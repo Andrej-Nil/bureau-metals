@@ -1,3 +1,16 @@
+//шрифты
+$baseFont: "roboto slab", sans-serif;
+$accentFont: "roboto", sans-serif;
+$decorative: "ebenya";
+
+//Основные цвета
+$base: #bc1622;
+$base-lg: linear-gradient(90deg, #be1622 -0.04%, #1d1d1b 99.96%);
+$base-blake: #1d1d1b;
+//доп. цвета
+$milk: #f8f8f8;
+$l-grey-lg: linear-gradient(90.69deg, #e8e8e8 0.57%, #f1f1f1 99.4%);
+
 * {
   margin: 0;
   padding: 0;
@@ -14,4 +27,16 @@ a {
 
 ul {
   list-style-type: none;
+}
+
+body {
+  font-family: $baseFont;
+  font-weight: bold;
+  font-size: 60px;
+}
+
+.test {
+  width: 30px;
+  height: 30px;
+  position: relative;
 }
