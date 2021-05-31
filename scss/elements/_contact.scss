@@ -1,0 +1,43 @@
+.contact {
+  position: relative;
+  padding-left: 30px;
+}
+
+.contact__icon {
+  position: absolute;
+  top: 3px;
+  left: 0;
+}
+
+._contact-phone {
+  &::before {
+    @include font-icon-style("\e90f", 21px);
+  }
+}
+
+._contact-mail {
+  &::before {
+    @include font-icon-style("\e90d", 17px);
+  }
+}
+
+._contact-city {
+  &::before {
+    @include font-icon-style("\e910", 24px);
+  }
+}
+
+.contact__title {
+  font-family: $baseFont;
+  font-weight: bold;
+  line-height: 21px;
+}
+
+.contact__link {
+  color: $grey;
+  font-family: $accentFont;
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
+}

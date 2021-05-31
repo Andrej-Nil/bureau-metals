@@ -1,44 +1,46 @@
 @font-face {
-  font-family: "roboto";
-  src: url("../fonts/roboto/robotoslab-regular-webfont.eot");
-  src: url("robotoslab-regular-webfont.eot?#iefix") format("embedded-opentype"),
-    url("../fonts/roboto/robotoslab-regular-webfont.woff2") format("woff2"),
-    url("../fonts/roboto/robotoslab-regular-webfont.woff") format("woff"),
-    url("../fonts/roboto/robotoslab-regular-webfont.ttf") format("truetype");
+  font-family: "Roboto";
+  src: local("Roboto"), local("Roboto-Regular"),
+    url("../fonts/roboto/Roboto.woff2") format("woff2"),
+    url("../fonts/roboto/Roboto.woff") format("woff"),
+    url("../fonts/roboto/Roboto.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Roboto";
+  src: local("Roboto Medium"), local("Roboto-Medium"),
+    url("../fonts/roboto/Robotomedium.woff2") format("woff2"),
+    url("../fonts/roboto/Robotomedium.woff") format("woff"),
+    url("../fonts/roboto/Robotomedium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Roboto Slab";
+  src: local("Roboto Slab Regular"), local("RobotoSlab-Regular"),
+    url("../fonts/roboto-slab/Robotoslabregular.woff2") format("woff2"),
+    url("../fonts/roboto-slab/Robotoslabregular.woff") format("woff"),
+    url("../fonts/roboto-slab/Robotoslabregular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "roboto slab";
-  src: url("../fonts/roboto-slab/robotoslab-regular-webfont.eot");
-  src: url("robotoslab-regular-webfont.eot?#iefix") format("embedded-opentype"),
-    url("../fonts/roboto-slab/robotoslab-regular-webfont.woff2") format("woff2"),
-    url("../fonts/roboto-slab/robotoslab-regular-webfont.woff") format("woff"),
-    url("../fonts/roboto-slab/robotoslab-regular-webfont.ttf")
-      format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "roboto slab";
-  src: url("../fonts/roboto-slab/robotoslab-bold-webfont.eot");
-  src: url("robotoslab-bold-webfont.eot?#iefix") format("embedded-opentype"),
-    url("../fonts/roboto-slab/robotoslab-bold-webfont.woff2") format("woff2"),
-    url("../fonts/roboto-slab/robotoslab-bold-webfont.woff") format("woff"),
-    url("../fonts/roboto-slab/robotoslab-bold-webfont.ttf") format("truetype");
-  font-weight: 700;
+  font-family: "Roboto Slab";
+  src: local("Roboto Slab Bold"), local("RobotoSlab-Bold"),
+    url("../fonts/roboto-slab/Robotoslabbold.woff2") format("woff2"),
+    url("../fonts/roboto-slab/Robotoslabbold.woff") format("woff"),
+    url("../fonts/roboto-slab/Robotoslabbold.ttf") format("truetype");
+  font-weight: bold;
   font-style: normal;
 }
 
 @font-face {
   font-family: "ebenya";
-  src: url("../fonts/ebenya/ebenya-webfont.eot");
-  src: url("ebenya-webfont.eot?#iefix") format("embedded-opentype"),
-    url("../fonts/ebenya/ebenya-webfont.woff2") format("woff2"),
-    url("../fonts/ebenya/ebenya-webfont.woff") format("woff"),
-    url("../fonts/ebenya/ebenya-webfont.ttf") format("truetype");
+  src: url("EBENYA.eot?#iefix") format("embedded-opentype"),
+    url("../fonts/ebenya/EBENYA.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }

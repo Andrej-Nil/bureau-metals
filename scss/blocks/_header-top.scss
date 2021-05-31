@@ -1,0 +1,25 @@
+.header__top {
+  display: flex;
+  align-items: center;
+  height: 100px;
+}
+
+.header__logo {
+  margin-right: 74px;
+}
+
+.header__search {
+  margin-right: 64px;
+}
+
+.header__contacts {
+  margin-right: auto;
+  display: flex;
+}
+
+.header__contact-item {
+  margin-right: 27px;
+  &:last-child {
+    margin-right: 0;
+  }
+}

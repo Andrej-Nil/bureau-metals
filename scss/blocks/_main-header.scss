@@ -1,0 +1,40 @@
+.main-header {
+  padding-top: 40px;
+}
+
+.main-header__logo {
+  max-width: 174px;
+}
+
+.m-h__search {
+  &::before {
+    opacity: 0.75;
+    background: $white;
+  }
+}
+
+.m-h__search-text {
+  opacity: 0.75;
+  color: $white;
+}
+
+.m-h__search-icon {
+  &::before {
+    color: $white;
+  }
+}
+
+.m-h__contact-icon {
+  &::before {
+    color: $white;
+  }
+}
+
+.m-h__contact-title {
+  color: $white;
+}
+
+.m-h__contact-link {
+  color: $white;
+  opacity: 0.75;
+}

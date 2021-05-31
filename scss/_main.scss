@@ -1,16 +1,18 @@
 //шрифты
-$baseFont: "roboto slab", sans-serif;
-$accentFont: "roboto", sans-serif;
+$baseFont: "Roboto Slab", serif;
+$accentFont: "Roboto", sans-serif;
 $decorative: "ebenya";
 
 //Основные цвета
 $base: #bc1622;
 $base-lg: linear-gradient(90deg, #be1622 -0.04%, #1d1d1b 99.96%);
-$base-blake: #1d1d1b;
+$base-black: #1d1d1b;
 //доп. цвета
 $milk: #f8f8f8;
 $l-grey-lg: linear-gradient(90.69deg, #e8e8e8 0.57%, #f1f1f1 99.4%);
-
+$grey: #4f4f4f;
+$white: #fff;
+$black: #000;
 * {
   margin: 0;
   padding: 0;
@@ -23,6 +25,7 @@ img {
 
 a {
   text-decoration: none;
+  color: $base-black;
 }
 
 ul {
@@ -31,12 +34,22 @@ ul {
 
 body {
   font-family: $baseFont;
-  font-weight: bold;
-  font-size: 60px;
+  font-size: 16px;
+  line-height: 19px;
+  color: $base-black;
 }
 
-.test {
-  width: 30px;
-  height: 30px;
-  position: relative;
+@mixin font-icon-style($code, $size) {
+  font-family: "icomoon";
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+  content: $code;
+  font-size: $size;
+}
+
+.container {
+  max-width: 1442px;
+  width: 100%;
+  margin: 0 auto;
 }

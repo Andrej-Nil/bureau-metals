@@ -1,3 +1,20 @@
+// шрифты
 @import "./_fonts";
 @import "./_icon-font";
+
+//базовый
 @import "./_main";
+
+//Элементы
+@import "./elements/_logo";
+@import "./elements/_btns";
+@import "./elements/_search";
+@import "./elements/_contact";
+
+//header
+@import "./blocks/_header";
+@import "./blocks/_main-header";
+@import "./blocks/_header-top";
+
+// для переназначеный стилей
+@import "./blocks/_important";

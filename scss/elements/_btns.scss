@@ -1,0 +1,17 @@
+.btn {
+  padding: 20px 40px;
+  cursor: pointer;
+
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  transition: box-shadow 0.2s ease-in-out;
+  &:hover {
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.red-btn {
+  background-color: $base;
+  color: $white;
+}
