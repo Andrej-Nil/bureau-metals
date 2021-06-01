@@ -10,11 +10,13 @@
 @import "./elements/_btns";
 @import "./elements/_search";
 @import "./elements/_contact";
+@import "./elements/_popup-nav";
 
 //header
 @import "./blocks/_header";
 @import "./blocks/_main-header";
 @import "./blocks/_header-top";
+@import "./blocks/_header-nav";
 
 // для переназначеный стилей
 @import "./blocks/_important";
