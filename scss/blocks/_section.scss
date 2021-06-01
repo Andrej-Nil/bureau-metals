@@ -1,0 +1,18 @@
+.section {
+  position: relative;
+}
+
+.section__bg {
+  position: absolute;
+  left: -160px;
+  top: -50%;
+  font-family: $ebenya;
+  font-size: 200px;
+  line-height: 220px;
+  text-transform: uppercase;
+  opacity: 0.1;
+}
+
+.section__content {
+  position: relative;
+}

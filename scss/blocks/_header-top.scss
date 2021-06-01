@@ -6,6 +6,7 @@
 
 .header__logo {
   margin-right: 74px;
+  position: relative;
 }
 
 .header__search {
@@ -22,4 +23,8 @@
   &:last-child {
     margin-right: 0;
   }
+}
+
+.header__feedback {
+  position: relative;
 }

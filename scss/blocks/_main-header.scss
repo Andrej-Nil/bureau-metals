@@ -1,9 +1,13 @@
 .main-header {
+  position: relative;
   padding-top: 40px;
 }
 
-.main-header__logo {
-  max-width: 174px;
+.main-header__bg {
+  position: absolute;
+  top: 40px;
+  width: 100%;
+  height: auto;
 }
 
 .m-h__search {
@@ -37,4 +41,40 @@
 .m-h__contact-link {
   color: $white;
   opacity: 0.75;
+}
+
+.m-h__nav {
+  margin-bottom: 100px;
+}
+
+.m-h__title {
+  position: relative;
+  font-weight: bold;
+  font-size: 60px;
+  line-height: 79px;
+  text-transform: uppercase;
+  max-width: 950px;
+  color: $white;
+  margin-bottom: 270px;
+}
+
+.m-h-section__bg {
+  top: -65%;
+  color: $white;
+  opacity: 0.3;
+}
+
+.m-h__advantages__list {
+  color: $white;
+}
+
+.m-h__advantages__title {
+  color: $white;
+  &::before {
+    background: $white;
+  }
+}
+
+.m-h-advantage__desc {
+  color: $l-grey;
 }

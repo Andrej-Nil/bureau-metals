@@ -1,7 +1,7 @@
 //шрифты
-$baseFont: "Roboto Slab", serif;
-$accentFont: "Roboto", sans-serif;
-$decorative: "ebenya";
+$robotoS: "Roboto Slab", serif;
+$roboto: "Roboto", sans-serif;
+$ebenya: "ebenya", sans-serif;
 
 //Основные цвета
 $base: #bc1622;
@@ -11,6 +11,8 @@ $base-black: #1d1d1b;
 $milk: #f8f8f8;
 $pearl: #f2f2f2;
 $l-grey-lg: linear-gradient(90.69deg, #e8e8e8 0.57%, #f1f1f1 99.4%);
+
+$l-grey: #e0e0e0;
 $grey: #4f4f4f;
 $white: #fff;
 $black: #000;
@@ -34,7 +36,7 @@ ul {
 }
 
 body {
-  font-family: $baseFont;
+  font-family: $robotoS;
   font-size: 16px;
   line-height: 19px;
   color: $base-black;

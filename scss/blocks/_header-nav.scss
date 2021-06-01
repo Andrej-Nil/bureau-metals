@@ -37,6 +37,10 @@
   }
 }
 
+.header-nav__list {
+  position: relative;
+}
+
 .header-nav__link {
   margin-right: 30px;
   &:last-child {

@@ -28,14 +28,14 @@
 }
 
 .contact__title {
-  font-family: $baseFont;
+  font-family: $robotoS;
   font-weight: bold;
   line-height: 21px;
 }
 
 .contact__link {
   color: $grey;
-  font-family: $accentFont;
+  font-family: $roboto;
   cursor: pointer;
   &:hover {
     text-decoration: underline;

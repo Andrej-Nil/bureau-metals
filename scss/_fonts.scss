@@ -36,6 +36,15 @@
   font-weight: bold;
   font-style: normal;
 }
+@font-face {
+  font-family: "Roboto Slab";
+  src: local("Roboto Slab Light"), local("RobotoSlab-Light"),
+    url("../fonts/roboto-slab/Robotoslablight.woff2") format("woff2"),
+    url("../fonts/roboto-slab/Robotoslablight.woff") format("woff"),
+    url("../fonts/roboto-slab/Robotoslablight.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+}
 
 @font-face {
   font-family: "ebenya";

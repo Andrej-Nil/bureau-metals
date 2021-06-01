@@ -1,0 +1,31 @@
+.advantage {
+  max-width: 311px;
+}
+
+.advantage__title {
+  padding-left: 27px;
+  position: relative;
+  font-weight: normal;
+  color: $base;
+  font-size: 64px;
+  line-height: 84px;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translate(0, -50%);
+    display: block;
+    width: 17px;
+    height: 17px;
+    background: $base-lg;
+  }
+}
+
+.advantage__desc {
+  padding-left: 27px;
+
+  font-family: $roboto;
+  font-size: 18px;
+  line-height: 21px;
+}
