@@ -1,6 +1,6 @@
 .main-header {
   position: relative;
-  padding-top: 40px;
+  padding: 40px 0 55px;
 }
 
 .main-header__bg {
@@ -58,8 +58,12 @@
   margin-bottom: 270px;
 }
 
+.m-h-section {
+  padding-top: 0;
+}
+
 .m-h-section__bg {
-  top: -65%;
+  transform: translate(0, -50%);
   color: $white;
   opacity: 0.3;
 }

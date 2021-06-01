@@ -40,6 +40,7 @@ body {
   font-size: 16px;
   line-height: 19px;
   color: $base-black;
+  padding-bottom: 500px;
 }
 
 @mixin font-icon-style($code, $size) {
