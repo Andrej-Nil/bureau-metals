@@ -1,6 +1,11 @@
 .section {
   position: relative;
   padding-top: 100px;
+  margin-bottom: 100px;
+}
+
+.section__inner {
+  position: relative;
 }
 
 .section__bg {
@@ -14,6 +19,10 @@
   text-transform: uppercase;
   color: $base;
   opacity: 0.1;
+}
+
+.section--milk-bg {
+  background: $milk;
 }
 
 .section__content {
@@ -35,4 +44,25 @@
 .section__more {
   display: inline-block;
   margin: 0 auto;
+}
+
+.section-dots {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 120px;
+}
+
+.section-dots__item {
+  width: 20px;
+  height: 5px;
+  background: $grey;
+  margin-right: 10px;
+  &:last-child {
+    margin-right: 0px;
+  }
+}
+
+.section-dots__item--is-active {
+  width: 40px;
+  background: $base;
 }

@@ -8,11 +8,16 @@
 //Элементы
 @import "./elements/_logo";
 @import "./elements/_btns";
+@import "./elements/_inputs";
+@import "./elements/_counter";
 @import "./elements/_search";
 @import "./elements/_contact";
 @import "./elements/_popup-nav";
 @import "./elements/_advantage";
 @import "./elements/_catalog-card";
+@import "./elements/_product-card";
+
+//блоки
 
 @import "./blocks/_section";
 
@@ -23,6 +28,8 @@
 @import "./blocks/_main-header";
 @import "./blocks/_header-top";
 @import "./blocks/_header-nav";
+
+@import "./blocks/_product-slider";
 
 // для переназначеный стилей
 @import "./blocks/_important";

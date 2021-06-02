@@ -1,0 +1,44 @@
+.counter {
+  display: flex;
+  width: 91px;
+}
+
+.counter__input {
+  margin-right: 2px;
+}
+
+.counter__btn {
+  position: relative;
+  display: block;
+  width: 30px;
+  height: 30px;
+  border: 1px solid #bdbdbd;
+  margin-bottom: 2px;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.counter__icon {
+  position: absolute;
+  left: 50%;
+  //width: 10px;
+  //height: 10px;
+  transform: translate(-50%, -50%);
+}
+
+.counter__inc {
+  top: 46%;
+  &::before {
+    @include font-icon-style("\e905", 7.3px);
+    color: $d-grey;
+  }
+}
+
+.counter__dec {
+  top: 40%;
+  &::before {
+    @include font-icon-style("\e903", 6px);
+    color: $d-grey;
+  }
+}

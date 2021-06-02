@@ -1,6 +1,6 @@
 //шрифты
 $robotoS: "Roboto Slab", serif;
-$roboto: "Roboto", sans-serif;
+$roboto: "Roboto", serif;
 $ebenya: "ebenya", sans-serif;
 
 //Основные цвета
@@ -13,7 +13,9 @@ $pearl: #f2f2f2;
 $l-grey-lg: linear-gradient(90.69deg, #e8e8e8 0.57%, #f1f1f1 99.4%);
 
 $l-grey: #e0e0e0;
-$grey: #4f4f4f;
+$grey: #828282;
+$d-grey: #4f4f4f;
+
 $white: #fff;
 $black: #000;
 * {
@@ -56,4 +58,18 @@ body {
   max-width: 1442px;
   width: 100%;
   margin: 0 auto;
+}
+
+.slider-wrap {
+  max-width: 1472px;
+  width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.link {
+  &:hover {
+    color: $base;
+    text-decoration: underline;
+  }
 }
