@@ -29,21 +29,30 @@
   position: relative;
 }
 
+.section__header {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 27px;
+}
+
 .section__title {
   font-weight: bold;
   font-size: 48px;
   line-height: 63px;
   text-transform: uppercase;
-  margin-bottom: 27px;
+}
+
+.section__desc {
+  font-family: $roboto;
+  font-size: 20px;
+  line-height: 150%;
+  color: $d-grey;
+  margin-bottom: 50px;
 }
 
 .section__btn {
   text-align: center;
-}
-
-.section__more {
-  display: inline-block;
-  margin: 0 auto;
 }
 
 .section-dots {
@@ -65,4 +74,50 @@
 .section-dots__item--is-active {
   width: 40px;
   background: $base;
+}
+
+.sections-arrow__btn {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background: $white;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+  &:hover {
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.sections-arrow__prev {
+  top: 41.5%;
+  left: -35px;
+}
+
+.sections-arrow__next {
+  top: 41.5%;
+  right: -35px;
+}
+
+.sections-arrow__icon {
+  position: absolute;
+  top: 60%;
+
+  transform: translate(-50%, -50%);
+  &::before {
+    color: $base;
+  }
+}
+
+.sections-arrow__icon---is-prev {
+  left: 45%;
+  &::before {
+    @include font-icon-style("\e902", 35px);
+  }
+}
+
+.sections-arrow__icon---is-next {
+  left: 50%;
+  &::before {
+    @include font-icon-style("\e901", 35px);
+  }
 }

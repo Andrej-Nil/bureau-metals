@@ -1,9 +1,14 @@
-.product-slider .product-slider__track {
+.product-slider {
+  position: relative;
+  max-width: 1472px;
+  width: 100%;
+  margin: 0 auto;
+}
+.product-slider__track {
   display: flex;
 }
 
 .product-slider__slide {
   min-width: 338px;
-
   margin-right: 30px;
 }
