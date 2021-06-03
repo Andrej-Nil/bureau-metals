@@ -7,6 +7,9 @@
   position: absolute;
   top: 3px;
   left: 0;
+  &::before {
+    color: $base;
+  }
 }
 
 ._contact-phone {
@@ -34,7 +37,7 @@
 }
 
 .contact__link {
-  color: $d-grey;
+  color: $grey;
   font-family: $roboto;
   cursor: pointer;
   &:hover {

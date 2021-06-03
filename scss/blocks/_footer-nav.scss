@@ -1,0 +1,39 @@
+.footer__nav {
+  display: flex;
+  justify-content: space-between;
+}
+.footer-coll {
+  width: 338px;
+  margin-right: 30px;
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.footer-coll__title {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 21px;
+  text-transform: uppercase;
+  margin-bottom: 11px;
+}
+
+.footer-coll__item {
+  margin-bottom: 10px;
+}
+
+.footer-coll__link {
+  font-family: $roboto;
+  font-size: 14px;
+  line-height: 20px;
+  color: $d-grey;
+}
+
+.footer-coll__more {
+  font-family: $roboto;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: $d-grey;
+  text-decoration: underline;
+}

@@ -1,0 +1,50 @@
+.footer {
+  background: $l-grey;
+  padding: 55px 0 15px 0;
+}
+
+.footer__body {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 150px;
+}
+
+.footer-right {
+  display: inline-block;
+  width: 338px;
+  margin-right: 26px;
+}
+
+.footer__logo {
+  margin-bottom: 45px;
+  width: 250px;
+}
+
+.footer__contacts {
+  margin-bottom: 45px;
+}
+
+.footer__contact-item {
+  margin-bottom: 30px;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.footer-right__item {
+  margin-bottom: 20px;
+  font-family: $robotoS;
+  font-size: 16px;
+  line-height: 21px;
+  text-transform: uppercase;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.footer-right__link {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 21px;
+  text-transform: uppercase;
+}

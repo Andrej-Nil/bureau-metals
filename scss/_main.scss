@@ -38,12 +38,23 @@ ul {
   list-style-type: none;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $robotoS;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 19px;
+}
+
 body {
   font-family: $robotoS;
   font-size: 16px;
   line-height: 19px;
   color: $base-black;
-  padding-bottom: 500px;
 }
 
 @mixin font-icon-style($code, $size) {

@@ -27,6 +27,15 @@
   font-weight: 400;
   font-style: normal;
 }
+@font-face {
+  font-family: "Roboto Slab";
+  src: local("Roboto Slab Medium"), local("RobotoSlab-Medium"),
+    url("../fonts/roboto-slab/Robotoslabmedium.woff2") format("woff2"),
+    url("../fonts/roboto-slab/Robotoslabmedium.woff") format("woff"),
+    url("../fonts/roboto-slab/Robotoslabmedium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
 
 @font-face {
   font-family: "Roboto Slab";
