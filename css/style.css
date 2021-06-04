@@ -1359,8 +1359,8 @@ body {
 
 .section {
   position: relative;
-  padding-top: 100px;
-  margin-bottom: 100px;
+  padding: 100px 0 100px 0;
+  margin-bottom: 50px;
 }
 
 .section__inner {
@@ -1508,6 +1508,11 @@ body {
   font-size: 35px;
 }
 
+.section__two-coll-text {
+  -webkit-columns: 2;
+          columns: 2;
+}
+
 .advantages__list {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1518,18 +1523,20 @@ body {
 }
 
 .header {
-  background: -webkit-gradient(linear, left top, right top, color-stop(-0.04%, #be1622), color-stop(99.96%, #1d1d1b));
-  background: linear-gradient(90deg, #be1622 -0.04%, #1d1d1b 99.96%);
-}
-
-.header-bg {
+  padding-top: 40px;
   background: -webkit-gradient(linear, left top, right top, color-stop(-0.04%, #be1622), color-stop(99.96%, #1d1d1b));
   background: linear-gradient(90deg, #be1622 -0.04%, #1d1d1b 99.96%);
 }
 
 .main-header {
   position: relative;
-  padding: 40px 0 55px;
+  padding: 0 0 171px 0;
+}
+
+.m-h__top {
+  height: 40px;
+  background: -webkit-gradient(linear, left top, right top, color-stop(-0.04%, #be1622), color-stop(99.96%, #1d1d1b));
+  background: linear-gradient(90deg, #be1622 -0.04%, #1d1d1b 99.96%);
 }
 
 .main-header__bg {
@@ -1568,6 +1575,11 @@ body {
 
 .m-h__nav {
   margin-bottom: 100px;
+}
+
+.header-nav__item {
+  position: relative;
+  z-index: 100;
 }
 
 .m-h__title {
@@ -1617,6 +1629,10 @@ body {
       -ms-flex-align: center;
           align-items: center;
   height: 100px;
+}
+
+.header__top-wrap {
+  background: #fff;
 }
 
 .header__logo {

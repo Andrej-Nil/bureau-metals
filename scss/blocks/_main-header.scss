@@ -1,6 +1,11 @@
 .main-header {
   position: relative;
-  padding: 40px 0 55px;
+  padding: 0 0 171px 0;
+}
+
+.m-h__top {
+  height: 40px;
+  background: $base-lg;
 }
 
 .main-header__bg {
@@ -45,6 +50,11 @@
 
 .m-h__nav {
   margin-bottom: 100px;
+}
+
+.header-nav__item {
+  position: relative;
+  z-index: 100;
 }
 
 .m-h__title {

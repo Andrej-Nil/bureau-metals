@@ -1,7 +1,7 @@
 .section {
   position: relative;
-  padding-top: 100px;
-  margin-bottom: 100px;
+  padding: 100px 0 100px 0;
+  margin-bottom: 50px;
 }
 
 .section__inner {
@@ -120,4 +120,8 @@
   &::before {
     @include font-icon-style("\e901", 35px);
   }
+}
+
+.section__two-coll-text {
+  columns: 2;
 }
