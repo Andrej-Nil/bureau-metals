@@ -1,0 +1,38 @@
+.small-card {
+  display: flex;
+  align-items: center;
+  background: $white;
+  width: 325px;
+  height: 100px;
+  padding: 5px 15px 5px 5px;
+  border: 1px solid $l-grey;
+  transition: 0.2s ease-in-out;
+  cursor: pointer;
+  &:hover {
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.15);
+    transform: scale(1.05);
+    border: 1px solid $base;
+  }
+
+  &:hover .small-card__title {
+    color: $base;
+    text-decoration: underline;
+  }
+}
+
+.small-card__preview {
+  margin-right: 20px;
+}
+
+.small-card__title {
+  font-size: 16px;
+  line-height: 150%;
+  margin-bottom: 7px;
+}
+
+.small-card__desc {
+  font-family: $roboto;
+  font-size: 16px;
+  line-height: 150%;
+  color: $grey;
+}

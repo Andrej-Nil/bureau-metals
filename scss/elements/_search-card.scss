@@ -1,0 +1,53 @@
+.search-card {
+  display: flex;
+  padding: 0 15px;
+  align-items: center;
+  height: 60px;
+  margin-bottom: 10px;
+  background: $milk;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.search-card__price {
+  margin-right: 90px;
+}
+.search-card__title {
+  margin-right: auto;
+  font-weight: 500;
+  width: 525px;
+  font-size: 14px;
+  line-height: 150%;
+}
+
+.search-card__old {
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.search-card__price-num {
+  font-size: 18px;
+  line-height: 24px;
+  margin-right: 5px;
+}
+
+.price__mark {
+  font-size: 16px;
+  line-height: 19px;
+}
+
+.price__unit {
+  font-size: 16px;
+  line-height: 19px;
+}
+
+.search-card__arrow {
+  width: 16px;
+  height: 25px;
+  margin-right: 10px;
+  &::before {
+    @include font-icon-style("\e901", 26px);
+    color: $base;
+  }
+}

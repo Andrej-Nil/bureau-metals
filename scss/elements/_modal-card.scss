@@ -1,0 +1,35 @@
+.modal-card {
+  margin-bottom: 90px;
+}
+
+.modal-card__title {
+  font-size: 30px;
+  line-height: 40px;
+  margin-bottom: 40px;
+}
+
+.modal-card__info {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.modal-card__price-name {
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.modal-card__price-num {
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 32px;
+  color: $base;
+}
+
+.modal-card__price-mark {
+  font-family: $roboto;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 21px;
+}

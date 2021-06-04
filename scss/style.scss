@@ -14,11 +14,15 @@
 @import "./elements/_contact";
 @import "./elements/_popup-nav";
 @import "./elements/_advantage";
+@import "./elements/_price";
 @import "./elements/_catalog-card";
 @import "./elements/_product-card";
 @import "./elements/_news-card";
-//блоки
+@import "./elements/_modal-card";
+@import "./elements/_small-card";
+@import "./elements/_search-card";
 
+//блоки
 @import "./blocks/_section";
 
 @import "./blocks/advantages";
@@ -35,6 +39,11 @@
 @import "./blocks/_footer";
 @import "./blocks/_footer-nav";
 @import "./blocks/_footer-bottom";
+
+@import "./blocks/_form";
+
+// modal
+@import "./blocks/_modal";
 
 // для переназначеный стилей
 @import "./blocks/_important";

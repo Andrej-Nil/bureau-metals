@@ -26,86 +26,87 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+[class^="icon-"],
+[class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: "icomoon" !important;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 .icon-arrow-big-down:before {
   content: "\e900";
-  color: #1d1d1b;
 }
 .icon-arrow-big-left:before {
   content: "\e901";
-  color: #1d1d1b;
 }
 .icon-arrow-big-right:before {
   content: "\e902";
-  color: #1d1d1b;
 }
 .icon-arrow-down:before {
   content: "\e903";
-  color: #1d1d1b;
+  color: #4f4f4f;
 }
 .icon-arrow-left:before {
   content: "\e904";
-  color: #1d1d1b;
 }
 .icon-arrow-up:before {
   content: "\e905";
-  color: #1d1d1b;
+  color: #4f4f4f;
 }
 .icon-basket:before {
   content: "\e906";
-  color: #1d1d1b;
 }
 .icon-burger:before {
   content: "\e907";
-  color: #1d1d1b;
 }
 .icon-clock:before {
   content: "\e908";
-  color: #1d1d1b;
 }
 .icon-close-modal:before {
   content: "\e909";
-  color: #1d1d1b;
 }
 .icon-like:before {
   content: "\e90a";
-  color: #1d1d1b;
 }
 .icon-like-card:before {
   content: "\e90b";
-  color: #1d1d1b;
 }
 .icon-list:before {
   content: "\e90c";
-  color: #1d1d1b;
+  color: #4f4f4f;
 }
 .icon-mail:before {
   content: "\e90d";
-  color: #1d1d1b;
 }
 .icon-more:before {
   content: "\e90e";
-  color: #1d1d1b;
 }
 .icon-phone:before {
   content: "\e90f";
-  color: #1d1d1b;
 }
 .icon-point:before {
   content: "\e910";
-  color: #1d1d1b;
 }
 .icon-remove:before {
   content: "\e911";
-  color: #1d1d1b;
 }
 .icon-remove-card:before {
   content: "\e912";
 }
 .icon-search:before {
   content: "\e913";
-  color: #1d1d1b;
 }
 .icon-tile:before {
   content: "\e914";
-  color: #1d1d1b;
+}
+.icon-checkmark:before {
+  content: "\ea10";
 }

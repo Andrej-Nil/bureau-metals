@@ -1,10 +1,84 @@
 .input {
-  width: 100%;
-  padding: 20px 15px;
+  width: 47.5%;
+  position: relative;
+  padding: 24px 15px 10px 15px;
   outline: none;
   font-family: $roboto;
   font-weight: normal;
   font-size: 18px;
   line-height: 20px;
   border: 1px solid #bdbdbd;
+  margin-bottom: 30px;
+}
+
+.input-no-bd {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  font-family: $roboto;
+  font-size: 16px;
+  line-height: 150%;
+  color: $d-grey;
+  background: rgba(0, 0, 0, 0);
+  outline: none;
+  border: none;
+  &:focus ~ .input__placeholder {
+    font-weight: 500;
+    font-size: 15px;
+    transform: translate(0, -130%);
+  }
+  &:not(:placeholder-shown) ~ .input__placeholder {
+    font-weight: 500;
+    font-size: 15px;
+    transform: translate(0, -130%);
+  }
+}
+
+.input__placeholder {
+  position: absolute;
+  top: 30px;
+  transform: translate(0, -50%);
+  display: block;
+  font-family: $roboto;
+  font-size: 16px;
+  line-height: 120%;
+  color: $d-grey;
+  z-index: 0;
+  transition: 0.2s ease-in-out;
+}
+
+.textarea {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.textarea__input {
+  height: 160px;
+  resize: none;
+}
+
+.upload__label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.upload__btn {
+  display: inline-block;
+  margin-right: 12px;
+}
+
+.upload__info {
+  font-family: $roboto;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 125%;
+}
+
+.upload__text {
+  display: block;
+}
+.upload__input {
+  display: none;
 }

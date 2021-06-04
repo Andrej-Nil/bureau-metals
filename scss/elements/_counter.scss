@@ -5,6 +5,9 @@
 
 .counter__input {
   margin-right: 2px;
+  padding: 20px 15px;
+  width: 100%;
+  text-align: center;
 }
 
 .counter__btn {
@@ -14,6 +17,7 @@
   height: 30px;
   border: 1px solid #bdbdbd;
   margin-bottom: 2px;
+  cursor: pointer;
   &:last-child {
     margin-bottom: 0;
   }
@@ -21,22 +25,23 @@
 
 .counter__icon {
   position: absolute;
+  display: block;
   left: 50%;
-  //width: 10px;
-  //height: 10px;
+  width: 10px;
+  height: 0px;
   transform: translate(-50%, -50%);
 }
 
 .counter__inc {
-  top: 46%;
+  //top: 50%;
   &::before {
-    @include font-icon-style("\e905", 7.3px);
+    @include font-icon-style("\e905", 6px);
     color: $d-grey;
   }
 }
 
 .counter__dec {
-  top: 40%;
+  //top: 50%;
   &::before {
     @include font-icon-style("\e903", 6px);
     color: $d-grey;

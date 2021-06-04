@@ -1,10 +1,12 @@
 .btn {
+  display: inline-block;
   padding: 20px 40px;
   cursor: pointer;
 
   font-weight: 500;
   font-size: 16px;
   line-height: 20px;
+  text-align: center;
   transition: box-shadow 0.2s ease-in-out;
   &:hover {
     box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.3);
@@ -14,4 +16,19 @@
 .red-btn {
   background-color: $base;
   color: $white;
+}
+
+.grey-btn {
+  background-color: $grey;
+  color: $white;
+}
+
+.white-btn-bd {
+  border: 1px solid $white;
+  color: $white;
+}
+
+.red-btn-bd {
+  border: 1px solid $base;
+  color: $base;
 }

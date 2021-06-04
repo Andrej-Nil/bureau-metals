@@ -1,0 +1,51 @@
+.form__inputs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.from__bottom {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+}
+
+.from__sumbit {
+  border: none;
+  outline: none;
+  width: 47.5%;
+  margin-bottom: 20px;
+}
+
+.from-approval {
+  position: relative;
+  padding-left: 26px;
+  width: 47.5%;
+  font-family: $roboto;
+  font-size: 12px;
+  line-height: 150%;
+}
+
+.from-approval__link {
+  text-decoration: underline;
+}
+.from-approval__checkbox {
+  display: none;
+  &:checked ~ .from-approval__fake-checkbox {
+    &::before {
+      @include font-icon-style("\ea10", 18px);
+      position: absolute;
+      top: -30%;
+      color: $base;
+    }
+  }
+}
+.from-approval__fake-checkbox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 16px;
+  height: 16px;
+  border: 1px solid $base-black;
+}
