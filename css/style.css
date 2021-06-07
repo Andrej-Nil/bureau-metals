@@ -1807,6 +1807,48 @@ body {
   margin-right: 30px;
 }
 
+.error404 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.error404__coll {
+  display: flex;
+  width: 49%;
+  align-items: center;
+  justify-content: center;
+}
+
+.error404__msg {
+  font-family: "Roboto", serif;
+  font-size: 24px;
+  line-height: 150%;
+  color: #4f4f4f;
+}
+
+.error404__logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(90deg, #be1622 -0.04%, #1d1d1b 99.96%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #bc1622;
+}
+
+.error404__num {
+  font-weight: bold;
+  font-size: 200px;
+  line-height: 200px;
+}
+
+.error404__text {
+  font-weight: bold;
+  font-size: 72px;
+  line-height: 95px;
+  text-transform: uppercase;
+}
+
 .footer {
   background: #e0e0e0;
   padding: 55px 0 15px 0;
