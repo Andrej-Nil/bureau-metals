@@ -12,7 +12,7 @@
 <body>
   <!--app-->
   <div class="app">
-    <header class="header ">
+    <header class="header">
       <!--header__top-->
       <div class="header__top-wrap">
         <div class="header__top container">
@@ -62,7 +62,7 @@
       <nav class="header-nav container">
         <div class="header__catalog h-catalog popup-nav-wrap">
           <i class="h-catalog__icon"></i>
-          <a href="catalog.html" class="header-nav__item"> Наш каталог </a>
+          <a href="catalog.html" class="header-nav__item">Наш каталог </a>
 
           <nav class="popup-nav">
             <ul class="popup-nav__list">
@@ -110,7 +110,7 @@
         </div>
 
         <div class="header__more h-more popup-nav-wrap">
-          <a href="subcatagory.html" class="header-nav__item">Наши услуги</a>
+          <a href="intermediate-category.html" class="header-nav__item">Наши услуги</a>
           <i class="h-more__icon"></i>
           <nav class="popup-nav">
             <ul class="popup-nav__list">
@@ -158,7 +158,7 @@
         </div>
 
         <div class="header__more h-more popup-nav-wrap">
-          <a href="subcatagory.html" class="header-nav__item">Производство</a>
+          <a href="#!" class="header-nav__item">Производство</a>
           <i class="h-more__icon"></i>
           <nav class="popup-nav">
             <ul class="popup-nav__list">
@@ -207,11 +207,21 @@
 
         <div class="header-nav__list">
           <a href="about.html" class="header-nav__link header-nav__item">О компании</a>
-          <a href="about.html" class="header-nav__link header-nav__item">Новости</a>
-          <a href="about.html" class="header-nav__link header-nav__item">Контакты</a>
+          <a href="news.html" class="header-nav__link header-nav__item">Новости</a>
+          <a href="contacts.html" class="header-nav__link header-nav__item">Контакты</a>
         </div>
       </nav>
     </header>
+
+    <!--path-->
+    <div class="path-wrap">
+      <div class="path container">
+        <a href="index.html" class="path__link">Главная</a>
+        <span class="path__point"></span>
+        <a href="catalog.html" class="path__link">Каталог</a>
+      </div>
+    </div>
+    <!--path-->
 
     <!-- our-catalog -->
     <section class="section">
@@ -730,13 +740,13 @@
             <nav class="footer-right__nav">
               <ul class="footer-right__list">
                 <li class="footer-right__item">
-                  <a href="#!" class="footer-right__link"> о компании </a>
+                  <a href="about.html" class="footer-right__link">о компании</a>
                 </li>
                 <li class="footer-right__item">
-                  <a href="#!" class="footer-right__link"> Контакты </a>
+                  <a href="contacts.html" class="footer-right__link">Контакты</a>
                 </li>
                 <li class="footer-right__item">
-                  <a href="#!" class="footer-right__link"> Новости </a>
+                  <a href="news.html" class="footer-right__link">Новости</a>
                 </li>
               </ul>
             </nav>
@@ -885,7 +895,17 @@
       </div>
     </footer>
 
+    <div class="icons-nav">
+      <a href="basket.html" class="icons-nav__link">
+        <span class="icons-nav__count" data-basket-count>123</span>
+        <i class="icons-nav__item icons-nav__item--basket"></i>
+      </a>
 
+      <a href="basket.html" class="icons-nav__link">
+        <span class="icons-nav__count" data-basket-favorite>657</span>
+        <i class="icons-nav__item icons-nav__item--favorite"></i>
+      </a>
+    </div>
   </div>
   <!--app-->
   <script src="./js/main.js"></script>

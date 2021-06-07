@@ -108,14 +108,14 @@
   }
 }
 
-.sections-arrow__icon---is-prev {
+.sections-arrow__icon--is-prev {
   left: 45%;
   &::before {
     @include font-icon-style("\e902", 35px);
   }
 }
 
-.sections-arrow__icon---is-next {
+.sections-arrow__icon--is-next {
   left: 50%;
   &::before {
     @include font-icon-style("\e901", 35px);

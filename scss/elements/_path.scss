@@ -1,0 +1,30 @@
+.path-wrap {
+  display: flex;
+  align-items: center;
+  height: 70px;
+  background: $milk;
+}
+
+.path__link {
+  font-family: $roboto;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.path {
+  display: flex;
+  align-items: center;
+}
+
+.path__point {
+  display: block;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: $base-black;
+  margin: 0 5px;
+}
