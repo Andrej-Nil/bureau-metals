@@ -492,6 +492,7 @@ body {
 .contact {
   position: relative;
   padding-left: 30px;
+  max-width: 270px;
 }
 
 .contact__icon {
@@ -538,6 +539,16 @@ body {
   font-family: "Roboto Slab", serif;
   font-weight: bold;
   line-height: 21px;
+  margin-bottom: 3px;
+}
+
+.contact__time-work {
+  font-family: "Roboto", serif;
+  font-size: 14px;
+  line-height: 16px;
+  color: #4f4f4f;
+  margin-bottom: 3px;
+  opacity: 0.75;
 }
 
 .contact__link {
@@ -1440,6 +1451,65 @@ body {
   font-size: 24px;
 }
 
+.form__inputs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.from__bottom {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+}
+
+.from__sumbit {
+  border: none;
+  outline: none;
+  width: 47.5%;
+  margin-bottom: 20px;
+}
+
+.from-approval {
+  position: relative;
+  padding-left: 26px;
+  width: 47.5%;
+  font-family: "Roboto", serif;
+  font-size: 12px;
+  line-height: 150%;
+}
+
+.from-approval__link {
+  text-decoration: underline;
+}
+
+.from-approval__checkbox {
+  display: none;
+}
+
+.from-approval__checkbox:checked ~ .from-approval__fake-checkbox::before {
+  font-family: "icomoon";
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+  line-height: 1;
+  content: "";
+  font-size: 18px;
+  position: absolute;
+  top: -30%;
+  color: #bc1622;
+}
+
+.from-approval__fake-checkbox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 16px;
+  height: 16px;
+  border: 1px solid #1d1d1b;
+}
+
 .section {
   position: relative;
   padding: 100px 0 50px 0;
@@ -1473,10 +1543,11 @@ body {
   position: relative;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 27px;
+  margin-bottom: 40px;
 }
 
 .section__title {
+  position: relative;
   font-weight: bold;
   font-size: 48px;
   line-height: 63px;
@@ -1849,6 +1920,115 @@ body {
   text-transform: uppercase;
 }
 
+.about {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+.about__desc {
+  font-family: "Roboto", serif;
+  font-size: 16px;
+  line-height: 150%;
+  color: #4f4f4f;
+}
+
+.about__text {
+  width: 49%;
+}
+
+.about__info {
+  margin-bottom: 50px;
+}
+
+.about__img {
+  width: 49%;
+}
+
+.about__img-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.about__img-item {
+  width: 49%;
+  margin-bottom: 40px;
+}
+
+.bank-account__title {
+  font-size: 20px;
+  line-height: 150%;
+  margin-bottom: 10px;
+}
+
+.bank-account__item {
+  font-family: "Roboto", serif;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 150%;
+  color: #4f4f4f;
+  margin-bottom: 15px;
+}
+
+.bank-account__name {
+  font-weight: bold;
+}
+
+.our-contacts {
+  display: flex;
+  justify-content: space-between;
+}
+
+.our-contacts__left {
+  display: flex;
+  width: 49%;
+  justify-content: space-between;
+}
+
+.our-contacts__item {
+  margin-bottom: 40px;
+}
+
+.our-contacts__item:last-child {
+  margin-bottom: 0;
+}
+
+.our-contacts__link {
+  color: #1d1d1b;
+}
+
+.our-contacts__address {
+  color: #1d1d1b;
+  cursor: default;
+}
+
+.our-contacts__address:hover {
+  text-decoration: none;
+}
+
+.our-contacts__form {
+  width: 49%;
+}
+
+.feetback-form__btn {
+  display: flex;
+  flex-direction: column;
+}
+
+.feetback-form__approval {
+  position: relative;
+  padding-left: 26px;
+  width: 100%;
+  font-family: "Roboto", serif;
+  font-size: 14px;
+  line-height: 150%;
+}
+
+.feetback-form__textarea {
+  height: 95px;
+}
+
 .footer {
   background: #e0e0e0;
   padding: 55px 0 15px 0;
@@ -1958,65 +2138,6 @@ body {
 
 .footer__map-site {
   text-decoration: underline;
-}
-
-.form__inputs {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-
-.from__bottom {
-  display: flex;
-  align-items: flex-end;
-  flex-direction: column;
-}
-
-.from__sumbit {
-  border: none;
-  outline: none;
-  width: 47.5%;
-  margin-bottom: 20px;
-}
-
-.from-approval {
-  position: relative;
-  padding-left: 26px;
-  width: 47.5%;
-  font-family: "Roboto", serif;
-  font-size: 12px;
-  line-height: 150%;
-}
-
-.from-approval__link {
-  text-decoration: underline;
-}
-
-.from-approval__checkbox {
-  display: none;
-}
-
-.from-approval__checkbox:checked ~ .from-approval__fake-checkbox::before {
-  font-family: "icomoon";
-  font-weight: normal;
-  font-style: normal;
-  font-display: block;
-  line-height: 1;
-  content: "";
-  font-size: 18px;
-  position: absolute;
-  top: -30%;
-  color: #bc1622;
-}
-
-.from-approval__fake-checkbox {
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: block;
-  width: 16px;
-  height: 16px;
-  border: 1px solid #1d1d1b;
 }
 
 .modal {

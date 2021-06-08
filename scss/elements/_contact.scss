@@ -1,6 +1,7 @@
 .contact {
   position: relative;
   padding-left: 30px;
+  max-width: 270px;
 }
 
 .contact__icon {
@@ -34,6 +35,17 @@
   font-family: $robotoS;
   font-weight: bold;
   line-height: 21px;
+  margin-bottom: 3px;
+}
+
+.contact__time-work {
+  font-family: $roboto;
+  font-size: 14px;
+  line-height: 16px;
+  color: $d-grey;
+  margin-bottom: 3px;
+
+  opacity: 0.75;
 }
 
 .contact__link {

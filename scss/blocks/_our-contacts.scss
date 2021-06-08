@@ -1,0 +1,51 @@
+.our-contacts {
+  display: flex;
+  justify-content: space-between;
+}
+
+.our-contacts__left {
+  display: flex;
+  width: 49%;
+  justify-content: space-between;
+}
+
+.our-contacts__item {
+  margin-bottom: 40px;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.our-contacts__link {
+  color: $base-black;
+}
+
+.our-contacts__address {
+  color: $base-black;
+  cursor: default;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.our-contacts__form {
+  width: 49%;
+}
+
+.feetback-form__btn {
+  display: flex;
+  flex-direction: column;
+}
+
+.feetback-form__approval {
+  position: relative;
+  padding-left: 26px;
+  width: 100%;
+  font-family: "Roboto", serif;
+  font-size: 14px;
+  line-height: 150%;
+}
+
+.feetback-form__textarea {
+  height: 95px;
+}

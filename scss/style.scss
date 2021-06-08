@@ -26,6 +26,7 @@
 @import "./elements/_pagination";
 
 //блоки
+@import "./blocks/_form";
 @import "./blocks/_section";
 @import "./blocks/advantages";
 
@@ -39,12 +40,14 @@
 
 @import "./blocks/_error404";
 
+@import "./blocks/_about";
+@import "./blocks/_bank-account";
+@import "./blocks/_our-contacts";
+
 // footer
 @import "./blocks/_footer";
 @import "./blocks/_footer-nav";
 @import "./blocks/_footer-bottom";
-
-@import "./blocks/_form";
 
 // modal
 @import "./blocks/_modal";
