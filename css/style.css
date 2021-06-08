@@ -232,6 +232,10 @@ body {
   text-decoration: underline;
 }
 
+.map {
+  margin-bottom: 100px;
+}
+
 .logo {
   width: 100%;
   height: auto;
