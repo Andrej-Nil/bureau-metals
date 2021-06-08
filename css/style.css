@@ -1554,6 +1554,14 @@ body {
   text-transform: uppercase;
 }
 
+.section__data {
+  width: 100%;
+  color: #828282;
+  font-size: 16px;
+  line-height: 150%;
+  margin-bottom: 47px;
+}
+
 .section__desc {
   font-family: "Roboto", serif;
   font-size: 20px;
