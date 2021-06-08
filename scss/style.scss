@@ -16,19 +16,24 @@
 @import "./elements/_popup-nav";
 @import "./elements/_advantage";
 @import "./elements/_price";
+@import "./elements/_favorite";
+
 @import "./elements/_catalog-card";
 @import "./elements/_product-card";
+@import "./elements/_basket-card";
 @import "./elements/_news-card";
 @import "./elements/_modal-card";
 @import "./elements/_small-card";
 @import "./elements/_search-card";
+
 @import "./elements/_icon-nav";
 @import "./elements/_pagination";
 
 //блоки
 @import "./blocks/_form";
 @import "./blocks/_section";
-@import "./blocks/advantages";
+@import "./blocks/_advantages";
+@import "./blocks/_basket";
 
 //header
 @import "./blocks/_header";

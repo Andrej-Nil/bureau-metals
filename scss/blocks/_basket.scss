@@ -1,0 +1,37 @@
+.basket {
+  display: flex;
+  justify-content: space-between;
+}
+
+.basket__top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 27px;
+}
+
+.basket__info {
+  width: 49%;
+}
+
+.basket__title {
+  font-weight: bold;
+  font-size: 32px;
+  line-height: 42px;
+  text-transform: uppercase;
+}
+
+.basket-total {
+  font-family: $roboto;
+  font-size: 16px;
+  line-height: 150%;
+  color: $d-grey;
+}
+
+.basket-total__price-count {
+  font-weight: 500;
+  color: $base;
+}
+
+.basket__form {
+  width: 49%;
+}

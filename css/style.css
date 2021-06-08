@@ -742,6 +742,38 @@ body {
   line-height: 23px;
 }
 
+.favorite {
+  position: relative;
+  cursor: pointer;
+}
+
+.favorite__icon {
+  position: relative;
+  bottom: -5px;
+}
+
+.favorite__icon::before {
+  font-family: "icomoon";
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+  line-height: 1;
+  content: "";
+  font-size: 17px;
+  color: #bc1622;
+}
+
+.favorite__add {
+  font-family: "Roboto", serif;
+  margin-left: auto;
+  font-size: 12px;
+  padding-bottom: 3px;
+  margin-left: 2px;
+  line-height: 20px;
+  color: #bc1622;
+  border-bottom: 1px dashed #bc1622;
+}
+
 .our-catalog {
   display: flex;
   flex-wrap: wrap;
@@ -968,11 +1000,12 @@ body {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -30%);
+  transform: translate(-50%, -50%);
   display: block;
 }
 
 .product-card__stiker-icon::before {
+  display: block;
   font-family: "icomoon";
   font-weight: normal;
   font-style: normal;
@@ -1005,38 +1038,6 @@ body {
   justify-content: space-between;
   align-items: flex-end;
   margin-bottom: 25px;
-}
-
-.product-card__favorite {
-  position: relative;
-  cursor: pointer;
-}
-
-.product-card__favorite-icon {
-  position: relative;
-  bottom: -5px;
-}
-
-.product-card__favorite-icon::before {
-  font-family: "icomoon";
-  font-weight: normal;
-  font-style: normal;
-  font-display: block;
-  line-height: 1;
-  content: "";
-  font-size: 17px;
-  color: #bc1622;
-}
-
-.product-card__favorite-add {
-  font-family: "Roboto", serif;
-  margin-left: auto;
-  font-size: 12px;
-  padding-bottom: 3px;
-  margin-left: 2px;
-  line-height: 20px;
-  color: #bc1622;
-  border-bottom: 1px dashed #bc1622;
 }
 
 .product-card__buy {
@@ -1099,6 +1100,98 @@ body {
   z-index: -1;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0);
   transition: 0.5s ease-in-out;
+}
+
+.basket-card {
+  padding: 15px;
+  position: relative;
+}
+
+.basket-card:nth-child(odd) {
+  background: #f8f8f8;
+}
+
+.basket-card__remove {
+  position: absolute;
+  top: 12px;
+  right: 27px;
+  width: 23px;
+  height: 23px;
+  padding: 4px;
+  display: block;
+  cursor: pointer;
+}
+
+.basket-card__remove::before {
+  font-family: "icomoon";
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+  line-height: 1;
+  content: "";
+  font-size: 15px;
+}
+
+.basket-card__top {
+  display: flex;
+  margin-bottom: 15px;
+}
+
+.basket-card__title {
+  max-width: 410px;
+  font-size: 14px;
+  line-height: 150%;
+  margin-right: 30px;
+}
+
+.basket-card__bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 500px;
+}
+
+.basket__price-num {
+  font-weight: normal;
+  line-height: 90%;
+  margin-right: 3px;
+}
+
+.basket-card__input {
+  margin-bottom: 0;
+  padding: 9px 15px;
+  background: rgba(0, 0, 0, 0);
+}
+
+.basket-card__counter-btn {
+  width: 20px;
+  height: 20px;
+}
+
+.basket-card__counter-icon {
+  left: 55%;
+  height: 9px;
+}
+
+.basket-card__counter-icon::before {
+  font-size: 4px;
+}
+
+.basket-card__price {
+  color: #bc1622;
+}
+
+.basket-card__price-num {
+  display: inline-block;
+  margin-right: 13px;
+  font-size: 24px;
+  line-height: 32px;
+}
+
+.basket-card__price-mark {
+  font-family: "Roboto", serif;
+  font-size: 18px;
+  line-height: 21px;
 }
 
 .news-card {
@@ -1664,6 +1757,44 @@ body {
 .advantages__list {
   display: flex;
   justify-content: space-between;
+}
+
+.basket {
+  display: flex;
+  justify-content: space-between;
+}
+
+.basket__top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 27px;
+}
+
+.basket__info {
+  width: 49%;
+}
+
+.basket__title {
+  font-weight: bold;
+  font-size: 32px;
+  line-height: 42px;
+  text-transform: uppercase;
+}
+
+.basket-total {
+  font-family: "Roboto", serif;
+  font-size: 16px;
+  line-height: 150%;
+  color: #4f4f4f;
+}
+
+.basket-total__price-count {
+  font-weight: 500;
+  color: #bc1622;
+}
+
+.basket__form {
+  width: 49%;
 }
 
 .header {

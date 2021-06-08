@@ -1,0 +1,82 @@
+.basket-card {
+  padding: 15px;
+  position: relative;
+  &:nth-child(odd) {
+    background: $milk;
+  }
+}
+
+.basket-card__remove {
+  position: absolute;
+  top: 12px;
+  right: 27px;
+  width: 23px;
+  height: 23px;
+  padding: 4px;
+  display: block;
+  cursor: pointer;
+  &::before {
+    @include font-icon-style("\e912", 15px);
+  }
+}
+
+.basket-card__top {
+  display: flex;
+  margin-bottom: 15px;
+}
+
+.basket-card__title {
+  max-width: 410px;
+  font-size: 14px;
+  line-height: 150%;
+  margin-right: 30px;
+}
+
+.basket-card__bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 500px;
+}
+
+.basket__price-num {
+  font-weight: normal;
+  line-height: 90%;
+  margin-right: 3px;
+}
+
+.basket-card__input {
+  margin-bottom: 0;
+  padding: 9px 15px;
+  background: rgba(0, 0, 0, 0);
+}
+
+.basket-card__counter-btn {
+  width: 20px;
+  height: 20px;
+}
+
+.basket-card__counter-icon {
+  left: 55%;
+  height: 9px;
+  &::before {
+    font-size: 4px;
+  }
+}
+
+.basket-card__price {
+  color: $base;
+}
+
+.basket-card__price-num {
+  display: inline-block;
+  margin-right: 13px;
+  font-size: 24px;
+  line-height: 32px;
+}
+
+.basket-card__price-mark {
+  font-family: $roboto;
+  font-size: 18px;
+  line-height: 21px;
+}

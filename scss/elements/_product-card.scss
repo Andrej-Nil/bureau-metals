@@ -56,9 +56,10 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -30%);
+  transform: translate(-50%, -50%);
   display: block;
   &::before {
+    display: block;
     @include font-icon-style("\e90b", 35px);
     color: $base;
   }
@@ -85,31 +86,6 @@
   justify-content: space-between;
   align-items: flex-end;
   margin-bottom: 25px;
-}
-
-.product-card__favorite {
-  position: relative;
-  cursor: pointer;
-}
-
-.product-card__favorite-icon {
-  position: relative;
-  bottom: -5px;
-  &::before {
-    @include font-icon-style("\e90b", 17px);
-    color: $base;
-  }
-}
-
-.product-card__favorite-add {
-  font-family: $roboto;
-  margin-left: auto;
-  font-size: 12px;
-  padding-bottom: 3px;
-  margin-left: 2px;
-  line-height: 20px;
-  color: $base;
-  border-bottom: 1px dashed $base;
 }
 
 .product-card__buy {
