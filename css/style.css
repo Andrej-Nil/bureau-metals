@@ -231,6 +231,11 @@ body {
   width: 100%;
 }
 
+.content__bottom {
+  display: flex;
+  justify-content: space-between;
+}
+
 .sidebar {
   max-width: 338px;
   width: 100%;
@@ -922,6 +927,69 @@ body {
   color: #bc1622;
 }
 
+.sorting {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  background: #f2f2f2;
+  margin-bottom: 10px;
+}
+
+.sorting__item {
+  position: relative;
+  margin-right: 50px;
+  width: 145px;
+  cursor: pointer;
+  color: #828282;
+}
+
+.sorting__item:last-child {
+  margin-right: 0;
+}
+
+.sorting__item:hover {
+  color: #bc1622;
+}
+
+.sorting__item:hover .sorting__arrow::before {
+  font-family: "icomoon";
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+  line-height: 1;
+  content: "";
+  font-size: 6px;
+}
+
+.sorting__name {
+  font-family: "Roboto", serif;
+  font-size: 16px;
+  line-height: 150%;
+}
+
+.sorting__arrow {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  height: 6px;
+  transform: translate(0, -50%);
+  display: block;
+}
+
+.sorting__arrow::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-family: "icomoon";
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+  line-height: 1;
+  content: "";
+  font-size: 6px;
+}
+
 .catalog-card {
   display: block;
   position: relative;
@@ -1535,6 +1603,52 @@ body {
   color: #bc1622;
 }
 
+.product-line {
+  margin-bottom: 10px;
+  height: 90px;
+}
+
+.product-line {
+  display: flex;
+  align-items: center;
+  background: #f8f8f8;
+  padding: 14px 19px 10px 15px;
+}
+
+.product-line__right {
+  width: 305px;
+  margin-right: 20px;
+}
+
+.product-line__title {
+  font-size: 14px;
+  line-height: 150%;
+}
+
+.product-line__sizes {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 335px;
+  height: 100%;
+}
+
+.product-line__price {
+  margin-right: 35px;
+}
+
+.product-line__sizes-item {
+  text-align: center;
+  width: 145px;
+}
+
+.product-line__btn {
+  margin-left: auto;
+  font-size: 14px;
+  line-height: 20px;
+  padding: 10px 30px;
+}
+
 .icons-nav {
   position: fixed;
   padding: 36px 0;
@@ -1964,10 +2078,6 @@ body {
   font-size: 34px;
 }
 
-.view-tile--is-active::before {
-  color: #bc1622;
-}
-
 .view-list::before {
   font-family: "icomoon";
   font-weight: normal;
@@ -1978,7 +2088,7 @@ body {
   font-size: 20px;
 }
 
-.view-list--is-active::before {
+.view--is-active::before {
   color: #bc1622;
 }
 

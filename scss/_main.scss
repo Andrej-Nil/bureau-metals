@@ -84,6 +84,11 @@ body {
   width: 100%;
 }
 
+.content__bottom {
+  display: flex;
+  justify-content: space-between;
+}
+
 .sidebar {
   max-width: 338px;
   width: 100%;

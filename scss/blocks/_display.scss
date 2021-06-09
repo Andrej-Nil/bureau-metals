@@ -39,18 +39,13 @@
   }
 }
 
-.view-tile--is-active {
-  &::before {
-    color: $base;
-  }
-}
 .view-list {
   &::before {
     @include font-icon-style("\e90c", 20px);
   }
 }
 
-.view-list--is-active {
+.view--is-active {
   &::before {
     color: $base;
   }

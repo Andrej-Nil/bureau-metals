@@ -1,0 +1,49 @@
+.sorting {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  background: $pearl;
+  margin-bottom: 10px;
+}
+
+.sorting__item {
+  position: relative;
+  margin-right: 50px;
+  width: 145px;
+  cursor: pointer;
+  color: $grey;
+  &:last-child {
+    margin-right: 0;
+  }
+  &:hover {
+    color: $base;
+  }
+  &:hover .sorting__arrow {
+    &::before {
+      @include font-icon-style("\e905", 6px);
+    }
+  }
+}
+
+.sorting__name {
+  font-family: $roboto;
+
+  font-size: 16px;
+  line-height: 150%;
+}
+
+.sorting__arrow {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  height: 6px;
+  transform: translate(0, -50%);
+  display: block;
+  &::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    @include font-icon-style("\e903", 6px);
+  }
+}
