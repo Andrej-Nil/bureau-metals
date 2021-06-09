@@ -2153,6 +2153,36 @@ body {
   line-height: 20px;
 }
 
+.search-info {
+  margin-bottom: 40px;
+}
+
+.search__title {
+  font-size: 24px;
+  line-height: 120%;
+  margin-bottom: 40px;
+}
+
+.search__resault {
+  color: #bc1622;
+}
+
+.search__categories-link {
+  display: inline-block;
+  margin-right: 15px;
+  padding: 10px 30px;
+  margin-bottom: 20px;
+  background: #f2f2f2;
+  font-size: 16px;
+  line-height: 20px;
+  transition: 0.2s ease-in-out;
+}
+
+.search__categories-link:hover {
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.15);
+  color: #bc1622;
+}
+
 .header {
   padding-top: 40px;
   background: linear-gradient(90deg, #be1622 -0.04%, #1d1d1b 99.96%);

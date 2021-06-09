@@ -1,0 +1,30 @@
+.search-info {
+  margin-bottom: 40px;
+}
+
+.search__title {
+  font-size: 24px;
+  line-height: 120%;
+  margin-bottom: 40px;
+}
+
+.search__resault {
+  color: $base;
+}
+
+.search__categories-link {
+  display: inline-block;
+  margin-right: 15px;
+  padding: 10px 30px;
+  margin-bottom: 20px;
+  background: $pearl;
+
+  font-size: 16px;
+  line-height: 20px;
+
+  transition: 0.2s ease-in-out;
+  &:hover {
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.15);
+    color: $base;
+  }
+}
