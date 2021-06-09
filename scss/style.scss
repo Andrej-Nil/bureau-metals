@@ -8,6 +8,7 @@
 //Элементы
 @import "./elements/_logo";
 @import "./elements/_btns";
+
 @import "./elements/_inputs";
 @import "./elements/_path";
 @import "./elements/_counter";
@@ -17,6 +18,8 @@
 @import "./elements/_advantage";
 @import "./elements/_price";
 @import "./elements/_favorite";
+@import "./elements/_select";
+@import "./elements/_fake-checkbox";
 
 @import "./elements/_catalog-card";
 @import "./elements/_product-card";
@@ -34,6 +37,8 @@
 @import "./blocks/_section";
 @import "./blocks/_advantages";
 @import "./blocks/_basket";
+@import "./blocks/_display";
+@import "./blocks/_nav";
 
 //header
 @import "./blocks/_header";

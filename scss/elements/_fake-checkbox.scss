@@ -1,0 +1,16 @@
+.fake-checkbox {
+  position: relative;
+  display: block;
+  width: 16px;
+  height: 16px;
+  border: 1px solid $base-black;
+}
+
+.fake-checkbox--is-active {
+  &::before {
+    @include font-icon-style("\ea10", 18px);
+    position: absolute;
+    top: -30%;
+    color: $base;
+  }
+}

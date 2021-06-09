@@ -1,0 +1,74 @@
+.select {
+  display: inline-block;
+  position: relative;
+  &:hover {
+    z-index: 2000;
+  }
+  &:hover .options__body {
+    height: 290px;
+  }
+}
+.select__header {
+  position: relative;
+  display: inline-block;
+  padding: 14px 93px 14px 10px;
+  border: 1px solid $grey;
+  border-bottom: none;
+  color: $grey;
+
+  &::before {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    right: 19px;
+    width: 12px;
+    height: 4px;
+    @include font-icon-style("\e903", 6px);
+  }
+}
+
+.options__body {
+  position: absolute;
+  background: $white;
+  border: 1px solid $grey;
+  border-top: none;
+  width: 100%;
+  left: 0;
+  height: 1px;
+  overflow: hidden;
+}
+.options {
+  background: $white;
+  padding: 20px 10px;
+}
+
+.options__link {
+  display: flex;
+  align-items: center;
+}
+
+.options__checkbox {
+  margin-right: 15px;
+}
+
+.options__list {
+  height: 240px;
+  overflow: auto;
+  padding: 20px 10px;
+  background: $white;
+  scrollbar-color: $base $l-grey;
+  scrollbar-width: thin;
+}
+
+.options__list::-webkit-scrollbar {
+  width: 4px;
+  background-color: $l-grey;
+}
+
+.options__list::-webkit-scrollbar-thumb {
+  background-color: $base;
+}
+
+.options__item {
+  margin-bottom: 10px;
+}

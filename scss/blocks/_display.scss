@@ -1,0 +1,57 @@
+.display {
+  margin-bottom: 40px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.display__selects-item {
+  margin-right: 25px;
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.display-view {
+  display: flex;
+}
+
+.display-view__item {
+  position: relative;
+  width: 35px;
+  height: 35px;
+  margin-right: 35px;
+  display: block;
+  &:last-child {
+    margin-right: 0;
+  }
+  &::before {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: $d-grey;
+  }
+}
+
+.view-tile {
+  &::before {
+    @include font-icon-style("\e914", 34px);
+  }
+}
+
+.view-tile--is-active {
+  &::before {
+    color: $base;
+  }
+}
+.view-list {
+  &::before {
+    @include font-icon-style("\e90c", 20px);
+  }
+}
+
+.view-list--is-active {
+  &::before {
+    color: $base;
+  }
+}
