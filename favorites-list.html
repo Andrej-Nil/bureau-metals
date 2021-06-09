@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./css/style.min.css" />
+  <title>Избранное</title>
+</head>
+
+<body>
+  <!--app-->
+  <div class="app">
+    <header class="header">
+      <!--header__top-->
+      <div class="header__top-wrap">
+        <div class="header__top container">
+          <div class="header__logo">
+            <a href="index.html" class="logo__link">
+              <img src="./img/logo.svg" alt="" class="logo" />
+            </a>
+          </div>
+
+          <div class="header__search  search">
+            <span class="search__text">Поиск по сайту</span>
+            <i class="search__icon"></i>
+          </div>
+          <!--header__contacts-->
+          <div class="header__contacts">
+            <div class="header__contact-item contact">
+              <i class="contact__icon _contact-phone"></i>
+              <div class="contact__title">Наш телефон</div>
+              <a href="tel:+74951234567" class="contact__link">
+                +7(495) 123-45-67
+              </a>
+            </div>
+
+            <div class="header__contact-item contact">
+              <i class="contact__icon _contact-mail"></i>
+              <div class="contact__title">Наша почта</div>
+              <a href="mailto:info@byrometalov.ru" class="contact__link">
+                info@byrometalov.ru
+              </a>
+            </div>
+
+            <div class="header__contact-item contact">
+              <i class="contact__icon _contact-city"></i>
+              <div class="contact__title">Ваш город</div>
+              <span class="contact__link">
+                Петропавлоск-Камчатский
+              </span>
+            </div>
+          </div>
+          <!--header__contacts-->
+          <span id="feedbackBtn" class="header__feedback btn red-btn">
+            Связаться с нами
+          </span>
+        </div>
+      </div>
+      <!--header__top-->
+      <nav class="header-nav container">
+        <div class="header__catalog h-catalog popup-nav-wrap">
+          <i class="h-catalog__icon"></i>
+          <a href="catalog.html" class="header-nav__item">Наш каталог </a>
+
+          <nav class="popup-nav">
+            <ul class="popup-nav__list">
+              <li class="popup-nav__item">
+                <div class="popup-nav__title">
+                  <a href="category.html" class="popup-nav__link">
+                    Электротехническая продукция
+                  </a>
+
+                  <div class="popup-nav__arrow">
+                    <i class="popup-nav__icon"></i>
+                  </div>
+                </div>
+
+                <ul class="popup-nav__sublist">
+                  <li class="popup-nav__subitem">
+                    <a href="category.html" class="popup-nav__sublink">
+                      Электротехническая продукция
+                    </a>
+                  </li>
+                  <li class="popup-nav__subitem">
+                    <a href="category.html" class="popup-nav__sublink">
+                      Электротехническая продукция
+                    </a>
+                  </li>
+                  <li class="popup-nav__subitem">
+                    <a href="category.html" class="popup-nav__sublink">
+                      Электротехническая продукция
+                    </a>
+                  </li>
+                  <li class="popup-nav__subitem">
+                    <a href="category.html" class="popup-nav__sublink">
+                      Электротехническая продукция
+                    </a>
+                  </li>
+                  <li class="popup-nav__subitem">
+                    <a href="category.html" class="popup-nav__sublink">
+                      Электротехническая продукция
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </nav>
+        </div>
+
+        <div class="header__more h-more popup-nav-wrap">
+          <a href="intermediate-category.html" class="header-nav__item">Наши услуги</a>
+          <i class="h-more__icon"></i>
+          <nav class="popup-nav">
+            <ul class="popup-nav__list">
+              <li class="popup-nav__item">
+                <div class="popup-nav__title">
+                  <a href="category.html" class="popup-nav__link">
+                    Электротехническая продукция
+                  </a>
+
+                  <div class="popup-nav__arrow">
+                    <i class="popup-nav__icon"></i>
+                  </div>
+                </div>
+
+                <ul class="popup-nav__sublist">
+                  <li class="popup-nav__subitem">
+                    <a href="category.html" class="popup-nav__sublink">
+                      Электротехническая продукция
+                    </a>
+                  </li>
+                  <li class="popup-nav__subitem">
+                    <a href="category.html" class="popup-nav__sublink">
+                      Электротехническая продукция
+                    </a>
+                  </li>
+                  <li class="popup-nav__subitem">
+                    <a href="category.html" class="popup-nav__sublink">
+                      Электротехническая продукция
+                    </a>
+                  </li>
+                  <li class="popup-nav__subitem">
+                    <a href="category.html" class="popup-nav__sublink">
+                      Электротехническая продукция
+                    </a>
+                  </li>
+                  <li class="popup-nav__subitem">
+                    <a href="category.html" class="popup-nav__sublink">
+                      Электротехническая продукция
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </nav>
+        </div>
+
+        <div class="header__more h-more popup-nav-wrap">
+          <a href="#!" class="header-nav__item">Производство</a>
+          <i class="h-more__icon"></i>
+          <nav class="popup-nav">
+            <ul class="popup-nav__list">
+              <li class="popup-nav__item">
+                <div class="popup-nav__title">
+                  <a href="category.html" class="popup-nav__link">
+                    Электротехническая продукция
+                  </a>
+
+                  <div class="popup-nav__arrow">
+                    <i class="popup-nav__icon"></i>
+                  </div>
+                </div>
+
+                <ul class="popup-nav__sublist">
+                  <li class="popup-nav__subitem">
+                    <a href="category.html" class="popup-nav__sublink">
+                      Электротехническая продукция
+                    </a>
+                  </li>
+                  <li class="popup-nav__subitem">
+                    <a href="category.html" class="popup-nav__sublink">
+                      Электротехническая продукция
+                    </a>
+                  </li>
+                  <li class="popup-nav__subitem">
+                    <a href="category.html" class="popup-nav__sublink">
+                      Электротехническая продукция
+                    </a>
+                  </li>
+                  <li class="popup-nav__subitem">
+                    <a href="category.html" class="popup-nav__sublink">
+                      Электротехническая продукция
+                    </a>
+                  </li>
+                  <li class="popup-nav__subitem">
+                    <a href="category.html" class="popup-nav__sublink">
+                      Электротехническая продукция
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </nav>
+        </div>
+
+        <div class="header-nav__list">
+          <a href="about.html" class="header-nav__link header-nav__item">О компании</a>
+          <a href="news.html" class="header-nav__link header-nav__item">Новости</a>
+          <a href="contacts.html" class="header-nav__link header-nav__item">Контакты</a>
+        </div>
+      </nav>
+    </header>
+
+    <!--path-->
+    <div class="path-wrap">
+      <div class="path container">
+        <a href="index.html" class="path__link">Главная</a>
+        <span class="path__point"></span>
+        <a href="search.html" class="path__link">Поиск</a>
+      </div>
+    </div>
+    <!--path-->
+
+    <!-- контент -->
+    <div class="section">
+      <div class="section__inner container">
+        <div class="section__header">
+          <div class="section__bg">наш каталог</div>
+          <h2 class="section__title container">Избранное</h2>
+        </div>
+        <div class="section__content wrapper">
+          <div class="content">
+
+            <!--display-->
+            <div class="display">
+              <div class="display__selects">
+                <div class="display__selects-item select">
+                  <div class="select__header">
+                    Сначала дешевые
+                  </div>
+                  <div class="options__body">
+                    <div class="options">
+                      <ul class="options__list">
+                        <li class="options__item options__item--is-active">
+                          <a href="#!" class="options__link">
+                            <span class="options__checkbox  fake-checkbox"></span>
+                            <span class="options__name">
+                              Сначала дешевые
+                            </span>
+                          </a>
+                        </li>
+                        <li class="options__item">
+                          <a href="#!" class="options__link">
+                            <span class="options__checkbox  fake-checkbox"></span>
+                            <span class="options__name">
+                              Сначала дорогие
+                            </span>
+                          </a>
+                        </li>
+                        <li class="options__item">
+
+                          <a href="#!" class="options__link">
+                            <span class="options__checkbox  fake-checkbox"></span>
+                            <span class="options__name">
+                              От А до Я
+                            </span>
+                          </a>
+                        </li>
+                        <li class="options__item">
+
+                          <a href="#!" class="options__link">
+                            <span class="options__checkbox  fake-checkbox"></span>
+                            <span class="options__name">
+                              От Я до А
+                            </span>
+                          </a>
+                        </li>
+                        <li class="options__item">
+                          <a href="#!" class="options__link">
+                            <span class="options__checkbox  fake-checkbox"></span>
+                            <span class="options__name">
+                              Сначала дешевые
+                            </span>
+                          </a>
+                        </li>
+                        <li class="options__item">
+                          <a href="#!" class="options__link">
+                            <span class="options__checkbox  fake-checkbox"></span>
+                            <span class="options__name">
+                              Сначала дорогие
+                            </span>
+                          </a>
+                        </li>
+                        <li class="options__item">
+
+                          <a href="#!" class="options__link">
+                            <span class="options__checkbox  fake-checkbox"></span>
+                            <span class="options__name">
+                              От А до Я
+                            </span>
+                          </a>
+                        </li>
+                        <li class="options__item">
+
+                          <a href="#!" class="options__link">
+                            <span class="options__checkbox  fake-checkbox"></span>
+                            <span class="options__name">
+                              От Я до А
+                            </span>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+
+
+                </div>
+
+                <div class="display__selects-item select">
+                  <div class="select__header">
+                    18 на странице
+                  </div>
+                  <div class="options__body">
+                    <div class="options">
+                      <ul class="options__list">
+                        <li class="options__item options__item--is-active">
+                          <a href="#!" class="options__link">
+                            <span class="options__checkbox  fake-checkbox"></span>
+                            <span class="options__name">
+                              24 на странице
+                            </span>
+                          </a>
+                        </li>
+                        <li class="options__item">
+                          <a href="#!" class="options__link">
+                            <span class="options__checkbox  fake-checkbox"></span>
+                            <span class="options__name">
+                              30 на странице
+                            </span>
+                          </a>
+                        </li>
+                        <li class="options__item">
+
+                          <a href="#!" class="options__link">
+                            <span class="options__checkbox  fake-checkbox"></span>
+                            <span class="options__name">
+                              36 на странице
+                            </span>
+                          </a>
+                        </li>
+                        <li class="options__item">
+
+                          <a href="#!" class="options__link">
+                            <span class="options__checkbox  fake-checkbox"></span>
+                            <span class="options__name">
+                              42 на странице
+                            </span>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+
+
+                </div>
+              </div>
+              <div class="display-view">
+                <a href="favorites.html" class="display-view__item view-tile"></a>
+                <a href="favorites-list.html" class="display-view__item view-list view--is-active"></a>
+              </div>
+
+            </div>
+            <!--display-->
+
+            <!-- product-list -->
+            <div class="product-list">
+              <div class="product-line">
+                <div class="product-line__right">
+                  <h3 class="product-line__title">
+                    <a href="product-page.html" class="product-line__link link">Пруток магниевый 0,6х500х1000 мм МА15
+                      ГОСТ 22635-77 свернутый в рулоне по...</a>
+
+                  </h3>
+                  <div class="product-line__favorite favorite">
+                    <i class="product-line__favorite favorite__icon"></i>
+                    <span class="favorite__add">добавить в Избранное</span>
+                  </div>
+                </div>
+
+                <div class="product-line__sizes">
+                  <div class="product-line__sizes-item">100</div>
+                  <div class="product-line__sizes-item">100</div>
+                </div>
+
+                <div class="product-line__price price">
+                  <span class="product-card__old price__old">1 550</span>
+                  <span class="product-card__new price__new">
+                    <span class="product-card__price-num price__num">1 250</span>
+                    <span class="product-card__price-mark price__mark">₽</span><span
+                      class="product-card__price-unit price__unit">/кг</span>
+                  </span>
+                </div>
+
+                <div class="product-line__counter counter">
+                  <input type="text" class="basket-card__input input counter__input" value="1" />
+                  <div class=" counter__controls">
+                    <span class="basket-card__counter-btn counter__btn">
+                      <i class="basket-card__counter-icon 
+                            counter__icon counter__inc
+                          "></i>
+                    </span>
+                    <span class="basket-card__counter-btn counter__btn">
+                      <i class="basket-card__counter-icon 
+                            counter__icon counter__dec
+                          "></i>
+                    </span>
+                  </div>
+                </div>
+
+                <span class="product-line__btn btn red-btn">
+                  Заказать
+                </span>
+              </div>
+
+              <div class="product-line">
+                <div class="product-line__right">
+                  <h3 class="product-line__title">
+                    <a href="product-page.html" class="product-line__link link">Пруток магниевый 0,6х500х1000 мм МА15
+                      ГОСТ 22635-77 свернутый в рулоне по...</a>
+
+                  </h3>
+                  <div class="product-line__favorite favorite">
+                    <i class="product-line__favorite favorite__icon"></i>
+                    <span class="favorite__add">добавить в Избранное</span>
+                  </div>
+                </div>
+
+                <div class="product-line__sizes">
+                  <div class="product-line__sizes-item">100</div>
+                  <div class="product-line__sizes-item">100</div>
+                </div>
+
+                <div class="product-line__price price">
+                  <span class="product-card__old price__old">1 550</span>
+                  <span class="product-card__new price__new">
+                    <span class="product-card__price-num price__num">1 250</span>
+                    <span class="product-card__price-mark price__mark">₽</span><span
+                      class="product-card__price-unit price__unit">/кг</span>
+                  </span>
+                </div>
+
+                <div class="product-line__counter counter">
+                  <input type="text" class="basket-card__input input counter__input" value="1" />
+                  <div class=" counter__controls">
+                    <span class="basket-card__counter-btn counter__btn">
+                      <i class="basket-card__counter-icon 
+                            counter__icon counter__inc
+                          "></i>
+                    </span>
+                    <span class="basket-card__counter-btn counter__btn">
+                      <i class="basket-card__counter-icon 
+                            counter__icon counter__dec
+                          "></i>
+                    </span>
+                  </div>
+                </div>
+
+                <span class="product-line__btn btn red-btn">
+                  Заказать
+                </span>
+              </div>
+
+              <div class="product-line">
+                <div class="product-line__right">
+                  <h3 class="product-line__title">
+                    <a href="product-page.html" class="product-line__link link">Пруток магниевый 0,6х500х1000 мм МА15
+                      ГОСТ 22635-77 свернутый в рулоне по...</a>
+
+                  </h3>
+                  <div class="product-line__favorite favorite">
+                    <i class="product-line__favorite favorite__icon"></i>
+                    <span class="favorite__add">добавить в Избранное</span>
+                  </div>
+                </div>
+
+                <div class="product-line__sizes">
+                  <div class="product-line__sizes-item">100</div>
+                  <div class="product-line__sizes-item">100</div>
+                </div>
+
+                <div class="product-line__price price">
+                  <span class="product-card__old price__old">1 550</span>
+                  <span class="product-card__new price__new">
+                    <span class="product-card__price-num price__num">1 250</span>
+                    <span class="product-card__price-mark price__mark">₽</span><span
+                      class="product-card__price-unit price__unit">/кг</span>
+                  </span>
+                </div>
+
+                <div class="product-line__counter counter">
+                  <input type="text" class="basket-card__input input counter__input" value="1" />
+                  <div class=" counter__controls">
+                    <span class="basket-card__counter-btn counter__btn">
+                      <i class="basket-card__counter-icon 
+                            counter__icon counter__inc
+                          "></i>
+                    </span>
+                    <span class="basket-card__counter-btn counter__btn">
+                      <i class="basket-card__counter-icon 
+                            counter__icon counter__dec
+                          "></i>
+                    </span>
+                  </div>
+                </div>
+
+                <span class="product-line__btn btn red-btn">
+                  Заказать
+                </span>
+              </div>
+
+              <div class="product-line">
+                <div class="product-line__right">
+                  <h3 class="product-line__title">
+                    <a href="product-page.html" class="product-line__link link">Пруток магниевый 0,6х500х1000 мм МА15
+                      ГОСТ 22635-77 свернутый в рулоне по...</a>
+
+                  </h3>
+                  <div class="product-line__favorite favorite">
+                    <i class="product-line__favorite favorite__icon"></i>
+                    <span class="favorite__add">добавить в Избранное</span>
+                  </div>
+                </div>
+
+                <div class="product-line__sizes">
+                  <div class="product-line__sizes-item">100</div>
+                  <div class="product-line__sizes-item">100</div>
+                </div>
+
+                <div class="product-line__price price">
+                  <span class="product-card__old price__old">1 550</span>
+                  <span class="product-card__new price__new">
+                    <span class="product-card__price-num price__num">1 250</span>
+                    <span class="product-card__price-mark price__mark">₽</span><span
+                      class="product-card__price-unit price__unit">/кг</span>
+                  </span>
+                </div>
+
+                <div class="product-line__counter counter">
+                  <input type="text" class="basket-card__input input counter__input" value="1" />
+                  <div class=" counter__controls">
+                    <span class="basket-card__counter-btn counter__btn">
+                      <i class="basket-card__counter-icon 
+                            counter__icon counter__inc
+                          "></i>
+                    </span>
+                    <span class="basket-card__counter-btn counter__btn">
+                      <i class="basket-card__counter-icon 
+                            counter__icon counter__dec
+                          "></i>
+                    </span>
+                  </div>
+                </div>
+
+                <span class="product-line__btn btn red-btn">
+                  Заказать
+                </span>
+              </div>
+            </div>
+            <!-- product-list -->
+
+            <div class="content__bottom">
+              <div class="display__selects-item select">
+                <div class="select__header">
+                  Сначала дешевые
+                </div>
+                <div class="options__body">
+                  <div class="options">
+                    <ul class="options__list">
+                      <li class="options__item options__item--is-active">
+                        <a href="#!" class="options__link">
+                          <span class="options__checkbox  fake-checkbox"></span>
+                          <span class="options__name">
+                            Сначала дешевые
+                          </span>
+                        </a>
+                      </li>
+                      <li class="options__item">
+                        <a href="#!" class="options__link">
+                          <span class="options__checkbox  fake-checkbox"></span>
+                          <span class="options__name">
+                            Сначала дорогие
+                          </span>
+                        </a>
+                      </li>
+                      <li class="options__item">
+
+                        <a href="#!" class="options__link">
+                          <span class="options__checkbox  fake-checkbox"></span>
+                          <span class="options__name">
+                            От А до Я
+                          </span>
+                        </a>
+                      </li>
+                      <li class="options__item">
+
+                        <a href="#!" class="options__link">
+                          <span class="options__checkbox  fake-checkbox"></span>
+                          <span class="options__name">
+                            От Я до А
+                          </span>
+                        </a>
+                      </li>
+                      <li class="options__item">
+                        <a href="#!" class="options__link">
+                          <span class="options__checkbox  fake-checkbox"></span>
+                          <span class="options__name">
+                            Сначала дешевые
+                          </span>
+                        </a>
+                      </li>
+                      <li class="options__item">
+                        <a href="#!" class="options__link">
+                          <span class="options__checkbox  fake-checkbox"></span>
+                          <span class="options__name">
+                            Сначала дорогие
+                          </span>
+                        </a>
+                      </li>
+                      <li class="options__item">
+
+                        <a href="#!" class="options__link">
+                          <span class="options__checkbox  fake-checkbox"></span>
+                          <span class="options__name">
+                            От А до Я
+                          </span>
+                        </a>
+                      </li>
+                      <li class="options__item">
+
+                        <a href="#!" class="options__link">
+                          <span class="options__checkbox  fake-checkbox"></span>
+                          <span class="options__name">
+                            От Я до А
+                          </span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+
+              </div>
+
+              <!-- pagination -->
+              <div class="pagination">
+                <a href="#!" class="pagination__item">
+                  <i class="pagination__arrow pagination__arrow--prev"></i>
+                </a>
+                <a href="#!" class="pagination__item">1</a>
+                <a href="#!" class="pagination__item">2</a>
+                <a href="#!" class="pagination__item">3</a>
+                <span href="#!" class="pagination__item pagination__item--fake">...</span>
+                <a href="#!" class="pagination__item">10</a>
+                <a href="#!" class="pagination__item">
+                  <i class="pagination__arrow pagination__arrow--next"></i>
+                </a>
+              </div>
+              <!-- pagination -->
+
+              <div class="display__selects-item select">
+                <div class="select__header">
+                  18 на странице
+                </div>
+                <div class="options__body">
+                  <div class="options">
+                    <ul class="options__list">
+                      <li class="options__item options__item--is-active">
+                        <a href="#!" class="options__link">
+                          <span class="options__checkbox  fake-checkbox"></span>
+                          <span class="options__name">
+                            24 на странице
+                          </span>
+                        </a>
+                      </li>
+                      <li class="options__item">
+                        <a href="#!" class="options__link">
+                          <span class="options__checkbox  fake-checkbox"></span>
+                          <span class="options__name">
+                            30 на странице
+                          </span>
+                        </a>
+                      </li>
+                      <li class="options__item">
+
+                        <a href="#!" class="options__link">
+                          <span class="options__checkbox  fake-checkbox"></span>
+                          <span class="options__name">
+                            36 на странице
+                          </span>
+                        </a>
+                      </li>
+                      <li class="options__item">
+
+                        <a href="#!" class="options__link">
+                          <span class="options__checkbox  fake-checkbox"></span>
+                          <span class="options__name">
+                            42 на странице
+                          </span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+
+          </div>
+
+          <div class="sidebar">
+            <nav class="nav">
+              <ul class="nav__list">
+                <li class="nav__item">
+                  <div class="nav__title">
+                    <a href="category.html" class="nav__link">
+                      Электротехническая продукция
+                    </a>
+
+                    <div class="nav__arrow">
+                      <i class="nav__icon"></i>
+                    </div>
+                  </div>
+
+                  <ul class="nav__sublist">
+                    <li class="nav__subitem">
+                      <a href="category.html" class="nav__sublink link">
+                        Электротехническая продукция
+                      </a>
+                    </li>
+                    <li class="nav__subitem">
+                      <a href="category.html" class="nav__sublink link">
+                        Электротехническая продукция
+                      </a>
+                    </li>
+                    <li class="nav__subitem">
+                      <a href="category.html" class="nav__sublink link">
+                        Электротехническая продукция
+                      </a>
+                    </li>
+                    <li class="nav__subitem">
+                      <a href="category.html" class="nav__sublink link">
+                        Электротехническая продукция
+                      </a>
+                    </li>
+                    <li class="nav__subitem">
+                      <a href="category.html" class="nav__sublink link">
+                        Электротехническая продукция
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </nav>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <!--контент-->
+
+    <footer class="footer">
+      <div class="footer__inner container">
+        <div class="footer__body">
+          <div class="footer-right">
+            <img src="./img/logo.svg" alt="" class="footer__logo" />
+
+            <div class="footer__contacts">
+              <div class="footer__contact-item contact">
+                <i class="footer__contact-icon contact__icon _contact-phone"></i>
+                <div class="footer__contact-title contact__title">
+                  Наш телефон
+                </div>
+                <a href="tel:+74951234567" class="footer__contact-link contact__link">
+                  +7(495) 123-45-67
+                </a>
+              </div>
+              <div class="footer__contact-item contact">
+                <i class="footer__contact-icon contact__icon _contact-mail"></i>
+                <div class="footer__contact-title contact__title">
+                  Наша почта
+                </div>
+                <a href="mailto:info@byrometalov.ru" class="footer__contact-link contact__link">
+                  info@byrometalov.ru
+                </a>
+              </div>
+            </div>
+
+            <nav class="footer-right__nav">
+              <ul class="footer-right__list">
+                <li class="footer-right__item">
+                  <a href="about.html" class="footer-right__link">о компании</a>
+                </li>
+                <li class="footer-right__item">
+                  <a href="contacts.html" class="footer-right__link">Контакты</a>
+                </li>
+                <li class="footer-right__item">
+                  <a href="news.html" class="footer-right__link">Новости</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+
+          <div class="footer__nav">
+            <div class="footer-coll">
+              <h4 class="footer-coll__title">наша продукция</h4>
+              <ul class="footer-coll__list">
+                <li class="footer-coll__item">
+                  <a href="#!" class="footer-coll__link">Электротехническая продукция</a>
+                </li>
+                <li class="footer-coll__item">
+                  <a href="#!" class="footer-coll__link">Электротехническая продукция</a>
+                </li>
+                <li class="footer-coll__item">
+                  <a href="#!" class="footer-coll__link">Электротехническая продукция</a>
+                </li>
+                <li class="footer-coll__item">
+                  <a href="#!" class="footer-coll__link">Электротехническая продукция</a>
+                </li>
+                <li class="footer-coll__item">
+                  <a href="#!" class="footer-coll__link">Электротехническая продукция</a>
+                </li>
+                <li class="footer-coll__item">
+                  <a href="#!" class="footer-coll__link">Электротехническая продукция</a>
+                </li>
+                <li class="footer-coll__item">
+                  <a href="#!" class="footer-coll__link">Электротехническая продукция</a>
+                </li>
+                <li class="footer-coll__item">
+                  <a href="#!" class="footer-coll__link">Электротехническая продукция</a>
+                </li>
+                <li class="footer-coll__item">
+                  <a href="#!" class="footer-coll__link">Электротехническая продукция</a>
+                </li>
+                <li class="footer-coll__item">
+                  <a href="#!" class="footer-coll__link">Электротехническая продукция</a>
+                </li>
+                <li class="footer-coll__item">
+                  <a href="#!" class="footer-coll__link">Электротехническая продукция</a>
+                </li>
+              </ul>
+
+              <a href="#!" class="footer-coll__more">
+                Смотреть всю продукцию
+              </a>
+            </div>
+
+            <div class="footer-coll">
+              <h4 class="footer-coll__title">наша продукция</h4>
+              <ul class="footer-coll__list">
+                <li class="footer-coll__item">
+                  <a href="#!" class="footer-coll__link">Электротехническая продукция</a>
+                </li>
+                <li class="footer-coll__item">
+                  <a href="#!" class="footer-coll__link">Электротехническая продукция</a>
+                </li>
+                <li class="footer-coll__item">
+                  <a href="#!" class="footer-coll__link">Электротехническая продукция</a>
+                </li>
+                <li class="footer-coll__item">
+                  <a href="#!" class="footer-coll__link">Электротехническая продукция</a>
+                </li>
+                <li class="footer-coll__item">
+                  <a href="#!" class="footer-coll__link">Электротехническая продукция</a>
+                </li>
+                <li class="footer-coll__item">
+                  <a href="#!" class="footer-coll__link">Электротехническая продукция</a>
+                </li>
+                <li class="footer-coll__item">
+                  <a href="#!" class="footer-coll__link">Электротехническая продукция</a>
+                </li>
+                <li class="footer-coll__item">
+                  <a href="#!" class="footer-coll__link">Электротехническая продукция</a>
+                </li>
+                <li class="footer-coll__item">
+                  <a href="#!" class="footer-coll__link">Электротехническая продукция</a>
+                </li>
+                <li class="footer-coll__item">
+                  <a href="#!" class="footer-coll__link">Электротехническая продукция</a>
+                </li>
+                <li class="footer-coll__item">
+                  <a href="#!" class="footer-coll__link">Электротехническая продукция</a>
+                </li>
+              </ul>
+
+              <a href="#!" class="footer-coll__more">
+                Смотреть всю продукцию
+              </a>
+            </div>
+
+            <div class="footer-coll">
+              <h4 class="footer-coll__title">наша продукция</h4>
+              <ul class="footer-coll__list">
+                <li class="footer-coll__item">
+                  <a href="#!" class="footer-coll__link">Электротехническая продукция</a>
+                </li>
+                <li class="footer-coll__item">
+                  <a href="#!" class="footer-coll__link">Электротехническая продукция</a>
+                </li>
+                <li class="footer-coll__item">
+                  <a href="#!" class="footer-coll__link">Электротехническая продукция</a>
+                </li>
+                <li class="footer-coll__item">
+                  <a href="#!" class="footer-coll__link">Электротехническая продукция</a>
+                </li>
+                <li class="footer-coll__item">
+                  <a href="#!" class="footer-coll__link">Электротехническая продукция</a>
+                </li>
+                <li class="footer-coll__item">
+                  <a href="#!" class="footer-coll__link">Электротехническая продукция</a>
+                </li>
+                <li class="footer-coll__item">
+                  <a href="#!" class="footer-coll__link">Электротехническая продукция</a>
+                </li>
+                <li class="footer-coll__item">
+                  <a href="#!" class="footer-coll__link">Электротехническая продукция</a>
+                </li>
+                <li class="footer-coll__item">
+                  <a href="#!" class="footer-coll__link">Электротехническая продукция</a>
+                </li>
+                <li class="footer-coll__item">
+                  <a href="#!" class="footer-coll__link">Электротехническая продукция</a>
+                </li>
+                <li class="footer-coll__item">
+                  <a href="#!" class="footer-coll__link">Электротехническая продукция</a>
+                </li>
+              </ul>
+
+              <a href="#!" class="footer-coll__more">
+                Смотреть всю продукцию
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer__bottom">
+          <p class="footer__copyright">
+            © 2021 Все права защищены, копирование преследуется по закону.
+            <a href="#!" class="footer__privacy-policy">Политика конфиденциальности</a>
+          </p>
+
+          <a href="#!" class="footer__map-site">Карта сайта</a>
+        </div>
+      </div>
+    </footer>
+
+    <!--icons-nav-->
+    <div class="icons-nav">
+      <a href="basket.html" class="icons-nav__link">
+        <span class="icons-nav__count" data-basket-count>123</span>
+        <i class="icons-nav__item icons-nav__item--basket"></i>
+      </a>
+
+      <a href="favorites.html" class="icons-nav__link">
+        <span class="icons-nav__count" data-basket-favorite>657</span>
+        <i class="icons-nav__item icons-nav__item--favorite"></i>
+      </a>
+    </div>
+    <!-- icons-nav -->
+  </div>
+  <!--app-->
+</body>
+
+</html>

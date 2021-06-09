@@ -1603,6 +1603,10 @@ body {
   color: #bc1622;
 }
 
+.product-list {
+  margin-bottom: 100px;
+}
+
 .product-line {
   margin-bottom: 10px;
   height: 90px;
@@ -1869,7 +1873,7 @@ body {
   position: relative;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 }
 
 .section__title {
