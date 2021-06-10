@@ -1,0 +1,90 @@
+.filters {
+  background: $milk;
+  margin-bottom: 30px;
+}
+
+.filters__selected {
+  padding: 30px 20px;
+}
+
+.filters__active-list {
+  //display: flex;
+  margin-bottom: 30px;
+}
+
+.filters__selected {
+  border-bottom: 1px solid $grey;
+}
+
+.filters__item {
+  margin: 0 20px 20px 0;
+}
+
+.filters__title {
+  display: inline-block;
+  margin-right: 20px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+  margin-bottom: 10px;
+}
+
+.filters__active-item {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 6px;
+  padding-right: 26px;
+  margin-right: 20px;
+}
+
+.filter__active-name {
+  font-family: $roboto;
+  font-size: 16px;
+  line-height: 150%;
+  color: $d-grey;
+}
+
+.filter__active-remove {
+  position: absolute;
+  display: block;
+  top: 50%;
+  right: 0;
+  transform: translate(0, -50%);
+  width: 16px;
+  height: 16px;
+  //background: $base;
+  cursor: pointer;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    transform: translate(-50%, -50%);
+    background-image: url("../../img/icon/remove.svg");
+  }
+}
+
+.filters__btn {
+  padding: 10px 30px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: normal;
+  margin-right: 25px;
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.filters__control {
+  text-align: right;
+}
+
+.filters__list {
+  padding: 40px 20px 30px;
+}
+
+.filter-options__list {
+  height: 190px;
+}

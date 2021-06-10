@@ -824,23 +824,40 @@ body {
 .select {
   display: inline-block;
   position: relative;
+  min-width: 215px;
 }
 
 .select:hover {
   z-index: 2000;
 }
 
-.select:hover .options__body {
+.select:hover .select__header {
+  z-index: 2000;
+  border: 1px solid #bc1622;
+  border-bottom: none;
+  color: #bc1622;
+}
+
+.select:hover .options-body {
   height: 290px;
+  border: 1px solid #bc1622;
+  border-top: none;
+}
+
+.select:hover .options-body::before {
+  color: #bc1622;
 }
 
 .select__header {
+  cursor: pointer;
   position: relative;
   display: inline-block;
   padding: 14px 93px 14px 10px;
   border: 1px solid #828282;
   border-bottom: none;
+  background: #fff;
   color: #828282;
+  transition: 0.2s ease-in-out;
 }
 
 .select__header::before {
@@ -859,7 +876,7 @@ body {
   font-size: 6px;
 }
 
-.options__body {
+.options-body {
   position: absolute;
   background: #fff;
   border: 1px solid #828282;
@@ -868,11 +885,87 @@ body {
   left: 0;
   height: 1px;
   overflow: hidden;
+  transition: border 0.2s ease-in-out;
 }
 
 .options {
   background: #fff;
   padding: 20px 10px;
+}
+
+.options__search {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.options__btn {
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translate(0, -50%);
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.options__btn::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-family: "icomoon";
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+  line-height: 1;
+  content: "";
+  font-size: 18px;
+  color: #828282;
+}
+
+.options__input {
+  width: 100%;
+  padding: 10px 40px 10px 15px;
+  outline: none;
+  font-family: "Roboto", serif;
+  color: #828282;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  border: 1px solid #bdbdbd;
+}
+
+.options__input::-webkit-input-placeholder {
+  font-family: "Roboto", serif;
+  font-style: italic;
+  font-size: 14px;
+  line-height: 150%;
+  color: #828282;
+}
+
+.options__input::-moz-placeholder {
+  font-family: "Roboto", serif;
+  font-style: italic;
+  font-size: 14px;
+  line-height: 150%;
+  color: #828282;
+}
+
+/* Firefox 19+ */
+.options__input:-moz-placeholder {
+  font-family: "Roboto", serif;
+  font-style: italic;
+  font-size: 14px;
+  line-height: 150%;
+  color: #828282;
+}
+
+/* Firefox 18- */
+.options__input:-ms-input-placeholder {
+  font-family: "Roboto", serif;
+  font-style: italic;
+  font-size: 14px;
+  line-height: 150%;
+  color: #828282;
 }
 
 .options__link {
@@ -887,7 +980,7 @@ body {
 .options__list {
   height: 240px;
   overflow: auto;
-  padding: 20px 10px;
+  padding: 10px;
   background: #fff;
   scrollbar-color: #bc1622 #e0e0e0;
   scrollbar-width: thin;
@@ -904,6 +997,12 @@ body {
 
 .options__item {
   margin-bottom: 10px;
+  padding-right: 10px;
+  cursor: pointer;
+}
+
+.options__count {
+  margin-left: auto;
 }
 
 .fake-checkbox {
@@ -2185,6 +2284,97 @@ body {
 .search__categories-link:hover {
   box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.15);
   color: #bc1622;
+}
+
+.filters {
+  background: #f8f8f8;
+  margin-bottom: 30px;
+}
+
+.filters__selected {
+  padding: 30px 20px;
+}
+
+.filters__active-list {
+  margin-bottom: 30px;
+}
+
+.filters__selected {
+  border-bottom: 1px solid #828282;
+}
+
+.filters__item {
+  margin: 0 20px 20px 0;
+}
+
+.filters__title {
+  display: inline-block;
+  margin-right: 20px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+  margin-bottom: 10px;
+}
+
+.filters__active-item {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 6px;
+  padding-right: 26px;
+  margin-right: 20px;
+}
+
+.filter__active-name {
+  font-family: "Roboto", serif;
+  font-size: 16px;
+  line-height: 150%;
+  color: #4f4f4f;
+}
+
+.filter__active-remove {
+  position: absolute;
+  display: block;
+  top: 50%;
+  right: 0;
+  transform: translate(0, -50%);
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.filter__active-remove::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%);
+  background-image: url("../../img/icon/remove.svg");
+}
+
+.filters__btn {
+  padding: 10px 30px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: normal;
+  margin-right: 25px;
+}
+
+.filters__btn:last-child {
+  margin-right: 0;
+}
+
+.filters__control {
+  text-align: right;
+}
+
+.filters__list {
+  padding: 40px 20px 30px;
+}
+
+.filter-options__list {
+  height: 190px;
 }
 
 .header {

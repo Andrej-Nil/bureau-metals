@@ -1,20 +1,36 @@
 .select {
   display: inline-block;
   position: relative;
+  min-width: 215px;
+
   &:hover {
     z-index: 2000;
   }
-  &:hover .options__body {
+  &:hover .select__header {
+    z-index: 2000;
+    border: 1px solid $base;
+    border-bottom: none;
+    color: $base;
+  }
+  &:hover .options-body {
     height: 290px;
+    border: 1px solid $base;
+    border-top: none;
+    &::before {
+      color: $base;
+    }
   }
 }
 .select__header {
+  cursor: pointer;
   position: relative;
   display: inline-block;
   padding: 14px 93px 14px 10px;
   border: 1px solid $grey;
   border-bottom: none;
+  background: $white;
   color: $grey;
+  transition: 0.2s ease-in-out;
 
   &::before {
     position: absolute;
@@ -27,7 +43,7 @@
   }
 }
 
-.options__body {
+.options-body {
   position: absolute;
   background: $white;
   border: 1px solid $grey;
@@ -36,12 +52,75 @@
   left: 0;
   height: 1px;
   overflow: hidden;
+  transition: border 0.2s ease-in-out;
 }
+
 .options {
   background: $white;
   padding: 20px 10px;
 }
+.options__search {
+  position: relative;
+  margin-bottom: 20px;
+}
 
+.options__btn {
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translate(0, -50%);
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  &::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    @include font-icon-style("\e913", 18px);
+    color: $grey;
+  }
+}
+
+.options__input {
+  width: 100%;
+  padding: 10px 40px 10px 15px;
+  outline: none;
+  font-family: $roboto;
+  color: $grey;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  border: 1px solid #bdbdbd;
+}
+
+.options__input::-webkit-input-placeholder {
+  font-family: $roboto;
+  font-style: italic;
+  font-size: 14px;
+  line-height: 150%;
+  color: $grey;
+}
+.options__input::-moz-placeholder {
+  font-family: $roboto;
+  font-style: italic;
+  font-size: 14px;
+  line-height: 150%;
+  color: $grey;
+} /* Firefox 19+ */
+.options__input:-moz-placeholder {
+  font-family: $roboto;
+  font-style: italic;
+  font-size: 14px;
+  line-height: 150%;
+  color: $grey;
+} /* Firefox 18- */
+.options__input:-ms-input-placeholder {
+  font-family: $roboto;
+  font-style: italic;
+  font-size: 14px;
+  line-height: 150%;
+  color: $grey;
+}
 .options__link {
   display: flex;
   align-items: center;
@@ -54,7 +133,7 @@
 .options__list {
   height: 240px;
   overflow: auto;
-  padding: 20px 10px;
+  padding: 10px;
   background: $white;
   scrollbar-color: $base $l-grey;
   scrollbar-width: thin;
@@ -71,4 +150,10 @@
 
 .options__item {
   margin-bottom: 10px;
+  padding-right: 10px;
+  cursor: pointer;
+}
+
+.options__count {
+  margin-left: auto;
 }
