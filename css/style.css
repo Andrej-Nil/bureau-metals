@@ -215,9 +215,16 @@ body {
 }
 
 .container {
+  padding: 0 10px;
   max-width: 1442px;
   width: 100%;
   margin: 0 auto;
+}
+
+@media (min-width: 1472px) {
+  .container {
+    padding: 0;
+  }
 }
 
 .wrapper {
@@ -2577,8 +2584,92 @@ body {
 }
 
 .header {
-  padding-top: 40px;
   background: linear-gradient(90deg, #be1622 -0.04%, #1d1d1b 99.96%);
+}
+
+.header-top {
+  height: 50px;
+  background: linear-gradient(90deg, #be1622 -0.04%, #1d1d1b 99.96%);
+}
+
+@media (min-width: 1130px) {
+  .header-top {
+    height: 40px;
+  }
+}
+
+.header-top__inner {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media (min-width: 1130px) {
+  .header-top__inner {
+    display: none;
+  }
+}
+
+.header__m-contact {
+  color: #fff;
+}
+
+.header__m-contact-icon::before {
+  color: #fff;
+}
+
+.header__m-contact-title {
+  font-size: 13px;
+  line-height: 17px;
+  margin-bottom: 1px;
+}
+
+.header__m-contact-link {
+  font-size: 14px;
+  line-height: 16px;
+  color: #f2f2f2;
+  opacity: 0.75;
+}
+
+.header-top__phone {
+  position: relative;
+  display: block;
+  width: 23px;
+  height: 23px;
+}
+
+.header-top__phone::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 23px;
+  height: 23px;
+  font-family: "icomoon";
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+  line-height: 1;
+  content: "";
+  font-size: 21px;
+  color: #fff;
+}
+
+@media (min-width: 530px) {
+  .header-top__phone {
+    display: none;
+  }
+}
+
+.header__m-contact--phone {
+  display: none;
+}
+
+@media (min-width: 530px) {
+  .header__m-contact--phone {
+    display: block;
+  }
 }
 
 .main-header {
@@ -2672,52 +2763,143 @@ body {
   color: #e0e0e0;
 }
 
-.header__top {
+.header__main {
   display: flex;
   align-items: center;
-  height: 100px;
+  height: 80px;
 }
 
-.header__top-wrap {
+@media (min-width: 1280px) {
+  .header__main {
+    height: 100px;
+  }
+}
+
+.header__main-wrap {
   background: #fff;
 }
 
 .header__logo {
-  margin-right: 74px;
+  width: 110px;
   position: relative;
 }
 
+@media (min-width: 1130px) {
+  .header__logo {
+    margin-right: 20px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .header__logo {
+    margin-right: 40px;
+    width: 175px;
+  }
+}
+
+@media (min-width: 1472px) {
+  .header__logo {
+    margin-right: 74px;
+  }
+}
+
 .header__search {
-  margin-right: 64px;
+  display: none;
+}
+
+@media (min-width: 1130px) {
+  .header__search {
+    width: 150px;
+    display: flex;
+    margin-right: 20px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .header__search {
+    margin-right: 30px;
+  }
+}
+
+@media (min-width: 1472px) {
+  .header__search {
+    width: 100%;
+  }
 }
 
 .header__contacts {
+  display: none;
   margin-right: auto;
-  display: flex;
+}
+
+@media (min-width: 1130px) {
+  .header__contacts {
+    display: flex;
+  }
 }
 
 .header__contact-item {
-  margin-right: 27px;
+  margin-right: 10px;
 }
 
 .header__contact-item:last-child {
   margin-right: 0;
+  display: none;
+}
+
+@media (min-width: 1130px) {
+  .header__contact-item:last-child {
+    display: block;
+  }
+}
+
+@media (min-width: 1280px) {
+  .header__contact-item {
+    margin-right: 30px;
+  }
 }
 
 .header__feedback {
-  position: relative;
+  width: 165px;
+  padding: 10px 10px;
+  font-size: 14px;
+  line-height: 20px;
+  margin-left: auto;
+}
+
+@media (min-width: 1280px) {
+  .header__feedback {
+    padding: 20px 40px;
+    width: auto;
+  }
 }
 
 .header-nav {
   height: 60px;
-  display: flex;
+}
+
+.header-nav__desktop {
+  display: none;
+  height: 100%;
   align-items: center;
+}
+
+@media (min-width: 1130px) {
+  .header-nav__desktop {
+    display: flex;
+  }
 }
 
 .header__catalog {
   position: relative;
   align-items: center;
-  margin-right: 180px;
+  margin-right: auto;
+}
+
+@media (min-width: 1280px) {
+  .header__catalog {
+    margin-right: 180px;
+  }
 }
 
 .h-catalog__icon {
@@ -2777,6 +2959,37 @@ body {
   font-size: 18px;
   line-height: 20px;
   text-transform: uppercase;
+  color: #fff;
+}
+
+.header-nav__mobile {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-nav__m-search {
+  position: relative;
+  display: block;
+  width: 23px;
+  height: 23px;
+}
+
+.header-nav__m-search::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  font-family: "icomoon";
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+  line-height: 1;
+  content: "";
+  font-size: 23px;
   color: #fff;
 }
 

@@ -1,13 +1,24 @@
 .header-nav {
   height: 60px;
-  display: flex;
+}
+
+.header-nav__desktop {
+  display: none;
+  height: 100%;
+
   align-items: center;
+  @media (min-width: 1130px) {
+    display: flex;
+  }
 }
 
 .header__catalog {
   position: relative;
   align-items: center;
-  margin-right: 180px;
+  margin-right: auto;
+  @media (min-width: 1280px) {
+    margin-right: 180px;
+  }
 }
 
 .h-catalog__icon {
@@ -53,4 +64,28 @@
   line-height: 20px;
   text-transform: uppercase;
   color: $white;
+}
+
+.header-nav__mobile {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-nav__m-search {
+  position: relative;
+  display: block;
+  width: 23px;
+  height: 23px;
+  &::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    @include font-icon-style("\e913", 23px);
+    color: $white;
+  }
 }
