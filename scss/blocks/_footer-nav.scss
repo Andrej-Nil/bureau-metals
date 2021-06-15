@@ -1,12 +1,36 @@
 .footer__nav {
+  //display: none;
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: 50px;
+
+  @media (min-width: 1400px) {
+    flex-wrap: nowrap;
+    margin-bottom: 0;
+  }
 }
 .footer-coll {
-  width: 338px;
-  margin-right: 30px;
+  width: 100%;
+  margin: 0 0 30px 0;
   &:last-child {
-    margin-right: 0;
+    margin: 0;
+  }
+
+  @media (min-width: 500px) {
+    width: 49%;
+  }
+
+  @media (min-width: 700px) {
+    width: 31%;
+  }
+
+  @media (min-width: 1130px) {
+    width: 338px;
+    margin-right: 30px;
+    &:last-child {
+      margin-right: 0;
+    }
   }
 }
 

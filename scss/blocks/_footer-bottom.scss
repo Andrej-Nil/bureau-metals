@@ -2,8 +2,16 @@
   display: flex;
   justify-content: space-between;
   font-family: $roboto;
-  font-size: 14px;
+  font-size: 10px;
   line-height: 150%;
+  @media (min-width: 1000px) {
+    display: flex;
+    font-size: 14px;
+  }
+}
+
+.footer__copyright {
+  margin-right: 30px;
 }
 
 .footer__privacy-policy {
@@ -12,4 +20,5 @@
 
 .footer__map-site {
   text-decoration: underline;
+  white-space: nowrap;
 }

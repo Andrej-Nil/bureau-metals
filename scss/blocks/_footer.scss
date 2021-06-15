@@ -1,38 +1,107 @@
 .footer {
   background: $l-grey;
-  padding: 55px 0 15px 0;
+  padding: 45px 0 15px 0;
+  @media (min-width: 1400px) {
+    padding: 55px 0 15px 0;
+  }
 }
 
 .footer__body {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 150px;
+  //display: flex;
+  //justify-content: space-between;
+  //margin-bottom: 150px;
+  @media (min-width: 1400px) {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 150px;
+  }
 }
 
 .footer-right {
-  display: inline-block;
-  width: 338px;
-  margin-right: 26px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
+  margin: 0 0 51px 0;
+
+  @media (min-width: 800px) {
+    flex-wrap: nowrap;
+  }
+  @media (min-width: 1400px) {
+    display: inline-block;
+    max-width: 338px;
+    margin-right: 0 26px 0 0;
+  }
 }
 
 .footer__logo {
   margin-bottom: 45px;
+  width: 100%;
+  @media (min-width: 800px) {
+    width: 250px;
+  }
+}
+
+.footer__logo-img {
   width: 250px;
 }
 
 .footer__contacts {
-  margin-bottom: 45px;
+  //width: 50%;
+  //margin:0 0;
+  @media (min-width: 600px) {
+    display: flex;
+  }
+  @media (min-width: 1400px) {
+    display: block;
+    margin-bottom: 45px;
+  }
 }
 
 .footer__contact-item {
-  margin-bottom: 30px;
+  padding: 0;
+  margin: 0 0 30px 0;
   &:last-child {
-    margin-bottom: 0;
+    margin: 0;
+  }
+
+  @media (min-width: 400px) {
+    padding: 0 0 0 30px;
+  }
+  @media (min-width: 600px) {
+    margin: 0 30px 0 0;
+    &:last-child {
+      margin: 0;
+    }
+  }
+  @media (min-width: 1400px) {
+    margin: 0 0 30px 0;
+    &:last-child {
+      margin: 0;
+    }
+  }
+}
+
+.footer-right__list {
+  @media (min-width: 1000px) {
+    display: flex;
+  }
+
+  @media (min-width: 1400px) {
+    display: block;
+  }
+}
+
+.footer__contact-icon {
+  display: none;
+  @media (min-width: 400px) {
+    display: block;
   }
 }
 
 .footer-right__item {
-  margin-bottom: 20px;
+  margin: 0 0 20px 0;
   font-family: $robotoS;
   font-size: 16px;
   line-height: 21px;
@@ -40,11 +109,22 @@
   &:last-child {
     margin-bottom: 0;
   }
+
+  @media (min-width: 1000px) {
+    margin: 0 20px 0 0;
+  }
+
+  @media (min-width: 1400px) {
+    margin: 0 0 20px 0;
+  }
 }
 
 .footer-right__link {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
   line-height: 21px;
   text-transform: uppercase;
+  @media (min-width: 400px) {
+    font-size: 16px;
+  }
 }

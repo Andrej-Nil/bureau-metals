@@ -71,6 +71,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  @media (min-width: 1130px) {
+    display: none;
+  }
 }
 
 .header-nav__m-search {
