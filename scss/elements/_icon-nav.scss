@@ -1,23 +1,35 @@
 .icons-nav {
   position: fixed;
-  padding: 36px 0;
+  padding: 23px 0;
   right: 0;
-  top: 300px;
-  width: 100px;
-  height: 200px;
+  top: 190px;
+  width: 50px;
+  height: 120px;
   background: $milk;
   background: rgba(255, 255, 255, 0.5);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  @media (min-width: 1130px) {
+    padding: 36px 0;
+    top: 300px;
+    width: 100px;
+    height: 200px;
+  }
 }
 
 .icons-nav__link {
   position: relative;
   display: block;
-  width: 42px;
-  height: 42px;
-  margin: 0 auto 50px;
+  width: 23px;
+  height: 23px;
+  margin: 0 auto 36px;
   &:last-child {
     margin: 0 auto;
+  }
+
+  @media (min-width: 1130px) {
+    margin: 0 auto 50px;
+    width: 42px;
+    height: 42px;
   }
 }
 
@@ -29,11 +41,18 @@
   &::before {
     content: "";
     display: block;
-    width: 42px;
-    height: 42px;
+    width: 23px;
+    height: 23px;
 
     background-repeat: no-repeat;
     background-size: contain;
+  }
+
+  @media (min-width: 1130px) {
+    &::before {
+      width: 42px;
+      height: 42px;
+    }
   }
 }
 
@@ -51,17 +70,28 @@
 
 .icons-nav__count {
   position: absolute;
-  right: -16px;
+  right: -10px;
   top: -50%;
   display: block;
-  width: 32px;
-  height: 32px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   background: $base;
 
   color: $white;
   text-align: center;
   font-family: $roboto;
-  font-size: 14px;
-  line-height: 32px;
+  font-size: 10px;
+  line-height: 20px;
+
+  @media (min-width: 1130px) {
+    right: -16px;
+    top: -50%;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+
+    font-size: 14px;
+    line-height: 32px;
+  }
 }

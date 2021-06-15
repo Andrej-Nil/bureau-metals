@@ -421,15 +421,38 @@ body {
   background: #f8f8f8;
 }
 
+.path__back {
+  display: flex;
+  align-items: center;
+  color: #bc1622;
+}
+
+.path__arrow {
+  position: relative;
+  display: block;
+  transform: translate(0, -10%);
+}
+
 .path__link {
+  display: none;
   font-family: "Roboto", serif;
   font-weight: 500;
   font-size: 16px;
   line-height: 20px;
 }
 
+.path__link:last-child {
+  display: inline;
+}
+
 .path__link:hover {
   text-decoration: underline;
+}
+
+@media (min-width: 1130px) {
+  .path__link {
+    display: inline;
+  }
 }
 
 .path {
@@ -438,12 +461,23 @@ body {
 }
 
 .path__point {
-  display: block;
+  display: none;
   width: 3px;
   height: 3px;
   border-radius: 50%;
   background: #1d1d1b;
   margin: 0 5px;
+}
+
+@media (min-width: 1130px) {
+  .path__point {
+    display: block;
+  }
+}
+
+.path__point--back {
+  background: #bc1622;
+  display: block;
 }
 
 .counter {
@@ -1960,26 +1994,43 @@ body {
 
 .icons-nav {
   position: fixed;
-  padding: 36px 0;
+  padding: 23px 0;
   right: 0;
-  top: 300px;
-  width: 100px;
-  height: 200px;
+  top: 190px;
+  width: 50px;
+  height: 120px;
   background: #f8f8f8;
   background: rgba(255, 255, 255, 0.5);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
+@media (min-width: 1130px) {
+  .icons-nav {
+    padding: 36px 0;
+    top: 300px;
+    width: 100px;
+    height: 200px;
+  }
+}
+
 .icons-nav__link {
   position: relative;
   display: block;
-  width: 42px;
-  height: 42px;
-  margin: 0 auto 50px;
+  width: 23px;
+  height: 23px;
+  margin: 0 auto 36px;
 }
 
 .icons-nav__link:last-child {
   margin: 0 auto;
+}
+
+@media (min-width: 1130px) {
+  .icons-nav__link {
+    margin: 0 auto 50px;
+    width: 42px;
+    height: 42px;
+  }
 }
 
 .icons-nav__item {
@@ -1992,10 +2043,17 @@ body {
 .icons-nav__item::before {
   content: "";
   display: block;
-  width: 42px;
-  height: 42px;
+  width: 23px;
+  height: 23px;
   background-repeat: no-repeat;
   background-size: contain;
+}
+
+@media (min-width: 1130px) {
+  .icons-nav__item::before {
+    width: 42px;
+    height: 42px;
+  }
 }
 
 .icons-nav__item--basket::before {
@@ -2008,18 +2066,30 @@ body {
 
 .icons-nav__count {
   position: absolute;
-  right: -16px;
+  right: -10px;
   top: -50%;
   display: block;
-  width: 32px;
-  height: 32px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   background: #bc1622;
   color: #fff;
   text-align: center;
   font-family: "Roboto", serif;
-  font-size: 14px;
-  line-height: 32px;
+  font-size: 10px;
+  line-height: 20px;
+}
+
+@media (min-width: 1130px) {
+  .icons-nav__count {
+    right: -16px;
+    top: -50%;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    font-size: 14px;
+    line-height: 32px;
+  }
 }
 
 .pagination {
