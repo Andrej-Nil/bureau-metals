@@ -1363,31 +1363,6 @@ body {
   transition: 0.5s ease-in-out;
 }
 
-.product-card:hover {
-  z-index: 1000;
-}
-
-.product-card:hover .product-card__stiker {
-  opacity: 1;
-  z-index: 1000;
-}
-
-.product-card:hover .product-card__order {
-  opacity: 1;
-  z-index: 1000;
-}
-
-.product-card:hover .product-card__bg {
-  height: 640px;
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
-}
-
-.product-card:hover .product-card__back {
-  opacity: 1;
-  bottom: -140px;
-  z-index: 1000;
-}
-
 @media (min-width: 630px) {
   .product-card {
     width: 49%;
@@ -1403,6 +1378,26 @@ body {
 @media (min-width: 1280px) {
   .product-card {
     width: 32%;
+  }
+  .product-card:hover {
+    z-index: 1000;
+  }
+  .product-card:hover .product-card__stiker {
+    opacity: 1;
+    z-index: 1000;
+  }
+  .product-card:hover .product-card__order {
+    opacity: 1;
+    z-index: 1000;
+  }
+  .product-card:hover .product-card__bg {
+    height: 640px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+  }
+  .product-card:hover .product-card__back {
+    opacity: 1;
+    bottom: -140px;
+    z-index: 1000;
   }
 }
 
@@ -1633,8 +1628,7 @@ body {
 
 .news-card {
   display: inline-block;
-  width: 338px;
-  height: 540px;
+  width: 100%;
   margin: 0 0 30px 0;
   transition: 0.2s ease-in-out;
 }
@@ -1643,15 +1637,43 @@ body {
   box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.15);
 }
 
+@media (min-width: 630px) {
+  .news-card {
+    width: 49%;
+  }
+}
+
+@media (min-width: 900px) {
+  .news-card {
+    width: 32%;
+  }
+}
+
+@media (min-width: 1280px) {
+  .news-card {
+    width: 32%;
+  }
+}
+
+@media (min-width: 1280px) and (min-width: 1472px) {
+  .news-card {
+    width: 338px;
+    height: 540px;
+  }
+}
+
 .news-card__preview {
   width: 100%;
-  max-height: 240px;
   margin-bottom: 12px;
 }
 
 .news-card__preview-link {
   width: 100%;
   height: 100%;
+}
+
+.news-card__img {
+  width: 100%;
 }
 
 .news-card__info {
@@ -2259,7 +2281,7 @@ body {
 .pagination {
   display: flex;
   justify-content: space-between;
-  width: 400px;
+  width: 100%;
   margin: 0 auto;
   margin-bottom: 100px;
 }

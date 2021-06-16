@@ -1,34 +1,11 @@
 .product-card {
   position: relative;
   margin: 0 0 30px 0;
-  //max-width: 338px;
   height: 500px;
   width: 100%;
   background: $white;
   z-index: 0;
   transition: 0.5s ease-in-out;
-  &:hover {
-    z-index: 1000;
-  }
-
-  &:hover .product-card__stiker {
-    opacity: 1;
-    z-index: 1000;
-  }
-  &:hover .product-card__order {
-    opacity: 1;
-    z-index: 1000;
-  }
-  &:hover .product-card__bg {
-    height: 640px;
-
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
-  }
-  &:hover .product-card__back {
-    opacity: 1;
-    bottom: -140px;
-    z-index: 1000;
-  }
 
   @media (min-width: 630px) {
     width: 49%;
@@ -40,6 +17,29 @@
 
   @media (min-width: 1280px) {
     width: 32%;
+
+    &:hover {
+      z-index: 1000;
+    }
+
+    &:hover .product-card__stiker {
+      opacity: 1;
+      z-index: 1000;
+    }
+    &:hover .product-card__order {
+      opacity: 1;
+      z-index: 1000;
+    }
+    &:hover .product-card__bg {
+      height: 640px;
+
+      box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+    }
+    &:hover .product-card__back {
+      opacity: 1;
+      bottom: -140px;
+      z-index: 1000;
+    }
   }
 
   @media (min-width: 1472px) {
