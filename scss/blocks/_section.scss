@@ -1,6 +1,10 @@
 .section {
   position: relative;
-  padding: 100px 0 50px 0;
+  padding: 50px 0 50px 0;
+
+  @media (min-width: 1130px) {
+    padding: 100px 0 50px 0;
+  }
 }
 
 .section__inner {
@@ -8,16 +12,30 @@
 }
 
 .section__bg {
+  display: none;
   position: absolute;
-  left: -160px;
+  left: 20px;
   transform: translate(0, -41%);
 
   font-family: $ebenya;
-  font-size: 200px;
+  font-size: 100px;
   line-height: 220px;
   text-transform: uppercase;
   color: $base;
   opacity: 0.1;
+  @media (min-width: 1130px) {
+    display: block;
+  }
+
+  @media (min-width: 1280px) {
+    font-size: 140px;
+  }
+  @media (min-width: 1900px) {
+    left: -160px;
+    transform: translate(0, -41%);
+    font-size: 200px;
+    line-height: 220px;
+  }
 }
 
 .section--milk-bg {
@@ -29,8 +47,10 @@
 }
 
 .section__header {
-  position: relative;
   display: flex;
+  //display: none;
+  position: relative;
+
   justify-content: space-between;
   margin-bottom: 40px;
 }
@@ -38,9 +58,14 @@
 .section__title {
   position: relative;
   font-weight: bold;
-  font-size: 48px;
-  line-height: 63px;
+  font-size: 32px;
+  line-height: 42px;
   text-transform: uppercase;
+
+  @media (min-width: 1130px) {
+    font-size: 48px;
+    line-height: 63px;
+  }
 }
 
 .section__data {
@@ -131,5 +156,7 @@
 }
 
 .section__two-coll-text {
-  columns: 2;
+  @media (min-width: 1130px) {
+    columns: 2;
+  }
 }

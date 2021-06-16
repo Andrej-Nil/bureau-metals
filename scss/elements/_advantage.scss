@@ -1,5 +1,11 @@
 .advantage {
-  max-width: 311px;
+  min-width: 237px;
+  max-width: 237px;
+  margin-right: 10px;
+  @media (min-width: 1280px) {
+    margin-right: 0;
+    max-width: 311px;
+  }
 }
 
 .advantage__title {
@@ -7,8 +13,8 @@
   position: relative;
   font-weight: normal;
   color: $base;
-  font-size: 64px;
-  line-height: 84px;
+  font-size: 48px;
+  line-height: 63px;
   &::before {
     content: "";
     position: absolute;
@@ -20,12 +26,20 @@
     height: 17px;
     background: $base-lg;
   }
+  @media (min-width: 1280px) {
+    font-size: 64px;
+    line-height: 84px;
+  }
 }
 
 .advantage__desc {
   padding-left: 27px;
 
   font-family: $roboto;
-  font-size: 18px;
-  line-height: 21px;
+  font-size: 14px;
+  line-height: 16px;
+  @media (min-width: 1280px) {
+    font-size: 18px;
+    line-height: 21px;
+  }
 }

@@ -9,6 +9,9 @@
   display: flex;
   align-items: center;
   color: $base;
+  @media (min-width: 1130px) {
+    display: none;
+  }
 }
 
 .path__arrow {

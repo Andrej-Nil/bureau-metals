@@ -427,6 +427,12 @@ body {
   color: #bc1622;
 }
 
+@media (min-width: 1130px) {
+  .path__back {
+    display: none;
+  }
+}
+
 .path__arrow {
   position: relative;
   display: block;
@@ -748,7 +754,16 @@ body {
 }
 
 .advantage {
-  max-width: 311px;
+  min-width: 237px;
+  max-width: 237px;
+  margin-right: 10px;
+}
+
+@media (min-width: 1280px) {
+  .advantage {
+    margin-right: 0;
+    max-width: 311px;
+  }
 }
 
 .advantage__title {
@@ -756,8 +771,8 @@ body {
   position: relative;
   font-weight: normal;
   color: #bc1622;
-  font-size: 64px;
-  line-height: 84px;
+  font-size: 48px;
+  line-height: 63px;
 }
 
 .advantage__title::before {
@@ -772,11 +787,25 @@ body {
   background: linear-gradient(90deg, #be1622 -0.04%, #1d1d1b 99.96%);
 }
 
+@media (min-width: 1280px) {
+  .advantage__title {
+    font-size: 64px;
+    line-height: 84px;
+  }
+}
+
 .advantage__desc {
   padding-left: 27px;
   font-family: "Roboto", serif;
-  font-size: 18px;
-  line-height: 21px;
+  font-size: 14px;
+  line-height: 16px;
+}
+
+@media (min-width: 1280px) {
+  .advantage__desc {
+    font-size: 18px;
+    line-height: 21px;
+  }
 }
 
 .price {
@@ -1133,41 +1162,60 @@ body {
 .catalog-card {
   display: block;
   position: relative;
-  max-width: 338px;
   width: 100%;
   margin: 0 0 30px 0;
   z-index: 0;
   transition: 0.5s;
 }
 
-.catalog-card:hover {
-  z-index: 1000;
+@media (min-width: 630px) {
+  .catalog-card {
+    width: 49%;
+  }
 }
 
-.catalog-card:hover .catalog-card__bg {
-  height: 390px;
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+@media (min-width: 900px) {
+  .catalog-card {
+    width: 32%;
+  }
 }
 
-.catalog-card:hover .catalog-card__back {
-  transform: translate(0, 70%);
-  opacity: 1;
-}
-
-.catalog-card:hover .catalog-card__more {
-  opacity: 1;
-  z-index: 0;
-  bottom: -160px;
-}
-
-.catalog-card:hover .catalog-card__arrow {
-  transform: rotate(-90deg);
-  left: 290px;
-  bottom: 10px;
+@media (min-width: 1472px) {
+  .catalog-card {
+    max-width: 338px;
+  }
+  .catalog-card:hover {
+    z-index: 1000;
+  }
+  .catalog-card:hover .catalog-card__front {
+    z-index: 0;
+  }
+  .catalog-card:hover .catalog-card__bg {
+    height: 390px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+  }
+  .catalog-card:hover .catalog-card__back {
+    transform: translate(0, 70%);
+    opacity: 1;
+    z-index: 1;
+  }
+  .catalog-card:hover .catalog-card__more {
+    opacity: 1;
+    z-index: 10;
+    bottom: -160px;
+  }
+  .catalog-card:hover .catalog-card__arrow {
+    transform: rotate(-90deg);
+    left: 290px;
+    bottom: 10px;
+  }
 }
 
 .catalog-card__front {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   background: linear-gradient(90.69deg, #e8e8e8 0.57%, #f1f1f1 99.4%);
   padding: 20px 15px;
   height: 230px;
@@ -1179,6 +1227,19 @@ body {
   font-weight: normal;
   font-size: 24px;
   line-height: 120%;
+}
+
+.catalog-card__link {
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 150%;
+  color: #bc1622;
+}
+
+@media (min-width: 1280px) {
+  .catalog-card__link {
+    display: none;
+  }
 }
 
 .catalog-card__img {
@@ -1196,11 +1257,18 @@ body {
   height: 230px;
   transition: 0.5s ease-in-out;
   opacity: 0;
+  z-index: -1;
 }
 
 .catalog-card__list {
+  display: none;
   margin-bottom: 20px;
-  width: 300px;
+}
+
+@media (min-width: 1280px) {
+  .catalog-card__list {
+    display: block;
+  }
 }
 
 .catalog-card__item {
@@ -1211,17 +1279,18 @@ body {
   margin-bottom: 0;
 }
 
-.catalog-card__link {
+.catalog-card__item-link {
   font-size: 14px;
   line-height: 20px;
 }
 
-.catalog-card__link:hover {
+.catalog-card__item-link:hover {
   color: #bc1622;
 }
 
 .catalog-card__arrow {
   position: absolute;
+  display: block;
   bottom: 80px;
   left: 15px;
   width: 30px;
@@ -1234,7 +1303,7 @@ body {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: rotate(90deg) translate(-50%, 55%);
+  transform: rotate(90deg) translate(-50%, 45%);
 }
 
 .catalog-card__icon::before {
@@ -2002,6 +2071,7 @@ body {
   background: #f8f8f8;
   background: rgba(255, 255, 255, 0.5);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  z-index: 1000;
 }
 
 @media (min-width: 1130px) {
@@ -2217,7 +2287,13 @@ body {
 
 .section {
   position: relative;
-  padding: 100px 0 50px 0;
+  padding: 50px 0 50px 0;
+}
+
+@media (min-width: 1130px) {
+  .section {
+    padding: 100px 0 50px 0;
+  }
 }
 
 .section__inner {
@@ -2225,15 +2301,37 @@ body {
 }
 
 .section__bg {
+  display: none;
   position: absolute;
-  left: -160px;
+  left: 20px;
   transform: translate(0, -41%);
   font-family: "ebenya", sans-serif;
-  font-size: 200px;
+  font-size: 100px;
   line-height: 220px;
   text-transform: uppercase;
   color: #bc1622;
   opacity: 0.1;
+}
+
+@media (min-width: 1130px) {
+  .section__bg {
+    display: block;
+  }
+}
+
+@media (min-width: 1280px) {
+  .section__bg {
+    font-size: 140px;
+  }
+}
+
+@media (min-width: 1900px) {
+  .section__bg {
+    left: -160px;
+    transform: translate(0, -41%);
+    font-size: 200px;
+    line-height: 220px;
+  }
 }
 
 .section--milk-bg {
@@ -2245,8 +2343,8 @@ body {
 }
 
 .section__header {
-  position: relative;
   display: flex;
+  position: relative;
   justify-content: space-between;
   margin-bottom: 40px;
 }
@@ -2254,9 +2352,16 @@ body {
 .section__title {
   position: relative;
   font-weight: bold;
-  font-size: 48px;
-  line-height: 63px;
+  font-size: 32px;
+  line-height: 42px;
   text-transform: uppercase;
+}
+
+@media (min-width: 1130px) {
+  .section__title {
+    font-size: 48px;
+    line-height: 63px;
+  }
 }
 
 .section__data {
@@ -2362,13 +2467,53 @@ body {
   font-size: 35px;
 }
 
-.section__two-coll-text {
-  columns: 2;
+@media (min-width: 1130px) {
+  .section__two-coll-text {
+    columns: 2;
+  }
+}
+
+.advantages {
+  position: relative;
+  width: 100%;
+  overflow: auto;
+  height: 150px;
+  scrollbar-color: rgba(0, 0, 0, 0) #828282;
+  scrollbar-width: thin;
+}
+
+.advantages::-webkit-scrollbar {
+  width: 8px;
+  /* ширина для вертикального скролла */
+  height: 8px;
+  /* высота для горизонтального скролла */
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.advantages::-webkit-scrollbar-thumb {
+  background-color: #e0e0e0;
+  border-radius: 9em;
+}
+
+@media (min-width: 1280px) {
+  .advantages {
+    overflow: none;
+    height: auto;
+  }
 }
 
 .advantages__list {
+  position: absolute;
+  top: 0;
+  left: 0;
   display: flex;
   justify-content: space-between;
+}
+
+@media (min-width: 1280px) {
+  .advantages__list {
+    position: relative;
+  }
 }
 
 .basket {
