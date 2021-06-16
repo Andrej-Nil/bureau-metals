@@ -48,11 +48,15 @@
 
 .section__header {
   display: flex;
-  //display: none;
+  flex-direction: column;
   position: relative;
 
   justify-content: space-between;
   margin-bottom: 40px;
+  @media (min-width: 700px) {
+    align-items: center;
+    flex-direction: row;
+  }
 }
 
 .section__title {
@@ -61,10 +65,27 @@
   font-size: 32px;
   line-height: 42px;
   text-transform: uppercase;
-
+  margin-bottom: 20px;
   @media (min-width: 1130px) {
     font-size: 48px;
     line-height: 63px;
+  }
+}
+
+.section__more {
+  max-width: 290px;
+}
+
+.section__btn--mobile {
+  @media (min-width: 1130px) {
+    display: none;
+  }
+}
+
+.section__btn--desktop {
+  display: none;
+  @media (min-width: 1130px) {
+    display: block;
   }
 }
 
@@ -73,7 +94,10 @@
   color: $grey;
   font-size: 16px;
   line-height: 150%;
-  margin-bottom: 47px;
+  margin-bottom: 20px;
+  @media (min-width: 1130px) {
+    margin-bottom: 47px;
+  }
 }
 
 .section__desc {

@@ -1,7 +1,12 @@
 .about {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column-reverse;
   margin-bottom: 40px;
+  @media (min-width: 1130px) {
+    align-items: flex-start;
+    flex-direction: row;
+    justify-content: space-between;
+  }
 }
 
 .about__desc {
@@ -12,7 +17,10 @@
 }
 
 .about__text {
-  width: 49%;
+  width: 100%;
+  @media (min-width: 1130px) {
+    width: 49%;
+  }
 }
 
 .about__info {
@@ -20,7 +28,11 @@
 }
 
 .about__img {
-  width: 49%;
+  width: 100%;
+  margin-bottom: 20px;
+  @media (min-width: 1130px) {
+    width: 49%;
+  }
 }
 
 .about__img-list {

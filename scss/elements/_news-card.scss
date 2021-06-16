@@ -17,11 +17,10 @@
 
   @media (min-width: 1280px) {
     width: 32%;
-
-    @media (min-width: 1472px) {
-      width: 338px;
-      height: 540px;
-    }
+  }
+  @media (min-width: 1472px) {
+    width: 338px;
+    height: 540px;
   }
 }
 
