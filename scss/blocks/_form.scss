@@ -13,8 +13,10 @@
 .from__sumbit {
   border: none;
   outline: none;
-  width: 47.5%;
   margin-bottom: 20px;
+  @media (min-width: 650px) {
+    width: 49%;
+  }
 }
 
 .from-approval {

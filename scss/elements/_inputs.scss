@@ -1,6 +1,6 @@
 .input {
-  width: 47.5%;
   position: relative;
+  width: 100%;
   padding: 24px 15px 10px 15px;
   outline: none;
   font-family: $roboto;
@@ -9,6 +9,9 @@
   line-height: 20px;
   border: 1px solid #bdbdbd;
   margin-bottom: 30px;
+  @media (min-width: 650px) {
+    width: 49%;
+  }
 }
 
 .input-no-bd {

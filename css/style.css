@@ -325,8 +325,8 @@ body {
 }
 
 .input {
-  width: 47.5%;
   position: relative;
+  width: 100%;
   padding: 24px 15px 10px 15px;
   outline: none;
   font-family: "Roboto", serif;
@@ -335,6 +335,12 @@ body {
   line-height: 20px;
   border: 1px solid #bdbdbd;
   margin-bottom: 30px;
+}
+
+@media (min-width: 650px) {
+  .input {
+    width: 49%;
+  }
 }
 
 .input-no-bd {
@@ -2383,8 +2389,13 @@ body {
 .from__sumbit {
   border: none;
   outline: none;
-  width: 47.5%;
   margin-bottom: 20px;
+}
+
+@media (min-width: 650px) {
+  .from__sumbit {
+    width: 49%;
+  }
 }
 
 .from-approval {
@@ -3543,8 +3554,15 @@ body {
 }
 
 .about__img-item {
-  width: 49%;
-  margin-bottom: 40px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+@media (min-width: 768px) {
+  .about__img-item {
+    width: 49%;
+    margin-bottom: 40px;
+  }
 }
 
 .bank-account__title {
@@ -3568,13 +3586,64 @@ body {
 
 .our-contacts {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+}
+
+@media (min-width: 1280px) {
+  .our-contacts {
+    flex-direction: row;
+    justify-content: space-between;
+  }
 }
 
 .our-contacts__left {
   display: flex;
-  width: 49%;
-  justify-content: space-between;
+  width: 100%;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+@media (min-width: 768px) {
+  .our-contacts__left {
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 0;
+  }
+}
+
+@media (min-width: 1280px) {
+  .our-contacts__left {
+    width: 49%;
+    margin-bottom: 0;
+  }
+}
+
+.our-contacts__list {
+  margin-bottom: 30px;
+}
+
+@media (min-width: 768px) {
+  .our-contacts__list {
+    width: 49%;
+  }
+}
+
+@media (min-width: 1280px) {
+  .our-contacts__list {
+    width: auto;
+  }
+}
+
+@media (min-width: 768px) {
+  .our-contacts__bank-account {
+    width: 49%;
+  }
+}
+
+@media (min-width: 1280px) {
+  .our-contacts__bank-account {
+    width: auto;
+  }
 }
 
 .our-contacts__item {
@@ -3598,13 +3667,29 @@ body {
   text-decoration: none;
 }
 
-.our-contacts__form {
-  width: 49%;
+@media (min-width: 1280px) {
+  .our-contacts__form {
+    width: 49%;
+  }
 }
 
 .feetback-form__btn {
   display: flex;
   flex-direction: column;
+}
+
+@media (min-width: 650px) {
+  .feetback-form__btn {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+@media (min-width: 1280px) {
+  .feetback-form__btn {
+    flex-direction: column;
+    justify-content: flex-start;
+  }
 }
 
 .feetback-form__approval {
@@ -3614,6 +3699,18 @@ body {
   font-family: "Roboto", serif;
   font-size: 14px;
   line-height: 150%;
+}
+
+@media (min-width: 650px) {
+  .feetback-form__approval {
+    width: 49%;
+  }
+}
+
+@media (min-width: 1280px) {
+  .feetback-form__approval {
+    width: 100%;
+  }
 }
 
 .feetback-form__textarea {

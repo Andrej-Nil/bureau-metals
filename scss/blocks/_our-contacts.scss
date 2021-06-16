@@ -1,12 +1,46 @@
 .our-contacts {
   display: flex;
-  justify-content: space-between;
+
+  flex-direction: column;
+  @media (min-width: 1280px) {
+    flex-direction: row;
+    justify-content: space-between;
+  }
 }
 
 .our-contacts__left {
   display: flex;
-  width: 49%;
-  justify-content: space-between;
+  width: 100%;
+  flex-direction: column;
+  margin-bottom: 20px;
+  @media (min-width: 768px) {
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 0;
+  }
+  @media (min-width: 1280px) {
+    width: 49%;
+    margin-bottom: 0;
+  }
+}
+
+.our-contacts__list {
+  margin-bottom: 30px;
+  @media (min-width: 768px) {
+    width: 49%;
+  }
+  @media (min-width: 1280px) {
+    width: auto;
+  }
+}
+
+.our-contacts__bank-account {
+  @media (min-width: 768px) {
+    width: 49%;
+  }
+  @media (min-width: 1280px) {
+    width: auto;
+  }
 }
 
 .our-contacts__item {
@@ -29,12 +63,22 @@
 }
 
 .our-contacts__form {
-  width: 49%;
+  @media (min-width: 1280px) {
+    width: 49%;
+  }
 }
 
 .feetback-form__btn {
   display: flex;
   flex-direction: column;
+  @media (min-width: 650px) {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  @media (min-width: 1280px) {
+    flex-direction: column;
+    justify-content: flex-start;
+  }
 }
 
 .feetback-form__approval {
@@ -44,6 +88,12 @@
   font-family: "Roboto", serif;
   font-size: 14px;
   line-height: 150%;
+  @media (min-width: 650px) {
+    width: 49%;
+  }
+  @media (min-width: 1280px) {
+    width: 100%;
+  }
 }
 
 .feetback-form__textarea {
