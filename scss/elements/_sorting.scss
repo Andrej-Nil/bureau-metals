@@ -1,10 +1,13 @@
 .sorting {
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   height: 60px;
   background: $pearl;
   margin-bottom: 10px;
+  @media (min-width: 1472px) {
+    display: flex;
+  }
 }
 
 .sorting__item {
@@ -28,7 +31,6 @@
 
 .sorting__name {
   font-family: $roboto;
-
   font-size: 16px;
   line-height: 150%;
 }

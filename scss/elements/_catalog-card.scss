@@ -14,8 +14,8 @@
     width: 32%;
   }
 
-  @media (min-width: 1472px) {
-    max-width: 338px;
+  @media (min-width: 1280px) {
+    width: 32%;
     &:hover {
       z-index: 1000;
     }
@@ -41,6 +41,10 @@
       left: 290px;
       bottom: 10px;
     }
+  }
+
+  @media (min-width: 1472px) {
+    max-width: 338px;
   }
 }
 
@@ -94,7 +98,6 @@
 .catalog-card__list {
   display: none;
   margin-bottom: 20px;
-  //width: 300px;
   @media (min-width: 1280px) {
     display: block;
   }

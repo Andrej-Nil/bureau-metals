@@ -1,0 +1,18 @@
+.content {
+  width: 100%;
+  @media (min-width: 1472px) {
+    max-width: 1074px;
+  }
+}
+
+.content__bottom {
+  display: flex;
+  justify-content: space-between;
+}
+
+.content__selects-item {
+  display: none;
+  @media (min-width: 1280px) {
+    display: block;
+  }
+}

@@ -2,12 +2,47 @@
   margin-bottom: 40px;
   display: flex;
   justify-content: space-between;
+  flex-direction: column;
+
+  @media (min-width: 400px) {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.display__selects {
+  margin-bottom: 20px;
+  @media (min-width: 400px) {
+    margin-bottom: 0;
+  }
 }
 
 .display__selects-item {
-  margin-right: 25px;
+  //margin-right: 25px;
+  width: 100%;
   &:last-child {
+    display: none;
     margin-right: 0;
+  }
+
+  @media (min-width: 400px) {
+    width: auto;
+  }
+
+  @media (min-width: 768px) {
+    margin-right: 25px;
+    &:last-child {
+      display: inline-block;
+      margin-right: 0;
+    }
+  }
+}
+
+.display__selects-header {
+  width: 100%;
+
+  @media (min-width: 400px) {
+    width: auto;
   }
 }
 

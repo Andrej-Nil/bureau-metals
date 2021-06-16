@@ -83,19 +83,14 @@ body {
   justify-content: space-between;
 }
 
-.content {
-  max-width: 1074px;
-  width: 100%;
-}
-
-.content__bottom {
-  display: flex;
-  justify-content: space-between;
-}
-
 .sidebar {
+  display: none;
   max-width: 338px;
   width: 100%;
+  margin-right: 30px;
+  @media (min-width: 1280px) {
+    display: block;
+  }
 }
 
 .slider-wrap {
