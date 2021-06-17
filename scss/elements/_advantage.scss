@@ -13,8 +13,8 @@
   position: relative;
   font-weight: normal;
   color: $base;
-  font-size: 48px;
-  line-height: 63px;
+  font-size: 36px;
+  line-height: 47px;
   &::before {
     content: "";
     position: absolute;
@@ -34,10 +34,9 @@
 
 .advantage__desc {
   padding-left: 27px;
-
   font-family: $roboto;
-  font-size: 14px;
-  line-height: 16px;
+  font-size: 13px;
+  line-height: 15px;
   @media (min-width: 1280px) {
     font-size: 18px;
     line-height: 21px;
