@@ -12,47 +12,72 @@
 <body>
   <!--app-->
   <div class="app">
-    <header class="main-header m-h">
-      <div class="m-h__top"></div>
-      <img src="./img/image/main-header-bg.jpg" alt="" class="main-header__bg" />
-      <!--header__top-->
-      <div class="m-h-wrap container">
+    <div class="header main-header__mobile">
+      <!--header-top-->
+      <div class="header-top">
+        <div class="header-top__inner container">
+          <div class="header__m-contact contact">
+            <i class="header__m-contact-icon contact__icon _contact-city"></i>
+            <div class="header__m-contact-title contact__title">Ваш город</div>
+            <span class="header__m-contact-link contact__link">
+              Петропавлоск-Камчатский
+            </span>
+          </div>
 
-        <div class="header__main">
-          <div class="header__logo">
-            <a href="index.html" class="logo__link">
-              <img src="./img/white-logo.svg" alt="" class="logo" />
+          <div class="header__m-contact header__m-contact--phone contact">
+            <i class="header__m-contact-icon contact__icon _contact-phone"></i>
+            <div class="header__m-contact-title contact__title">Наш телефон</div>
+            <a href="tel:+74951234567" class="header__m-contact-link contact__link">
+              +7(495) 123-45-67
             </a>
           </div>
 
-          <div class="header__search m-h__search search">
-            <span class="m-h__search-text search__text">Поиск по сайту</span>
-            <i class="m-h__search-icon search__icon"></i>
+          <a href="tel:+74951234567" class="header-top__phone">
+
+          </a>
+        </div>
+
+      </div>
+      <!--header-top-->
+
+      <!--header__main-->
+      <div class="header__main-wrap">
+        <div class="header__main container">
+
+          <div class="header__logo">
+            <a href="index.html" class="logo__link">
+              <img src="./img/logo.svg" alt="" class="logo" />
+            </a>
+          </div>
+
+          <div class="header__search  search">
+            <span class="search__text">Поиск по сайту</span>
+            <i class="search__icon"></i>
           </div>
           <!--header__contacts-->
           <div class="header__contacts">
             <div class="header__contact-item contact">
-              <i class="m-h__contact-icon contact__icon _contact-phone"></i>
-              <div class="m-h__contact-title contact__title">Наш телефон</div>
-              <a href="tel:+74951234567" class="m-h__contact-link contact__link">
+              <i class="contact__icon _contact-phone"></i>
+              <div class="contact__title">Наш телефон</div>
+              <a href="tel:+74951234567" class="contact__link">
                 +7(495) 123-45-67
               </a>
             </div>
 
             <div class="header__contact-item contact">
-              <i class="m-h__contact-icon contact__icon _contact-mail"></i>
-              <div class="m-h__contact-title contact__title">Наша почта</div>
-              <a href="mailto:info@byrometalov.ru" class="m-h__contact-link contact__link">
+              <i class="contact__icon _contact-mail"></i>
+              <div class="contact__title">Наша почта</div>
+              <a href="mailto:info@byrometalov.ru" class="contact__link">
                 info@byrometalov.ru
               </a>
             </div>
 
             <div class="header__contact-item contact">
-              <i class="m-h__contact-icon contact__icon _contact-city"></i>
-              <div class="m-h__contact-title contact__title">Ваш город</div>
-              <a href="tel:+74951234567" class="m-h__contact-link contact__link">
+              <i class="contact__icon _contact-city"></i>
+              <div class="contact__title">Ваш город</div>
+              <span class="contact__link">
                 Петропавлоск-Камчатский
-              </a>
+              </span>
             </div>
           </div>
           <!--header__contacts-->
@@ -60,8 +85,11 @@
             Связаться с нами
           </span>
         </div>
-        <!--header__top-->
-        <nav class="header-nav m-h__nav">
+      </div>
+      <!--header__main-->
+
+      <nav class="header-nav container">
+        <div class="header-nav__desktop">
           <div class="header__catalog h-catalog popup-nav-wrap">
             <i class="h-catalog__icon"></i>
             <a href="catalog.html" class="header-nav__item">Наш каталог</a>
@@ -160,7 +188,7 @@
           </div>
 
           <div class="header__more h-more popup-nav-wrap">
-            <a href="subcatagory.html" class="header-nav__item">Производство</a>
+            <a href="#!" class="header-nav__item">Производство</a>
             <i class="h-more__icon"></i>
             <nav class="popup-nav">
               <ul class="popup-nav__list">
@@ -212,7 +240,225 @@
             <a href="news.html" class="header-nav__link header-nav__item">Новости</a>
             <a href="contacts.html" class="header-nav__link header-nav__item">Контакты</a>
           </div>
+        </div>
+
+        <div class="header-nav__mobile">
+          <div class="header-nav__m-catalog">
+            <i class="h-catalog__icon"></i>
+            <a href="catalog.html" class="header-nav__item">Наш каталог </a>
+          </div>
+          <i class="header-nav__m-search"></i>
+        </div>
+      </nav>
+    </div>
+    <header class="main-header m-h">
+      <img src="./img/image/main-header-bg.jpg" alt="" class="main-header__bg" />
+
+      <div class="main-header__desktop">
+        <div class="m-h__top"></div>
+        <div class="header__main container">
+          <div class="header__logo">
+            <a href="index.html" class="logo__link">
+              <img src="./img/white-logo.svg" alt="" class="logo" />
+            </a>
+          </div>
+
+          <div class="header__search m-h__search search">
+            <span class="m-h__search-text search__text">Поиск по сайту</span>
+            <i class="m-h__search-icon search__icon"></i>
+          </div>
+          <!--header__contacts-->
+          <div class="header__contacts">
+            <div class="header__contact-item contact">
+              <i class="m-h__contact-icon contact__icon _contact-phone"></i>
+              <div class="m-h__contact-title contact__title">Наш телефон</div>
+              <a href="tel:+74951234567" class="m-h__contact-link contact__link">
+                +7(495) 123-45-67
+              </a>
+            </div>
+
+            <div class="header__contact-item contact">
+              <i class="m-h__contact-icon contact__icon _contact-mail"></i>
+              <div class="m-h__contact-title contact__title">Наша почта</div>
+              <a href="mailto:info@byrometalov.ru" class="m-h__contact-link contact__link">
+                info@byrometalov.ru
+              </a>
+            </div>
+
+            <div class="header__contact-item contact">
+              <i class="m-h__contact-icon contact__icon _contact-city"></i>
+              <div class="m-h__contact-title contact__title">Ваш город</div>
+              <a href="tel:+74951234567" class="m-h__contact-link contact__link">
+                Петропавлоск-Камчатский
+              </a>
+            </div>
+          </div>
+          <!--header__contacts-->
+          <span id="mainfeedbackBtn" class="m-h__feedback header__feedback btn red-btn">
+            Связаться с нами
+          </span>
+        </div>
+
+        <nav class="header-nav m-h__nav container">
+
+          <div class="header-nav__desktop">
+            <div class="header__catalog h-catalog popup-nav-wrap">
+              <i class="h-catalog__icon"></i>
+              <a href="catalog.html" class="header-nav__item">Наш каталог</a>
+
+              <nav class="popup-nav">
+                <ul class="popup-nav__list">
+                  <li class="popup-nav__item">
+                    <div class="popup-nav__title">
+                      <a href="category.html" class="popup-nav__link">
+                        Электротехническая продукция
+                      </a>
+
+                      <div class="popup-nav__arrow">
+                        <i class="popup-nav__icon"></i>
+                      </div>
+                    </div>
+
+                    <ul class="popup-nav__sublist">
+                      <li class="popup-nav__subitem">
+                        <a href="category.html" class="popup-nav__sublink">
+                          Электротехническая продукция
+                        </a>
+                      </li>
+                      <li class="popup-nav__subitem">
+                        <a href="category.html" class="popup-nav__sublink">
+                          Электротехническая продукция
+                        </a>
+                      </li>
+                      <li class="popup-nav__subitem">
+                        <a href="category.html" class="popup-nav__sublink">
+                          Электротехническая продукция
+                        </a>
+                      </li>
+                      <li class="popup-nav__subitem">
+                        <a href="category.html" class="popup-nav__sublink">
+                          Электротехническая продукция
+                        </a>
+                      </li>
+                      <li class="popup-nav__subitem">
+                        <a href="category.html" class="popup-nav__sublink">
+                          Электротехническая продукция
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+
+            <div class="header__more h-more popup-nav-wrap">
+              <a href="intermediate-category.html" class="header-nav__item">Наши услуги</a>
+              <i class="h-more__icon"></i>
+              <nav class="popup-nav">
+                <ul class="popup-nav__list">
+                  <li class="popup-nav__item">
+                    <div class="popup-nav__title">
+                      <a href="category.html" class="popup-nav__link">
+                        Электротехническая продукция
+                      </a>
+
+                      <div class="popup-nav__arrow">
+                        <i class="popup-nav__icon"></i>
+                      </div>
+                    </div>
+
+                    <ul class="popup-nav__sublist">
+                      <li class="popup-nav__subitem">
+                        <a href="category.html" class="popup-nav__sublink">
+                          Электротехническая продукция
+                        </a>
+                      </li>
+                      <li class="popup-nav__subitem">
+                        <a href="category.html" class="popup-nav__sublink">
+                          Электротехническая продукция
+                        </a>
+                      </li>
+                      <li class="popup-nav__subitem">
+                        <a href="category.html" class="popup-nav__sublink">
+                          Электротехническая продукция
+                        </a>
+                      </li>
+                      <li class="popup-nav__subitem">
+                        <a href="category.html" class="popup-nav__sublink">
+                          Электротехническая продукция
+                        </a>
+                      </li>
+                      <li class="popup-nav__subitem">
+                        <a href="category.html" class="popup-nav__sublink">
+                          Электротехническая продукция
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+
+            <div class="header__more h-more popup-nav-wrap">
+              <a href="#!" class="header-nav__item">Производство</a>
+              <i class="h-more__icon"></i>
+              <nav class="popup-nav">
+                <ul class="popup-nav__list">
+                  <li class="popup-nav__item">
+                    <div class="popup-nav__title">
+                      <a href="category.html" class="popup-nav__link">
+                        Электротехническая продукция
+                      </a>
+
+                      <div class="popup-nav__arrow">
+                        <i class="popup-nav__icon"></i>
+                      </div>
+                    </div>
+
+                    <ul class="popup-nav__sublist">
+                      <li class="popup-nav__subitem">
+                        <a href="category.html" class="popup-nav__sublink">
+                          Электротехническая продукция
+                        </a>
+                      </li>
+                      <li class="popup-nav__subitem">
+                        <a href="category.html" class="popup-nav__sublink">
+                          Электротехническая продукция
+                        </a>
+                      </li>
+                      <li class="popup-nav__subitem">
+                        <a href="category.html" class="popup-nav__sublink">
+                          Электротехническая продукция
+                        </a>
+                      </li>
+                      <li class="popup-nav__subitem">
+                        <a href="category.html" class="popup-nav__sublink">
+                          Электротехническая продукция
+                        </a>
+                      </li>
+                      <li class="popup-nav__subitem">
+                        <a href="category.html" class="popup-nav__sublink">
+                          Электротехническая продукция
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+
+            <div class="header-nav__list">
+              <a href="about.html" class="header-nav__link header-nav__item">О компании</a>
+              <a href="news.html" class="header-nav__link header-nav__item">Новости</a>
+              <a href="contacts.html" class="header-nav__link header-nav__item">Контакты</a>
+            </div>
+          </div>
         </nav>
+      </div>
+
+      <div class="m-h-wrap container">
+
+
 
         <h1 class="m-h__title">
           продаем металлопрокат оптом и врозницу в&nbsp;россии
@@ -220,7 +466,7 @@
 
         <!-- m-h__advantages -->
 
-        <div class="section m-h-section">
+        <div class="section pb0 m-h-section">
           <div class="section__bg m-h-section__bg">преимущества</div>
 
           <div class="section__content advantages m-h__advantages">
@@ -790,7 +1036,7 @@
               <div class="product-slider__slide">
 
                 <!-- product-card -->
-                <div class="product-card">
+                <div class="product-card product-slider__card">
                   <div class="product-card__front">
                     <div class="product-card__preview">
                       <a href="" class="product-card__img-link">
@@ -873,7 +1119,7 @@
                 <!-- product-card -->
 
                 <!-- product-card -->
-                <div class="product-card">
+                <div class="product-card product-slider__card">
                   <div class="product-card__front">
                     <div class="product-card__preview">
                       <a href="" class="product-card__img-link">
@@ -961,7 +1207,7 @@
               <div class="product-slider__slide">
 
                 <!-- product-card -->
-                <div class="product-card">
+                <div class="product-card product-slider__card">
                   <div class="product-card__front">
                     <div class="product-card__preview">
                       <a href="" class="product-card__img-link">
@@ -1044,178 +1290,7 @@
                 <!-- product-card -->
 
                 <!-- product-card -->
-                <div class="product-card">
-                  <div class="product-card__front">
-                    <div class="product-card__preview">
-                      <a href="" class="product-card__img-link">
-                        <img src="./img/image/product-card-img.jpg" alt="" class="product-card__img" />
-                      </a>
-
-                      <div class="product-card__stiker">
-                        <i class="product-card__stiker-icon"></i>
-                      </div>
-                    </div>
-                    <div class="product-card__info">
-                      <h3 class="product-card__title">
-                        <a href="#!" class="product-card__link link">
-                          Пруток магниевый 0,6х500х1000 мм МА15 ГОСТ 22635-77
-                          свернутый в рулоне по 100 метров
-                        </a>
-                      </h3>
-
-                      <div class="product-card__center">
-                        <div class="product-card__price price">
-                          <span class="product-card__old price__old">1 550</span>
-                          <span class="product-card__new price__new">
-                            <span class="product-card__price-num price__num">1 250</span>
-                            <span class="product-card__price-mark price__mark">₽</span><span
-                              class="product-card__price-unit price__unit">/кг</span>
-                          </span>
-                        </div>
-                        <div class="product-card__favorite favorite">
-                          <i class="product-card__favorite-icon favorite__icon"></i>
-                          <span class="favorite__add">добавить в Избранное</span>
-                        </div>
-                      </div>
-                      <div class="product-card__buy">
-                        <div class="product-card__counter counter">
-                          <input type="text" class="product-card__input input counter__input" value="1" />
-                          <div class="product-card__controls counter__controls">
-                            <span class="product-card__inc counter__btn">
-                              <i class="
-                                    product-card__inc-icon
-                                    counter__icon counter__inc
-                                  "></i>
-                            </span>
-                            <span class="product-card__dec counter__btn">
-                              <i class="
-                                    product-card__dec-icon
-                                    counter__icon counter__dec
-                                  "></i>
-                            </span>
-                          </div>
-                        </div>
-                        <span class="product-card__btn btn red-btn">Заказать</span>
-                      </div>
-
-                      <span class="product-card__order">
-                        Купить в 1 клик
-                      </span>
-                    </div>
-                  </div>
-
-                  <div class="product-card__back">
-                    <div class="product-card__desc">
-                      <ul class="product-card__list">
-                        <li class="product-card__item">
-                          <span class="product-card__property">Вес погоного метра, кг</span><span
-                            class="product-card__value">0,617</span>
-                        </li>
-                        <li class="product-card__item">
-                          <span class="product-card__property">Сечение, мм</span><span
-                            class="product-card__value">10</span>
-                        </li>
-                        <li class="product-card__item">
-                          <span class="product-card__property">Марка стали</span><span class="product-card__value">Атр.
-                            500</span>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="product-card__bg"></div>
-                </div>
-                <!-- product-card -->
-              </div>
-              <!--product-slider__slide-->
-
-              <!--product-slider__slide-->
-              <div class="product-slider__slide">
-
-                <!-- product-card -->
-                <div class="product-card">
-                  <div class="product-card__front">
-                    <div class="product-card__preview">
-                      <a href="" class="product-card__img-link">
-                        <img src="./img/image/product-card-img.jpg" alt="" class="product-card__img" />
-                      </a>
-
-                      <div class="product-card__stiker">
-                        <i class="product-card__stiker-icon"></i>
-                      </div>
-                    </div>
-                    <div class="product-card__info">
-                      <h3 class="product-card__title">
-                        <a href="#!" class="product-card__link link">
-                          Пруток магниевый 0,6х500х1000 мм МА15 ГОСТ 22635-77
-                          свернутый в рулоне по 100 метров
-                        </a>
-                      </h3>
-
-                      <div class="product-card__center">
-                        <div class="product-card__price price">
-                          <span class="product-card__old price__old">1 550</span>
-                          <span class="product-card__new price__new">
-                            <span class="product-card__price-num price__num">1 250</span>
-                            <span class="product-card__price-mark price__mark">₽</span><span
-                              class="product-card__price-unit price__unit">/кг</span>
-                          </span>
-                        </div>
-                        <div class="product-card__favorite favorite">
-                          <i class="product-card__favorite-icon favorite__icon"></i>
-                          <span class="favorite__add">добавить в Избранное</span>
-                        </div>
-                      </div>
-                      <div class="product-card__buy">
-                        <div class="product-card__counter counter">
-                          <input type="text" class="product-card__input input counter__input" value="1" />
-                          <div class="product-card__controls counter__controls">
-                            <span class="product-card__inc counter__btn">
-                              <i class="
-                                    product-card__inc-icon
-                                    counter__icon counter__inc
-                                  "></i>
-                            </span>
-                            <span class="product-card__dec counter__btn">
-                              <i class="
-                                    product-card__dec-icon
-                                    counter__icon counter__dec
-                                  "></i>
-                            </span>
-                          </div>
-                        </div>
-                        <span class="product-card__btn btn red-btn">Заказать</span>
-                      </div>
-
-                      <span class="product-card__order">
-                        Купить в 1 клик
-                      </span>
-                    </div>
-                  </div>
-
-                  <div class="product-card__back">
-                    <div class="product-card__desc">
-                      <ul class="product-card__list">
-                        <li class="product-card__item">
-                          <span class="product-card__property">Вес погоного метра, кг</span><span
-                            class="product-card__value">0,617</span>
-                        </li>
-                        <li class="product-card__item">
-                          <span class="product-card__property">Сечение, мм</span><span
-                            class="product-card__value">10</span>
-                        </li>
-                        <li class="product-card__item">
-                          <span class="product-card__property">Марка стали</span><span class="product-card__value">Атр.
-                            500</span>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="product-card__bg"></div>
-                </div>
-                <!-- product-card -->
-
-                <!-- product-card -->
-                <div class="product-card">
+                <div class="product-card product-slider__card">
                   <div class="product-card__front">
                     <div class="product-card__preview">
                       <a href="" class="product-card__img-link">
@@ -1303,7 +1378,7 @@
               <div class="product-slider__slide">
 
                 <!-- product-card -->
-                <div class="product-card">
+                <div class="product-card product-slider__card">
                   <div class="product-card__front">
                     <div class="product-card__preview">
                       <a href="" class="product-card__img-link">
@@ -1386,7 +1461,7 @@
                 <!-- product-card -->
 
                 <!-- product-card -->
-                <div class="product-card">
+                <div class="product-card product-slider__card">
                   <div class="product-card__front">
                     <div class="product-card__preview">
                       <a href="" class="product-card__img-link">
@@ -1474,7 +1549,7 @@
               <div class="product-slider__slide">
 
                 <!-- product-card -->
-                <div class="product-card">
+                <div class="product-card product-slider__card">
                   <div class="product-card__front">
                     <div class="product-card__preview">
                       <a href="" class="product-card__img-link">
@@ -1557,7 +1632,178 @@
                 <!-- product-card -->
 
                 <!-- product-card -->
-                <div class="product-card">
+                <div class="product-card product-slider__card">
+                  <div class="product-card__front">
+                    <div class="product-card__preview">
+                      <a href="" class="product-card__img-link">
+                        <img src="./img/image/product-card-img.jpg" alt="" class="product-card__img" />
+                      </a>
+
+                      <div class="product-card__stiker">
+                        <i class="product-card__stiker-icon"></i>
+                      </div>
+                    </div>
+                    <div class="product-card__info">
+                      <h3 class="product-card__title">
+                        <a href="#!" class="product-card__link link">
+                          Пруток магниевый 0,6х500х1000 мм МА15 ГОСТ 22635-77
+                          свернутый в рулоне по 100 метров
+                        </a>
+                      </h3>
+
+                      <div class="product-card__center">
+                        <div class="product-card__price price">
+                          <span class="product-card__old price__old">1 550</span>
+                          <span class="product-card__new price__new">
+                            <span class="product-card__price-num price__num">1 250</span>
+                            <span class="product-card__price-mark price__mark">₽</span><span
+                              class="product-card__price-unit price__unit">/кг</span>
+                          </span>
+                        </div>
+                        <div class="product-card__favorite favorite">
+                          <i class="product-card__favorite-icon favorite__icon"></i>
+                          <span class="favorite__add">добавить в Избранное</span>
+                        </div>
+                      </div>
+                      <div class="product-card__buy">
+                        <div class="product-card__counter counter">
+                          <input type="text" class="product-card__input input counter__input" value="1" />
+                          <div class="product-card__controls counter__controls">
+                            <span class="product-card__inc counter__btn">
+                              <i class="
+                                    product-card__inc-icon
+                                    counter__icon counter__inc
+                                  "></i>
+                            </span>
+                            <span class="product-card__dec counter__btn">
+                              <i class="
+                                    product-card__dec-icon
+                                    counter__icon counter__dec
+                                  "></i>
+                            </span>
+                          </div>
+                        </div>
+                        <span class="product-card__btn btn red-btn">Заказать</span>
+                      </div>
+
+                      <span class="product-card__order">
+                        Купить в 1 клик
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="product-card__back">
+                    <div class="product-card__desc">
+                      <ul class="product-card__list">
+                        <li class="product-card__item">
+                          <span class="product-card__property">Вес погоного метра, кг</span><span
+                            class="product-card__value">0,617</span>
+                        </li>
+                        <li class="product-card__item">
+                          <span class="product-card__property">Сечение, мм</span><span
+                            class="product-card__value">10</span>
+                        </li>
+                        <li class="product-card__item">
+                          <span class="product-card__property">Марка стали</span><span class="product-card__value">Атр.
+                            500</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="product-card__bg"></div>
+                </div>
+                <!-- product-card -->
+              </div>
+              <!--product-slider__slide-->
+
+              <!--product-slider__slide-->
+              <div class="product-slider__slide">
+
+                <!-- product-card -->
+                <div class="product-card product-slider__card">
+                  <div class="product-card__front">
+                    <div class="product-card__preview">
+                      <a href="" class="product-card__img-link">
+                        <img src="./img/image/product-card-img.jpg" alt="" class="product-card__img" />
+                      </a>
+
+                      <div class="product-card__stiker">
+                        <i class="product-card__stiker-icon"></i>
+                      </div>
+                    </div>
+                    <div class="product-card__info">
+                      <h3 class="product-card__title">
+                        <a href="#!" class="product-card__link link">
+                          Пруток магниевый 0,6х500х1000 мм МА15 ГОСТ 22635-77
+                          свернутый в рулоне по 100 метров
+                        </a>
+                      </h3>
+
+                      <div class="product-card__center">
+                        <div class="product-card__price price">
+                          <span class="product-card__old price__old">1 550</span>
+                          <span class="product-card__new price__new">
+                            <span class="product-card__price-num price__num">1 250</span>
+                            <span class="product-card__price-mark price__mark">₽</span><span
+                              class="product-card__price-unit price__unit">/кг</span>
+                          </span>
+                        </div>
+                        <div class="product-card__favorite favorite">
+                          <i class="product-card__favorite-icon favorite__icon"></i>
+                          <span class="favorite__add">добавить в Избранное</span>
+                        </div>
+                      </div>
+                      <div class="product-card__buy">
+                        <div class="product-card__counter counter">
+                          <input type="text" class="product-card__input input counter__input" value="1" />
+                          <div class="product-card__controls counter__controls">
+                            <span class="product-card__inc counter__btn">
+                              <i class="
+                                    product-card__inc-icon
+                                    counter__icon counter__inc
+                                  "></i>
+                            </span>
+                            <span class="product-card__dec counter__btn">
+                              <i class="
+                                    product-card__dec-icon
+                                    counter__icon counter__dec
+                                  "></i>
+                            </span>
+                          </div>
+                        </div>
+                        <span class="product-card__btn btn red-btn">Заказать</span>
+                      </div>
+
+                      <span class="product-card__order">
+                        Купить в 1 клик
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="product-card__back">
+                    <div class="product-card__desc">
+                      <ul class="product-card__list">
+                        <li class="product-card__item">
+                          <span class="product-card__property">Вес погоного метра, кг</span><span
+                            class="product-card__value">0,617</span>
+                        </li>
+                        <li class="product-card__item">
+                          <span class="product-card__property">Сечение, мм</span><span
+                            class="product-card__value">10</span>
+                        </li>
+                        <li class="product-card__item">
+                          <span class="product-card__property">Марка стали</span><span class="product-card__value">Атр.
+                            500</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="product-card__bg"></div>
+                </div>
+                <!-- product-card -->
+
+                <!-- product-card -->
+                <div class="product-card product-slider__card">
                   <div class="product-card__front">
                     <div class="product-card__preview">
                       <a href="" class="product-card__img-link">
@@ -1669,7 +1915,7 @@
         <div class="section__header">
           <div class="section__bg">ассортимент</div>
           <h2 class="section__title">Популярные услуги</h2>
-          <a href="#!" class="section__more btn red-btn">Все услуги</a>
+          <a href="#!" class="section__more section__btn--desktop btn red-btn">Все услуги</a>
         </div>
 
         <div class="section__content">
@@ -1683,37 +1929,40 @@
             Ясность нашей позиции очевидна: базовый вектор развития однозначно
             фиксирует необходимость приоритизации разума над эмоциями.
           </p>
-          <div class="tile">
+          <div class="section__content tile">
+
             <!-- catalog-card -->
             <div class="catalog-card">
               <div class="catalog-card__front">
                 <img src="./img/image/catalog-card-img.png" alt="" class="catalog-card__img" />
                 <h3 class="catalog-card__title">
-                  <a href="" class="catalog-card__title-link">
+                  <a href="#!" class="catalog-card__title-link">
                     Двутавровые балки
                   </a>
                 </h3>
+
+                <a class="catalog-card__link"> Перейти в категорию</a>
               </div>
 
               <div class="catalog-card__back">
                 <ul class="catalog-card__list">
                   <li class="catalog-card__item">
-                    <a href="!#" class="catalog-card__link">
+                    <a href="!#" class="catalog-card__item-link">
                       Балка горячекатная
                     </a>
                   </li>
                   <li class="catalog-card__item">
-                    <a href="!#" class="catalog-card__link">
+                    <a href="!#" class="catalog-card__item-link">
                       Балка оцинкованная
                     </a>
                   </li>
                   <li class="catalog-card__item">
-                    <a href="!#" class="catalog-card__link">
+                    <a href="!#" class="catalog-card__item-link">
                       Балка электросварная
                     </a>
                   </li>
                   <li class="catalog-card__item">
-                    <a href="!#" class="catalog-card__link">
+                    <a href="!#" class="catalog-card__item-link">
                       Шестигранник горячекатаный ГОСТ 2891-45
                     </a>
                   </li>
@@ -1723,15 +1972,12 @@
                   </li>
                 </ul>
 
-                <div class="catalog-card__arrow">
+                <a href="#!" class="catalog-card__arrow">
                   <i class="catalog-card__icon"></i>
-                </div>
+                </a>
               </div>
               <div class="catalog-card__bg"></div>
-
-              <a href="!#" class="catalog-card__more">
-                Еще больше категорий
-              </a>
+              <a href="!#" class="catalog-card__more"> Еще больше категорий</a>
             </div>
             <!-- catalog-card -->
 
@@ -1740,31 +1986,33 @@
               <div class="catalog-card__front">
                 <img src="./img/image/catalog-card-img.png" alt="" class="catalog-card__img" />
                 <h3 class="catalog-card__title">
-                  <a href="" class="catalog-card__title-link">
+                  <a href="#!" class="catalog-card__title-link">
                     Двутавровые балки
                   </a>
                 </h3>
+
+                <a class="catalog-card__link"> Перейти в категорию</a>
               </div>
 
               <div class="catalog-card__back">
                 <ul class="catalog-card__list">
                   <li class="catalog-card__item">
-                    <a href="!#" class="catalog-card__link">
+                    <a href="!#" class="catalog-card__item-link">
                       Балка горячекатная
                     </a>
                   </li>
                   <li class="catalog-card__item">
-                    <a href="!#" class="catalog-card__link">
+                    <a href="!#" class="catalog-card__item-link">
                       Балка оцинкованная
                     </a>
                   </li>
                   <li class="catalog-card__item">
-                    <a href="!#" class="catalog-card__link">
+                    <a href="!#" class="catalog-card__item-link">
                       Балка электросварная
                     </a>
                   </li>
                   <li class="catalog-card__item">
-                    <a href="!#" class="catalog-card__link">
+                    <a href="!#" class="catalog-card__item-link">
                       Шестигранник горячекатаный ГОСТ 2891-45
                     </a>
                   </li>
@@ -1774,15 +2022,12 @@
                   </li>
                 </ul>
 
-                <div class="catalog-card__arrow">
+                <a href="#!" class="catalog-card__arrow">
                   <i class="catalog-card__icon"></i>
-                </div>
+                </a>
               </div>
               <div class="catalog-card__bg"></div>
-
-              <a href="!#" class="catalog-card__more">
-                Еще больше категорий
-              </a>
+              <a href="!#" class="catalog-card__more"> Еще больше категорий</a>
             </div>
             <!-- catalog-card -->
 
@@ -1791,31 +2036,33 @@
               <div class="catalog-card__front">
                 <img src="./img/image/catalog-card-img.png" alt="" class="catalog-card__img" />
                 <h3 class="catalog-card__title">
-                  <a href="" class="catalog-card__title-link">
+                  <a href="#!" class="catalog-card__title-link">
                     Двутавровые балки
                   </a>
                 </h3>
+
+                <a class="catalog-card__link"> Перейти в категорию</a>
               </div>
 
               <div class="catalog-card__back">
                 <ul class="catalog-card__list">
                   <li class="catalog-card__item">
-                    <a href="!#" class="catalog-card__link">
+                    <a href="!#" class="catalog-card__item-link">
                       Балка горячекатная
                     </a>
                   </li>
                   <li class="catalog-card__item">
-                    <a href="!#" class="catalog-card__link">
+                    <a href="!#" class="catalog-card__item-link">
                       Балка оцинкованная
                     </a>
                   </li>
                   <li class="catalog-card__item">
-                    <a href="!#" class="catalog-card__link">
+                    <a href="!#" class="catalog-card__item-link">
                       Балка электросварная
                     </a>
                   </li>
                   <li class="catalog-card__item">
-                    <a href="!#" class="catalog-card__link">
+                    <a href="!#" class="catalog-card__item-link">
                       Шестигранник горячекатаный ГОСТ 2891-45
                     </a>
                   </li>
@@ -1825,15 +2072,12 @@
                   </li>
                 </ul>
 
-                <div class="catalog-card__arrow">
+                <a href="#!" class="catalog-card__arrow">
                   <i class="catalog-card__icon"></i>
-                </div>
+                </a>
               </div>
               <div class="catalog-card__bg"></div>
-
-              <a href="!#" class="catalog-card__more">
-                Еще больше категорий
-              </a>
+              <a href="!#" class="catalog-card__more"> Еще больше категорий</a>
             </div>
             <!-- catalog-card -->
 
@@ -1842,31 +2086,33 @@
               <div class="catalog-card__front">
                 <img src="./img/image/catalog-card-img.png" alt="" class="catalog-card__img" />
                 <h3 class="catalog-card__title">
-                  <a href="" class="catalog-card__title-link">
+                  <a href="#!" class="catalog-card__title-link">
                     Двутавровые балки
                   </a>
                 </h3>
+
+                <a class="catalog-card__link"> Перейти в категорию</a>
               </div>
 
               <div class="catalog-card__back">
                 <ul class="catalog-card__list">
                   <li class="catalog-card__item">
-                    <a href="!#" class="catalog-card__link">
+                    <a href="!#" class="catalog-card__item-link">
                       Балка горячекатная
                     </a>
                   </li>
                   <li class="catalog-card__item">
-                    <a href="!#" class="catalog-card__link">
+                    <a href="!#" class="catalog-card__item-link">
                       Балка оцинкованная
                     </a>
                   </li>
                   <li class="catalog-card__item">
-                    <a href="!#" class="catalog-card__link">
+                    <a href="!#" class="catalog-card__item-link">
                       Балка электросварная
                     </a>
                   </li>
                   <li class="catalog-card__item">
-                    <a href="!#" class="catalog-card__link">
+                    <a href="!#" class="catalog-card__item-link">
                       Шестигранник горячекатаный ГОСТ 2891-45
                     </a>
                   </li>
@@ -1876,15 +2122,12 @@
                   </li>
                 </ul>
 
-                <div class="catalog-card__arrow">
+                <a href="#!" class="catalog-card__arrow">
                   <i class="catalog-card__icon"></i>
-                </div>
+                </a>
               </div>
               <div class="catalog-card__bg"></div>
-
-              <a href="!#" class="catalog-card__more">
-                Еще больше категорий
-              </a>
+              <a href="!#" class="catalog-card__more"> Еще больше категорий</a>
             </div>
             <!-- catalog-card -->
 
@@ -1893,31 +2136,33 @@
               <div class="catalog-card__front">
                 <img src="./img/image/catalog-card-img.png" alt="" class="catalog-card__img" />
                 <h3 class="catalog-card__title">
-                  <a href="" class="catalog-card__title-link">
+                  <a href="#!" class="catalog-card__title-link">
                     Двутавровые балки
                   </a>
                 </h3>
+
+                <a class="catalog-card__link"> Перейти в категорию</a>
               </div>
 
               <div class="catalog-card__back">
                 <ul class="catalog-card__list">
                   <li class="catalog-card__item">
-                    <a href="!#" class="catalog-card__link">
+                    <a href="!#" class="catalog-card__item-link">
                       Балка горячекатная
                     </a>
                   </li>
                   <li class="catalog-card__item">
-                    <a href="!#" class="catalog-card__link">
+                    <a href="!#" class="catalog-card__item-link">
                       Балка оцинкованная
                     </a>
                   </li>
                   <li class="catalog-card__item">
-                    <a href="!#" class="catalog-card__link">
+                    <a href="!#" class="catalog-card__item-link">
                       Балка электросварная
                     </a>
                   </li>
                   <li class="catalog-card__item">
-                    <a href="!#" class="catalog-card__link">
+                    <a href="!#" class="catalog-card__item-link">
                       Шестигранник горячекатаный ГОСТ 2891-45
                     </a>
                   </li>
@@ -1927,15 +2172,12 @@
                   </li>
                 </ul>
 
-                <div class="catalog-card__arrow">
+                <a href="#!" class="catalog-card__arrow">
                   <i class="catalog-card__icon"></i>
-                </div>
+                </a>
               </div>
               <div class="catalog-card__bg"></div>
-
-              <a href="!#" class="catalog-card__more">
-                Еще больше категорий
-              </a>
+              <a href="!#" class="catalog-card__more"> Еще больше категорий</a>
             </div>
             <!-- catalog-card -->
 
@@ -1944,31 +2186,33 @@
               <div class="catalog-card__front">
                 <img src="./img/image/catalog-card-img.png" alt="" class="catalog-card__img" />
                 <h3 class="catalog-card__title">
-                  <a href="" class="catalog-card__title-link">
+                  <a href="#!" class="catalog-card__title-link">
                     Двутавровые балки
                   </a>
                 </h3>
+
+                <a class="catalog-card__link"> Перейти в категорию</a>
               </div>
 
               <div class="catalog-card__back">
                 <ul class="catalog-card__list">
                   <li class="catalog-card__item">
-                    <a href="!#" class="catalog-card__link">
+                    <a href="!#" class="catalog-card__item-link">
                       Балка горячекатная
                     </a>
                   </li>
                   <li class="catalog-card__item">
-                    <a href="!#" class="catalog-card__link">
+                    <a href="!#" class="catalog-card__item-link">
                       Балка оцинкованная
                     </a>
                   </li>
                   <li class="catalog-card__item">
-                    <a href="!#" class="catalog-card__link">
+                    <a href="!#" class="catalog-card__item-link">
                       Балка электросварная
                     </a>
                   </li>
                   <li class="catalog-card__item">
-                    <a href="!#" class="catalog-card__link">
+                    <a href="!#" class="catalog-card__item-link">
                       Шестигранник горячекатаный ГОСТ 2891-45
                     </a>
                   </li>
@@ -1978,15 +2222,12 @@
                   </li>
                 </ul>
 
-                <div class="catalog-card__arrow">
+                <a href="#!" class="catalog-card__arrow">
                   <i class="catalog-card__icon"></i>
-                </div>
+                </a>
               </div>
               <div class="catalog-card__bg"></div>
-
-              <a href="!#" class="catalog-card__more">
-                Еще больше категорий
-              </a>
+              <a href="!#" class="catalog-card__more"> Еще больше категорий</a>
             </div>
             <!-- catalog-card -->
 
@@ -1995,31 +2236,33 @@
               <div class="catalog-card__front">
                 <img src="./img/image/catalog-card-img.png" alt="" class="catalog-card__img" />
                 <h3 class="catalog-card__title">
-                  <a href="" class="catalog-card__title-link">
+                  <a href="#!" class="catalog-card__title-link">
                     Двутавровые балки
                   </a>
                 </h3>
+
+                <a class="catalog-card__link"> Перейти в категорию</a>
               </div>
 
               <div class="catalog-card__back">
                 <ul class="catalog-card__list">
                   <li class="catalog-card__item">
-                    <a href="!#" class="catalog-card__link">
+                    <a href="!#" class="catalog-card__item-link">
                       Балка горячекатная
                     </a>
                   </li>
                   <li class="catalog-card__item">
-                    <a href="!#" class="catalog-card__link">
+                    <a href="!#" class="catalog-card__item-link">
                       Балка оцинкованная
                     </a>
                   </li>
                   <li class="catalog-card__item">
-                    <a href="!#" class="catalog-card__link">
+                    <a href="!#" class="catalog-card__item-link">
                       Балка электросварная
                     </a>
                   </li>
                   <li class="catalog-card__item">
-                    <a href="!#" class="catalog-card__link">
+                    <a href="!#" class="catalog-card__item-link">
                       Шестигранник горячекатаный ГОСТ 2891-45
                     </a>
                   </li>
@@ -2029,15 +2272,12 @@
                   </li>
                 </ul>
 
-                <div class="catalog-card__arrow">
+                <a href="#!" class="catalog-card__arrow">
                   <i class="catalog-card__icon"></i>
-                </div>
+                </a>
               </div>
               <div class="catalog-card__bg"></div>
-
-              <a href="!#" class="catalog-card__more">
-                Еще больше категорий
-              </a>
+              <a href="!#" class="catalog-card__more"> Еще больше категорий</a>
             </div>
             <!-- catalog-card -->
 
@@ -2046,31 +2286,33 @@
               <div class="catalog-card__front">
                 <img src="./img/image/catalog-card-img.png" alt="" class="catalog-card__img" />
                 <h3 class="catalog-card__title">
-                  <a href="" class="catalog-card__title-link">
+                  <a href="#!" class="catalog-card__title-link">
                     Двутавровые балки
                   </a>
                 </h3>
+
+                <a class="catalog-card__link"> Перейти в категорию</a>
               </div>
 
               <div class="catalog-card__back">
                 <ul class="catalog-card__list">
                   <li class="catalog-card__item">
-                    <a href="!#" class="catalog-card__link">
+                    <a href="!#" class="catalog-card__item-link">
                       Балка горячекатная
                     </a>
                   </li>
                   <li class="catalog-card__item">
-                    <a href="!#" class="catalog-card__link">
+                    <a href="!#" class="catalog-card__item-link">
                       Балка оцинкованная
                     </a>
                   </li>
                   <li class="catalog-card__item">
-                    <a href="!#" class="catalog-card__link">
+                    <a href="!#" class="catalog-card__item-link">
                       Балка электросварная
                     </a>
                   </li>
                   <li class="catalog-card__item">
-                    <a href="!#" class="catalog-card__link">
+                    <a href="!#" class="catalog-card__item-link">
                       Шестигранник горячекатаный ГОСТ 2891-45
                     </a>
                   </li>
@@ -2080,17 +2322,70 @@
                   </li>
                 </ul>
 
-                <div class="catalog-card__arrow">
+                <a href="#!" class="catalog-card__arrow">
                   <i class="catalog-card__icon"></i>
-                </div>
+                </a>
               </div>
               <div class="catalog-card__bg"></div>
-
-              <a href="!#" class="catalog-card__more">
-                Еще больше категорий
-              </a>
+              <a href="!#" class="catalog-card__more"> Еще больше категорий</a>
             </div>
             <!-- catalog-card -->
+
+            <!-- catalog-card -->
+            <div class="catalog-card">
+              <div class="catalog-card__front">
+                <img src="./img/image/catalog-card-img.png" alt="" class="catalog-card__img" />
+                <h3 class="catalog-card__title">
+                  <a href="#!" class="catalog-card__title-link">
+                    Двутавровые балки
+                  </a>
+                </h3>
+
+                <a class="catalog-card__link"> Перейти в категорию</a>
+              </div>
+
+              <div class="catalog-card__back">
+                <ul class="catalog-card__list">
+                  <li class="catalog-card__item">
+                    <a href="!#" class="catalog-card__item-link">
+                      Балка горячекатная
+                    </a>
+                  </li>
+                  <li class="catalog-card__item">
+                    <a href="!#" class="catalog-card__item-link">
+                      Балка оцинкованная
+                    </a>
+                  </li>
+                  <li class="catalog-card__item">
+                    <a href="!#" class="catalog-card__item-link">
+                      Балка электросварная
+                    </a>
+                  </li>
+                  <li class="catalog-card__item">
+                    <a href="!#" class="catalog-card__item-link">
+                      Шестигранник горячекатаный ГОСТ 2891-45
+                    </a>
+                  </li>
+
+                  <li class="catalog-card__item">
+                    <span class="catalog-card__ellipsis"> ... </span>
+                  </li>
+                </ul>
+
+                <a href="#!" class="catalog-card__arrow">
+                  <i class="catalog-card__icon"></i>
+                </a>
+              </div>
+              <div class="catalog-card__bg"></div>
+              <a href="!#" class="catalog-card__more"> Еще больше категорий</a>
+            </div>
+            <!-- catalog-card -->
+
+
+          </div>
+
+          <div class="section__btn section__btn--mobile">
+            <a href="#!" class="section__more  btn red-btn">Все услуги</a>
           </div>
         </div>
       </div>
@@ -2103,7 +2398,7 @@
         <div class="section__header">
           <div class="section__bg">ассортимент</div>
           <h2 class="section__title">Наше производство</h2>
-          <a href="#!" class="section__more btn red-btn">Все услуги</a>
+          <a href="#!" class="section__more section__btn--desktop btn red-btn">Все услуги</a>
         </div>
 
         <div class="section__content">
@@ -2117,37 +2412,40 @@
             Ясность нашей позиции очевидна: базовый вектор развития однозначно
             фиксирует необходимость приоритизации разума над эмоциями.
           </p>
-          <div class="tile">
+          <div class="section__content tile">
+
             <!-- catalog-card -->
             <div class="catalog-card">
               <div class="catalog-card__front">
                 <img src="./img/image/catalog-card-img.png" alt="" class="catalog-card__img" />
                 <h3 class="catalog-card__title">
-                  <a href="" class="catalog-card__title-link">
+                  <a href="#!" class="catalog-card__title-link">
                     Двутавровые балки
                   </a>
                 </h3>
+
+                <a class="catalog-card__link"> Перейти в категорию</a>
               </div>
 
               <div class="catalog-card__back">
                 <ul class="catalog-card__list">
                   <li class="catalog-card__item">
-                    <a href="!#" class="catalog-card__link">
+                    <a href="!#" class="catalog-card__item-link">
                       Балка горячекатная
                     </a>
                   </li>
                   <li class="catalog-card__item">
-                    <a href="!#" class="catalog-card__link">
+                    <a href="!#" class="catalog-card__item-link">
                       Балка оцинкованная
                     </a>
                   </li>
                   <li class="catalog-card__item">
-                    <a href="!#" class="catalog-card__link">
+                    <a href="!#" class="catalog-card__item-link">
                       Балка электросварная
                     </a>
                   </li>
                   <li class="catalog-card__item">
-                    <a href="!#" class="catalog-card__link">
+                    <a href="!#" class="catalog-card__item-link">
                       Шестигранник горячекатаный ГОСТ 2891-45
                     </a>
                   </li>
@@ -2157,15 +2455,12 @@
                   </li>
                 </ul>
 
-                <div class="catalog-card__arrow">
+                <a href="#!" class="catalog-card__arrow">
                   <i class="catalog-card__icon"></i>
-                </div>
+                </a>
               </div>
               <div class="catalog-card__bg"></div>
-
-              <a href="!#" class="catalog-card__more">
-                Еще больше категорий
-              </a>
+              <a href="!#" class="catalog-card__more"> Еще больше категорий</a>
             </div>
             <!-- catalog-card -->
 
@@ -2174,31 +2469,33 @@
               <div class="catalog-card__front">
                 <img src="./img/image/catalog-card-img.png" alt="" class="catalog-card__img" />
                 <h3 class="catalog-card__title">
-                  <a href="" class="catalog-card__title-link">
+                  <a href="#!" class="catalog-card__title-link">
                     Двутавровые балки
                   </a>
                 </h3>
+
+                <a class="catalog-card__link"> Перейти в категорию</a>
               </div>
 
               <div class="catalog-card__back">
                 <ul class="catalog-card__list">
                   <li class="catalog-card__item">
-                    <a href="!#" class="catalog-card__link">
+                    <a href="!#" class="catalog-card__item-link">
                       Балка горячекатная
                     </a>
                   </li>
                   <li class="catalog-card__item">
-                    <a href="!#" class="catalog-card__link">
+                    <a href="!#" class="catalog-card__item-link">
                       Балка оцинкованная
                     </a>
                   </li>
                   <li class="catalog-card__item">
-                    <a href="!#" class="catalog-card__link">
+                    <a href="!#" class="catalog-card__item-link">
                       Балка электросварная
                     </a>
                   </li>
                   <li class="catalog-card__item">
-                    <a href="!#" class="catalog-card__link">
+                    <a href="!#" class="catalog-card__item-link">
                       Шестигранник горячекатаный ГОСТ 2891-45
                     </a>
                   </li>
@@ -2208,15 +2505,12 @@
                   </li>
                 </ul>
 
-                <div class="catalog-card__arrow">
+                <a href="#!" class="catalog-card__arrow">
                   <i class="catalog-card__icon"></i>
-                </div>
+                </a>
               </div>
               <div class="catalog-card__bg"></div>
-
-              <a href="!#" class="catalog-card__more">
-                Еще больше категорий
-              </a>
+              <a href="!#" class="catalog-card__more"> Еще больше категорий</a>
             </div>
             <!-- catalog-card -->
 
@@ -2225,31 +2519,33 @@
               <div class="catalog-card__front">
                 <img src="./img/image/catalog-card-img.png" alt="" class="catalog-card__img" />
                 <h3 class="catalog-card__title">
-                  <a href="" class="catalog-card__title-link">
+                  <a href="#!" class="catalog-card__title-link">
                     Двутавровые балки
                   </a>
                 </h3>
+
+                <a class="catalog-card__link"> Перейти в категорию</a>
               </div>
 
               <div class="catalog-card__back">
                 <ul class="catalog-card__list">
                   <li class="catalog-card__item">
-                    <a href="!#" class="catalog-card__link">
+                    <a href="!#" class="catalog-card__item-link">
                       Балка горячекатная
                     </a>
                   </li>
                   <li class="catalog-card__item">
-                    <a href="!#" class="catalog-card__link">
+                    <a href="!#" class="catalog-card__item-link">
                       Балка оцинкованная
                     </a>
                   </li>
                   <li class="catalog-card__item">
-                    <a href="!#" class="catalog-card__link">
+                    <a href="!#" class="catalog-card__item-link">
                       Балка электросварная
                     </a>
                   </li>
                   <li class="catalog-card__item">
-                    <a href="!#" class="catalog-card__link">
+                    <a href="!#" class="catalog-card__item-link">
                       Шестигранник горячекатаный ГОСТ 2891-45
                     </a>
                   </li>
@@ -2259,15 +2555,12 @@
                   </li>
                 </ul>
 
-                <div class="catalog-card__arrow">
+                <a href="#!" class="catalog-card__arrow">
                   <i class="catalog-card__icon"></i>
-                </div>
+                </a>
               </div>
               <div class="catalog-card__bg"></div>
-
-              <a href="!#" class="catalog-card__more">
-                Еще больше категорий
-              </a>
+              <a href="!#" class="catalog-card__more"> Еще больше категорий</a>
             </div>
             <!-- catalog-card -->
 
@@ -2276,31 +2569,33 @@
               <div class="catalog-card__front">
                 <img src="./img/image/catalog-card-img.png" alt="" class="catalog-card__img" />
                 <h3 class="catalog-card__title">
-                  <a href="" class="catalog-card__title-link">
+                  <a href="#!" class="catalog-card__title-link">
                     Двутавровые балки
                   </a>
                 </h3>
+
+                <a class="catalog-card__link"> Перейти в категорию</a>
               </div>
 
               <div class="catalog-card__back">
                 <ul class="catalog-card__list">
                   <li class="catalog-card__item">
-                    <a href="!#" class="catalog-card__link">
+                    <a href="!#" class="catalog-card__item-link">
                       Балка горячекатная
                     </a>
                   </li>
                   <li class="catalog-card__item">
-                    <a href="!#" class="catalog-card__link">
+                    <a href="!#" class="catalog-card__item-link">
                       Балка оцинкованная
                     </a>
                   </li>
                   <li class="catalog-card__item">
-                    <a href="!#" class="catalog-card__link">
+                    <a href="!#" class="catalog-card__item-link">
                       Балка электросварная
                     </a>
                   </li>
                   <li class="catalog-card__item">
-                    <a href="!#" class="catalog-card__link">
+                    <a href="!#" class="catalog-card__item-link">
                       Шестигранник горячекатаный ГОСТ 2891-45
                     </a>
                   </li>
@@ -2310,15 +2605,12 @@
                   </li>
                 </ul>
 
-                <div class="catalog-card__arrow">
+                <a href="#!" class="catalog-card__arrow">
                   <i class="catalog-card__icon"></i>
-                </div>
+                </a>
               </div>
               <div class="catalog-card__bg"></div>
-
-              <a href="!#" class="catalog-card__more">
-                Еще больше категорий
-              </a>
+              <a href="!#" class="catalog-card__more"> Еще больше категорий</a>
             </div>
             <!-- catalog-card -->
 
@@ -2327,31 +2619,33 @@
               <div class="catalog-card__front">
                 <img src="./img/image/catalog-card-img.png" alt="" class="catalog-card__img" />
                 <h3 class="catalog-card__title">
-                  <a href="" class="catalog-card__title-link">
+                  <a href="#!" class="catalog-card__title-link">
                     Двутавровые балки
                   </a>
                 </h3>
+
+                <a class="catalog-card__link"> Перейти в категорию</a>
               </div>
 
               <div class="catalog-card__back">
                 <ul class="catalog-card__list">
                   <li class="catalog-card__item">
-                    <a href="!#" class="catalog-card__link">
+                    <a href="!#" class="catalog-card__item-link">
                       Балка горячекатная
                     </a>
                   </li>
                   <li class="catalog-card__item">
-                    <a href="!#" class="catalog-card__link">
+                    <a href="!#" class="catalog-card__item-link">
                       Балка оцинкованная
                     </a>
                   </li>
                   <li class="catalog-card__item">
-                    <a href="!#" class="catalog-card__link">
+                    <a href="!#" class="catalog-card__item-link">
                       Балка электросварная
                     </a>
                   </li>
                   <li class="catalog-card__item">
-                    <a href="!#" class="catalog-card__link">
+                    <a href="!#" class="catalog-card__item-link">
                       Шестигранник горячекатаный ГОСТ 2891-45
                     </a>
                   </li>
@@ -2361,15 +2655,12 @@
                   </li>
                 </ul>
 
-                <div class="catalog-card__arrow">
+                <a href="#!" class="catalog-card__arrow">
                   <i class="catalog-card__icon"></i>
-                </div>
+                </a>
               </div>
               <div class="catalog-card__bg"></div>
-
-              <a href="!#" class="catalog-card__more">
-                Еще больше категорий
-              </a>
+              <a href="!#" class="catalog-card__more"> Еще больше категорий</a>
             </div>
             <!-- catalog-card -->
 
@@ -2378,31 +2669,33 @@
               <div class="catalog-card__front">
                 <img src="./img/image/catalog-card-img.png" alt="" class="catalog-card__img" />
                 <h3 class="catalog-card__title">
-                  <a href="" class="catalog-card__title-link">
+                  <a href="#!" class="catalog-card__title-link">
                     Двутавровые балки
                   </a>
                 </h3>
+
+                <a class="catalog-card__link"> Перейти в категорию</a>
               </div>
 
               <div class="catalog-card__back">
                 <ul class="catalog-card__list">
                   <li class="catalog-card__item">
-                    <a href="!#" class="catalog-card__link">
+                    <a href="!#" class="catalog-card__item-link">
                       Балка горячекатная
                     </a>
                   </li>
                   <li class="catalog-card__item">
-                    <a href="!#" class="catalog-card__link">
+                    <a href="!#" class="catalog-card__item-link">
                       Балка оцинкованная
                     </a>
                   </li>
                   <li class="catalog-card__item">
-                    <a href="!#" class="catalog-card__link">
+                    <a href="!#" class="catalog-card__item-link">
                       Балка электросварная
                     </a>
                   </li>
                   <li class="catalog-card__item">
-                    <a href="!#" class="catalog-card__link">
+                    <a href="!#" class="catalog-card__item-link">
                       Шестигранник горячекатаный ГОСТ 2891-45
                     </a>
                   </li>
@@ -2412,15 +2705,12 @@
                   </li>
                 </ul>
 
-                <div class="catalog-card__arrow">
+                <a href="#!" class="catalog-card__arrow">
                   <i class="catalog-card__icon"></i>
-                </div>
+                </a>
               </div>
               <div class="catalog-card__bg"></div>
-
-              <a href="!#" class="catalog-card__more">
-                Еще больше категорий
-              </a>
+              <a href="!#" class="catalog-card__more"> Еще больше категорий</a>
             </div>
             <!-- catalog-card -->
 
@@ -2429,31 +2719,33 @@
               <div class="catalog-card__front">
                 <img src="./img/image/catalog-card-img.png" alt="" class="catalog-card__img" />
                 <h3 class="catalog-card__title">
-                  <a href="" class="catalog-card__title-link">
+                  <a href="#!" class="catalog-card__title-link">
                     Двутавровые балки
                   </a>
                 </h3>
+
+                <a class="catalog-card__link"> Перейти в категорию</a>
               </div>
 
               <div class="catalog-card__back">
                 <ul class="catalog-card__list">
                   <li class="catalog-card__item">
-                    <a href="!#" class="catalog-card__link">
+                    <a href="!#" class="catalog-card__item-link">
                       Балка горячекатная
                     </a>
                   </li>
                   <li class="catalog-card__item">
-                    <a href="!#" class="catalog-card__link">
+                    <a href="!#" class="catalog-card__item-link">
                       Балка оцинкованная
                     </a>
                   </li>
                   <li class="catalog-card__item">
-                    <a href="!#" class="catalog-card__link">
+                    <a href="!#" class="catalog-card__item-link">
                       Балка электросварная
                     </a>
                   </li>
                   <li class="catalog-card__item">
-                    <a href="!#" class="catalog-card__link">
+                    <a href="!#" class="catalog-card__item-link">
                       Шестигранник горячекатаный ГОСТ 2891-45
                     </a>
                   </li>
@@ -2463,15 +2755,12 @@
                   </li>
                 </ul>
 
-                <div class="catalog-card__arrow">
+                <a href="#!" class="catalog-card__arrow">
                   <i class="catalog-card__icon"></i>
-                </div>
+                </a>
               </div>
               <div class="catalog-card__bg"></div>
-
-              <a href="!#" class="catalog-card__more">
-                Еще больше категорий
-              </a>
+              <a href="!#" class="catalog-card__more"> Еще больше категорий</a>
             </div>
             <!-- catalog-card -->
 
@@ -2480,31 +2769,33 @@
               <div class="catalog-card__front">
                 <img src="./img/image/catalog-card-img.png" alt="" class="catalog-card__img" />
                 <h3 class="catalog-card__title">
-                  <a href="" class="catalog-card__title-link">
+                  <a href="#!" class="catalog-card__title-link">
                     Двутавровые балки
                   </a>
                 </h3>
+
+                <a class="catalog-card__link"> Перейти в категорию</a>
               </div>
 
               <div class="catalog-card__back">
                 <ul class="catalog-card__list">
                   <li class="catalog-card__item">
-                    <a href="!#" class="catalog-card__link">
+                    <a href="!#" class="catalog-card__item-link">
                       Балка горячекатная
                     </a>
                   </li>
                   <li class="catalog-card__item">
-                    <a href="!#" class="catalog-card__link">
+                    <a href="!#" class="catalog-card__item-link">
                       Балка оцинкованная
                     </a>
                   </li>
                   <li class="catalog-card__item">
-                    <a href="!#" class="catalog-card__link">
+                    <a href="!#" class="catalog-card__item-link">
                       Балка электросварная
                     </a>
                   </li>
                   <li class="catalog-card__item">
-                    <a href="!#" class="catalog-card__link">
+                    <a href="!#" class="catalog-card__item-link">
                       Шестигранник горячекатаный ГОСТ 2891-45
                     </a>
                   </li>
@@ -2514,17 +2805,69 @@
                   </li>
                 </ul>
 
-                <div class="catalog-card__arrow">
+                <a href="#!" class="catalog-card__arrow">
                   <i class="catalog-card__icon"></i>
-                </div>
+                </a>
               </div>
               <div class="catalog-card__bg"></div>
-
-              <a href="!#" class="catalog-card__more">
-                Еще больше категорий
-              </a>
+              <a href="!#" class="catalog-card__more"> Еще больше категорий</a>
             </div>
             <!-- catalog-card -->
+
+            <!-- catalog-card -->
+            <div class="catalog-card">
+              <div class="catalog-card__front">
+                <img src="./img/image/catalog-card-img.png" alt="" class="catalog-card__img" />
+                <h3 class="catalog-card__title">
+                  <a href="#!" class="catalog-card__title-link">
+                    Двутавровые балки
+                  </a>
+                </h3>
+
+                <a class="catalog-card__link"> Перейти в категорию</a>
+              </div>
+
+              <div class="catalog-card__back">
+                <ul class="catalog-card__list">
+                  <li class="catalog-card__item">
+                    <a href="!#" class="catalog-card__item-link">
+                      Балка горячекатная
+                    </a>
+                  </li>
+                  <li class="catalog-card__item">
+                    <a href="!#" class="catalog-card__item-link">
+                      Балка оцинкованная
+                    </a>
+                  </li>
+                  <li class="catalog-card__item">
+                    <a href="!#" class="catalog-card__item-link">
+                      Балка электросварная
+                    </a>
+                  </li>
+                  <li class="catalog-card__item">
+                    <a href="!#" class="catalog-card__item-link">
+                      Шестигранник горячекатаный ГОСТ 2891-45
+                    </a>
+                  </li>
+
+                  <li class="catalog-card__item">
+                    <span class="catalog-card__ellipsis"> ... </span>
+                  </li>
+                </ul>
+
+                <a href="#!" class="catalog-card__arrow">
+                  <i class="catalog-card__icon"></i>
+                </a>
+              </div>
+              <div class="catalog-card__bg"></div>
+              <a href="!#" class="catalog-card__more"> Еще больше категорий</a>
+            </div>
+            <!-- catalog-card -->
+
+
+          </div>
+          <div class="section__btn section__btn--mobile">
+            <a href="#!" class="section__more  btn red-btn">Все услуги</a>
           </div>
         </div>
       </div>
@@ -2546,7 +2889,7 @@
               <div class="product-slider__slide">
 
                 <!-- product-card -->
-                <div class="product-card">
+                <div class="product-card product-slider__card">
                   <div class="product-card__front">
                     <div class="product-card__preview">
                       <a href="" class="product-card__img-link">
@@ -2634,7 +2977,7 @@
               <div class="product-slider__slide">
 
                 <!-- product-card -->
-                <div class="product-card">
+                <div class="product-card product-slider__card">
                   <div class="product-card__front">
                     <div class="product-card__preview">
                       <a href="" class="product-card__img-link">
@@ -2722,7 +3065,7 @@
               <div class="product-slider__slide">
 
                 <!-- product-card -->
-                <div class="product-card">
+                <div class="product-card product-slider__card">
                   <div class="product-card__front">
                     <div class="product-card__preview">
                       <a href="" class="product-card__img-link">
@@ -2810,7 +3153,7 @@
               <div class="product-slider__slide">
 
                 <!-- product-card -->
-                <div class="product-card">
+                <div class="product-card product-slider__card">
                   <div class="product-card__front">
                     <div class="product-card__preview">
                       <a href="" class="product-card__img-link">
@@ -2898,7 +3241,7 @@
               <div class="product-slider__slide">
 
                 <!-- product-card -->
-                <div class="product-card">
+                <div class="product-card product-slider__card">
                   <div class="product-card__front">
                     <div class="product-card__preview">
                       <a href="" class="product-card__img-link">
@@ -3006,14 +3349,14 @@
     <!-- Мы производим -->
 
     <!-- Наши новости -->
-    <section class="section container">
-      <div class="section__header">
+    <section class="section ">
+      <div class="section__header container">
         <div class="section__bg">Интересное</div>
         <h2 class="section__title">Наши новости</h2>
-        <a href="#!" class="section__more btn red-btn">Все новости</a>
+        <a href="#!" class="section__more section__btn--desktop btn red-btn">Все новости</a>
       </div>
 
-      <div class="section__content tile">
+      <div class="section__content our-news tile container">
         <!-- news-card -->
         <div class="news-card">
           <div class="news-card__preview">
@@ -3123,6 +3466,10 @@
         </div>
         <!-- news-card -->
       </div>
+      <div class="section__btn section__btn--mobile">
+        <a href="#!" class="section__more  btn red-btn">Все новости</a>
+      </div>
+
     </section>
     <!-- Наши новости -->
 
@@ -3343,7 +3690,7 @@
               <span class="input__placeholder">Город</span>
             </div>
             <div class="input-block input textarea">
-              <textarea type="text" name="message" class="input-no-bd textarea__input" placeholder=" "></textarea>
+              <textarea name="message" class="input-no-bd textarea__input" placeholder=" "></textarea>
               <span class="input__placeholder">Как вас зовут?</span>
             </div>
           </div>
@@ -3523,7 +3870,7 @@
               <span class="input__placeholder">Город</span>
             </div>
             <div class="input-block input textarea">
-              <textarea type="text" name="message" class="input-no-bd textarea__input" placeholder=" "></textarea>
+              <textarea name="message" class="input-no-bd textarea__input" placeholder=" "></textarea>
               <span class="input__placeholder">Как вас зовут?</span>
             </div>
           </div>
