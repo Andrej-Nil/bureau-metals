@@ -3652,21 +3652,45 @@ body {
 
 .error404 {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column-reverse;
+}
+
+@media (min-width: 1130px) {
+  .error404 {
+    flex-direction: row;
+    justify-content: space-between;
+  }
 }
 
 .error404__coll {
   display: flex;
-  width: 49%;
   align-items: center;
   justify-content: center;
+  margin-bottom: 50px;
+}
+
+.error404__coll:first-child {
+  margin-bottom: 0;
+}
+
+@media (min-width: 1130px) {
+  .error404__coll {
+    width: 49%;
+    margin-bottom: 0;
+  }
 }
 
 .error404__msg {
   font-family: "Roboto", serif;
-  font-size: 24px;
+  font-size: 18px;
   line-height: 150%;
   color: #4f4f4f;
+}
+
+@media (min-width: 1130px) {
+  .error404__msg {
+    font-size: 24px;
+  }
 }
 
 .error404__logo {
@@ -3681,15 +3705,29 @@ body {
 
 .error404__num {
   font-weight: bold;
-  font-size: 200px;
-  line-height: 200px;
+  font-size: 100px;
+  line-height: 100px;
+}
+
+@media (min-width: 1130px) {
+  .error404__num {
+    font-size: 200px;
+    line-height: 200px;
+  }
 }
 
 .error404__text {
   font-weight: bold;
-  font-size: 72px;
+  font-size: 45px;
   line-height: 95px;
   text-transform: uppercase;
+}
+
+@media (min-width: 1130px) {
+  .error404__text {
+    font-size: 72px;
+    line-height: 95px;
+  }
 }
 
 .about {

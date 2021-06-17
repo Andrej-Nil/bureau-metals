@@ -1,20 +1,34 @@
 .error404 {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column-reverse;
+  @media (min-width: 1130px) {
+    flex-direction: row;
+    justify-content: space-between;
+  }
 }
 
 .error404__coll {
   display: flex;
-  width: 49%;
   align-items: center;
   justify-content: center;
+  margin-bottom: 50px;
+  &:first-child {
+    margin-bottom: 0;
+  }
+  @media (min-width: 1130px) {
+    width: 49%;
+    margin-bottom: 0;
+  }
 }
 
 .error404__msg {
   font-family: $roboto;
-  font-size: 24px;
+  font-size: 18px;
   line-height: 150%;
   color: $d-grey;
+  @media (min-width: 1130px) {
+    font-size: 24px;
+  }
 }
 
 .error404__logo {
@@ -29,14 +43,21 @@
 
 .error404__num {
   font-weight: bold;
-  font-size: 200px;
-  line-height: 200px;
+  font-size: 100px;
+  line-height: 100px;
+  @media (min-width: 1130px) {
+    font-size: 200px;
+    line-height: 200px;
+  }
 }
 
 .error404__text {
   font-weight: bold;
-  font-size: 72px;
+  font-size: 45px;
   line-height: 95px;
-
   text-transform: uppercase;
+  @media (min-width: 1130px) {
+    font-size: 72px;
+    line-height: 95px;
+  }
 }
