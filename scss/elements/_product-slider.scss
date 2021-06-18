@@ -1,12 +1,25 @@
 .product-carousel {
-  width: 338px;
+  margin-bottom: 30px;
+  @media (min-width: 1360px) {
+    min-width: 338px;
+    margin-bottom: 0;
+  }
 }
 
 .product__preview {
   position: relative;
   width: 100%;
-  height: 340px;
+
   margin-bottom: 20px;
+  @media (min-width: 1360px) {
+    height: 340px;
+  }
+}
+
+.product__img {
+  width: 100%;
+  margin: 0 auto;
+  max-width: 500px;
 }
 
 .product__arrow {
@@ -46,6 +59,12 @@
   &::before {
     @include font-icon-style("\e901", 15px);
   }
+}
+
+.product__dots {
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
 .product__dots-track {

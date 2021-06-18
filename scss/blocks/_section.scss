@@ -137,16 +137,19 @@
 }
 
 .sections-arrow__btn {
-  //display: none;
   position: absolute;
   top: 190px;
-  width: 50px;
-  height: 50px;
+  width: 33px;
+  height: 33px;
   background: $white;
   cursor: pointer;
   transition: 0.2s ease-in-out;
   &:hover {
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  }
+  @media (min-width: 1280px) {
+    width: 50px;
+    height: 50px;
   }
   @media (min-width: 1472px) {
     display: block;
@@ -154,19 +157,29 @@
 }
 
 .sections-arrow--two-floor {
-  top: 41.5%;
+  top: 47%;
+
+  @media (min-width: 1280px) {
+    top: 41.5%;
+  }
 }
 
 .sections-arrow__prev {
   left: 0px;
-  @media (min-width: 1555px) {
+  @media (min-width: 768px) {
+    left: -30px;
+  }
+  @media (min-width: 1280px) {
     left: -50px;
   }
 }
 
 .sections-arrow__next {
   right: 0px;
-  @media (min-width: 1555px) {
+  @media (min-width: 768px) {
+    right: -30px;
+  }
+  @media (min-width: 1280px) {
     right: -50px;
   }
 }
@@ -184,14 +197,26 @@
 .sections-arrow__icon--is-prev {
   left: 50%;
   &::before {
-    @include font-icon-style("\e902", 35px);
+    @include font-icon-style("\e902", 28px);
+  }
+
+  @media (min-width: 1280px) {
+    &::before {
+      @include font-icon-style("\e902", 35px);
+    }
   }
 }
 
 .sections-arrow__icon--is-next {
   left: 50%;
   &::before {
-    @include font-icon-style("\e901", 35px);
+    @include font-icon-style("\e901", 28px);
+  }
+
+  @media (min-width: 1280px) {
+    &::before {
+      @include font-icon-style("\e901", 35px);
+    }
   }
 }
 
