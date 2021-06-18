@@ -934,6 +934,7 @@ body {
   background: #fff;
   color: #828282;
   transition: 0.2s ease-in-out;
+  width: 100%;
 }
 
 .select__header::before {
@@ -1460,6 +1461,7 @@ body {
 .product-card__img {
   max-width: 338px;
   max-height: 240px;
+  margin: 0 auto;
   width: 100%;
 }
 
@@ -2362,6 +2364,12 @@ body {
   margin-bottom: 100px;
 }
 
+@media (min-width: 768px) {
+  .pagination {
+    width: 380px;
+  }
+}
+
 @media (min-width: 1472px) {
   .pagination {
     width: 470px;
@@ -2993,9 +3001,34 @@ body {
   color: #bc1622;
 }
 
+.filter-btn {
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+@media (min-width: 400px) {
+  .filter-btn {
+    width: 250px;
+    display: block;
+  }
+}
+
+@media (min-width: 1130px) {
+  .filter-btn {
+    display: none;
+  }
+}
+
 .filters {
+  display: none;
   background: #f8f8f8;
   margin-bottom: 30px;
+}
+
+@media (min-width: 1130px) {
+  .filters {
+    display: block;
+  }
 }
 
 .filters__selected {

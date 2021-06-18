@@ -1,6 +1,22 @@
+.filter-btn {
+  width: 100%;
+  margin-bottom: 30px;
+  @media (min-width: 400px) {
+    width: 250px;
+    display: block;
+  }
+  @media (min-width: 1130px) {
+    display: none;
+  }
+}
+
 .filters {
+  display: none;
   background: $milk;
   margin-bottom: 30px;
+  @media (min-width: 1130px) {
+    display: block;
+  }
 }
 
 .filters__selected {
@@ -8,7 +24,6 @@
 }
 
 .filters__active-list {
-  //display: flex;
   margin-bottom: 30px;
 }
 
