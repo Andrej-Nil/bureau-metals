@@ -1,15 +1,18 @@
 .basket-card {
-  padding: 15px;
+  padding: 10px;
   position: relative;
   &:nth-child(odd) {
     background: $milk;
+  }
+  @media (min-width: 768px) {
+    padding: 15px;
   }
 }
 
 .basket-card__remove {
   position: absolute;
-  top: 12px;
-  right: 27px;
+  top: 10px;
+  right: 15px;
   width: 23px;
   height: 23px;
   padding: 4px;
@@ -18,31 +21,69 @@
   &::before {
     @include font-icon-style("\e912", 15px);
   }
+  @media (min-width: 768px) {
+    top: 12px;
+    right: 27px;
+  }
 }
 
 .basket-card__top {
   display: flex;
   margin-bottom: 15px;
+  flex-direction: column;
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
 }
 
 .basket-card__title {
   max-width: 410px;
   font-size: 14px;
   line-height: 150%;
-  margin-right: 30px;
+  margin: 0 50px 10px 0;
+  @media (min-width: 768px) {
+    flex-direction: row;
+    margin: 0 30px 0 0;
+  }
+}
+
+.basket__favorite {
+  @media (min-width: 768px) {
+    margin: 0 50px 0 auto;
+  }
+  @media (min-width: 1050px) {
+    margin: 0;
+    width: 49%;
+  }
 }
 
 .basket-card__bottom {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
   max-width: 500px;
 }
 
+.basket-card__price-old {
+  font-size: 14px;
+  line-height: 18px;
+  @media (min-width: 768px) {
+    font-size: 18px;
+    line-height: 24px;
+  }
+}
+
 .basket__price-num {
   font-weight: normal;
-  line-height: 90%;
+
   margin-right: 3px;
+
+  font-size: 18px;
+  line-height: 24px;
+  @media (min-width: 768px) {
+    font-size: 24px;
+    line-height: 90%;
+  }
 }
 
 .basket-card__input {
@@ -70,9 +111,13 @@
 
 .basket-card__price-num {
   display: inline-block;
-  margin-right: 13px;
-  font-size: 24px;
-  line-height: 32px;
+  margin-right: 5px;
+  font-size: 18px;
+  line-height: 24px;
+  @media (min-width: 768px) {
+    font-size: 24px;
+    line-height: 32px;
+  }
 }
 
 .basket-card__price-mark {

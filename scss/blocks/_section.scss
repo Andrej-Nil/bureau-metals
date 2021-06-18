@@ -62,7 +62,7 @@
 .section__title {
   position: relative;
   font-weight: bold;
-  font-size: 32px;
+  font-size: 28px;
   line-height: 42px;
   text-transform: uppercase;
   margin-bottom: 20px;
@@ -139,6 +139,7 @@
 .sections-arrow__btn {
   //display: none;
   position: absolute;
+  top: 190px;
   width: 50px;
   height: 50px;
   background: $white;
@@ -152,8 +153,11 @@
   }
 }
 
-.sections-arrow__prev {
+.sections-arrow--two-floor {
   top: 41.5%;
+}
+
+.sections-arrow__prev {
   left: 0px;
   @media (min-width: 1555px) {
     left: -50px;
@@ -161,7 +165,6 @@
 }
 
 .sections-arrow__next {
-  top: 41.5%;
   right: 0px;
   @media (min-width: 1555px) {
     right: -50px;
