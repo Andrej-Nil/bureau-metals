@@ -1,27 +1,52 @@
-.modal {
-  position: fixed;
-  display: none;
-  top: 0;
-  left: 50%;
-  transform: translate(-50%, 0);
-  max-width: 800px;
+.modal-bg {
   width: 100%;
-  background: rgba(0, 0, 0, 0.466);
+  position: fixed;
+  overflow-y: auto;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
   z-index: 1000;
+  background: rgba(0, 0, 0, 0);
+
   box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.15);
+  transition: background 0.5s ease-in-out;
+}
+
+.modal {
+  transform: translate(0, -100%);
+  transition: 0.5s ease-in-out;
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+  width: 100%;
+  opacity: 0;
 }
 
 .modal-search {
-  max-width: 1440px;
+  max-width: 1442px;
 }
-.modal--is-show {
-  display: block;
+
+.modal--is-hide {
+  z-index: -1000;
+}
+
+.modal--is-open {
+  background: rgba(0, 0, 0, 0.466);
+  opacity: 1;
+  .modal {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
 }
 
 .modal__content {
-  padding: 40px 35px 60px;
+  padding: 40px 10px 30px;
   background: $white;
   width: 100%;
+  @media (min-width: 1130px) {
+    padding: 40px 35px 60px;
+  }
 }
 
 .modal__title {
@@ -93,40 +118,6 @@
   width: 48%;
 }
 
-.modal-search__bd {
-  position: relative;
-  padding: 1px 1px 1px 2px;
-  background: $base-lg;
-  margin-bottom: 35px;
-}
-
-.modal-search__loupe {
-  position: absolute;
-  right: 15px;
-  top: 50%;
-  transform: translate(0, -50%);
-  display: block;
-  width: 31px;
-  height: 31px;
-  cursor: pointer;
-
-  &::before {
-    @include font-icon-style("\e913", 30px);
-    color: $base;
-  }
-}
-
-.modal-search__input {
-  border: none;
-  outline: none;
-  background: $white;
-  padding: 16.5px 20px;
-  width: 100%;
-  font-family: $roboto;
-  font-size: 18px;
-  line-height: 150%;
-}
-
 .modal-search__input::-webkit-input-placeholder {
   color: $grey;
   font-family: $roboto;
@@ -170,25 +161,6 @@
   line-height: 150%;
 }
 
-.search-form {
-  background: $white;
-  display: flex;
-  align-items: center;
-}
-
-.search-form__area {
-  position: relative;
-  margin-left: 5px;
-  background: $base;
-  padding: 13px 10px;
-  color: $white;
-  font-family: $roboto;
-  font-size: 16px;
-  line-height: 150%;
-  width: 240px;
-  cursor: pointer;
-}
-
 .modal-search__arrow {
   position: absolute;
   right: 20px;
@@ -200,7 +172,44 @@
 .modal-search__cards {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   margin-bottom: 30px;
+  @media (min-width: 900px) {
+    &::before {
+      content: "";
+      width: 32%;
+      height: 0;
+      order: 1;
+    }
+    &::after {
+      content: "";
+      width: 32%;
+      height: 0;
+    }
+  }
+
+  @media (min-width: 900px) {
+    &::before {
+      content: "";
+      width: 32%;
+      height: 0;
+      order: 1;
+    }
+    &::after {
+      content: "";
+      width: 32%;
+      height: 0;
+    }
+  }
+
+  @media (min-width: 1442px) {
+    &::before {
+      width: 325px;
+    }
+    &::after {
+      width: 325px;
+    }
+  }
 }
 
 .modal-search__list {
@@ -208,5 +217,14 @@
 }
 
 .modal-search__bottom {
-  text-align: right;
+  @media (min-width: 600px) {
+    text-align: right;
+  }
+}
+
+.modal-search__btn {
+  width: 100%;
+  @media (min-width: 600px) {
+    width: auto;
+  }
 }

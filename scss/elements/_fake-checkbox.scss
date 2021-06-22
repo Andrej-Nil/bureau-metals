@@ -14,3 +14,12 @@
     color: $base;
   }
 }
+
+.checkbox:checked + .fake-checkbox {
+  &::before {
+    @include font-icon-style("\ea10", 18px);
+    position: absolute;
+    top: -30%;
+    color: $base;
+  }
+}

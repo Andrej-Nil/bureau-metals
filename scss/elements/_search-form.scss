@@ -1,0 +1,101 @@
+.search__wrap {
+  position: relative;
+
+  background: $base-lg;
+  margin-bottom: 35px;
+  @media (min-width: 600px) {
+    padding: 1px 1px 1px 2px;
+  }
+}
+
+.search-form {
+  background: $white;
+  align-items: center;
+  @media (min-width: 600px) {
+    display: flex;
+  }
+}
+
+.modal-search__loupe {
+  position: absolute;
+  right: 15px;
+  bottom: 0;
+
+  transform: translate(0, -50%);
+  display: block;
+  width: 31px;
+  height: 31px;
+  cursor: pointer;
+
+  &::before {
+    @include font-icon-style("\e913", 30px);
+    color: $base;
+  }
+}
+
+.modal-search__input {
+  border: none;
+  border-bottom: 1px solid $base;
+  outline: none;
+  background: $white;
+  padding: 10px 10px;
+  width: 100%;
+  font-family: $roboto;
+  font-size: 18px;
+  line-height: 150%;
+  @media (min-width: 600px) {
+    padding: 16.5px 20px;
+    border-bottom: none;
+  }
+}
+
+.search-form__area {
+  position: relative;
+  display: block;
+  margin: 0 0 10px 0;
+  background: $base;
+  padding: 13px 10px;
+  color: $white;
+  font-family: $roboto;
+  font-size: 16px;
+  line-height: 150%;
+  width: 100%;
+  cursor: pointer;
+  @media (min-width: 600px) {
+    margin: 0 0 0 5px;
+    width: 240px;
+  }
+}
+
+.search-form__label {
+  display: flex;
+  align-items: center;
+}
+
+.search-form__fake-checkbox {
+  margin-right: 20px;
+}
+
+.search-form__list {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  height: 0;
+  overflow: hidden;
+  transform: translate(0, 100%);
+  border: 1px solid $base;
+  background: $white;
+}
+
+.search-form__label {
+  padding: 10px;
+  cursor: pointer;
+  &:hover {
+    background: $pearl;
+  }
+}
+
+.search-form__label-text {
+  color: $base;
+}
