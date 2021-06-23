@@ -11,41 +11,36 @@
 .search-form {
   background: $white;
   align-items: center;
+  padding: 0 0 2px 0;
   @media (min-width: 600px) {
     display: flex;
   }
 }
 
-.modal-search__loupe {
+.search-form__input {
+  border: none;
+  border-bottom: 1px solid $base;
+  @media (min-width: 600px) {
+    padding: 16.5px 20px;
+    border-bottom: none;
+  }
+}
+
+.search-form__loupe {
   position: absolute;
   right: 15px;
   bottom: 0;
-
   transform: translate(0, -50%);
   display: block;
   width: 31px;
   height: 31px;
   cursor: pointer;
-
   &::before {
     @include font-icon-style("\e913", 30px);
     color: $base;
   }
-}
 
-.modal-search__input {
-  border: none;
-  border-bottom: 1px solid $base;
-  outline: none;
-  background: $white;
-  padding: 10px 10px;
-  width: 100%;
-  font-family: $roboto;
-  font-size: 18px;
-  line-height: 150%;
   @media (min-width: 600px) {
-    padding: 16.5px 20px;
-    border-bottom: none;
   }
 }
 
@@ -76,7 +71,7 @@
   margin-right: 20px;
 }
 
-.search-form__list {
+.search-form__list-body {
   position: absolute;
   width: 100%;
   left: 0;
@@ -86,6 +81,7 @@
   transform: translate(0, 100%);
   border: 1px solid $base;
   background: $white;
+  transition: 0.2s ease-in-out;
 }
 
 .search-form__label {
@@ -98,4 +94,13 @@
 
 .search-form__label-text {
   color: $base;
+}
+
+.modal-search__btn {
+  border: none;
+  outline: none;
+  width: 100%;
+  @media (min-width: 600px) {
+    width: auto;
+  }
 }

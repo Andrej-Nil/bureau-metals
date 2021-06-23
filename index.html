@@ -20,7 +20,7 @@
           <div class="header__m-contact contact">
             <i class="header__m-contact-icon contact__icon _contact-city"></i>
             <div class="header__m-contact-title contact__title">Ваш город</div>
-            <span class="header__m-contact-link contact__link">
+            <span id="openCityModalMobileBtn" class="header__m-contact-link contact__link">
               Петропавлоск-Камчатский
             </span>
           </div>
@@ -50,7 +50,7 @@
               <img src="./img/logo.svg" alt="" class="logo" />
             </a>
           </div>
-          <span id="feedbackBtn" class="header__feedback btn red-btn">
+          <span id="$openCallBackModalMobileBtn" class="header__feedback btn red-btn">
             Связаться с нами
           </span>
         </div>
@@ -105,13 +105,13 @@
             <div class="header__contact-item contact">
               <i class="m-h__contact-icon contact__icon _contact-city"></i>
               <div class="m-h__contact-title contact__title">Ваш город</div>
-              <a href="tel:+74951234567" class="m-h__contact-link contact__link">
+              <span id="openCityModalBtn" class="m-h__contact-link contact__link">
                 Петропавлоск-Камчатский
-              </a>
+              </span>
             </div>
           </div>
           <!--header__contacts-->
-          <span id="mainfeedbackBtn" class="m-h__feedback header__feedback btn red-btn">
+          <span id="openCallBackModalBtn" class="m-h__feedback header__feedback btn red-btn">
             Связаться с нами
           </span>
         </div>
@@ -3574,48 +3574,50 @@
     <!-- added to cart -->
 
     <!-- consultation -->
-    <div id="callBackModal" class="modal">
-      <div class="modal__close"></div>
-      <div class="modal__content">
-        <h3 class="modal__title">Нужна консультация?</h3>
-        <p class="modal__desc">
-          Оставьте Ваши контакты и мы обязательно Вам перезвоним!
-        </p>
+    <div id="callBackModal" class="modal-bg modal--is-hide" data-close>
+      <div class="modal">
+        <div class="modal__close" data-close></div>
+        <div class="modal__content">
+          <h3 class="modal__title">Нужна консультация?</h3>
+          <p class="modal__desc">
+            Оставьте Ваши контакты и мы обязательно Вам перезвоним!
+          </p>
 
-        <form action="" id="callBackForm" method="post" class="form">
-          <div class="form__inputs">
-            <div class="input-block input">
-              <input type="text" name="name" class="input-no-bd" placeholder=" " />
-              <span class="input__placeholder">Как вас зовут?</span>
+          <form action="" id="callBackForm" method="post" class="form">
+            <div class="form__inputs">
+              <div class="input-block input">
+                <input type="text" name="name" class="input-no-bd" placeholder=" " />
+                <span class="input__placeholder">Как вас зовут?</span>
+              </div>
+              <div class="input-block input">
+                <input type="text" name="phone" class="input-no-bd" placeholder=" " />
+                <span class="input__placeholder">Ваш телефон</span>
+              </div>
             </div>
-            <div class="input-block input">
-              <input type="text" name="phone" class="input-no-bd" placeholder=" " />
-              <span class="input__placeholder">Ваш телефон</span>
+            <div class="from__bottom">
+              <input type="submit" class="from__sumbit btn red-btn" value="Отправить заявку">
+
+              <label class="from-approval">
+                <input type="checkbox" class="from-approval__checkbox" checked>
+                <span class="from-approval__fake-checkbox fake-checkbox">
+
+                </span>
+
+                <span class="from-approval__text">
+                  Я прочитал и согласен с правилами <a href="#!" class="from-approval__link">«Соглашение на обработку
+                    персональных данных»</a>
+                </span>
+              </label>
             </div>
-          </div>
-          <div class="from__bottom">
-            <input type="submit" class="from__sumbit btn red-btn" value="Отправить заявку">
+          </form>
+        </div>
+        <div class="modal__result">
+          <p class="modal__msg">
+            Ваше сообщение успешно отправлено
+          </p>
 
-            <label class="from-approval">
-              <input type="checkbox" class="from-approval__checkbox" checked>
-              <span class="from-approval__fake-checkbox fake-checkbox">
-
-              </span>
-
-              <span class="from-approval__text">
-                Я прочитал и согласен с правилами <a href="#!" class="from-approval__link">«Соглашение на обработку
-                  персональных данных»</a>
-              </span>
-            </label>
-          </div>
-        </form>
-      </div>
-      <div class="modal__result">
-        <p class="modal__msg">
-          Ваше сообщение успешно отправлено
-        </p>
-
-        <span class="modal__close-btn btn white-btn-bd">Закрыть окно</span>
+          <span class="modal__close-btn btn white-btn-bd">Закрыть окно</span>
+        </div>
       </div>
     </div>
     <!-- consultation -->
@@ -3705,409 +3707,410 @@
     <!-- fastOrde -->
 
     <!-- searchCityModal -->
-    <div id="searchCityModal" class=" modal modal-search">
-      <div class="modal__close"></div>
-      <div class="modal__content">
-        <h3 class="modal__title">Поиск филиала компании</h3>
-        <div class="modal-search__bd">
-          <i class="modal-search__loupe"></i>
-          <input class="modal-search__input" placeholder="Петропаловский">
+    <div id="cityModal" class="modal-bg modal--is-hide" data-close>
+      <div class=" modal modal-search">
+        <div class="modal__close" data-close></div>
+        <div class="modal__content">
+          <h3 class="modal__title">Поиск филиала компании</h3>
+          <div class="modal-search-city">
+            <i class="modal-search__loupe"></i>
+            <input id="searchCityInput" class="modal-search__input" placeholder="Петропаловский">
+          </div>
+
+          <ul id="cityList" class="modal-search__branches">
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Москва
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Екатеринбург
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Санкт-Петербург
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Москва
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Екатеринбург
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Санкт-Петербург
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Москва
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Екатеринбург
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Санкт-Петербург
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Москва
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Екатеринбург
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Санкт-Петербург
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Москва
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Екатеринбург
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Санкт-Петербург
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Москва
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Екатеринбург
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Санкт-Петербург
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Москва
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Екатеринбург
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Санкт-Петербург
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Москва
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Екатеринбург
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Санкт-Петербург
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Москва
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Екатеринбург
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Санкт-Петербург
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Москва
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Екатеринбург
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Санкт-Петербург
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Москва
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Екатеринбург
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Санкт-Петербург
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Москва
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Екатеринбург
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Санкт-Петербург
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Москва
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Екатеринбург
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Санкт-Петербург
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Москва
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Екатеринбург
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Санкт-Петербург
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Москва
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Екатеринбург
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Санкт-Петербург
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Москва
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Екатеринбург
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Санкт-Петербург
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Москва
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Екатеринбург
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Санкт-Петербург
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Москва
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Екатеринбург
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Санкт-Петербург
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Москва
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Екатеринбург
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Санкт-Петербург
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Москва
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Екатеринбург
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Санкт-Петербург
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Москва
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Екатеринбург
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Санкт-Петербург
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Москва
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Екатеринбург
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Санкт-Петербург
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Екатеринбург
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Санкт-Петербург
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Москва
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Екатеринбург
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Санкт-Петербург
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Москва
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Екатеринбург
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Санкт-Петербург
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Москва
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Екатеринбург
+              </a>
+            </li>
+            <li class="modal-search__item" data-list-item>
+              <a href="#!" class="modal-search__link link" data-city>
+                Санкт-Петербург
+              </a>
+            </li>
+
+          </ul>
         </div>
-
-        <ul class="modal-search__branches">
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Москва
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Екатеринбург
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Санкт-Петербург
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Москва
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Екатеринбург
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Санкт-Петербург
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Москва
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Екатеринбург
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Санкт-Петербург
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Москва
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Екатеринбург
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Санкт-Петербург
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Москва
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Екатеринбург
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Санкт-Петербург
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Москва
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Екатеринбург
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Санкт-Петербург
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Москва
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Екатеринбург
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Санкт-Петербург
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Москва
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Екатеринбург
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Санкт-Петербург
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Москва
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Екатеринбург
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Санкт-Петербург
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Москва
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Екатеринбург
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Санкт-Петербург
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Москва
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Екатеринбург
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Санкт-Петербург
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Москва
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Екатеринбург
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Санкт-Петербург
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Москва
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Екатеринбург
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Санкт-Петербург
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Москва
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Екатеринбург
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Санкт-Петербург
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Москва
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Екатеринбург
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Санкт-Петербург
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Москва
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Екатеринбург
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Санкт-Петербург
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Москва
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Екатеринбург
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Санкт-Петербург
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Москва
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Екатеринбург
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Санкт-Петербург
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Москва
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Екатеринбург
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Санкт-Петербург
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Москва
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Екатеринбург
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Санкт-Петербург
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Москва
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Екатеринбург
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Санкт-Петербург
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Москва
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Екатеринбург
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Санкт-Петербург
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Екатеринбург
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Санкт-Петербург
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Москва
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Екатеринбург
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Санкт-Петербург
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Москва
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Екатеринбург
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Санкт-Петербург
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Москва
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Екатеринбург
-            </a>
-          </li>
-          <li class="modal-search__item">
-            <a href="#!" class="modal-search__link link">
-              Санкт-Петербург
-            </a>
-          </li>
-
-        </ul>
       </div>
     </div>
     <!-- searchCityModal -->
 
     <!-- searchModal -->
-
     <div id="searchModal" class="modal-bg modal--is-hide" data-close>
       <div class="modal modal-search">
         <div class="modal__close" data-close></div>
@@ -4117,62 +4120,66 @@
           <h3 class="modal__title">Поиск</h3>
 
           <div class="search__wrap">
-            <form id="searchForm" action="" class="search-form">
-              <i class="modal-search__loupe"></i>
+            <form id="searchForm" action="" method="GET" class="search-form">
+              <i class="search-form__loupe"></i>
               <div id="searchArea" class="search-form__area">
                 <span id="areaName" class="search-form__name">
                   По всему сайту
                 </span>
                 <i class="modal-search__arrow"></i>
-                <ul class="search-form__list">
-                  <li class="search-form__item">
-                    <label class="search-form__label">
-                      <input type="radio" name="type" value="" class="from-approval__checkbox checkbox" checked>
-                      <span class="search-form__fake-checkbox fake-checkbox">
-                      </span>
+                <div id="areaListBody" class="search-form__list-body" data-is-close="close">
+                  <ul id="areaList" class="search-form__list">
+                    <li class="search-form__item">
+                      <label class="search-form__label" data-value="По всему сайту">
+                        <input type="radio" name="type" value="" class="from-approval__checkbox checkbox" checked>
+                        <span class="search-form__fake-checkbox fake-checkbox">
+                        </span>
 
-                      <span class="search-form__label-text">
-                        По всему сайту
-                      </span>
-                    </label>
-                  </li>
-                  <li class="search-form__item">
-                    <label class="search-form__label">
-                      <input type="radio" name="type" value="content" class="from-approval__checkbox checkbox">
-                      <span class="search-form__fake-checkbox fake-checkbox">
-                      </span>
+                        <span class="search-form__label-text">
+                          По всему сайту
+                        </span>
+                      </label>
+                    </li>
+                    <li class="search-form__item">
+                      <label class="search-form__label" data-value="По товарам">
+                        <input type="radio" name="type" value="content" class="from-approval__checkbox checkbox">
+                        <span class="search-form__fake-checkbox fake-checkbox">
+                        </span>
 
-                      <span class="search-form__label-text">
-                        По товарам
-                      </span>
-                    </label>
-                  </li>
-                  <li class="search-form__item">
-                    <label class="search-form__label">
-                      <input type="radio" name="type" value="categoty" class="from-approval__checkbox checkbox">
-                      <span class="search-form__fake-checkbox fake-checkbox">
-                      </span>
+                        <span class="search-form__label-text">
+                          По товарам
+                        </span>
+                      </label>
+                    </li>
+                    <li class="search-form__item">
+                      <label class="search-form__label" data-value="По категориям">
+                        <input type="radio" name="type" value="categoty" class="from-approval__checkbox checkbox">
+                        <span class="search-form__fake-checkbox fake-checkbox">
+                        </span>
 
-                      <span class="search-form__label-text">
-                        По категориям
-                      </span>
-                    </label>
-                  </li>
-                  <li class="search-form__item">
-                    <label class="search-form__label">
-                      <input type="radio" name="type" value="news" class="from-approval__checkbox checkbox">
-                      <span class="search-form__fake-checkbox fake-checkbox">
-                      </span>
+                        <span class="search-form__label-text">
+                          По категориям
+                        </span>
+                      </label>
+                    </li>
+                    <li class="search-form__item">
+                      <label class="search-form__label" data-value="По новостям">
+                        <input type="radio" name="type" value="news" class="from-approval__checkbox checkbox">
+                        <span class="search-form__fake-checkbox fake-checkbox">
+                        </span>
 
-                      <span class="search-form__label-text">
-                        По новостям
-                      </span>
-                    </label>
-                  </li>
-                </ul>
+                        <span class="search-form__label-text">
+                          По новостям
+                        </span>
+                      </label>
+                    </li>
+                  </ul>
+
+                </div>
               </div>
 
-              <input type="text" class="modal-search__input" placeholder="Балки двутавровые">
+              <input type="text" name="search" class="modal-search__input search-form__input"
+                placeholder="Балки двутавровые">
             </form>
           </div>
 
@@ -4356,7 +4363,7 @@
           <!-- modal-search__list -->
 
           <div class="modal-search__bottom">
-            <a href="#!" class="modal-search__btn btn red-btn">Все результаты поиска</a>
+            <input type="submit" form="searchForm" class="modal-search__btn btn red-btn" value="Все результаты поиска">
           </div>
         </div>
       </div>

@@ -50,9 +50,12 @@
 }
 
 .modal__title {
-  font-size: 36px;
+  font-size: 24px;
   line-height: 47px;
   margin-bottom: 9px;
+  @media (min-width: 1130px) {
+    font-size: 36px;
+  }
 }
 
 .modal__desc {
@@ -118,6 +121,17 @@
   width: 48%;
 }
 
+.modal-search__input {
+  border: none;
+  outline: none;
+  background: $white;
+  padding: 10px 10px;
+  width: 100%;
+  font-family: $roboto;
+  font-size: 18px;
+  line-height: 150%;
+}
+
 .modal-search__input::-webkit-input-placeholder {
   color: $grey;
   font-family: $roboto;
@@ -143,15 +157,66 @@
   line-height: 150%;
 }
 
+.modal-search__loupe {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+
+  transform: translate(0, -50%);
+  display: block;
+  width: 31px;
+  height: 31px;
+  cursor: pointer;
+
+  &::before {
+    @include font-icon-style("\e913", 30px);
+    color: $base;
+  }
+}
+
 .modal-search__branches {
-  height: 633px;
+  height: 330px;
   overflow: auto;
+  scrollbar-color: $base $l-grey;
+  scrollbar-width: thin;
+  @media (min-width: 1130px) {
+    height: 440px;
+  }
+}
+
+.modal-search__branches::-webkit-scrollbar {
+  width: 8px;
+  background-color: $l-grey;
+}
+
+.modal-search__branches::-webkit-scrollbar-thumb {
+  background-color: $base;
+}
+
+.modal-search-city {
+  position: relative;
+  border: 1px solid $base;
+  margin-bottom: 30px;
 }
 
 .modal-search__item {
   display: inline-block;
-  width: 24%;
+  width: 100%;
   margin-bottom: 20px;
+  @media (min-width: 500px) {
+    width: 49%;
+  }
+  @media (min-width: 750px) {
+    width: 32%;
+  }
+
+  @media (min-width: 900px) {
+    width: 24%;
+  }
+}
+
+.city-hide {
+  display: none;
 }
 
 .modal-search__link {
@@ -219,12 +284,5 @@
 .modal-search__bottom {
   @media (min-width: 600px) {
     text-align: right;
-  }
-}
-
-.modal-search__btn {
-  width: 100%;
-  @media (min-width: 600px) {
-    width: auto;
   }
 }

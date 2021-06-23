@@ -21,7 +21,7 @@
 @import "./elements/_select";
 @import "./elements/_fake-checkbox";
 @import "./elements/_sorting";
-@import "./elements/_search-form";
+
 @import "./elements/_catalog-card";
 @import "./elements/_product-card";
 @import "./elements/_basket-card";
@@ -70,6 +70,7 @@
 
 // modal
 @import "./blocks/_modal";
+@import "./elements/_search-form";
 
 // для переназначеный стилей
 @import "./blocks/_important";
