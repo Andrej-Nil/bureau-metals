@@ -1512,7 +1512,7 @@ body {
 
 .product-card__order {
   position: absolute;
-  bottom: 0;
+  bottom: -10px;
   opacity: 0;
   right: 15px;
   font-family: "Roboto", serif;
@@ -1827,20 +1827,40 @@ body {
   color: #fff;
 }
 
-.modal-card {
-  margin-bottom: 90px;
+@media (min-width: 700px) {
+  .modal-card {
+    margin-bottom: 90px;
+  }
 }
 
 .modal-card__title {
-  font-size: 30px;
-  line-height: 40px;
+  font-size: 18px;
+  line-height: 30px;
   margin-bottom: 40px;
+}
+
+@media (min-width: 700px) {
+  .modal-card__title {
+    font-size: 30px;
+    line-height: 40px;
+  }
 }
 
 .modal-card__info {
   display: flex;
   justify-content: space-between;
+  flex-direction: column;
   align-items: flex-start;
+}
+
+@media (min-width: 700px) {
+  .modal-card__info {
+    flex-direction: row;
+  }
+}
+
+.modal-card__price {
+  margin-bottom: 30px;
 }
 
 .modal-card__price-name {
@@ -2663,6 +2683,7 @@ body {
   border: none;
   outline: none;
   margin-bottom: 20px;
+  width: 100%;
 }
 
 @media (min-width: 650px) {
@@ -2674,10 +2695,16 @@ body {
 .from-approval {
   position: relative;
   padding-left: 26px;
-  width: 47.5%;
+  width: 100%;
   font-family: "Roboto", serif;
   font-size: 12px;
   line-height: 150%;
+}
+
+@media (min-width: 650px) {
+  .from-approval {
+    width: 49%;
+  }
 }
 
 .from-approval__link {
@@ -2795,6 +2822,7 @@ body {
 }
 
 .section__more {
+  position: relative;
   max-width: 290px;
 }
 
@@ -2847,7 +2875,7 @@ body {
 
 @media (min-width: 1280px) {
   .section-dots {
-    margin-bottom: 120px;
+    margin-bottom: 20px;
   }
 }
 
@@ -2895,12 +2923,12 @@ body {
 }
 
 .sections-arrow--two-floor {
-  top: 47%;
+  top: 42.7%;
 }
 
 @media (min-width: 1280px) {
   .sections-arrow--two-floor {
-    top: 41.5%;
+    top: 40%;
   }
 }
 
@@ -2908,13 +2936,25 @@ body {
   left: 0px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1030px) {
   .sections-arrow__prev {
-    left: -30px;
+    left: 10px;
   }
 }
 
 @media (min-width: 1280px) {
+  .sections-arrow__prev {
+    left: 10px;
+  }
+}
+
+@media (min-width: 1472px) {
+  .sections-arrow__prev {
+    left: 0px;
+  }
+}
+
+@media (min-width: 1600px) {
   .sections-arrow__prev {
     left: -50px;
   }
@@ -2924,13 +2964,13 @@ body {
   right: 0px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1280px) {
   .sections-arrow__next {
-    right: -30px;
+    right: 0;
   }
 }
 
-@media (min-width: 1280px) {
+@media (min-width: 1600px) {
   .sections-arrow__next {
     right: -50px;
   }
@@ -3926,7 +3966,7 @@ body {
 .product-slider__track {
   overflow: hidden;
   display: flex;
-  padding: 0;
+  padding-bottom: 125px;
   justify-content: space-between;
 }
 

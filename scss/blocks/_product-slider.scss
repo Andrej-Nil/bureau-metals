@@ -1,6 +1,5 @@
 .product-slider {
   position: relative;
-  //max-width: 1472px;
   width: 100%;
   margin: 0 auto;
   @media (min-width: 400px) {
@@ -13,7 +12,7 @@
 .product-slider__track {
   overflow: hidden;
   display: flex;
-  padding: 0;
+  padding-bottom: 125px;
   justify-content: space-between;
 }
 

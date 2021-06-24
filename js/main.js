@@ -13,6 +13,20 @@ const $callBackModal = doc.querySelector('#callBackModal')
 const $openCallBackModalBtn = doc.querySelector('#openCallBackModalBtn')
 const $openCallBackModalMobileBtn = doc.querySelector('#openCallBackModalMobileBtn');
 
+const $consultationModal = doc.querySelector('#consultationModal');
+
+class Server {
+
+  constructor() {
+    this._token = this.getToken();
+  }
+
+  getToken = () => {
+    const meta = document.querySelector('meta[name="csrf-token"]');
+    return meta.getAttribute('content');
+  }
+}
+
 class Modal {
   constructor(modalId) {
     this.$modal = doc.querySelector(modalId);
@@ -161,27 +175,38 @@ class CityModal extends Modal {
   }
 }
 
-function searchCity(e) {
-  const value = e.target.value.trim().toLowerCase();
-  const city = selectCityModal.querySelectorAll('[data-city]');
-  city.forEach(el => {
-    const cityName = el.innerHTML.toLowerCase();
-    const res = cityName.includes(value);
-    const li = el.closest('.select-city__item');
-    li.classList.add('select-city__item--is-hide');
-    if (res === '') {
-      li.classList.remove('select-city__item--is-hide');
-    }
-    if (res) {
-      li.classList.remove('select-city__item--is-hide');
-    }
+class FastOrderModal extends Modal {
+  constructor(modalId) {
+    super(modalId);
+    this.prodId = null;
+    this.$el = null;
+    this.server = new Server();
+  }
 
-  })
+  openFastOrder($el) {
+    this.$el = $el;
+
+    this.open();
+  }
+
+  getProductId = () => {
+    console.log(this.$el);
+  }
+}
+
+class ConsultationModal extends Modal {
+  constructor(modalId) {
+    super(modalId);
+  }
 }
 
 const searchModal = new SearchModal('#searchModal');
 const cityModal = new CityModal('#cityModal');
 const callBackModal = new CityModal('#callBackModal');
+const fastOrderModal = new FastOrderModal('#fastOrdenModal');
+const consultationModal = new ConsultationModal('#consultationModal')
+
+doc.addEventListener('click', docListener);
 
 //окно поиска
 if ($openSearchBtn && $searchModal) {
@@ -222,3 +247,10 @@ if ($openCallBackModalMobileBtn && $callBackModal) {
 }
 
 
+
+function docListener(e) {
+  const target = e.target;
+  if (target.closest('[data-fast-order]')) {
+    fastOrderModal.openFastOrder(target);
+  }
+}
