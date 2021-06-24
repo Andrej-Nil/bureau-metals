@@ -15,6 +15,8 @@ const $openCallBackModalMobileBtn = doc.querySelector('#openCallBackModalMobileB
 
 const $consultationModal = doc.querySelector('#consultationModal');
 
+const $map = doc.querySelector('#map');
+
 class Server {
 
   constructor() {
@@ -128,11 +130,12 @@ class SearchModal extends Modal {
 class CityModal extends Modal {
   constructor(modalId) {
     super(modalId);
-    this.$searchCityInput = this.$modal.querySelector('#searchCityInput');
-    this.$listItem = this.$modal.querySelectorAll('[data-list-item]');
-    this.$cities = this.$modal.querySelectorAll('[data-city]');
+    this.$searchCityInput = this.getElement('#searchCityInput');
+    this.$listItem = this.getElemants('[data-list-item]');
+    this.$cities = this.getElemants('[data-city]');
     this.inputValue = '';
     this.searchCityInputListener();
+
   }
 
   searchCity = () => {
@@ -173,6 +176,23 @@ class CityModal extends Modal {
     }
     this.$searchCityInput.addEventListener('input', this.searchCity);
   }
+
+  getElement = (selector) => {
+    if (!this.$modal) {
+      return false;
+    }
+    return this.$modal.querySelector(selector);
+  }
+
+  getElemants = (selector) => {
+    if (!this.$modal) {
+      return false;
+    }
+    return this.$modal.querySelectorAll(selector);
+  }
+
+
+
 }
 
 class FastOrderModal extends Modal {
@@ -246,7 +266,28 @@ if ($openCallBackModalMobileBtn && $callBackModal) {
   })
 }
 
+if ($map) {
+  yandexMap();
+}
 
+function yandexMap() {
+  let map;
+  let marker;
+  const dataCoord = $map.dataset.coordinates;
+  const coordinates = dataCoord.split(',');
+  function initMap() {
+    map = new ymaps.Map("map", {
+      center: coordinates,
+      zoom: 16
+    });
+    marker = new ymaps.Placemark(coordinates, {
+      hintContent: 'Расположение',
+      balloonContent: 'Это наша организация'
+    });
+    map.geoObjects.add(marker);
+  }
+  ymaps.ready(initMap);
+}
 
 function docListener(e) {
   const target = e.target;
@@ -254,3 +295,4 @@ function docListener(e) {
     fastOrderModal.openFastOrder(target);
   }
 }
+

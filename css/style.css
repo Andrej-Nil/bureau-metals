@@ -4415,7 +4415,23 @@ body {
 }
 
 .map {
+  position: relative;
+  overflow: hidden;
   margin-bottom: 100px;
+  height: 320px;
+}
+
+@media (min-width: 1130px) {
+  .map {
+    height: 580px;
+  }
+}
+
+.map__img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .footer {
