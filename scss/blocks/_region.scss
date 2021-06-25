@@ -1,0 +1,69 @@
+.region {
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 15px;
+  margin-right: 2%;
+  @media (min-width: 500px) {
+    width: 47%;
+  }
+  @media (min-width: 750px) {
+    width: 32%;
+  }
+
+  @media (min-width: 900px) {
+    width: 22%;
+  }
+}
+
+.region__header {
+  position: relative;
+  cursor: pointer;
+  width: 100%;
+}
+
+.region__arrow {
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translate(0, -50%);
+  display: block;
+  width: 5px;
+  height: 9px;
+  &::before {
+    position: absolute;
+    top: 0;
+    @include font-icon-style("\e901", 10px);
+    color: $base;
+  }
+}
+
+.region__arrow--is-donw {
+  &::before {
+    transform: rotate(90deg);
+  }
+}
+
+.redion__title {
+  font-size: 14px;
+  line-height: 150%;
+}
+
+.region__list-body {
+  height: 0;
+  overflow: hidden;
+  transition: 0.2s ease-in-out;
+}
+
+.region__item {
+  padding: 15px 0 5px 15px;
+}
+
+.region__link {
+  font-family: $roboto;
+  color: $d-grey;
+  font-size: 14px;
+  line-height: 150%;
+}
+.hide {
+  display: none;
+}

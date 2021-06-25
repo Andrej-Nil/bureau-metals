@@ -18,10 +18,59 @@ const $consultationModal = doc.querySelector('#consultationModal');
 const $map = doc.querySelector('#map');
 
 class Server {
-
   constructor() {
     this._token = this.getToken();
+    this.POST = 'GET';
+    this.GET = 'GET';
   }
+
+  getCity = async () => {
+    const api = '../json/city.json';
+    const data = {
+      _token: this._token
+    }
+    const formData = this.createFormData(data);
+    return await this.getResponse(this.POST, formData, api);
+  }
+
+  getResponse = async (method, data, api) => {
+    return await new Promise(function (resolve, reject) {
+      const xhr = new XMLHttpRequest();
+      let response = null
+      xhr.open(method, api, true);
+      xhr.send(data);
+      xhr.onload = function () {
+        if (xhr.status != 200) {
+          console.log('Ошибка: ' + xhr.status);
+          return;
+        } else {
+          response = JSON.parse(xhr.response);
+          resolve(response);
+          if (response) {
+            console.log("Запрос отправлен");
+          } else {
+            console.log("Неудачная отправка");
+          }
+        }
+      };
+      xhr.onerror = function () {
+        reject(new Error("Network Error"))
+      };
+    })
+  }
+
+  createFormData = (data) => {
+    const formData = new FormData()
+    for (let key in data) {
+      formData.append(`${key}`, data[key])
+    }
+
+    //for (let [name, value] of formData) {
+    //  console.log(`${name} = ${value}`);
+    //}
+    return formData;
+  }
+
 
   getToken = () => {
     const meta = document.querySelector('meta[name="csrf-token"]');
@@ -29,11 +78,74 @@ class Server {
   }
 }
 
+class Render {
+  constructor($parent) {
+    this.$parent = $parent;
+    this.spinnerText = '';
+  }
+
+  //Методы отресовки элементов
+  renderSpiner = (spinnerText = '') => {
+    this.spinnerText = spinnerText;
+    this._render(this.$parent, this.getSpinnerHtml, false);
+  }
+
+  //Методы возвращающие разметку
+  getSpinnerHtml = () => {
+    const spinnerText = `<p class="spinner__text">${this.spinnerText}</p>`
+    return (/*html*/`
+      <div class="spinner" data-spinner>
+        <div class="spinner__body loadingio-spinner-double-ring-z93jzk1i9p8">
+          <div class="ldio-dkpata5megj">
+            <div></div>
+            <div></div>
+            <div>
+              <div></div>
+            </div>
+            <div>
+              <div></div>
+            </div>
+          </div>
+        </div>
+       ${this.spinnerText ? spinnerText : ''}
+      </div>
+    `)
+
+  }
+
+  //Общая функция отрисовки
+  _render = ($parent, getHtmlMarkup, array = false) => {
+    let markupAsStr = '';
+    if (array) {
+      array.forEach((item) => {
+        markupAsStr = markupAsStr + getHtmlMarkup(item);
+      })
+    }
+    if (!array) {
+      markupAsStr = getHtmlMarkup();
+    }
+
+    $parent.insertAdjacentHTML('beforeEnd', markupAsStr);
+  }
+
+  clearParent = () => {
+    this.$parent.innerHTML = '';
+  }
+
+  deleteFromParent = (dataName) => {
+    const el = this.$parent.querySelector(dataName);
+    el.remove()
+  }
+
+}
+
 class Modal {
   constructor(modalId) {
     this.$modal = doc.querySelector(modalId);
     this.$body = doc.querySelector('body');
-    this.closeModal()
+    this.server = new Server();
+    this.closeModal();
+    this.loading = true;
   }
   open = () => {
     this.$modal.classList.remove('modal--is-hide');
@@ -62,6 +174,16 @@ class Modal {
       }
     })
   }
+
+  getElement = (selector, all = false) => {
+    if (!this.$modal) {
+      return false;
+    }
+    if (all) {
+      return this.$modal.querySelectorAll(selector);
+    }
+    return this.$modal.querySelector(selector);
+  }
 }
 
 class SearchModal extends Modal {
@@ -74,9 +196,9 @@ class SearchModal extends Modal {
     if (!this.$modal) {
       return false;
     }
-    this.$searchArea = this.$modal.querySelector('#searchArea');
-    this.$areaListBody = this.$searchArea.querySelector('#areaListBody');
-    this.$areaList = this.$searchArea.querySelector('#areaList');
+    this.$searchArea = this.getElement('#searchArea');
+    this.$areaListBody = this.getElement('#areaListBody');
+    this.$areaList = this.getElement('#areaList');
     this.searchAreaListener();
     this.searchModalListener();
   }
@@ -131,12 +253,25 @@ class CityModal extends Modal {
   constructor(modalId) {
     super(modalId);
     this.$searchCityInput = this.getElement('#searchCityInput');
-    this.$listItem = this.getElemants('[data-list-item]');
-    this.$cities = this.getElemants('[data-city]');
+    this.$cityList = this.getElement('#cityList');
+    this.render = new Render(this.$cityList);
+    this.listCity = null;
+    this.$listItem = null;
+    this.$cities = null;
     this.inputValue = '';
-    this.searchCityInputListener();
-
   }
+
+  openCityModal = async () => {
+    this.open();
+    this.render.renderSpiner('Идет загрузка...');
+    await this.getListCity();
+  }
+
+  getListCity = async () => {
+    this.listCity = await this.server.getCity();
+  }
+
+
 
   searchCity = () => {
     this.changeInputValue();
@@ -177,22 +312,6 @@ class CityModal extends Modal {
     this.$searchCityInput.addEventListener('input', this.searchCity);
   }
 
-  getElement = (selector) => {
-    if (!this.$modal) {
-      return false;
-    }
-    return this.$modal.querySelector(selector);
-  }
-
-  getElemants = (selector) => {
-    if (!this.$modal) {
-      return false;
-    }
-    return this.$modal.querySelectorAll(selector);
-  }
-
-
-
 }
 
 class FastOrderModal extends Modal {
@@ -219,12 +338,14 @@ class ConsultationModal extends Modal {
     super(modalId);
   }
 }
-
+const server = new Server();
 const searchModal = new SearchModal('#searchModal');
 const cityModal = new CityModal('#cityModal');
+
+
 const callBackModal = new CityModal('#callBackModal');
 const fastOrderModal = new FastOrderModal('#fastOrdenModal');
-const consultationModal = new ConsultationModal('#consultationModal')
+const consultationModal = new ConsultationModal('#consultationModal');
 
 doc.addEventListener('click', docListener);
 
@@ -243,13 +364,13 @@ if ($openSearchMobileBtn && $searchModal) {
 //окно города
 if ($openCityModalBtn && $cityModal) {
   $openCityModalBtn.addEventListener('click', () => {
-    cityModal.open();
+    cityModal.openCityModal();
   });
 }
 
 if ($openCityModalMobileBtn && $cityModal) {
   $openCityModalMobileBtn.addEventListener('click', () => {
-    cityModal.open();
+    cityModal.openCityModal();
   });
 }
 
@@ -294,5 +415,40 @@ function docListener(e) {
   if (target.closest('[data-fast-order]')) {
     fastOrderModal.openFastOrder(target);
   }
+
+  if (target.closest('[data-dropdown]')) {
+    toggleDropdown(target)
+  }
 }
+
+function toggleDropdown(target) {
+  const $dropdownBody = getDropdownBody(target);
+  const isClose = $dropdownBody.dataset.dropdownClose;
+
+  if (isClose == 'close') {
+    openDropdown($dropdownBody)
+  }
+
+  if (isClose == 'open') {
+    closeDropdown($dropdownBody)
+  }
+}
+
+function getDropdownBody(target) {
+  const $dropdown = target.closest('[data-dropdown]');
+  return $dropdown.querySelector('[data-dropdown-close]');
+}
+
+function openDropdown($dropdownBody) {
+  const $dropdownList = $dropdownBody.querySelector('[data-dropdown-list]');
+  const dropdownListHeight = $dropdownList.offsetHeight;
+  $dropdownBody.style.height = dropdownListHeight + 'px';
+  $dropdownBody.dataset.dropdownClose = 'open';
+}
+
+function closeDropdown($dropdownBody) {
+  $dropdownBody.style.height = 0 + 'px';
+  $dropdownBody.dataset.dropdownClose = 'close';
+}
+
 
