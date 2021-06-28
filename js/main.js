@@ -82,12 +82,56 @@ class Render {
   constructor($parent) {
     this.$parent = $parent;
     this.spinnerText = '';
+    this.errorMsg = '';
   }
 
   //Методы отресовки элементов
   renderSpiner = (spinnerText = '') => {
     this.spinnerText = spinnerText;
     this._render(this.$parent, this.getSpinnerHtml, false);
+  }
+
+  renderErrorMsg = (msg) => {
+    const errorHtml = `
+    <div class="rez-error">
+      <p class="rez-error__msg">${msg}</p>
+    </div>
+    `;
+    this.$parent.innerHTML = errorHtml;
+  }
+
+  renderListCity = (regionList, columns = 1) => {
+    this.renderColumnsCityList(columns);
+    this.renderRegionList(regionList, columns);
+  }
+
+  renderColumnsCityList = (columns) => {
+    for (let i = 1; i <= columns; i++) {
+      this._render(this.$parent, this.getColumnsCityListHtml, false);
+    }
+  }
+
+  renderRegionList = (regionList, numCol) => {
+    const $columns = this.$parent.querySelectorAll('.city-list__col');
+    const regionListLength = regionList.length;
+    const numberSections = parseInt(regionListLength / numCol);
+    const remainder = regionListLength % numCol;
+    let start = 0;
+
+    let end = start + numberSections;
+    for (let i = 0; i <= numCol - 1; i++) {
+
+      if (i + 1 <= remainder) {
+        end = end + 1;
+
+      }
+      const arr = regionList.slice(start, end);
+      start = end;
+      end = start + numberSections;
+      this._render($columns[i], this.getRegionHtml, arr);
+    }
+
+
   }
 
   //Методы возвращающие разметку
@@ -113,6 +157,89 @@ class Render {
 
   }
 
+  getRegionHtml = (region) => {
+    let listCityHtml = this.getCityListHtml(region.parent);
+    return (/*html*/`
+      <li class="modal-search__region region" data-region data-dropdown>
+        <div class="region__header" data-dropdown-btn>
+          <i class="region__arrow" data-dropdown-arrow></i>
+          <span class="redion__title" data-region-title>${region.title}</span>
+        </div>
+        <div class="region__list-body" data-dropdown-close="close">
+          <ul class="region__list" data-dropdown-list>
+            ${listCityHtml}
+          </ul>
+        </div>
+      </li>
+    `)
+  }
+
+  getCityListHtml = (cityList) => {
+    let cityListHtml = '';
+    cityList.map((city) => {
+      cityListHtml = cityListHtml + this.getCityHtml(city);
+    })
+    return cityListHtml;
+  }
+
+  getCityHtml = (city) => {
+    return (/*html*/`
+    <li class="region__item" data-region-item>
+      <a href="${city.slug}" class="region__link link" data-city>
+        ${city.title}
+      </a>
+    </li>
+    `)
+  }
+  /*
+   <!--<li class="modal-search__region region" data-region data-dropdown>
+              <div class="region__header" data-dropdown-btn>
+                <i class="region__arrow" data-dropdown-arrow></i>
+                <span class="redion__title" data-region-title>Московская область</span>
+              </div>
+              <div class="region__list-body" data-dropdown-close="close">
+                <ul class="region__list" data-dropdown-list>
+                  <li class="region__item" data-region-item>
+                    <a href="#!" class="region__link link" data-city>
+                      Москва
+                    </a>
+                  </li>
+
+                  <li class="region__item" data-region-item>
+                    <a href="#!" class="region__link link" data-city>
+                      Орск
+                    </a>
+                  </li>
+
+                  <li class="region__item" data-region-item>
+                    <a href="#!" class="region__link link" data-city>
+                      Питер
+                    </a>
+                  </li>
+
+                  <li class="region__item" data-region-item>
+                    <a href="#!" class="region__link link" data-city>
+                      Уфа
+                    </a>
+                  </li>
+
+                  <li class="region__item" data-region-item>
+                    <a href="#!" class="region__link link" data-city>
+                      Москва
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>-->
+  */
+  getColumnsCityListHtml = () => {
+    return (/*html*/`
+    <ul class="city-list__col"></ul>
+  `)
+  }
+
+
+
   //Общая функция отрисовки
   _render = ($parent, getHtmlMarkup, array = false) => {
     let markupAsStr = '';
@@ -132,9 +259,9 @@ class Render {
     this.$parent.innerHTML = '';
   }
 
-  deleteFromParent = (dataName) => {
-    const el = this.$parent.querySelector(dataName);
-    el.remove()
+  delete = (selector) => {
+    const $el = this.$parent.querySelector(selector);
+    $el.remove()
   }
 
 }
@@ -255,23 +382,42 @@ class CityModal extends Modal {
     this.$searchCityInput = this.getElement('#searchCityInput');
     this.$cityList = this.getElement('#cityList');
     this.render = new Render(this.$cityList);
-    this.listCity = null;
+    this.regionList = null;
     this.$listItem = null;
     this.$cities = null;
     this.inputValue = '';
+    this.isHasListCity = false;
   }
 
   openCityModal = async () => {
     this.open();
-    this.render.renderSpiner('Идет загрузка...');
-    await this.getListCity();
+    if (this.isHasListCity) {
+      return;
+    }
+    if (!this.isHasListCity) {
+      this.render.clearParent();
+      this.render.renderSpiner('Идет загрузка...');
+      await this.createListCity();
+    }
+
   }
 
-  getListCity = async () => {
-    this.listCity = await this.server.getCity();
+  createListCity = async () => {
+    this.regionList = await this.server.getCity();
+
+    if (!this.regionList.rez) {
+      this.render.renderErrorMsg(this.regionList.error.desc);
+      console.log(`Ошибка: ${regionList.error.id}`);
+    }
+
+    if (this.regionList.rez) {
+      this.render.delete('[data-spinner]');
+      this.render.renderListCity(this.regionList.content);
+      this.isHasRegionList = this.regionList.rez;
+    }
+
+
   }
-
-
 
   searchCity = () => {
     this.changeInputValue();
@@ -338,11 +484,10 @@ class ConsultationModal extends Modal {
     super(modalId);
   }
 }
+
 const server = new Server();
 const searchModal = new SearchModal('#searchModal');
 const cityModal = new CityModal('#cityModal');
-
-
 const callBackModal = new CityModal('#callBackModal');
 const fastOrderModal = new FastOrderModal('#fastOrdenModal');
 const consultationModal = new ConsultationModal('#consultationModal');
@@ -391,25 +536,6 @@ if ($map) {
   yandexMap();
 }
 
-function yandexMap() {
-  let map;
-  let marker;
-  const dataCoord = $map.dataset.coordinates;
-  const coordinates = dataCoord.split(',');
-  function initMap() {
-    map = new ymaps.Map("map", {
-      center: coordinates,
-      zoom: 16
-    });
-    marker = new ymaps.Placemark(coordinates, {
-      hintContent: 'Расположение',
-      balloonContent: 'Это наша организация'
-    });
-    map.geoObjects.add(marker);
-  }
-  ymaps.ready(initMap);
-}
-
 function docListener(e) {
   const target = e.target;
   if (target.closest('[data-fast-order]')) {
@@ -451,4 +577,21 @@ function closeDropdown($dropdownBody) {
   $dropdownBody.dataset.dropdownClose = 'close';
 }
 
-
+function yandexMap() {
+  let map;
+  let marker;
+  const dataCoord = $map.dataset.coordinates;
+  const coordinates = dataCoord.split(',');
+  function initMap() {
+    map = new ymaps.Map("map", {
+      center: coordinates,
+      zoom: 16
+    });
+    marker = new ymaps.Placemark(coordinates, {
+      hintContent: 'Расположение',
+      balloonContent: 'Это наша организация'
+    });
+    map.geoObjects.add(marker);
+  }
+  ymaps.ready(initMap);
+}

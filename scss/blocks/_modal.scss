@@ -174,7 +174,7 @@
   }
 }
 
-.modal-search__branches {
+.modal-search__city-list {
   height: 330px;
   overflow: auto;
   scrollbar-color: $base $l-grey;
@@ -184,12 +184,12 @@
   }
 }
 
-.modal-search__branches::-webkit-scrollbar {
+.modal-search__city-list::-webkit-scrollbar {
   width: 8px;
   background-color: $l-grey;
 }
 
-.modal-search__branches::-webkit-scrollbar-thumb {
+.modal-search__city-list::-webkit-scrollbar-thumb {
   background-color: $base;
 }
 

@@ -472,6 +472,15 @@ body {
   box-sizing: content-box;
 }
 
+.rez-error {
+  width: 100%;
+  text-align: center;
+}
+
+.rez-error__msg {
+  color: #bc1622;
+}
+
 .input {
   position: relative;
   width: 100%;
@@ -3539,29 +3548,41 @@ body {
   height: 190px;
 }
 
-.region {
-  display: inline-block;
-  width: 100%;
-  margin-bottom: 15px;
-  margin-right: 2%;
+.city-list {
+  display: flex;
+  justify-content: space-between;
 }
 
 @media (min-width: 500px) {
-  .region {
+  .city-list__col {
     width: 47%;
   }
 }
 
 @media (min-width: 750px) {
-  .region {
+  .city-list__col {
     width: 32%;
   }
 }
 
 @media (min-width: 900px) {
-  .region {
+  .city-list__col {
     width: 22%;
   }
+}
+
+.city-list::-webkit-scrollbar {
+  width: 8px;
+  background-color: #e0e0e0;
+}
+
+.city-list::-webkit-scrollbar-thumb {
+  background-color: #bc1622;
+}
+
+.region {
+  width: 100%;
+  margin-bottom: 15px;
 }
 
 .region__header {
@@ -5110,7 +5131,7 @@ body {
   color: #bc1622;
 }
 
-.modal-search__branches {
+.modal-search__city-list {
   height: 330px;
   overflow: auto;
   scrollbar-color: #bc1622 #e0e0e0;
@@ -5118,17 +5139,17 @@ body {
 }
 
 @media (min-width: 1130px) {
-  .modal-search__branches {
+  .modal-search__city-list {
     height: 440px;
   }
 }
 
-.modal-search__branches::-webkit-scrollbar {
+.modal-search__city-list::-webkit-scrollbar {
   width: 8px;
   background-color: #e0e0e0;
 }
 
-.modal-search__branches::-webkit-scrollbar-thumb {
+.modal-search__city-list::-webkit-scrollbar-thumb {
   background-color: #bc1622;
 }
 

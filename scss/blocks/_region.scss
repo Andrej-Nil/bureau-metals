@@ -1,8 +1,9 @@
-.region {
-  display: inline-block;
-  width: 100%;
-  margin-bottom: 15px;
-  margin-right: 2%;
+.city-list {
+  display: flex;
+  justify-content: space-between;
+}
+
+.city-list__col {
   @media (min-width: 500px) {
     width: 47%;
   }
@@ -13,6 +14,20 @@
   @media (min-width: 900px) {
     width: 22%;
   }
+}
+
+.city-list::-webkit-scrollbar {
+  width: 8px;
+  background-color: $l-grey;
+}
+
+.city-list::-webkit-scrollbar-thumb {
+  background-color: $base;
+}
+
+.region {
+  width: 100%;
+  margin-bottom: 15px;
 }
 
 .region__header {
