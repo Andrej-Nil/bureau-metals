@@ -4,6 +4,7 @@
 }
 
 .city-list__col {
+  width: 100%;
   @media (min-width: 500px) {
     width: 47%;
   }
@@ -44,11 +45,13 @@
   display: block;
   width: 5px;
   height: 9px;
+
   &::before {
     position: absolute;
     top: 0;
     @include font-icon-style("\e901", 10px);
     color: $base;
+    transition: 0.1s ease-in-out;
   }
 }
 
@@ -79,6 +82,6 @@
   font-size: 14px;
   line-height: 150%;
 }
-.hide {
+.city-hide {
   display: none;
 }

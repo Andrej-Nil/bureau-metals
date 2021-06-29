@@ -3553,6 +3553,10 @@ body {
   justify-content: space-between;
 }
 
+.city-list__col {
+  width: 100%;
+}
+
 @media (min-width: 500px) {
   .city-list__col {
     width: 47%;
@@ -3612,6 +3616,7 @@ body {
   content: "";
   font-size: 10px;
   color: #bc1622;
+  transition: 0.1s ease-in-out;
 }
 
 .region__arrow--is-donw::before {
@@ -3640,7 +3645,7 @@ body {
   line-height: 150%;
 }
 
-.hide {
+.city-hide {
   display: none;
 }
 

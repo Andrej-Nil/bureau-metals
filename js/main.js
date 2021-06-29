@@ -100,18 +100,22 @@ class Render {
     this.$parent.innerHTML = errorHtml;
   }
 
-  renderListCity = (regionList, columns = 1) => {
-    this.renderColumnsCityList(columns);
-    this.renderRegionList(regionList, columns);
+  renderListCity = (regionList, numCol = 1) => {
+    this.clearParent();
+    this.renderColumnsCityList(numCol);
+    this.renderRegionList(regionList, numCol);
   }
 
-  renderColumnsCityList = (columns) => {
-    for (let i = 1; i <= columns; i++) {
+  renderColumnsCityList = (numCol) => {
+    for (let i = 1; i <= numCol; i++) {
       this._render(this.$parent, this.getColumnsCityListHtml, false);
     }
   }
 
   renderRegionList = (regionList, numCol) => {
+    if (!this.$parent) {
+      return;
+    }
     const $columns = this.$parent.querySelectorAll('.city-list__col');
     const regionListLength = regionList.length;
     const numberSections = parseInt(regionListLength / numCol);
@@ -130,8 +134,6 @@ class Render {
       end = start + numberSections;
       this._render($columns[i], this.getRegionHtml, arr);
     }
-
-
   }
 
   //Методы возвращающие разметку
@@ -191,57 +193,19 @@ class Render {
     </li>
     `)
   }
-  /*
-   <!--<li class="modal-search__region region" data-region data-dropdown>
-              <div class="region__header" data-dropdown-btn>
-                <i class="region__arrow" data-dropdown-arrow></i>
-                <span class="redion__title" data-region-title>Московская область</span>
-              </div>
-              <div class="region__list-body" data-dropdown-close="close">
-                <ul class="region__list" data-dropdown-list>
-                  <li class="region__item" data-region-item>
-                    <a href="#!" class="region__link link" data-city>
-                      Москва
-                    </a>
-                  </li>
 
-                  <li class="region__item" data-region-item>
-                    <a href="#!" class="region__link link" data-city>
-                      Орск
-                    </a>
-                  </li>
 
-                  <li class="region__item" data-region-item>
-                    <a href="#!" class="region__link link" data-city>
-                      Питер
-                    </a>
-                  </li>
-
-                  <li class="region__item" data-region-item>
-                    <a href="#!" class="region__link link" data-city>
-                      Уфа
-                    </a>
-                  </li>
-
-                  <li class="region__item" data-region-item>
-                    <a href="#!" class="region__link link" data-city>
-                      Москва
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </li>-->
-  */
   getColumnsCityListHtml = () => {
     return (/*html*/`
     <ul class="city-list__col"></ul>
   `)
   }
 
-
-
   //Общая функция отрисовки
   _render = ($parent, getHtmlMarkup, array = false) => {
+    if (!$parent) {
+      return;
+    }
     let markupAsStr = '';
     if (array) {
       array.forEach((item) => {
@@ -255,8 +219,11 @@ class Render {
     $parent.insertAdjacentHTML('beforeEnd', markupAsStr);
   }
 
-  clearParent = () => {
-    this.$parent.innerHTML = '';
+  clearParent = ($parent = this.$parent) => {
+    if (!$parent) {
+      return;
+    }
+    $parent.innerHTML = '';
   }
 
   delete = (selector) => {
@@ -384,18 +351,48 @@ class CityModal extends Modal {
     this.render = new Render(this.$cityList);
     this.regionList = null;
     this.$listItem = null;
-    this.$cities = null;
     this.inputValue = '';
-    this.isHasListCity = false;
+    this.isHasRegionList = false;
+    this.numCol = 1;
+    this.changingSizeWindow();
+    this.searchCityInputListener();
+  }
+
+  changingSizeWindow = () => {
+    window.addEventListener('resize', () => {
+      this.setNubColumns();
+      this.render.renderListCity(this.regionList, this.numCol);
+    });
+  }
+
+  setNubColumns = () => {
+    let lientWidth = doc.documentElement.clientWidth;
+
+    if (lientWidth < 500) {
+      this.numCol = 1;
+      return;
+    }
+    if (lientWidth < 750) {
+      this.numCol = 2;
+      return;
+    }
+    if (lientWidth < 900) {
+      this.numCol = 3;
+      return;
+    }
+    if (lientWidth > 900) {
+      this.numCol = 4;
+      return;
+    }
   }
 
   openCityModal = async () => {
     this.open();
-    if (this.isHasListCity) {
+    if (this.isHasRegionList) {
       return;
     }
-    if (!this.isHasListCity) {
-      this.render.clearParent();
+    if (!this.isHasRegionList) {
+      this.render.clearParent(this.$cityList);
       this.render.renderSpiner('Идет загрузка...');
       await this.createListCity();
     }
@@ -403,52 +400,99 @@ class CityModal extends Modal {
   }
 
   createListCity = async () => {
-    this.regionList = await this.server.getCity();
-
-    if (!this.regionList.rez) {
-      this.render.renderErrorMsg(this.regionList.error.desc);
-      console.log(`Ошибка: ${regionList.error.id}`);
+    const response = await this.server.getCity();
+    if (!response.rez) {
+      this.render.renderErrorMsg(response.error.desc);
+      console.log(`Ошибка: ${response.error.id}`);
     }
-
-    if (this.regionList.rez) {
+    if (response.rez) {
+      this.regionList = response.content;
       this.render.delete('[data-spinner]');
-      this.render.renderListCity(this.regionList.content);
-      this.isHasRegionList = this.regionList.rez;
+      this.setNubColumns();
+      this.render.renderListCity(this.regionList, this.numCol);
+      this.isHasRegionList = response.rez;
     }
-
-
   }
 
   searchCity = () => {
     this.changeInputValue();
-    this.showFindedCity()
+    this.showFindedRegeon();
+    this.showFindedCity();
+    this.openFindedRegeon();
   }
 
   changeInputValue = () => {
     this.inputValue = this.$searchCityInput.value.trim().toLowerCase();
   }
 
-  showFindedCity = () => {
-    this.$cities.forEach(el => {
-      const cityName = el.innerHTML.toLowerCase().trim();
-      const res = cityName.includes(this.inputValue);
-      const $li = el.closest('[data-list-item]');
-      this.hideCity($li);
-      if (res === '') {
-        this.showCity($li);
-      }
+  showFindedRegeon = () => {
+    if (this.inputValue == '') {
+      this.setNubColumns();
+      this.render.renderListCity(this.regionList, this.numCol);
+      return;
+    }
+
+    const newRegionList = this.getNewArrRegeon();
+    this.setNubColumns();
+    this.render.renderListCity(newRegionList, this.numCol);
+  }
+
+  getNewArrRegeon = () => {
+    const newRegionList = [];
+    this.regionList.forEach(regeon => {
+      const res = this.checkRegeon(regeon);
       if (res) {
-        this.showCity($li);
+        newRegionList.push(regeon);
       }
+    })
+    return newRegionList;
+  }
+
+  checkRegeon = (regeon) => {
+    const regionName = regeon.title;
+    const listCity = regeon.parent;
+
+    let rez = false;
+    rez = regionName.toLowerCase().includes(this.inputValue);
+    listCity.forEach((city) => {
+      rez = rez || city.title.toLowerCase().includes(this.inputValue);
+    })
+
+    return rez;
+  };
+
+  showFindedCity() {
+    const $allRegionItems = this.getElement('[data-region-item]', true);
+    $allRegionItems.forEach(($item) => {
+      const $city = $item.querySelector('[data-city]');
+      const cityName = $city.innerHTML.toLowerCase().trim();
+      const rez = cityName.toLowerCase().includes(this.inputValue);
+      this.hideCity($item);
+      if (rez) {
+        this.showCity($item);
+      }
+      if (!rez) {
+        this.hideCity($item);
+      }
+    });
+  }
+
+  openFindedRegeon() {
+    console.log('test')
+    const $allCityList = this.getElement('[data-dropdown]', true);
+    $allCityList.forEach(($cityList) => {
+      const $dropdownBody = $cityList.querySelector('[data-dropdown-close]');
+      const $arrow = $cityList.querySelector('[data-dropdown-arrow]');
+      openDropdown($dropdownBody, $arrow);
     })
   }
 
-  showCity($li) {
-    $li.classList.remove('city-hide');
+  showCity($item) {
+    $item.classList.remove('city-hide');
   }
 
-  hideCity($li) {
-    $li.classList.add('city-hide');
+  hideCity($item) {
+    $item.classList.add('city-hide');
   }
 
   searchCityInputListener = () => {
@@ -470,7 +514,6 @@ class FastOrderModal extends Modal {
 
   openFastOrder($el) {
     this.$el = $el;
-
     this.open();
   }
 
@@ -548,32 +591,38 @@ function docListener(e) {
 }
 
 function toggleDropdown(target) {
-  const $dropdownBody = getDropdownBody(target);
+  if (target.closest('[data-dropdown-list]')) {
+    return;
+  }
+  const $dropdownBody = getDropdownEl(target, '[data-dropdown-close]');
+  const $arrow = getDropdownEl(target, '[data-dropdown-arrow]');
   const isClose = $dropdownBody.dataset.dropdownClose;
 
   if (isClose == 'close') {
-    openDropdown($dropdownBody)
+    openDropdown($dropdownBody, $arrow)
   }
 
   if (isClose == 'open') {
-    closeDropdown($dropdownBody)
+    closeDropdown($dropdownBody, $arrow)
   }
 }
 
-function getDropdownBody(target) {
+function getDropdownEl(target, selector) {
   const $dropdown = target.closest('[data-dropdown]');
-  return $dropdown.querySelector('[data-dropdown-close]');
+  return $dropdown.querySelector(selector);
 }
 
-function openDropdown($dropdownBody) {
+function openDropdown($dropdownBody, $arrow) {
   const $dropdownList = $dropdownBody.querySelector('[data-dropdown-list]');
   const dropdownListHeight = $dropdownList.offsetHeight;
   $dropdownBody.style.height = dropdownListHeight + 'px';
+  $arrow.classList.add('region__arrow--is-donw');
   $dropdownBody.dataset.dropdownClose = 'open';
 }
 
-function closeDropdown($dropdownBody) {
+function closeDropdown($dropdownBody, $arrow) {
   $dropdownBody.style.height = 0 + 'px';
+  $arrow.classList.remove('region__arrow--is-donw');
   $dropdownBody.dataset.dropdownClose = 'close';
 }
 
@@ -595,3 +644,14 @@ function yandexMap() {
   }
   ymaps.ready(initMap);
 }
+
+//function debounce(f, t) {
+//  return function (args) {
+//    let previousCall = this.lastCall;
+//    this.lastCall = Date.now();
+//    if (previousCall && ((this.lastCall - previousCall) <= t)) {
+//      clearTimeout(this.lastCallTimer);
+//    }
+//    this.lastCallTimer = setTimeout(() => f(args), t);
+//  }
+//}
