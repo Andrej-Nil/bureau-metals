@@ -12,8 +12,9 @@ const $openCityModalMobileBtn = doc.querySelector('#openCityModalMobileBtn');
 const $callBackModal = doc.querySelector('#callBackModal')
 const $openCallBackModalBtn = doc.querySelector('#openCallBackModalBtn')
 const $openCallBackModalMobileBtn = doc.querySelector('#openCallBackModalMobileBtn');
-
 const $consultationModal = doc.querySelector('#consultationModal');
+
+const $callBackForm = doc.querySelector('#callBackForm');
 
 const $map = doc.querySelector('#map');
 
@@ -31,6 +32,32 @@ class Server {
     }
     const formData = this.createFormData(data);
     return await this.getResponse(this.POST, formData, api);
+  }
+
+
+
+  postForm = async ($form) => {
+    const api = $form.action;
+    const data = new FormData(this.$form);
+    data.append('_token', this._token);
+    return await this.getResponse(this.POST, data, api);
+  }
+
+  createFormData = (data) => {
+    const formData = new FormData()
+    for (let key in data) {
+      formData.append(`${key}`, data[key])
+    }
+
+    //for (let [name, value] of formData) {
+    //  console.log(`${name} = ${value}`);
+    //}
+    return formData;
+  }
+
+  getToken = () => {
+    const meta = document.querySelector('meta[name="csrf-token"]');
+    return meta.getAttribute('content');
   }
 
   getResponse = async (method, data, api) => {
@@ -57,24 +84,6 @@ class Server {
         reject(new Error("Network Error"))
       };
     })
-  }
-
-  createFormData = (data) => {
-    const formData = new FormData()
-    for (let key in data) {
-      formData.append(`${key}`, data[key])
-    }
-
-    //for (let [name, value] of formData) {
-    //  console.log(`${name} = ${value}`);
-    //}
-    return formData;
-  }
-
-
-  getToken = () => {
-    const meta = document.querySelector('meta[name="csrf-token"]');
-    return meta.getAttribute('content');
   }
 }
 
@@ -116,7 +125,11 @@ class Render {
     if (!this.$parent) {
       return;
     }
+    if (!regionList) {
+      return
+    }
     const $columns = this.$parent.querySelectorAll('.city-list__col');
+
     const regionListLength = regionList.length;
     const numberSections = parseInt(regionListLength / numCol);
     const remainder = regionListLength % numCol;
@@ -236,6 +249,7 @@ class Render {
 class Modal {
   constructor(modalId) {
     this.$modal = doc.querySelector(modalId);
+    this.$resultBlock = this.$modal.querySelector('[data-result]');
     this.$body = doc.querySelector('body');
     this.server = new Server();
     this.closeModal();
@@ -252,7 +266,9 @@ class Modal {
     setTimeout(() => {
       this.$modal.classList.add('modal--is-hide');
       this.$body.classList.remove('no-scroll');
+      this.resultBlockHide();
     }, 500)
+
   }
 
   closeModal() {
@@ -277,6 +293,13 @@ class Modal {
       return this.$modal.querySelectorAll(selector);
     }
     return this.$modal.querySelector(selector);
+  }
+
+  resultBlockHide = () => {
+    if (!this.$resultBlock) {
+      return;
+    }
+    this.$resultBlock.classList.remove('modal__result--is-show');
   }
 }
 
@@ -361,7 +384,6 @@ class CityModal extends Modal {
   changingSizeWindow = () => {
     window.addEventListener('resize', () => {
       this.setNubColumns();
-      this.render.renderListCity(this.regionList, this.numCol);
     });
   }
 
@@ -370,18 +392,26 @@ class CityModal extends Modal {
 
     if (lientWidth < 500) {
       this.numCol = 1;
+
+      this.render.renderListCity(this.regionList, this.numCol);
       return;
     }
     if (lientWidth < 750) {
       this.numCol = 2;
+
+      this.render.renderListCity(this.regionList, this.numCol);
       return;
     }
     if (lientWidth < 900) {
       this.numCol = 3;
+
+      this.render.renderListCity(this.regionList, this.numCol);
       return;
     }
     if (lientWidth > 900) {
       this.numCol = 4;
+
+      this.render.renderListCity(this.regionList, this.numCol);
       return;
     }
   }
@@ -409,7 +439,6 @@ class CityModal extends Modal {
       this.regionList = response.content;
       this.render.delete('[data-spinner]');
       this.setNubColumns();
-      this.render.renderListCity(this.regionList, this.numCol);
       this.isHasRegionList = response.rez;
     }
   }
@@ -528,7 +557,185 @@ class ConsultationModal extends Modal {
   }
 }
 
+
+class Form {
+  constructor(formId) {
+    this.$form = doc.querySelector(formId);
+    this.regTel = /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{5,10}$/;
+    this.regMail = /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/;
+
+    this.formInit();
+  }
+  formInit = () => {
+    if (!this.$form) {
+      return false;
+    }
+    this.$inputs = this.$form.querySelectorAll('[data-input]');
+    this.$formMsg = this.$form.querySelector('[data-form-msg]');
+    this.$resultBlock = this.$form.closest('[data-modal]').querySelector('[data-result]');
+    this.server = new Server();
+  }
+
+  formCheck = (...$inputs) => {
+    let res = true;
+    $inputs.forEach((item) => {
+      res = this.checkInput(item) && res;
+    })
+    if (!res) {
+      console.log('not sent');
+      return res;
+    }
+    if (res) {
+      console.log('sent');
+      return res;
+    }
+  }
+
+  checkInput = ($input) => {
+    const name = $input.getAttribute('name');
+    let result;
+    switch (name) {
+      case 'email':
+        result = this.checkValue($input.value, this.regMail);
+        //statusVisualInput(input, result);
+        break;
+      case 'phone':
+        result = this.checkValue($input.value, this.regTel);
+        this.statusVisualInput($input, result);
+        break;
+      case 'message':
+        //result = isEmptyInput(input.value);
+        //statusVisualInput(input, result);
+        break;
+      case 'consent':
+        result = this.checkCheckbox($input);
+        this.statusVisualCheckbox($input, result);
+        break;
+      case 'password':
+        //result = isEmptyInput(input.value);
+        //statusVisualInput(input, result);
+        break;
+    }
+    return result;
+  }
+
+  checkValue(value, reg) {
+    return reg.test(value)
+  }
+
+  checkCheckbox(checkbox) {
+    return checkbox.checked
+  }
+
+  statusVisualInput = ($input, result) => {
+    const $inputBlock = $input.closest('[data-input-block]');
+    const $inputMsg = $inputBlock.querySelector('[data-input-msg]');
+    const placeholder = $inputMsg.dataset.placeholder;
+    const value = $input.value.trim();
+    if (result) {
+      $inputMsg.innerHTML = placeholder;
+      $inputMsg.classList.remove('placeholder--is-error');
+      $inputBlock.classList.remove('input--is-error');
+      return true;
+    } else {
+      if (value === '') {
+        $inputMsg.innerHTML = 'Обязательное поле';
+      } else {
+        $inputMsg.innerHTML = 'Ошибка заполнения';
+      }
+
+      $inputMsg.classList.add('placeholder--is-error');
+      $inputBlock.classList.add('input--is-error');
+      return false;
+    }
+  }
+
+  statusVisualCheckbox($checkbox, result = false) {
+    const $checkboxBlock = $checkbox.closest('[checkbox-block]');
+    if (!result) {
+      $checkboxBlock.classList.add('animation-shake');
+      setTimeout(() => {
+        $checkboxBlock.classList.remove('animation-shake');
+
+      }, 800)
+      return;
+    }
+  }
+
+  sendForm = async () => {
+    const response = await this.server.postForm(this.$form);
+    if (!response.rez) {
+      this.showErrorMessage(response.error)
+    }
+
+    if (response.rez) {
+      this.clearForm();
+
+    }
+  }
+
+  showErrorMessage = (errorInfo) => {
+    this.$formMsg.classList.add('form__message--is-show');
+    this.$formMsg.innerHTML = errorInfo.desc;
+    console.log(`Ошибка: ${errorInfo.id}`);
+  }
+
+  clearForm = () => {
+    this.$inputs.forEach(($item) => {
+      $item.value = '';
+    })
+
+    this.$formMsg.classList.remove('form__message--is-show');
+    this.$formMsg.innerHTML = '';
+    this.resultBlockShow();
+  }
+}
+
+class CallBackForm extends Form {
+  constructor(formId) {
+    super(formId);
+    this.initCallbackForm();
+  }
+  initCallbackForm = () => {
+    if (!this.$form) {
+      return false;
+    }
+    this.$checkbox = this.$form.querySelector('[data-checkbox]');
+    this.$submitBtn = this.$form.querySelector('[data-submit]');
+    this.$inputPhone = this.$form.querySelector('[name="phone"]');
+    this.listeners();
+    this.send();
+  }
+
+  send = () => {
+    this.$submitBtn.addEventListener('click', () => {
+      const result = this.formCheck(this.$inputPhone, this.$checkbox);
+      if (result) {
+        this.sendForm();
+      }
+    });
+  }
+
+  resultBlockShow = () => {
+    if (!this.$resultBlock) {
+      return
+    }
+    this.$resultBlock.classList.add('modal__result--is-show');
+  }
+  listeners = () => {
+    this.$inputPhone.addEventListener('blur', () => {
+      this.checkInput(this.$inputPhone);
+    })
+  }
+
+
+}
+
+// формы
+const callBackForm = new CallBackForm('#callBackForm');
+
 const server = new Server();
+// окна
 const searchModal = new SearchModal('#searchModal');
 const cityModal = new CityModal('#cityModal');
 const callBackModal = new CityModal('#callBackModal');
@@ -572,6 +779,14 @@ if ($openCallBackModalBtn && $callBackModal) {
 if ($openCallBackModalMobileBtn && $callBackModal) {
   $openCallBackModalMobileBtn.addEventListener('click', () => {
     callBackModal.open();
+  })
+}
+
+// callBackForm
+if ($callBackForm) {
+  $callBackForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    //callBackForm.send();
   })
 }
 

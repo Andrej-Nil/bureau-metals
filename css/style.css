@@ -294,6 +294,38 @@ body {
   text-decoration: underline;
 }
 
+@keyframes shake {
+  0% {
+    transform: translate(0, 0);
+  }
+  15% {
+    transform: translate(7px, 0);
+  }
+  30% {
+    transform: translate(-7px, 0);
+  }
+  45% {
+    transform: translate(7px, 0);
+  }
+  60% {
+    transform: translate(-7px, 0);
+  }
+  75% {
+    transform: translate(7px, 0);
+  }
+  90% {
+    transform: translate(-7px, 0);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+.animation-shake {
+  animation-duration: 800ms;
+  animation-name: shake;
+}
+
 .logo {
   width: 100%;
   height: auto;
@@ -500,6 +532,10 @@ body {
   }
 }
 
+.input--is-error {
+  border: 1px solid #eb5757;
+}
+
 .input-no-bd {
   position: relative;
   z-index: 1;
@@ -537,6 +573,10 @@ body {
   color: #4f4f4f;
   z-index: 0;
   transition: 0.2s ease-in-out;
+}
+
+.placeholder--is-error {
+  color: #eb5757;
 }
 
 .textarea {
@@ -2814,6 +2854,16 @@ body {
   font-size: 24px;
 }
 
+.form__message {
+  display: none;
+  margin-bottom: 20px;
+  color: #eb5757;
+}
+
+.form__message--is-show {
+  display: block;
+}
+
 .form__inputs {
   display: flex;
   flex-wrap: wrap;
@@ -5041,7 +5091,7 @@ body {
 }
 
 .modal__result {
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   flex-direction: column;
@@ -5051,7 +5101,10 @@ body {
   bottom: 0;
   right: 0;
   background: rgba(29, 29, 27, 0.5);
-  z-index: -1000;
+}
+
+.modal__result--is-show {
+  display: flex;
 }
 
 .modal__msg {

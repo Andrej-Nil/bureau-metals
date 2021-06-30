@@ -87,7 +87,7 @@
 }
 
 .modal__result {
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   flex-direction: column;
@@ -97,9 +97,11 @@
   bottom: 0;
   right: 0;
   background: rgba(29, 29, 27, 0.5);
-  z-index: -1000;
 }
 
+.modal__result--is-show {
+  display: flex;
+}
 .modal__msg {
   font-size: 36px;
   line-height: 47px;

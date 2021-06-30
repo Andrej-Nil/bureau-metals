@@ -7,11 +7,15 @@
   font-weight: normal;
   font-size: 18px;
   line-height: 20px;
-  border: 1px solid #bdbdbd;
+  border: 1px solid $l-grey2;
   margin-bottom: 30px;
   @media (min-width: 650px) {
     width: 49%;
   }
+}
+
+.input--is-error {
+  border: 1px solid $l-red;
 }
 
 .input-no-bd {
@@ -49,6 +53,10 @@
   color: $d-grey;
   z-index: 0;
   transition: 0.2s ease-in-out;
+}
+
+.placeholder--is-error {
+  color: $l-red;
 }
 
 .textarea {

@@ -3541,7 +3541,6 @@
         </div>
       </div>
     </div>
-
     <!-- consultation -->
 
     <!-- added to cart -->
@@ -3576,8 +3575,8 @@
     </div>
     <!-- added to cart -->
 
-    <!-- consultation -->
-    <div id="callBackModal" class="modal-bg modal--is-hide" data-close>
+    <!-- callBackModal -->
+    <div id="callBackModal" class="modal-bg modal--is-hide" data-close data-modal>
       <div class="modal">
         <div class="modal__close" data-close></div>
         <div class="modal__content">
@@ -3586,26 +3585,25 @@
             Оставьте Ваши контакты и мы обязательно Вам перезвоним!
           </p>
 
-          <form action="" id="callBackForm" method="post" class="form">
+          <form action="../json/send-form.json" id="callBackForm" method="post" class="form">
+            <p class="form__message" data-form-msg></p>
             <div class="form__inputs">
-              <div class="input-block input">
-                <input type="text" name="name" class="input-no-bd" placeholder=" " />
-                <span class="input__placeholder">Как вас зовут?</span>
+              <div class="input-block input" data-input-block>
+                <input type="text" name="name" class="input-no-bd" placeholder=" " data-input />
+                <span class="input__placeholder" data-placeholder="Как вас зовут?" data-input-msg>Как вас зовут?</span>
               </div>
-              <div class="input-block input">
-                <input type="text" name="phone" class="input-no-bd" placeholder=" " />
-                <span class="input__placeholder">Ваш телефон</span>
+              <div class="input-block input" data-input-block>
+                <input type="text" name="phone" class="input-no-bd" placeholder=" " data-input />
+                <span class="input__placeholder" data-placeholder="Ваш телефон" data-input-msg>Ваш телефон</span>
               </div>
             </div>
             <div class="from__bottom">
-              <input type="submit" class="from__sumbit btn red-btn" value="Отправить заявку">
+              <input type="submit" class="from__sumbit btn red-btn" value="Отправить заявку" data-submit>
 
-              <label class="from-approval">
-                <input type="checkbox" class="from-approval__checkbox" checked>
+              <label class="from-approval" checkbox-block>
+                <input type="checkbox" name="consent" class="from-approval__checkbox" data-checkbox checked>
                 <span class="from-approval__fake-checkbox fake-checkbox">
-
                 </span>
-
                 <span class="from-approval__text">
                   Я прочитал и согласен с правилами <a href="#!" class="from-approval__link">«Соглашение на обработку
                     персональных данных»</a>
@@ -3614,16 +3612,16 @@
             </div>
           </form>
         </div>
-        <div class="modal__result">
+        <div class="modal__result" data-result>
           <p class="modal__msg">
             Ваше сообщение успешно отправлено
           </p>
 
-          <span class="modal__close-btn btn white-btn-bd">Закрыть окно</span>
+          <span class="modal__close-btn btn white-btn-bd" data-close>Закрыть окно</span>
         </div>
       </div>
     </div>
-    <!-- consultation -->
+    <!-- callBackModal -->
 
     <!-- fastOrde -->
     <div id="fastOrdenModal" class="modal-bg modal--is-hide" data-close>
