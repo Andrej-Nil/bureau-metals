@@ -1,9 +1,8 @@
-.modal-card {
+.modal-card-wrap {
   @media (min-width: 700px) {
     margin-bottom: 90px;
   }
 }
-
 .modal-card__title {
   font-size: 18px;
   line-height: 30px;
@@ -46,4 +45,5 @@
   font-weight: normal;
   font-size: 18px;
   line-height: 21px;
+  color: $base;
 }

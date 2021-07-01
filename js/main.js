@@ -15,6 +15,7 @@ const $openCallBackModalMobileBtn = doc.querySelector('#openCallBackModalMobileB
 const $consultationModal = doc.querySelector('#consultationModal');
 
 const $callBackForm = doc.querySelector('#callBackForm');
+const $fastOrdenForm = doc.querySelector('#fastOrdenForm');
 
 const $map = doc.querySelector('#map');
 
@@ -23,18 +24,23 @@ class Server {
     this._token = this.getToken();
     this.POST = 'GET';
     this.GET = 'GET';
+    this.cityApi = '../json/city.json';
+    this.fastOrderApi = '../json/getProd.json';
   }
 
   getCity = async () => {
-    const api = '../json/city.json';
     const data = {
       _token: this._token
     }
     const formData = this.createFormData(data);
-    return await this.getResponse(this.POST, formData, api);
+    return await this.getResponse(this.POST, formData, this.cityApi);
   }
 
-
+  getFastOrderProduct = async (data) => {
+    data._token = this._token;
+    const formData = this.createFormData(data);
+    return await this.getResponse(this.POST, formData, this.fastOrderApi);
+  }
 
   postForm = async ($form) => {
     const api = $form.action;
@@ -149,6 +155,10 @@ class Render {
     }
   }
 
+  renderModalCard = (card) => {
+    this._render(this.$parent, this.getModalCardHtml, card);
+  }
+
   //Методы возвращающие разметку
   getSpinnerHtml = () => {
     const spinnerText = `<p class="spinner__text">${this.spinnerText}</p>`
@@ -214,6 +224,46 @@ class Render {
   `)
   }
 
+  getModalCardHtml = (card) => {
+    return (/*html*/`
+    <div class="modal-card" data-modal-card data-id=${card.id}>
+      <h3 class="modal-card__title" >
+      ${card.title}
+      </h3>
+      <div class="modal-card__info">
+        <div class="modal-card__price">
+          <p class="modal-card__price-name">Цена за единицу (м/пог):</p>
+          <p class="modal-card__price-grup">
+          <span class="modal-card__price-num">${card.price}</span>
+          <span class="modal-card__price-mark"> ₽</span>
+          </p>
+        </div>
+
+        <div class="modal-card__counter counter" data-modal-counter>
+          <input type="text" class="modal-card__input input counter__input" value="3" data-modal-input/>
+          <div class="modal-card__controls counter__controls">
+            <span class="modal-card__inc counter__btn" data-modal-btn="inc">
+              <i class="modal-card__inc-icon
+                  counter__icon counter__inc"></i>
+            </span>
+            <span class="modal-card__dec counter__btn" data-modal-btn="dec">
+              <i class="modal-card__dec-icon
+                  counter__icon counter__dec"></i>
+            </span>
+          </div>
+        </div>
+
+        <div class="modal-card__price">
+          <p class="modal-card__price-name">Стоимость заказа:</p>
+          <p  class="modal-card__price-grup">
+          <span class="modal-card__price-num" data-modal-total>${card.total_price}</span>
+          <span class="modal-card__price-mark"> ₽</span></p>
+        </div>
+      </div>
+      </div>
+    `)
+  }
+
   //Общая функция отрисовки
   _render = ($parent, getHtmlMarkup, array = false) => {
     if (!$parent) {
@@ -249,11 +299,17 @@ class Render {
 class Modal {
   constructor(modalId) {
     this.$modal = doc.querySelector(modalId);
+    this.initModal()
+  }
+
+  initModal = () => {
+    if (!this.$modal) {
+      return;
+    }
     this.$resultBlock = this.$modal.querySelector('[data-result]');
     this.$body = doc.querySelector('body');
     this.server = new Server();
     this.closeModal();
-    this.loading = true;
   }
   open = () => {
     this.$modal.classList.remove('modal--is-hide');
@@ -369,6 +425,13 @@ class SearchModal extends Modal {
 class CityModal extends Modal {
   constructor(modalId) {
     super(modalId);
+    this.initCityModal()
+  }
+
+  initCityModal = () => {
+    if (!this.$modal) {
+      return
+    }
     this.$searchCityInput = this.getElement('#searchCityInput');
     this.$cityList = this.getElement('#cityList');
     this.render = new Render(this.$cityList);
@@ -422,7 +485,7 @@ class CityModal extends Modal {
       return;
     }
     if (!this.isHasRegionList) {
-      this.render.clearParent(this.$cityList);
+      this.render.clearParent();
       this.render.renderSpiner('Идет загрузка...');
       await this.createListCity();
     }
@@ -447,7 +510,7 @@ class CityModal extends Modal {
     this.changeInputValue();
     this.showFindedRegeon();
     this.showFindedCity();
-    this.openFindedRegeon();
+
   }
 
   changeInputValue = () => {
@@ -460,10 +523,14 @@ class CityModal extends Modal {
       this.render.renderListCity(this.regionList, this.numCol);
       return;
     }
+    if (this.inputValue != '') {
+      const newRegionList = this.getNewArrRegeon();
+      this.setNubColumns();
+      this.render.renderListCity(newRegionList, this.numCol);
+      this.openFindedRegeon();
+    }
 
-    const newRegionList = this.getNewArrRegeon();
-    this.setNubColumns();
-    this.render.renderListCity(newRegionList, this.numCol);
+
   }
 
   getNewArrRegeon = () => {
@@ -507,7 +574,6 @@ class CityModal extends Modal {
   }
 
   openFindedRegeon() {
-    console.log('test')
     const $allCityList = this.getElement('[data-dropdown]', true);
     $allCityList.forEach(($cityList) => {
       const $dropdownBody = $cityList.querySelector('[data-dropdown-close]');
@@ -536,18 +602,108 @@ class CityModal extends Modal {
 class FastOrderModal extends Modal {
   constructor(modalId) {
     super(modalId);
-    this.prodId = null;
-    this.$el = null;
+    this.init();
+  }
+
+  init = () => {
+    if (!this.$modal) {
+      return;
+    }
+    this.$productModal = this.$modal.querySelector('[data-modal-wrap]');
+    //this.$btn =
     this.server = new Server();
+    this.render = new Render(this.$productModal);
+    this.listener();
   }
-
-  openFastOrder($el) {
-    this.$el = $el;
+  openFastOrder = async ($btn) => {
+    this.$btn = $btn
     this.open();
+    this.render.clearParent();
+    this.render.renderSpiner('Идет загрузка...');
+    await this.createModalCard();
+    this.$input = this.$modal.querySelector('[data-modal-input]');
+    this.$totalPrice = this.$modal.querySelector('[data-modal-total]');
   }
 
-  getProductId = () => {
-    console.log(this.$el);
+  getProduct = async (count = 1) => {
+    const $productCard = this.$btn.closest('[data-product-card]');
+    const id = $productCard.dataset.id;
+    return await this.server.getFastOrderProduct({
+      id: id,
+      count: count
+    });
+  }
+
+  createModalCard = async () => {
+    const response = await this.getProduct();
+    if (!response.rez) {
+      this.render.renderErrorMsg(response.error.desc);
+      console.log(`Ошибка: ${response.error.id}`);
+    }
+    if (response.rez) {
+      this.render.delete('[data-spinner]');
+      this.render.renderModalCard(response.content);
+    }
+  }
+
+  counter = (eTarget) => {
+    const $btn = eTarget.closest('[data-modal-btn]');
+    if ($btn.dataset.modalBtn === 'inc') {
+      this.inc()
+    }
+    if ($btn.dataset.modalBtn === 'dec') {
+      this.dec()
+    }
+  }
+
+  inc = async () => {
+    const count = parseInt(this.$input.value) + 1;
+    const response = await this.getProduct(count);
+    this.sentCountAndTotalPrice(response.content[0]);
+  }
+
+  dec = async () => {
+    const count = parseInt(this.$input.value) - 1;
+    if (count <= 0) {
+      this.$input.value = 1;
+      return;
+    }
+    const response = await this.getProduct(count);
+    this.sentCountAndTotalPrice(response.content[0]);
+  }
+  changingValue = async () => {
+    const count = this.checkCount(this.$input.value);
+    const response = await this.getProduct(count);
+    this.sentCountAndTotalPrice(response.content[0]);
+  }
+
+  checkCount = (count) => {
+    let value = parseInt(count);
+    if (count <= 0) {
+      value = 1;
+    }
+    if (isNaN(value)) {
+      value = 1;
+    }
+    return value;
+  }
+
+  sentCountAndTotalPrice = (card) => {
+    this.$input.value = card.count;
+    this.$totalPrice.innerHTML = card.total_price;
+  }
+  listener = () => {
+    this.$modal.addEventListener('click', (e) => {
+      if (e.target.closest('[data-modal-btn]')) {
+        this.counter(e.target);
+      }
+    })
+    this.$modal.addEventListener('input', (e) => {
+      if (e.target.closest('[data-modal-input]')) {
+
+        this.changingValue();
+      }
+    })
   }
 }
 
@@ -597,7 +753,7 @@ class Form {
     switch (name) {
       case 'email':
         result = this.checkValue($input.value, this.regMail);
-        //statusVisualInput(input, result);
+        this.statusVisualInput($input, result);
         break;
       case 'phone':
         result = this.checkValue($input.value, this.regTel);
@@ -684,6 +840,10 @@ class Form {
     this.$inputs.forEach(($item) => {
       $item.value = '';
     })
+    console.log(this.$textarea);
+    if (this.$textarea) {
+      this.$textarea.value = '';
+    }
 
     this.$formMsg.classList.remove('form__message--is-show');
     this.$formMsg.innerHTML = '';
@@ -731,8 +891,52 @@ class CallBackForm extends Form {
 
 }
 
+class FastOrdenForm extends Form {
+  constructor(formId) {
+    super(formId);
+    this.initFastOrderForm();
+  }
+
+  initFastOrderForm = () => {
+    if (!this.$form) {
+      return false;
+    }
+    this.$checkbox = this.$form.querySelector('[data-checkbox]');
+    this.$submitBtn = this.$form.querySelector('[data-submit]');
+    this.$inputPhone = this.$form.querySelector('[name="phone"]');
+    this.$inputMail = this.$form.querySelector('[name="email"]');
+    this.listeners();
+    this.send();
+  }
+
+  send = () => {
+    this.$submitBtn.addEventListener('click', () => {
+      const result = this.formCheck(this.$inputPhone, this.$inputMail, this.$checkbox);
+      if (result) {
+        this.sendForm();
+      }
+    });
+  }
+
+  resultBlockShow = () => {
+    if (!this.$resultBlock) {
+      return
+    }
+    this.$resultBlock.classList.add('modal__result--is-show');
+  }
+  listeners = () => {
+    console.log(this.$inputPhone);
+    this.$inputPhone.addEventListener('blur', () => {
+      this.checkInput(this.$inputPhone);
+    })
+    this.$inputMail.addEventListener('blur', () => {
+      this.checkInput(this.$inputMail);
+    })
+  }
+}
 // формы
 const callBackForm = new CallBackForm('#callBackForm');
+const fastOrdenForm = new FastOrdenForm('#fastOrdenForm');
 
 const server = new Server();
 // окна
@@ -786,7 +990,13 @@ if ($openCallBackModalMobileBtn && $callBackModal) {
 if ($callBackForm) {
   $callBackForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    //callBackForm.send();
+  })
+}
+
+// fastOrdenForm
+if ($fastOrdenForm) {
+  $fastOrdenForm.addEventListener('submit', (e) => {
+    e.preventDefault();
   })
 }
 
@@ -803,6 +1013,22 @@ function docListener(e) {
   if (target.closest('[data-dropdown]')) {
     toggleDropdown(target)
   }
+
+  if (target.closest('[data-counter-inc]')) {
+    counterInc(target);
+  }
+}
+
+function counterInc(target) {
+  //const $incBtn = target.closest('[data-counter-inc]');
+  //const $productCard = $incBtn.closest('[data-product-card]');
+  //const productCardId
+  //const $input = $productCard.querySelector('[data-counter-input]');
+  //const inputValue = $input.value;
+  //console.log(inputValue);
+
+
+
 }
 
 function toggleDropdown(target) {
