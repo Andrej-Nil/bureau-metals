@@ -112,6 +112,7 @@
 .modal__total-product,
 .modal__total-price {
   color: $base;
+  white-space: nowrap;
 }
 
 .modal__btns {
@@ -260,4 +261,50 @@
   @media (min-width: 600px) {
     text-align: right;
   }
+}
+
+.add-modal {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  transform: translate(0, 100%);
+  z-index: 1000;
+  transition: 0.5s ease-in-out;
+  max-width: 400px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.add-modal--is-open {
+  transform: translate(0, 0);
+  opacity: 1;
+  box-shadow: -3px -3px 15px rgba(0, 0, 0, 0.2);
+}
+
+.add-modal__content {
+  background: $white;
+  padding: 30px 20px 10px;
+  transition: 0.2s ease-in-out;
+}
+
+.add-modal__info {
+  margin-bottom: 20px;
+}
+
+.add-modal__title {
+  font-size: 20px;
+  line-height: 30px;
+  margin-bottom: 9px;
+}
+
+.add-modal__desc {
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.add-modal__btn {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
 }

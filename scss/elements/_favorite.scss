@@ -7,8 +7,14 @@
   position: relative;
   bottom: -5px;
   &::before {
-    @include font-icon-style("\e90b", 17px);
+    @include font-icon-style("\e915", 17px);
     color: $base;
+  }
+}
+
+.favorite__icon--is-active {
+  &::before {
+    @include font-icon-style("\e90b", 17px);
   }
 }
 

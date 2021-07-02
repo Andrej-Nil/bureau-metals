@@ -26,6 +26,7 @@ class Server {
     this.GET = 'GET';
     this.cityApi = '../json/city.json';
     this.fastOrderApi = '../json/getProd.json';
+    this.addFavoriteApi = '../json/addFavorite.json';
   }
 
   getCity = async () => {
@@ -40,6 +41,15 @@ class Server {
     data._token = this._token;
     const formData = this.createFormData(data);
     return await this.getResponse(this.POST, formData, this.fastOrderApi);
+  }
+
+  addFavorite = async (id) => {
+    const data = {
+      _token: this._token,
+      id: id
+    }
+    const formData = this.createFormData(data);
+    return await this.getResponse(this.POST, formData, this.addFavoriteApi)
   }
 
   postForm = async ($form) => {
@@ -159,6 +169,42 @@ class Render {
     this._render(this.$parent, this.getModalCardHtml, card);
   }
 
+  renderAddInfo = (type, info) => {
+    const infoObj = {
+      title: '',
+      type: '',
+      totalPrice: info.total_price.toLocaleString(),
+      count: info.count.toLocaleString()
+    }
+    if (type === 'favorite') {
+      infoObj.title = 'Товар добавлен в Избранное';
+      infoObj.where = 'Избранном';
+    }
+    if (type === 'basket') {
+      infoObj.title = 'Товар добавлен в Крозину';
+      infoObj.where = 'Корзине';
+    }
+    this.$parent.innerHTML = this.getAddModalHtml(infoObj);
+  }
+
+  renderDeleteInfo = (type, info) => {
+    const infoObj = {
+      title: '',
+      type: '',
+      totalPrice: info.total_price.toLocaleString(),
+      count: info.count.toLocaleString()
+    }
+    if (type === 'favorite') {
+      infoObj.title = 'Товар удален из Избранного';
+      infoObj.where = 'Избранном';
+    }
+    if (type === 'basket') {
+      infoObj.title = 'Товар удален из Крозины';
+      infoObj.where = 'Корзине';
+    }
+    this.$parent.innerHTML = this.getAddModalHtml(infoObj);
+  }
+
   //Методы возвращающие разметку
   getSpinnerHtml = () => {
     const spinnerText = `<p class="spinner__text">${this.spinnerText}</p>`
@@ -264,6 +310,17 @@ class Render {
     `)
   }
 
+  getAddModalHtml = (infoObj) => {
+    return (/*html*/`
+    <h3 class="add-modal__title">${infoObj.title} </h3>
+    <p class="add-modal__desc" data-desc>В ${infoObj.where} <span class="modal__total-product" data-total-item>${infoObj.count}
+        товаров</span> на
+      сумму
+      <span class="modal__total-price" data-total-price>${infoObj.totalPrice} руб</span>
+    </p>
+    `)
+  }
+
   //Общая функция отрисовки
   _render = ($parent, getHtmlMarkup, array = false) => {
     if (!$parent) {
@@ -323,7 +380,7 @@ class Modal {
       this.$modal.classList.add('modal--is-hide');
       this.$body.classList.remove('no-scroll');
       this.resultBlockHide();
-    }, 500)
+    }, 500);
 
   }
 
@@ -610,7 +667,6 @@ class FastOrderModal extends Modal {
       return;
     }
     this.$productModal = this.$modal.querySelector('[data-modal-wrap]');
-    //this.$btn =
     this.server = new Server();
     this.render = new Render(this.$productModal);
     this.listener();
@@ -713,6 +769,142 @@ class ConsultationModal extends Modal {
   }
 }
 
+class InfoModal {
+  constructor(modalId) {
+    this.$modal = doc.querySelector(modalId);
+    this.init();
+
+  }
+  init = () => {
+    this.productId = null;
+    this.$modalInfo = this.$modal.querySelector('[data-info]');
+    this.$productCard = null;
+    this.response = null;
+    this.server = new Server();
+    this.render = new Render(this.$modalInfo);
+    this.timeOut = null;
+    this.closeModal();
+
+  }
+
+  open = ($productCard) => {
+    if (this.$modal.dataset.add === 'open') {
+      clearTimeout(this.timeOut);
+    }
+    this.timeOut = setTimeout(() => {
+      this.close()
+    }, 3000);
+    this.$modal.classList.add('add-modal--is-open');
+    this.$productCard = $productCard;
+    this.productId = $productCard.dataset.id;
+    this.$modal.dataset.add = 'open';
+
+  }
+
+  close = () => {
+    clearTimeout(this.timeOut);
+    this.$modal.classList.remove('add-modal--is-open');
+    this.$modal.dataset.add = 'close';
+  }
+
+  closeModal = () => {
+    if (!this.$modal) {
+      return
+    }
+    this.$modal.addEventListener('click', (e) => {
+      const $elTarget = e.target;
+
+      if ($elTarget.hasAttribute('data-close')) {
+        this.close();
+        return true;
+      }
+    })
+  }
+
+
+  showSpinner = () => {
+    this.render.clearParent();
+    this.render.renderSpiner();
+  }
+  showError = (error) => {
+    this.render.renderErrorMsg(error.desc);
+    console.log(`Ошибка: ${error.id}`);
+  }
+
+}
+
+class AddFavoriteModal extends InfoModal {
+  constructor(modalId) {
+    super(modalId);
+  }
+
+  init = () => {
+    if (!this.$productCard) {
+      return;
+    }
+    this.$stiker = this.$productCard.querySelector('[data-sticer-favirite]');
+    this.$icon = this.$productCard.querySelector('[data-icon-favorite]');
+    this.$addText = this.$productCard.querySelector('[add-favorite-text]');
+    this.$favoriteCount = doc.querySelector('#favoriteCount');
+  }
+
+  openModal = ($productCard) => {
+    this.open($productCard);
+    this.init();
+    this.renderInfo()
+  }
+
+  renderInfo = async () => {
+    this.showSpinner();
+    this.response = await this.server.addFavorite(this.productId);
+    if (!this.response.rez) {
+      this.showError(response.error);
+    }
+    if (this.response.rez) {
+      this.render.delete('[data-spinner]');
+
+      if (this.response.toggle) {
+        this.add();
+      }
+      if (!this.response.toggle) {
+        this.remove();
+      }
+    }
+  }
+
+  add = () => {
+    this.render.renderAddInfo('favorite', this.response.favorite);
+    if (this.$stiker) {
+      this.$stiker.classList.add('product-card__stiker-icon--is-active');
+    }
+    if (this.$icon) {
+      this.$icon.classList.add('favorite__icon--is-active');
+    }
+    if (this.$addText) {
+      this.$addText.innerHTML = 'удалить из Избранное';
+    }
+    if (this.$favoriteCount) {
+      this.$favoriteCount.innerHTML = this.response.favorite.count;
+    }
+  }
+
+  remove = () => {
+    this.render.renderDeleteInfo('favorite', this.response.favorite);
+    if (this.$stiker) {
+      this.$stiker.classList.remove('product-card__stiker-icon--is-active');
+    }
+    if (this.$icon) {
+      this.$icon.classList.remove('favorite__icon--is-active');
+    }
+    if (this.$addText) {
+      this.$addText.innerHTML = 'удалить из Избранное';
+    }
+    if (this.$favoriteCount) {
+      this.$favoriteCount.innerHTML = this.response.favorite.count;
+    }
+  }
+
+}
 
 class Form {
   constructor(formId) {
@@ -925,7 +1117,6 @@ class FastOrdenForm extends Form {
     this.$resultBlock.classList.add('modal__result--is-show');
   }
   listeners = () => {
-    console.log(this.$inputPhone);
     this.$inputPhone.addEventListener('blur', () => {
       this.checkInput(this.$inputPhone);
     })
@@ -945,6 +1136,7 @@ const cityModal = new CityModal('#cityModal');
 const callBackModal = new CityModal('#callBackModal');
 const fastOrderModal = new FastOrderModal('#fastOrdenModal');
 const consultationModal = new ConsultationModal('#consultationModal');
+const addFavoriteModal = new AddFavoriteModal('#addFavoriteModal', 'favorite');
 
 doc.addEventListener('click', docListener);
 
@@ -960,6 +1152,7 @@ if ($openSearchMobileBtn && $searchModal) {
     searchModal.open();
   });
 }
+
 //окно города
 if ($openCityModalBtn && $cityModal) {
   $openCityModalBtn.addEventListener('click', () => {
@@ -1004,20 +1197,6 @@ if ($map) {
   yandexMap();
 }
 
-function docListener(e) {
-  const target = e.target;
-  if (target.closest('[data-fast-order]')) {
-    fastOrderModal.openFastOrder(target);
-  }
-
-  if (target.closest('[data-dropdown]')) {
-    toggleDropdown(target)
-  }
-
-  if (target.closest('[data-counter-inc]')) {
-    counterInc(target);
-  }
-}
 
 function counterInc(target) {
   //const $incBtn = target.closest('[data-counter-inc]');
@@ -1026,9 +1205,6 @@ function counterInc(target) {
   //const $input = $productCard.querySelector('[data-counter-input]');
   //const inputValue = $input.value;
   //console.log(inputValue);
-
-
-
 }
 
 function toggleDropdown(target) {
@@ -1067,6 +1243,11 @@ function closeDropdown($dropdownBody, $arrow) {
   $dropdownBody.dataset.dropdownClose = 'close';
 }
 
+async function addFavorite(target) {
+  const $productCard = target.closest('[data-product-card]');
+  addFavoriteModal.openModal($productCard);
+}
+
 function yandexMap() {
   let map;
   let marker;
@@ -1085,6 +1266,25 @@ function yandexMap() {
   }
   ymaps.ready(initMap);
 }
+
+function docListener(e) {
+  const target = e.target;
+  if (target.closest('[data-fast-order]')) {
+    fastOrderModal.openFastOrder(target);
+  }
+  if (target.closest('[data-dropdown]')) {
+    toggleDropdown(target)
+  }
+  if (target.closest('[data-counter-inc]')) {
+    counterInc(target);
+  }
+  if (target.closest('[data-add-favorite]')) {
+    addFavorite(target);
+  }
+}
+
+
+
 
 //function debounce(f, t) {
 //  return function (args) {

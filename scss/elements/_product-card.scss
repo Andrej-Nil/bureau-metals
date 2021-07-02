@@ -77,9 +77,14 @@
   transform: translate(-50%, -50%);
   display: block;
   &::before {
-    display: block;
-    @include font-icon-style("\e90b", 35px);
+    @include font-icon-style("\e915", 35px);
     color: $base;
+  }
+}
+
+.product-card__stiker-icon--is-active {
+  &::before {
+    @include font-icon-style("\e90b", 35px);
   }
 }
 
