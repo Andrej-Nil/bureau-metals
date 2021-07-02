@@ -9,6 +9,9 @@ const $cityModal = doc.querySelector('#cityModal')
 const $openCityModalBtn = doc.querySelector('#openCityModalBtn')
 const $openCityModalMobileBtn = doc.querySelector('#openCityModalMobileBtn');
 
+const $addBasketModal = doc.querySelector('#addBasketModal');
+const $addFavoriteModal = doc.querySelector('#addFavoriteModal');
+
 const $callBackModal = doc.querySelector('#callBackModal')
 const $openCallBackModalBtn = doc.querySelector('#openCallBackModalBtn')
 const $openCallBackModalMobileBtn = doc.querySelector('#openCallBackModalMobileBtn');
@@ -27,6 +30,7 @@ class Server {
     this.cityApi = '../json/city.json';
     this.fastOrderApi = '../json/getProd.json';
     this.addFavoriteApi = '../json/addFavorite.json';
+    this.addBasketApi = '../json/addBasket.json';
   }
 
   getCity = async () => {
@@ -50,6 +54,16 @@ class Server {
     }
     const formData = this.createFormData(data);
     return await this.getResponse(this.POST, formData, this.addFavoriteApi)
+  }
+
+  addBsasket = async (id, count) => {
+    const data = {
+      _token: this._token,
+      id: id,
+      count: count
+    }
+    const formData = this.createFormData(data);
+    return await this.getResponse(this.POST, formData, this.addBasketApi)
   }
 
   postForm = async ($form) => {
@@ -174,7 +188,7 @@ class Render {
       title: '',
       type: '',
       totalPrice: info.total_price.toLocaleString(),
-      count: info.count.toLocaleString()
+      count: info.count
     }
     if (type === 'favorite') {
       infoObj.title = 'Товар добавлен в Избранное';
@@ -906,6 +920,68 @@ class AddFavoriteModal extends InfoModal {
 
 }
 
+class AddBasketModal extends InfoModal {
+  constructor(modalId) {
+    super(modalId);
+  }
+
+  init = () => {
+    if (!this.$productCard) {
+      return;
+    }
+    this.$btn = this.$productCard.querySelector('[data-add-basket]')
+    this.$basketCount = doc.querySelector('#basketCount');
+
+  }
+
+  openModal = ($productCard) => {
+    this.open($productCard);
+    this.init();
+    this.renderInfo()
+  }
+
+  renderInfo = async () => {
+    this.showSpinner();
+    this.response = await this.server.addBsasket(this.productId);
+    if (!this.response.rez) {
+      this.showError(this.response.error);
+    }
+    if (this.response.rez) {
+      this.render.delete('[data-spinner]');
+
+      if (this.response.toggle) {
+        this.add();
+      }
+      if (!this.response.toggle) {
+        this.remove();
+      }
+    }
+  }
+
+  add = () => {
+    this.render.renderAddInfo('basket', this.response.card);
+    if (this.$basketCount) {
+      this.$basketCount.innerHTML = this.response.card.count;
+    }
+    this.$btn.classList.remove('red-btn');
+    this.$btn.classList.add('red-btn-bd');
+    this.$btn.innerHTML = 'В карзине';
+
+
+  }
+
+  remove = () => {
+    this.render.renderDeleteInfo('basket', this.response.card);
+    if (this.$basketCount) {
+      this.$basketCount = this.response.card.count;
+    }
+    this.$btn.classList.add('red-btn');
+    this.$btn.classList.remove('red-btn-bd');
+    this.$btn.innerHTML = 'Заказать';
+  }
+
+}
+
 class Form {
   constructor(formId) {
     this.$form = doc.querySelector(formId);
@@ -1137,6 +1213,7 @@ const callBackModal = new CityModal('#callBackModal');
 const fastOrderModal = new FastOrderModal('#fastOrdenModal');
 const consultationModal = new ConsultationModal('#consultationModal');
 const addFavoriteModal = new AddFavoriteModal('#addFavoriteModal', 'favorite');
+const addBasketModal = new AddBasketModal('#addBasketModal', 'basket');
 
 doc.addEventListener('click', docListener);
 
@@ -1243,9 +1320,20 @@ function closeDropdown($dropdownBody, $arrow) {
   $dropdownBody.dataset.dropdownClose = 'close';
 }
 
-async function addFavorite(target) {
+function addFavorite(target) {
   const $productCard = target.closest('[data-product-card]');
   addFavoriteModal.openModal($productCard);
+  if ($addBasketModal.dataset.add === 'open') {
+    addBasketModal.close();
+  }
+}
+
+function addBasket(target) {
+  const $productCard = target.closest('[data-product-card]');
+  addBasketModal.openModal($productCard);
+  if ($addFavoriteModal.dataset.add === 'open') {
+    addFavoriteModal.close();
+  }
 }
 
 function yandexMap() {
@@ -1281,7 +1369,64 @@ function docListener(e) {
   if (target.closest('[data-add-favorite]')) {
     addFavorite(target);
   }
+  if (target.closest('[data-add-basket]')) {
+    addBasket(target);
+  }
+  if (target.closest('[data-counter-btn]')) {
+    counter(target);
+  }
 }
+
+
+
+function counter(target) {
+  const $btn = target.closest('[data-counter-btn]');
+  if ($btn.dataset.counterBtn === 'inc') {
+    //inc()
+    console.log('inc')
+  }
+  if ($btn.dataset.counterBtn === 'dec') {
+    console.log('dec')
+    //dec()
+  }
+}
+
+//inc = async () => {
+//  const count = parseInt(this.$input.value) + 1;
+//  const response = await this.getProduct(count);
+//  this.sentCountAndTotalPrice(response.content[0]);
+//}
+
+//dec = async () => {
+//  const count = parseInt(this.$input.value) - 1;
+//  if (count <= 0) {
+//    this.$input.value = 1;
+//    return;
+//  }
+//  const response = await this.getProduct(count);
+//  this.sentCountAndTotalPrice(response.content[0]);
+//}
+//changingValue = async () => {
+//  const count = this.checkCount(this.$input.value);
+//  const response = await this.getProduct(count);
+//  this.sentCountAndTotalPrice(response.content[0]);
+//}
+
+//checkCount = (count) => {
+//  let value = parseInt(count);
+//  if (count <= 0) {
+//    value = 1;
+//  }
+//  if (isNaN(value)) {
+//    value = 1;
+//  }
+//  return value;
+//}
+
+//sentCountAndTotalPrice = (card) => {
+//  this.$input.value = card.count;
+//  this.$totalPrice.innerHTML = card.total_price;
+//}
 
 
 

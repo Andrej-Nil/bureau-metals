@@ -1703,6 +1703,12 @@ body {
   align-items: flex-start;
 }
 
+.product-card__counter,
+.product-card__btn {
+  position: relative;
+  z-index: 1000;
+}
+
 .product-card__order {
   position: absolute;
   bottom: -10px;
@@ -5315,7 +5321,7 @@ body {
 
 .add-modal__content {
   background: #fff;
-  padding: 30px 20px 10px;
+  padding: 40px 20px 10px;
   transition: 0.2s ease-in-out;
 }
 

@@ -117,6 +117,11 @@
   justify-content: space-between;
   align-items: flex-start;
 }
+.product-card__counter,
+.product-card__btn {
+  position: relative;
+  z-index: 1000;
+}
 
 .product-card__order {
   position: absolute;
