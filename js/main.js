@@ -20,6 +20,9 @@ const $consultationModal = doc.querySelector('#consultationModal');
 const $callBackForm = doc.querySelector('#callBackForm');
 const $fastOrdenForm = doc.querySelector('#fastOrdenForm');
 
+const $basketCount = doc.querySelector('#basketCount');
+const $favoriteCount = doc.querySelector('#favoriteCount');
+
 const $map = doc.querySelector('#map');
 
 class Server {
@@ -931,6 +934,7 @@ class AddBasketModal extends InfoModal {
     }
     this.$btn = this.$productCard.querySelector('[data-add-basket]')
     this.$basketCount = doc.querySelector('#basketCount');
+    this.$input = this.$productCard.querySelector('[data-counter-input]')
 
   }
 
@@ -966,8 +970,8 @@ class AddBasketModal extends InfoModal {
     this.$btn.classList.remove('red-btn');
     this.$btn.classList.add('red-btn-bd');
     this.$btn.innerHTML = 'В карзине';
-
-
+    this.$input.value = this.response.content[0].count;
+    this.$productCard.dataset.inBasket = '1';
   }
 
   remove = () => {
@@ -978,6 +982,7 @@ class AddBasketModal extends InfoModal {
     this.$btn.classList.add('red-btn');
     this.$btn.classList.remove('red-btn-bd');
     this.$btn.innerHTML = 'Заказать';
+    this.$productCard.dataset.inBasket = '0';
   }
 
 }
@@ -1215,7 +1220,8 @@ const consultationModal = new ConsultationModal('#consultationModal');
 const addFavoriteModal = new AddFavoriteModal('#addFavoriteModal', 'favorite');
 const addBasketModal = new AddBasketModal('#addBasketModal', 'basket');
 
-doc.addEventListener('click', docListener);
+doc.addEventListener('click', docClickListener);
+doc.addEventListener('input', docInputListener);
 
 //окно поиска
 if ($openSearchBtn && $searchModal) {
@@ -1355,7 +1361,7 @@ function yandexMap() {
   ymaps.ready(initMap);
 }
 
-function docListener(e) {
+function docClickListener(e) {
   const target = e.target;
   if (target.closest('[data-fast-order]')) {
     fastOrderModal.openFastOrder(target);
@@ -1377,19 +1383,99 @@ function docListener(e) {
   }
 }
 
+function docInputListener(e) {
+  const target = e.target;
+  if (target.closest('[data-counter-input]')) {
+    changingValue(target)
+  }
+}
+
+function docChangListener(e) {
+  const target = e.target;
+  if (target.closest('[data-counter-input]')) {
+    changingValue(target)
+  }
+}
 
 
+// Функции счетчика товаров
 function counter(target) {
   const $btn = target.closest('[data-counter-btn]');
   if ($btn.dataset.counterBtn === 'inc') {
-    //inc()
-    console.log('inc')
+    inc($btn);
   }
   if ($btn.dataset.counterBtn === 'dec') {
-    console.log('dec')
-    //dec()
+    dec($btn);
   }
 }
+
+async function inc($btn) {
+  const cardObj = getProductCardObj($btn);
+  const count = parseInt(cardObj.$input.value) + 1;
+  if (cardObj.isInBasket === '0') {
+    cardObj.$input.value = count;
+  }
+
+  if (cardObj.isInBasket === '1') {
+    const response = await server.addBsasket(cardObj.id, count);
+    console.log(response.content[0].count);
+    cardObj.$input.value = response.content[0].count;
+    $basketCount.innerHTML = response.card.count;
+  }
+}
+
+async function dec($btn) {
+  const cardObj = getProductCardObj($btn);
+  const count = parseInt(cardObj.$input.value) - 1;
+
+  if (cardObj.isInBasket === '0') {
+    if (count < 0) {
+      cardObj.$input.value = 1;
+    }
+    if (count > 0) {
+      cardObj.$input.value = count;
+    }
+  }
+
+  if (cardObj.isInBasket === '1') {
+    const response = await server.addBsasket(cardObj.id, count);
+    cardObj.$input.value = response.content[0].count;
+    $basketCount.innerHTML = response.card.count;
+  }
+}
+
+async function changingValue(target) {
+  const $input = target.closest('[data-counter-input]');
+  const cardObj = getProductCardObj($input);
+  const count = checkCount(cardObj.$input.value);
+
+  if (cardObj.isInBasket === '0') {
+    cardObj.$input.value = count;
+  }
+
+  if (cardObj.isInBasket === '1') {
+    const response = await server.addBsasket(cardObj.id, count);
+    cardObj.$input.value = response.content[0].count;
+    $basketCount.innerHTML = response.card.count;
+  }
+}
+
+function getProductCardObj($el) {
+  const $card = $el.closest('[data-product-card]');
+  const $input = $card.querySelector('[data-counter-input]');
+  const isInBasket = $card.dataset.inBasket;
+  const id = $card.dataset.id;
+  return {
+    $card: $card,
+    $input: $input,
+    isInBasket: isInBasket,
+    id: id,
+  }
+}
+
+
+
+
 
 //inc = async () => {
 //  const count = parseInt(this.$input.value) + 1;
@@ -1412,21 +1498,18 @@ function counter(target) {
 //  this.sentCountAndTotalPrice(response.content[0]);
 //}
 
-//checkCount = (count) => {
-//  let value = parseInt(count);
-//  if (count <= 0) {
-//    value = 1;
-//  }
-//  if (isNaN(value)) {
-//    value = 1;
-//  }
-//  return value;
-//}
+function checkCount(count) {
+  let value = parseInt(count);
+  if (count <= 0) {
+    value = 1;
+  }
+  if (isNaN(value)) {
+    value = 1;
+  }
+  return value;
+}
 
-//sentCountAndTotalPrice = (card) => {
-//  this.$input.value = card.count;
-//  this.$totalPrice.innerHTML = card.total_price;
-//}
+
 
 
 
