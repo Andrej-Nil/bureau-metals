@@ -35,6 +35,9 @@
   width: 31px;
   height: 31px;
   cursor: pointer;
+  outline: none;
+  background: rgba(0, 0, 0, 0);
+  border: none;
   &::before {
     @include font-icon-style("\e913", 30px);
     color: $base;
@@ -84,6 +87,13 @@
   transition: 0.2s ease-in-out;
 }
 
+.modal-search__content-wrap {
+  position: relative;
+}
+
+.modal-search__content {
+  min-height: 567px;
+}
 .search-form__label {
   padding: 10px;
   cursor: pointer;
@@ -94,6 +104,22 @@
 
 .search-form__label-text {
   color: $base;
+}
+
+.modal-search__spinner {
+  display: none;
+  position: absolute;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.5);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.modal-search__spinner--is-show {
+  display: flex;
 }
 
 .modal-search__btn {

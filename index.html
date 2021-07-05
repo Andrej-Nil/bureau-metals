@@ -3730,7 +3730,7 @@
 
           <div class="search__wrap">
             <form id="searchForm" action="" method="GET" class="search-form">
-              <i class="search-form__loupe"></i>
+              <button type="submit" class="search-form__loupe"></button>
               <div id="searchArea" class="search-form__area">
                 <span id="areaName" class="search-form__name">
                   По всему сайту
@@ -3740,7 +3740,8 @@
                   <ul id="areaList" class="search-form__list">
                     <li class="search-form__item">
                       <label class="search-form__label" data-value="По всему сайту">
-                        <input type="radio" name="type" value="" class="from-approval__checkbox checkbox" checked>
+                        <input type="radio" name="type" value="" class="from-approval__checkbox checkbox"
+                          data-area="По всему сайту" checked>
                         <span class="search-form__fake-checkbox fake-checkbox">
                         </span>
 
@@ -3751,7 +3752,8 @@
                     </li>
                     <li class="search-form__item">
                       <label class="search-form__label" data-value="По товарам">
-                        <input type="radio" name="type" value="content" class="from-approval__checkbox checkbox">
+                        <input type="radio" name="type" value="content" class="from-approval__checkbox checkbox"
+                          data-area="По товарам">
                         <span class="search-form__fake-checkbox fake-checkbox">
                         </span>
 
@@ -3762,7 +3764,8 @@
                     </li>
                     <li class="search-form__item">
                       <label class="search-form__label" data-value="По категориям">
-                        <input type="radio" name="type" value="categoty" class="from-approval__checkbox checkbox">
+                        <input type="radio" name="type" value="categoty" class="from-approval__checkbox checkbox"
+                          data-area="По категориям">
                         <span class="search-form__fake-checkbox fake-checkbox">
                         </span>
 
@@ -3773,7 +3776,8 @@
                     </li>
                     <li class="search-form__item">
                       <label class="search-form__label" data-value="По новостям">
-                        <input type="radio" name="type" value="news" class="from-approval__checkbox checkbox">
+                        <input type="radio" name="type" value="news" class="from-approval__checkbox checkbox"
+                          data-area="По новостям">
                         <span class="search-form__fake-checkbox fake-checkbox">
                         </span>
 
@@ -3791,185 +3795,174 @@
                 placeholder="Балки двутавровые">
             </form>
           </div>
+          <div class="modal-search__content-wrap">
+            <div data-content class="modal-search__content">
+              <!--<div class="modal-search__cards">
 
-          <div class="modal-search__cards">
-            <div class="small-card">
-              <div class="small-card__preview">
-                <img src="./img/image/small-card.jpg" alt="" class="small-card__img">
+              <div class="small-card">
+                <div class="small-card__preview">
+                  <img src="./img/image/small-card.jpg" alt="" class="small-card__img">
+                </div>
+                <div class="small-card__info">
+                  <div class="small-card__title">Двутавровые балки</div>
+                  <div class="small-card__desc">125 товаров в категории</div>
+                </div>
               </div>
-              <div class="small-card__info">
-                <div class="small-card__title">Двутавровые балки</div>
-                <div class="small-card__desc">125 товаров в категории</div>
+
+              <div class="small-card">
+                <div class="small-card__preview">
+                  <img src="./img/image/small-card.jpg" alt="" class="small-card__img">
+                </div>
+                <div class="small-card__info">
+                  <div class="small-card__title">Двутавровые балки</div>
+                  <div class="small-card__desc">125 товаров в категории</div>
+                </div>
               </div>
+
+              <div class="small-card">
+                <div class="small-card__preview">
+                  <img src="./img/image/small-card.jpg" alt="" class="small-card__img">
+                </div>
+                <div class="small-card__info">
+                  <div class="small-card__title">Двутавровые балки</div>
+                  <div class="small-card__desc">125 товаров в категории</div>
+                </div>
+              </div>
+
+              <div class="small-card">
+                <div class="small-card__preview">
+                  <img src="./img/image/small-card.jpg" alt="" class="small-card__img">
+                </div>
+                <div class="small-card__info">
+                  <div class="small-card__title">Двутавровые балки</div>
+                  <div class="small-card__desc">125 товаров в категории</div>
+                </div>
+              </div>
+            </div>-->
+              <!-- modal-search__list -->
+              <!--<div class="modal-search__list">
+              <div class="search-card">
+                <h3 class="search-card__title">
+                  Пруток магниевый 0,6х500х1000 мм МА15 ГОСТ 22635-77 свернутый в рулоне по 100 метров рулоне.
+                </h3>
+
+                <div class="search-card__price price">
+                  <span class="search-card__old price__old">1 550</span>
+                  <span class="search-card__new price__new">
+                    <span class="search-card__price-num price__num ">1 250</span>
+                    <span class="search-card__price-mark price__mark">₽</span><span
+                      class="search-card__price-unit price__unit">/кг</span>
+                  </span>
+                </div>
+
+                <span class="search-card__arrow">
+
+                </span>
+              </div>
+
+              <div class="search-card">
+                <h3 class="search-card__title">
+                  Пруток магниевый 0,6х500х1000 мм МА15 ГОСТ 22635-77 свернутый в рулоне по 100 метров рулоне.
+                </h3>
+
+                <div class="search-card__price price">
+                  <span class="search-card__old price__old">1 550</span>
+                  <span class="search-card__new price__new">
+                    <span class="search-card__price-num price__num ">1 250</span>
+                    <span class="search-card__price-mark price__mark">₽</span><span
+                      class="search-card__price-unit price__unit">/кг</span>
+                  </span>
+                </div>
+
+                <span class="search-card__arrow">
+
+                </span>
+              </div>
+
+              <div class="search-card">
+                <h3 class="search-card__title">
+                  Пруток магниевый 0,6х500х1000 мм МА15 ГОСТ 22635-77 свернутый в рулоне по 100 метров рулоне.
+                </h3>
+
+                <div class="search-card__price price">
+                  <span class="search-card__old price__old">1 550</span>
+                  <span class="search-card__new price__new">
+                    <span class="search-card__price-num price__num ">1 250</span>
+                    <span class="search-card__price-mark price__mark">₽</span><span
+                      class="search-card__price-unit price__unit">/кг</span>
+                  </span>
+                </div>
+
+                <span class="search-card__arrow">
+
+                </span>
+              </div>
+
+              <div class="search-card">
+                <h3 class="search-card__title">
+                  Пруток магниевый 0,6х500х1000 мм МА15 ГОСТ 22635-77 свернутый в рулоне по 100 метров рулоне.
+                </h3>
+
+                <div class="search-card__price price">
+                  <span class="search-card__old price__old">1 550</span>
+                  <span class="search-card__new price__new">
+                    <span class="search-card__price-num price__num ">1 250</span>
+                    <span class="search-card__price-mark price__mark">₽</span><span
+                      class="search-card__price-unit price__unit">/кг</span>
+                  </span>
+                </div>
+
+                <span class="search-card__arrow">
+
+                </span>
+              </div>
+
+              <div class="search-card">
+                <h3 class="search-card__title">
+                  Пруток магниевый 0,6х500х1000 мм МА15 ГОСТ 22635-77 свернутый в рулоне по 100 метров рулоне.
+                </h3>
+
+                <div class="search-card__price price">
+                  <span class="search-card__old price__old">1 550</span>
+                  <span class="search-card__new price__new">
+                    <span class="search-card__price-num price__num ">1 250</span>
+                    <span class="search-card__price-mark price__mark">₽</span><span
+                      class="search-card__price-unit price__unit">/кг</span>
+                  </span>
+                </div>
+
+                <span class="search-card__arrow">
+
+                </span>
+              </div>
+
+              <div class="search-card">
+                <h3 class="search-card__title">
+                  Пруток магниевый 0,6х500х1000 мм МА15 ГОСТ 22635-77 свернутый в рулоне по 100 метров рулоне.
+                </h3>
+
+                <div class="search-card__price price">
+                  <span class="search-card__old price__old">1 550</span>
+                  <span class="search-card__new price__new">
+                    <span class="search-card__price-num price__num ">1 250</span>
+                    <span class="search-card__price-mark price__mark">₽</span><span
+                      class="search-card__price-unit price__unit">/кг</span>
+                  </span>
+                </div>
+
+                <span class="search-card__arrow">
+
+                </span>
+              </div>
+            </div>-->
+              <!-- modal-search__list -->
+            </div>
+            <div data-spinner-wrap class="modal-search__spinner">
+
             </div>
 
-            <div class="small-card">
-              <div class="small-card__preview">
-                <img src="./img/image/small-card.jpg" alt="" class="small-card__img">
-              </div>
-              <div class="small-card__info">
-                <div class="small-card__title">Двутавровые балки</div>
-                <div class="small-card__desc">125 товаров в категории</div>
-              </div>
-            </div>
-
-            <div class="small-card">
-              <div class="small-card__preview">
-                <img src="./img/image/small-card.jpg" alt="" class="small-card__img">
-              </div>
-              <div class="small-card__info">
-                <div class="small-card__title">Двутавровые балки</div>
-                <div class="small-card__desc">125 товаров в категории</div>
-              </div>
-            </div>
-
-            <div class="small-card">
-              <div class="small-card__preview">
-                <img src="./img/image/small-card.jpg" alt="" class="small-card__img">
-              </div>
-              <div class="small-card__info">
-                <div class="small-card__title">Двутавровые балки</div>
-                <div class="small-card__desc">125 товаров в категории</div>
-              </div>
-            </div>
-
-            <div class="small-card">
-              <div class="small-card__preview">
-                <img src="./img/image/small-card.jpg" alt="" class="small-card__img">
-              </div>
-              <div class="small-card__info">
-                <div class="small-card__title">Двутавровые балки</div>
-                <div class="small-card__desc">125 товаров в категории</div>
-              </div>
-            </div>
-
-            <div class="small-card">
-              <div class="small-card__preview">
-                <img src="./img/image/small-card.jpg" alt="" class="small-card__img">
-              </div>
-              <div class="small-card__info">
-                <div class="small-card__title">Двутавровые балки</div>
-                <div class="small-card__desc">125 товаров в категории</div>
-              </div>
-            </div>
           </div>
-          <!-- modal-search__list -->
-          <div class="modal-search__list">
-            <div class="search-card">
-              <h3 class="search-card__title">
-                Пруток магниевый 0,6х500х1000 мм МА15 ГОСТ 22635-77 свернутый в рулоне по 100 метров рулоне.
-              </h3>
 
-              <div class="search-card__price price">
-                <span class="search-card__old price__old">1 550</span>
-                <span class="search-card__new price__new">
-                  <span class="search-card__price-num price__num ">1 250</span>
-                  <span class="search-card__price-mark price__mark">₽</span><span
-                    class="search-card__price-unit price__unit">/кг</span>
-                </span>
-              </div>
-
-              <span class="search-card__arrow">
-
-              </span>
-            </div>
-
-            <div class="search-card">
-              <h3 class="search-card__title">
-                Пруток магниевый 0,6х500х1000 мм МА15 ГОСТ 22635-77 свернутый в рулоне по 100 метров рулоне.
-              </h3>
-
-              <div class="search-card__price price">
-                <span class="search-card__old price__old">1 550</span>
-                <span class="search-card__new price__new">
-                  <span class="search-card__price-num price__num ">1 250</span>
-                  <span class="search-card__price-mark price__mark">₽</span><span
-                    class="search-card__price-unit price__unit">/кг</span>
-                </span>
-              </div>
-
-              <span class="search-card__arrow">
-
-              </span>
-            </div>
-
-            <div class="search-card">
-              <h3 class="search-card__title">
-                Пруток магниевый 0,6х500х1000 мм МА15 ГОСТ 22635-77 свернутый в рулоне по 100 метров рулоне.
-              </h3>
-
-              <div class="search-card__price price">
-                <span class="search-card__old price__old">1 550</span>
-                <span class="search-card__new price__new">
-                  <span class="search-card__price-num price__num ">1 250</span>
-                  <span class="search-card__price-mark price__mark">₽</span><span
-                    class="search-card__price-unit price__unit">/кг</span>
-                </span>
-              </div>
-
-              <span class="search-card__arrow">
-
-              </span>
-            </div>
-
-            <div class="search-card">
-              <h3 class="search-card__title">
-                Пруток магниевый 0,6х500х1000 мм МА15 ГОСТ 22635-77 свернутый в рулоне по 100 метров рулоне.
-              </h3>
-
-              <div class="search-card__price price">
-                <span class="search-card__old price__old">1 550</span>
-                <span class="search-card__new price__new">
-                  <span class="search-card__price-num price__num ">1 250</span>
-                  <span class="search-card__price-mark price__mark">₽</span><span
-                    class="search-card__price-unit price__unit">/кг</span>
-                </span>
-              </div>
-
-              <span class="search-card__arrow">
-
-              </span>
-            </div>
-
-            <div class="search-card">
-              <h3 class="search-card__title">
-                Пруток магниевый 0,6х500х1000 мм МА15 ГОСТ 22635-77 свернутый в рулоне по 100 метров рулоне.
-              </h3>
-
-              <div class="search-card__price price">
-                <span class="search-card__old price__old">1 550</span>
-                <span class="search-card__new price__new">
-                  <span class="search-card__price-num price__num ">1 250</span>
-                  <span class="search-card__price-mark price__mark">₽</span><span
-                    class="search-card__price-unit price__unit">/кг</span>
-                </span>
-              </div>
-
-              <span class="search-card__arrow">
-
-              </span>
-            </div>
-
-            <div class="search-card">
-              <h3 class="search-card__title">
-                Пруток магниевый 0,6х500х1000 мм МА15 ГОСТ 22635-77 свернутый в рулоне по 100 метров рулоне.
-              </h3>
-
-              <div class="search-card__price price">
-                <span class="search-card__old price__old">1 550</span>
-                <span class="search-card__new price__new">
-                  <span class="search-card__price-num price__num ">1 250</span>
-                  <span class="search-card__price-mark price__mark">₽</span><span
-                    class="search-card__price-unit price__unit">/кг</span>
-                </span>
-              </div>
-
-              <span class="search-card__arrow">
-
-              </span>
-            </div>
-          </div>
-          <!-- modal-search__list -->
 
           <div class="modal-search__bottom">
             <input type="submit" form="searchForm" class="modal-search__btn btn red-btn" value="Все результаты поиска">

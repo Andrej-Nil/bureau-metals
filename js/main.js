@@ -34,6 +34,7 @@ class Server {
     this.fastOrderApi = '../json/getProd.json';
     this.addFavoriteApi = '../json/addFavorite.json';
     this.addBasketApi = '../json/addBasket.json';
+    this.searchApi = '../json/search.json';
   }
 
   getCity = async () => {
@@ -67,6 +68,12 @@ class Server {
     }
     const formData = this.createFormData(data);
     return await this.getResponse(this.POST, formData, this.addBasketApi)
+  }
+
+  getContent = async (data) => {
+    data._token = this._token;
+    const formData = this.createFormData(data)
+    return await this.getResponse(this.POST, formData, this.searchApi);
   }
 
   postForm = async ($form) => {
@@ -446,10 +453,26 @@ class SearchModal extends Modal {
     this.$searchArea = this.getElement('#searchArea');
     this.$areaListBody = this.getElement('#areaListBody');
     this.$areaList = this.getElement('#areaList');
+    this.$areaName = this.getElement('#areaName');
+    this.$content = this.getElement('[data-content]');
+    this.$spinnerWrap = this.getElement('[data-spinner-wrap]');
+    this.value = '';
+    this.area = '';
+    this.renderSpinner = new Render(this.$spinnerWrap);
+    this.render = new Render(this.$content);
     this.searchAreaListener();
     this.searchModalListener();
   }
 
+  openSearch = () => {
+    this.open();
+    this.render.clearParent();
+    this.$spinnerWrap.classList.add('modal-search__spinner--is-show');
+    this.renderSpinner.renderSpiner('Идет закрузка...');
+    this.renderContent();
+  }
+
+  //функции с AreaList
   slideToggleAreaList = () => {
     const isClose = this.$areaListBody.dataset.isClose;
     if (isClose === 'close') {
@@ -463,7 +486,6 @@ class SearchModal extends Modal {
 
   openAreaList = () => {
     const areaListHeight = this.$areaList.offsetHeight;
-
     this.$areaListBody.style.height = areaListHeight + 'px';
 
     setTimeout(() => {
@@ -476,8 +498,52 @@ class SearchModal extends Modal {
     this.$areaListBody.style.height = 0 + 'px';
   }
 
-  searchAreaListener = () => {
+  setAreaName = (radio) => {
+    const $radio = radio;
+    const area = $radio.dataset.area;
+    this.$areaName.innerHTML = area;
+    this.area = $radio.value;
+  }
 
+  renderContent = async () => {
+    const response = await this.getContent();
+  }
+
+  getContent = () => {
+    const data = {
+      products: 0,
+      caregory: 0,
+      news: 0,
+      value: this.value,
+    }
+    if (this.area === '') {
+      data.products = 6;
+      data.category = 4;
+      data.news = 0;
+      return this.server.getContent(data)
+    }
+    if (this.area === 'products') {
+      data.products = 8;
+      data.category = 0;
+      data.news = 0;
+      return this.server.getContent(data)
+    }
+    if (this.area === 'categoty') {
+      data.products = 0;
+      data.category = 8;
+      data.news = 0;
+      return this.server.getContent(data)
+    }
+    if (this.area === 'news') {
+      data.products = 0;
+      data.category = 0;
+      data.news = 8;
+      return this.server.getContent(data)
+    }
+  }
+
+  //слушатели
+  searchAreaListener = () => {
     if (!this.$searchArea) {
       return false;
     }
@@ -486,13 +552,29 @@ class SearchModal extends Modal {
 
   searchModalListener = () => {
     this.$modal.addEventListener('click', (e) => {
-      const $elTarget = e.target;
-
-      if (this.$areaListBody.dataset.isClose === 'open' && !$elTarget.closest('#areaListBody')) {
+      const target = e.target;
+      if (this.$areaListBody.dataset.isClose === 'open' && !target.closest('#areaListBody')) {
         this.closeAreaList();
         return true;
       }
+
+
     })
+
+    this.$modal.addEventListener('input', (e) => {
+      const target = e.target;
+      if (target.closest('[sdfds]')) {
+      }
+
+    })
+
+    this.$modal.addEventListener('change', (e) => {
+      const target = e.target;
+      if (target.closest('[name="type"]')) {
+        this.setAreaName(target);
+      }
+    })
+
   }
 }
 
@@ -744,6 +826,7 @@ class FastOrderModal extends Modal {
     const response = await this.getProduct(count);
     this.sentCountAndTotalPrice(response.content[0]);
   }
+
   changingValue = async () => {
     const count = this.checkCount(this.$input.value);
     const response = await this.getProduct(count);
@@ -765,6 +848,7 @@ class FastOrderModal extends Modal {
     this.$input.value = card.count;
     this.$totalPrice.innerHTML = card.total_price;
   }
+
   listener = () => {
     this.$modal.addEventListener('click', (e) => {
       if (e.target.closest('[data-modal-btn]')) {
@@ -1226,13 +1310,13 @@ doc.addEventListener('input', docInputListener);
 //окно поиска
 if ($openSearchBtn && $searchModal) {
   $openSearchBtn.addEventListener('click', () => {
-    searchModal.open();
+    searchModal.openSearch();
   });
 }
 
 if ($openSearchMobileBtn && $searchModal) {
   $openSearchMobileBtn.addEventListener('click', () => {
-    searchModal.open();
+    searchModal.openSearch();
   });
 }
 
@@ -1280,15 +1364,6 @@ if ($map) {
   yandexMap();
 }
 
-
-function counterInc(target) {
-  //const $incBtn = target.closest('[data-counter-inc]');
-  //const $productCard = $incBtn.closest('[data-product-card]');
-  //const productCardId
-  //const $input = $productCard.querySelector('[data-counter-input]');
-  //const inputValue = $input.value;
-  //console.log(inputValue);
-}
 
 function toggleDropdown(target) {
   if (target.closest('[data-dropdown-list]')) {
@@ -1342,6 +1417,8 @@ function addBasket(target) {
   }
 }
 
+
+
 function yandexMap() {
   let map;
   let marker;
@@ -1360,6 +1437,8 @@ function yandexMap() {
   }
   ymaps.ready(initMap);
 }
+
+
 
 function docClickListener(e) {
   const target = e.target;
@@ -1473,31 +1552,6 @@ function getProductCardObj($el) {
   }
 }
 
-
-
-
-
-//inc = async () => {
-//  const count = parseInt(this.$input.value) + 1;
-//  const response = await this.getProduct(count);
-//  this.sentCountAndTotalPrice(response.content[0]);
-//}
-
-//dec = async () => {
-//  const count = parseInt(this.$input.value) - 1;
-//  if (count <= 0) {
-//    this.$input.value = 1;
-//    return;
-//  }
-//  const response = await this.getProduct(count);
-//  this.sentCountAndTotalPrice(response.content[0]);
-//}
-//changingValue = async () => {
-//  const count = this.checkCount(this.$input.value);
-//  const response = await this.getProduct(count);
-//  this.sentCountAndTotalPrice(response.content[0]);
-//}
-
 function checkCount(count) {
   let value = parseInt(count);
   if (count <= 0) {
@@ -1508,11 +1562,6 @@ function checkCount(count) {
   }
   return value;
 }
-
-
-
-
-
 
 //function debounce(f, t) {
 //  return function (args) {
