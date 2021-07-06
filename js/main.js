@@ -25,6 +25,20 @@ const $favoriteCount = doc.querySelector('#favoriteCount');
 
 const $map = doc.querySelector('#map');
 
+class Debaunce {
+  constructor() { }
+  debaunce = (fn, ms) => {
+    let timeout;
+    return function () {
+      const fnCall = () => {
+        fn(arguments)
+      }
+      clearTimeout(timeout);
+      timeout = setTimeout(fnCall, ms)
+    };
+  }
+}
+
 class Server {
   constructor() {
     this._token = this.getToken();
@@ -70,7 +84,7 @@ class Server {
     return await this.getResponse(this.POST, formData, this.addBasketApi)
   }
 
-  getContent = async (data) => {
+  getSearchContent = async (data) => {
     data._token = this._token;
     const formData = this.createFormData(data)
     return await this.getResponse(this.POST, formData, this.searchApi);
@@ -211,6 +225,46 @@ class Render {
     this.$parent.innerHTML = this.getAddModalHtml(infoObj);
   }
 
+  renderSearchContent = (response) => {
+    if (response.categoty !== undefined) {
+      this.renderSearchCategory(response.categoty);
+    }
+    if (response.products !== undefined) {
+      this.renderSearchProducts(response.products);
+    }
+    if (response.news !== undefined) {
+    }
+
+  }
+
+  renderSearchCategory = (category) => {
+    const listCategoryHtml = this.createItemListHtml(category, this.getSearchCategoryHtml);
+    const caregoryHtml = (/*html*/`
+    <div class="modal-search__cards">
+      ${listCategoryHtml}
+    </div>
+    `)
+    this.$parent.insertAdjacentHTML('beforeEnd', caregoryHtml);
+  }
+
+  renderSearchProducts = (products) => {
+    const listProductsHtml = this.createItemListHtml(products, this.getSearchProductHtml);
+    const productsHtml = (/*html*/`
+    <div class="modal-search__list">
+      ${listProductsHtml}
+    </div>
+    `)
+    this.$parent.insertAdjacentHTML('beforeEnd', productsHtml);
+  }
+
+  createItemListHtml = (arr, getHtmlMarkup) => {
+    let itemListHtml = '';
+    arr.map((item) => {
+      itemListHtml = itemListHtml + getHtmlMarkup(item);
+    })
+    return itemListHtml;
+  }
+
   renderDeleteInfo = (type, info) => {
     const infoObj = {
       title: '',
@@ -287,7 +341,6 @@ class Render {
     `)
   }
 
-
   getColumnsCityListHtml = () => {
     return (/*html*/`
     <ul class="city-list__col"></ul>
@@ -345,6 +398,42 @@ class Render {
     `)
   }
 
+  getSearchCategoryHtml = (item) => {
+    return (/*html*/`
+    <a href="${item.slug}" class="small-card">
+      <div class="small-card__preview">
+        <picture class="small-card__picture">
+          <source srcset="${item.photo_webp}" type="image/webp">
+          <img src="${item.photo}" alt="" class="small-card__img">
+        </picture>
+      </div>
+      <div class="small-card__info">
+        <div class="small-card__title">${item.title}</div>
+        <div class="small-card__desc">${item.desc}</div>
+      </div>
+    </a>
+    `);
+  }
+
+  getSearchProductHtml = (item) => {
+    return (/*html*/`
+    <a href="${item.slug}" class="search-card">
+      <h3 class="search-card__title">
+        ${item.title}
+      </h3>
+
+      <div class="search-card__price price">
+        <span class="search-card__old price__old">${item.price_old}</span>
+        <span class="search-card__new price__new">
+          <span class="search-card__price-num price__num ">${item.price}</span>
+          <span class="search-card__price-mark price__mark">₽</span><span
+            class="search-card__price-unit price__unit">/кг</span>
+        </span>
+      </div>
+    </a>
+    `)
+  }
+
   //Общая функция отрисовки
   _render = ($parent, getHtmlMarkup, array = false) => {
     if (!$parent) {
@@ -362,6 +451,8 @@ class Render {
 
     $parent.insertAdjacentHTML('beforeEnd', markupAsStr);
   }
+
+  //Методы удаление дочерних элементов
 
   clearParent = ($parent = this.$parent) => {
     if (!$parent) {
@@ -454,25 +545,29 @@ class SearchModal extends Modal {
     this.$areaListBody = this.getElement('#areaListBody');
     this.$areaList = this.getElement('#areaList');
     this.$areaName = this.getElement('#areaName');
+    this.$input = this.getElement('#searchInput');
     this.$content = this.getElement('[data-content]');
     this.$spinnerWrap = this.getElement('[data-spinner-wrap]');
     this.value = '';
     this.area = '';
     this.renderSpinner = new Render(this.$spinnerWrap);
     this.render = new Render(this.$content);
+    this.debaunce = new Debaunce();
     this.searchAreaListener();
     this.searchModalListener();
+    this.searchInputListener();
   }
 
   openSearch = () => {
     this.open();
-    this.render.clearParent();
-    this.$spinnerWrap.classList.add('modal-search__spinner--is-show');
-    this.renderSpinner.renderSpiner('Идет закрузка...');
-    this.renderContent();
+    if (!this.$content.children.length) {
+      this.render.clearParent();
+      this.showSpinner();
+      this.createContent();
+    }
   }
 
-  //функции с AreaList
+  //методы работы с AreaList
   slideToggleAreaList = () => {
     const isClose = this.$areaListBody.dataset.isClose;
     if (isClose === 'close') {
@@ -505,8 +600,19 @@ class SearchModal extends Modal {
     this.area = $radio.value;
   }
 
-  renderContent = async () => {
+  //отрисовка контента
+  createContent = async () => {
     const response = await this.getContent();
+    if (!response.rez) {
+      this.renderSpinner.renderErrorMsg(response.error.desc);
+      console.log('Ошибка: ' + response.error.id)
+    }
+    if (response.rez) {
+      this.hideSpinner();
+      this.render.clearParent();
+      this.render.renderSearchContent(response);
+    }
+
   }
 
   getContent = () => {
@@ -520,29 +626,52 @@ class SearchModal extends Modal {
       data.products = 6;
       data.category = 4;
       data.news = 0;
-      return this.server.getContent(data)
+      return this.server.getSearchContent(data)
     }
     if (this.area === 'products') {
       data.products = 8;
       data.category = 0;
       data.news = 0;
-      return this.server.getContent(data)
+      return this.server.getSearchContent(data)
     }
     if (this.area === 'categoty') {
       data.products = 0;
       data.category = 8;
       data.news = 0;
-      return this.server.getContent(data)
+      return this.server.getSearchContent(data)
     }
     if (this.area === 'news') {
       data.products = 0;
       data.category = 0;
       data.news = 8;
-      return this.server.getContent(data)
+      return this.server.getSearchContent(data)
     }
   }
 
+
+  sendingSearchQuery = () => {
+    this.value = this.$input.value;
+    this.showSpinner();
+    this.createContent();
+  }
+
+  //показать скрыть спинер
+  showSpinner = () => {
+    this.$spinnerWrap.classList.add('modal-search__spinner--is-show');
+    this.renderSpinner.renderSpiner('Идет загрузка...');
+  }
+
+  hideSpinner = () => {
+    this.renderSpinner.delete('[data-spinner]');
+    this.$spinnerWrap.classList.remove('modal-search__spinner--is-show');
+  }
+
   //слушатели
+  searchInputListener = () => {
+    const sendingSearchQuery = this.debaunce.debaunce(this.sendingSearchQuery, 200);
+    this.$input.addEventListener('input', sendingSearchQuery);
+  }
+
   searchAreaListener = () => {
     if (!this.$searchArea) {
       return false;
@@ -553,21 +682,10 @@ class SearchModal extends Modal {
   searchModalListener = () => {
     this.$modal.addEventListener('click', (e) => {
       const target = e.target;
-      if (this.$areaListBody.dataset.isClose === 'open' && !target.closest('#areaListBody')) {
+      if (this.$areaListBody.dataset.isClose === 'open') {
         this.closeAreaList();
-        return true;
       }
-
-
     })
-
-    this.$modal.addEventListener('input', (e) => {
-      const target = e.target;
-      if (target.closest('[sdfds]')) {
-      }
-
-    })
-
     this.$modal.addEventListener('change', (e) => {
       const target = e.target;
       if (target.closest('[name="type"]')) {
@@ -575,7 +693,10 @@ class SearchModal extends Modal {
       }
     })
 
+
   }
+
+
 }
 
 class CityModal extends Modal {
@@ -591,6 +712,7 @@ class CityModal extends Modal {
     this.$searchCityInput = this.getElement('#searchCityInput');
     this.$cityList = this.getElement('#cityList');
     this.render = new Render(this.$cityList);
+    this.debaunce = new Debaunce();
     this.regionList = null;
     this.$listItem = null;
     this.inputValue = '';
@@ -601,10 +723,11 @@ class CityModal extends Modal {
   }
 
   changingSizeWindow = () => {
-    window.addEventListener('resize', () => {
-      this.setNubColumns();
-    });
+    const setNubColumns = this.debaunce.debaunce(this.setNubColumns, 300)
+    window.addEventListener('resize', setNubColumns);
   }
+
+
 
   setNubColumns = () => {
     let lientWidth = doc.documentElement.clientWidth;
@@ -747,12 +870,12 @@ class CityModal extends Modal {
   }
 
   searchCityInputListener = () => {
+    const searchCity = this.debaunce.debaunce(this.searchCity, 500)
     if (!this.$searchCityInput) {
       return false;
     }
-    this.$searchCityInput.addEventListener('input', this.searchCity);
+    this.$searchCityInput.addEventListener('input', searchCity);
   }
-
 }
 
 class FastOrderModal extends Modal {
@@ -1563,13 +1686,3 @@ function checkCount(count) {
   return value;
 }
 
-//function debounce(f, t) {
-//  return function (args) {
-//    let previousCall = this.lastCall;
-//    this.lastCall = Date.now();
-//    if (previousCall && ((this.lastCall - previousCall) <= t)) {
-//      clearTimeout(this.lastCallTimer);
-//    }
-//    this.lastCallTimer = setTimeout(() => f(args), t);
-//  }
-//}

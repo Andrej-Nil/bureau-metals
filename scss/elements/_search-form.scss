@@ -59,6 +59,7 @@
   line-height: 150%;
   width: 100%;
   cursor: pointer;
+  z-index: 1000;
   @media (min-width: 600px) {
     margin: 0 0 0 5px;
     width: 240px;
@@ -89,6 +90,7 @@
 
 .modal-search__content-wrap {
   position: relative;
+  margin-bottom: 20px;
 }
 
 .modal-search__content {
@@ -123,6 +125,7 @@
 }
 
 .modal-search__btn {
+  display: inline-block;
   border: none;
   outline: none;
   width: 100%;

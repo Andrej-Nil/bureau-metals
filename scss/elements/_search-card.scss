@@ -6,11 +6,15 @@
   margin-bottom: 10px;
   background: $milk;
   min-height: 60px;
+  transition: 0.2s ease-in-out;
   &:last-child {
     margin-bottom: 0;
   }
 
-  @media (min-width: 600px) {
+  @media (min-width: 1130px) {
+    &:hover {
+      box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.1);
+    }
   }
 }
 
