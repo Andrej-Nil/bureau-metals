@@ -129,6 +129,7 @@
 }
 
 .basket-rez {
+  display: none;
   position: absolute;
   top: 0;
   left: 0;
@@ -137,5 +138,6 @@
   background: rgba(255, 255, 255, 0.5);
 }
 
-//.basket-rez--is-show {
-//}
+.basket-rez--is-show {
+  display: block;
+}

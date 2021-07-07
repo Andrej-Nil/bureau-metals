@@ -89,6 +89,10 @@ class Server {
     return await this.getResponse(this.POST, formData, this.addBasketApi)
   }
 
+  removeBasketCard = () => {
+    console.log('test')
+  }
+
   getSearchContent = async (data) => {
     data._token = this._token;
     const formData = this.createFormData(data)
@@ -1672,8 +1676,6 @@ function addBasket(target) {
   }
 }
 
-
-
 function yandexMap() {
   let map;
   let marker;
@@ -1692,8 +1694,6 @@ function yandexMap() {
   }
   ymaps.ready(initMap);
 }
-
-
 
 function docClickListener(e) {
   const target = e.target;
@@ -1722,7 +1722,9 @@ function docClickListener(e) {
 }
 
 function removeBasketcard(target) {
-
+  const $productCard = target.closest('[data-product-card ]');
+  const id = $productCard.dataset.id;
+  server.removeBasketCard(id)
 }
 
 function docInputListener(e) {
@@ -1738,7 +1740,6 @@ function docChangListener(e) {
     changingValue(target)
   }
 }
-
 
 // Функции счетчика товаров
 function counter(target) {
