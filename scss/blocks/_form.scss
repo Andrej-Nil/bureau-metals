@@ -8,6 +8,11 @@
   display: block;
 }
 
+.form__success {
+  display: none;
+  margin-bottom: 20px;
+}
+
 .form__inputs {
   display: flex;
   flex-wrap: wrap;

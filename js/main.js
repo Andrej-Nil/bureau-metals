@@ -19,6 +19,7 @@ const $consultationModal = doc.querySelector('#consultationModal');
 
 const $callBackForm = doc.querySelector('#callBackForm');
 const $fastOrdenForm = doc.querySelector('#fastOrdenForm');
+const $feedBackForm = doc.querySelector('#feedBackForm');
 
 const $basketCount = doc.querySelector('#basketCount');
 const $favoriteCount = doc.querySelector('#favoriteCount');
@@ -1068,7 +1069,7 @@ class AddFavoriteModal extends InfoModal {
     }
     this.$stiker = this.$productCard.querySelector('[data-sticer-favirite]');
     this.$icon = this.$productCard.querySelector('[data-icon-favorite]');
-    this.$addText = this.$productCard.querySelector('[add-favorite-text]');
+    this.$addText = this.$productCard.querySelector('[data-add-favorite-text]');
     this.$favoriteCount = doc.querySelector('#favoriteCount');
   }
 
@@ -1208,13 +1209,14 @@ class Form {
     }
     this.$inputs = this.$form.querySelectorAll('[data-input]');
     this.$formMsg = this.$form.querySelector('[data-form-msg]');
-    this.$resultBlock = this.$form.closest('[data-modal]').querySelector('[data-result]');
+    this.$resultBlock = this.$form.closest('[data-form]').querySelector('[data-result]');
     this.server = new Server();
   }
 
   formCheck = (...$inputs) => {
     let res = true;
     $inputs.forEach((item) => {
+
       res = this.checkInput(item) && res;
     })
     if (!res) {
@@ -1274,11 +1276,11 @@ class Form {
       $inputBlock.classList.remove('input--is-error');
       return true;
     } else {
-      if (value === '') {
-        $inputMsg.innerHTML = 'Обязательное поле';
-      } else {
-        $inputMsg.innerHTML = 'Ошибка заполнения';
-      }
+      //if (value === '') {
+      //  $inputMsg.innerHTML = 'Обязательное поле';
+      //} else {
+      //  $inputMsg.innerHTML = 'Ошибка заполнения';
+      //}
 
       $inputMsg.classList.add('placeholder--is-error');
       $inputBlock.classList.add('input--is-error');
@@ -1287,7 +1289,7 @@ class Form {
   }
 
   statusVisualCheckbox($checkbox, result = false) {
-    const $checkboxBlock = $checkbox.closest('[checkbox-block]');
+    const $checkboxBlock = $checkbox.closest('[data-checkbox-block]');
     if (!result) {
       $checkboxBlock.classList.add('animation-shake');
       setTimeout(() => {
@@ -1301,12 +1303,13 @@ class Form {
   sendForm = async () => {
     const response = await this.server.postForm(this.$form);
     if (!response.rez) {
-      this.showErrorMessage(response.error)
+      this.resultBlockHide();
+      this.showErrorMessage(response.error);
     }
 
     if (response.rez) {
       this.clearForm();
-
+      this.resultBlockShow()
     }
   }
 
@@ -1316,18 +1319,31 @@ class Form {
     console.log(`Ошибка: ${errorInfo.id}`);
   }
 
+  resultBlockShow = () => {
+    if (!this.$resultBlock) {
+      return
+    }
+    this.$resultBlock.classList.add('result--is-show');
+  }
+
+  resultBlockHide = () => {
+    if (!this.$resultBlock) {
+      return
+    }
+    this.$resultBlock.classList.remove('result--is-show');
+  }
+
   clearForm = () => {
     this.$inputs.forEach(($item) => {
       $item.value = '';
     })
-    console.log(this.$textarea);
     if (this.$textarea) {
       this.$textarea.value = '';
     }
 
     this.$formMsg.classList.remove('form__message--is-show');
     this.$formMsg.innerHTML = '';
-    this.resultBlockShow();
+
   }
 }
 
@@ -1343,6 +1359,7 @@ class CallBackForm extends Form {
     this.$checkbox = this.$form.querySelector('[data-checkbox]');
     this.$submitBtn = this.$form.querySelector('[data-submit]');
     this.$inputPhone = this.$form.querySelector('[name="phone"]');
+
     this.listeners();
     this.send();
   }
@@ -1356,12 +1373,7 @@ class CallBackForm extends Form {
     });
   }
 
-  resultBlockShow = () => {
-    if (!this.$resultBlock) {
-      return
-    }
-    this.$resultBlock.classList.add('modal__result--is-show');
-  }
+
   listeners = () => {
     this.$inputPhone.addEventListener('blur', () => {
       this.checkInput(this.$inputPhone);
@@ -1394,15 +1406,9 @@ class FastOrdenForm extends Form {
       const result = this.formCheck(this.$inputPhone, this.$inputMail, this.$checkbox);
       if (result) {
         this.sendForm();
+
       }
     });
-  }
-
-  resultBlockShow = () => {
-    if (!this.$resultBlock) {
-      return
-    }
-    this.$resultBlock.classList.add('modal__result--is-show');
   }
   listeners = () => {
     this.$inputPhone.addEventListener('blur', () => {
@@ -1413,9 +1419,51 @@ class FastOrdenForm extends Form {
     })
   }
 }
+
+class FeedBackForm extends Form {
+  constructor(formId) {
+    super(formId);
+    this.initFeedBackForm();
+  }
+
+  initFeedBackForm = () => {
+    if (!this.$form) {
+      return false;
+    }
+    this.$checkbox = this.$form.querySelector('[data-checkbox]');
+    this.$submitBtn = this.$form.querySelector('[data-submit]');
+    this.$inputPhone = this.$form.querySelector('[name="phone"]');
+    this.$inputMail = this.$form.querySelector('[name="email"]');
+    this.listeners();
+    this.send();
+  }
+
+  send = () => {
+    this.$submitBtn.addEventListener('click', () => {
+      const result = this.formCheck(this.$inputPhone, this.$inputMail, this.$checkbox);
+      this.resultBlockHide();
+      if (result) {
+        this.sendForm();
+      }
+    });
+  }
+
+
+  listeners = () => {
+    this.$inputPhone.addEventListener('blur', () => {
+      this.checkInput(this.$inputPhone);
+    })
+    this.$inputMail.addEventListener('blur', () => {
+      this.checkInput(this.$inputMail);
+    })
+  }
+}
+
+
 // формы
 const callBackForm = new CallBackForm('#callBackForm');
 const fastOrdenForm = new FastOrdenForm('#fastOrdenForm');
+const feedBackForm = new FeedBackForm('#feedBackForm');
 
 const server = new Server();
 // окна
@@ -1479,6 +1527,12 @@ if ($callBackForm) {
 // fastOrdenForm
 if ($fastOrdenForm) {
   $fastOrdenForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+  })
+}
+
+if ($feedBackForm) {
+  $feedBackForm.addEventListener('submit', (e) => {
     e.preventDefault();
   })
 }

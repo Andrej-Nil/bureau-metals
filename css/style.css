@@ -284,6 +284,18 @@ body {
   text-decoration: underline;
 }
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  transition: all 5000s ease-in-out 0s;
+}
+
 @keyframes shake {
   0% {
     transform: translate(0, 0);
@@ -2885,6 +2897,11 @@ body {
   display: block;
 }
 
+.form__success {
+  display: none;
+  margin-bottom: 20px;
+}
+
 .form__inputs {
   display: flex;
   flex-wrap: wrap;
@@ -4240,6 +4257,10 @@ body {
   }
 }
 
+.header-nav__m-catalog {
+  cursor: pointer;
+}
+
 .header-nav__m-search {
   position: relative;
   display: block;
@@ -5124,7 +5145,7 @@ body {
   background: rgba(29, 29, 27, 0.5);
 }
 
-.modal__result--is-show {
+.result--is-show {
   display: flex;
 }
 
