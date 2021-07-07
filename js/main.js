@@ -53,7 +53,7 @@ class Server {
     this.addFavoriteApi = '../json/addFavorite.json';
     this.addBasketApi = '../json/addBasket.json';
     this.searchApi = '../json/search.json';
-    this.searchApi = '../json/removeBasket.json';
+    this.removeBaskethApi = '../json/removeBasket.json';
   }
 
   getCity = async () => {
@@ -89,8 +89,13 @@ class Server {
     return await this.getResponse(this.POST, formData, this.addBasketApi)
   }
 
-  removeBasketCard = () => {
-    console.log('test')
+  removeBasketCard = async (id) => {
+    const data = {
+      _token: this._token,
+      id: id,
+    }
+    const formData = this.createFormData(data);
+    return await this.getResponse(this.POST, formData, this.removeBaskethApi)
   }
 
   getSearchContent = async (data) => {
@@ -235,6 +240,7 @@ class Render {
   }
 
   renderSearchContent = (response) => {
+    console.log(response)
     if (response.categoty !== undefined) {
       this.renderSearchCategory(response.categoty);
     }
@@ -540,6 +546,34 @@ class Modal {
   }
 }
 
+class Basket {
+  constructor(basketId) {
+    this.basket = doc.querySelector(basketId);
+  }
+
+  //function setTotalBasketInfo(cardInfo) {
+  //  if ($basketCount) {
+  //    $basketCount.innerHTML = cardInfo.count;
+  //  }
+
+  //  if ($basketProductsTotalPrice) {
+  //    $basketProductsTotalPrice.innerHTML = cardInfo.total_price + ' ₽';
+  //  }
+
+  //  if ($basketProductsCount) {
+  //    $basketProductsCount.innerHTML = cardInfo.count;
+  //  }
+
+  //}
+
+
+  //async function removeBasketCard(target) {
+  //  const $productCard = target.closest('[data-product-card ]');
+  //  const id = $productCard.dataset.id;
+  //  const response = await server.removeBasketCard(id);
+  //}
+}
+
 class SearchModal extends Modal {
   constructor(modalId) {
     super(modalId);
@@ -565,6 +599,7 @@ class SearchModal extends Modal {
     this.searchAreaListener();
     this.searchModalListener();
     this.searchInputListener();
+
   }
 
   openSearch = () => {
@@ -690,7 +725,7 @@ class SearchModal extends Modal {
 
   searchModalListener = () => {
     this.$modal.addEventListener('click', (e) => {
-      const target = e.target;
+      //const target = e.target;
       if (this.$areaListBody.dataset.isClose === 'open') {
         this.closeAreaList();
       }
@@ -1192,9 +1227,6 @@ class AddBasketModal extends InfoModal {
     this.$btn.innerHTML = 'В карзине';
     this.$input.value = this.response.content[0].count;
     this.$productCard.dataset.inBasket = '1';
-    this.setTotalBasketInfo();
-
-
   }
 
   remove = () => {
@@ -1207,8 +1239,6 @@ class AddBasketModal extends InfoModal {
     this.$btn.innerHTML = 'Заказать';
     this.$productCard.dataset.inBasket = '0';
   }
-
-
 
 }
 
@@ -1551,6 +1581,8 @@ const consultationModal = new ConsultationModal('#consultationModal');
 const addFavoriteModal = new AddFavoriteModal('#addFavoriteModal', 'favorite');
 const addBasketModal = new AddBasketModal('#addBasketModal', 'basket');
 
+const basket = new Basket('#basket');
+
 doc.addEventListener('click', docClickListener);
 doc.addEventListener('input', docInputListener);
 
@@ -1716,15 +1748,9 @@ function docClickListener(e) {
     counter(target);
   }
   if (target.closest('[data-remove-card]')) {
-    removeBasketcard(target);
+    removeBasketCard(target);
   }
 
-}
-
-function removeBasketcard(target) {
-  const $productCard = target.closest('[data-product-card ]');
-  const id = $productCard.dataset.id;
-  server.removeBasketCard(id)
 }
 
 function docInputListener(e) {
@@ -1761,10 +1787,17 @@ async function inc($btn) {
 
   if (cardObj.isInBasket === '1') {
     const response = await server.addBsasket(cardObj.id, count);
-    cardObj.$input.value = response.content[0].count;
-    setTotalBasketInfo(response.card);
+    if (response.rez) {
+      cardObj.$input.value = response.content[0].count;
+      setTotalBasketCount(response.card.count);
+      setProductTotalPrice(cardObj.$totalPrice, response.card.total_price);
+    }
+    if (!response.rez) {
+      return;
+    }
   }
 }
+
 
 async function dec($btn) {
   const cardObj = getProductCardObj($btn);
@@ -1781,25 +1814,18 @@ async function dec($btn) {
 
   if (cardObj.isInBasket === '1') {
     const response = await server.addBsasket(cardObj.id, count);
-    cardObj.$input.value = response.content[0].count;
-    setTotalBasketInfo(response.card);
+
+    if (response.rez) {
+      cardObj.$input.value = response.content[0].count;
+      setTotalBasketCount(response.card.count);
+      setProductTotalPrice(cardObj.$totalPrice, response.card.total_price);
+    }
+    if (!response.rez) {
+      return;
+    }
   }
 }
 
-function setTotalBasketInfo(cardInfo) {
-  if ($basketCount) {
-    $basketCount.innerHTML = cardInfo.count;
-  }
-
-  if ($basketProductsTotalPrice) {
-    $basketProductsTotalPrice.innerHTML = cardInfo.total_price + ' ₽';
-  }
-
-  if ($basketProductsCount) {
-    $basketProductsCount.innerHTML = cardInfo.count;
-  }
-
-}
 
 async function changingValue(target) {
   const $input = target.closest('[data-counter-input]');
@@ -1812,19 +1838,42 @@ async function changingValue(target) {
 
   if (cardObj.isInBasket === '1') {
     const response = await server.addBsasket(cardObj.id, count);
-    cardObj.$input.value = response.content[0].count;
-    $basketCount.innerHTML = response.card.count;
+    if (response.rez) {
+
+      cardObj.$input.value = response.content[0].count;
+      setTotalBasketCount(response.card.count);
+      setProductTotalPrice(cardObj.$totalPrice, response.card.total_price);
+    }
+    if (!response.rez) {
+      return;
+    }
+
   }
+}
+
+function setProductTotalPrice($totalPrice, price) {
+  if ($totalPrice) {
+    $totalPrice.innerHTML = price.toLocaleString();
+  }
+}
+
+function setTotalBasketCount(count) {
+  if ($basketCount) {
+    $basketCount.innerHTML = count;
+  }
+
 }
 
 function getProductCardObj($el) {
   const $card = $el.closest('[data-product-card]');
   const $input = $card.querySelector('[data-counter-input]');
+  const $totalPrice = $card.querySelector('[data-total-price]');
   const isInBasket = $card.dataset.inBasket;
   const id = $card.dataset.id;
   return {
     $card: $card,
     $input: $input,
+    $totalPrice: $totalPrice,
     isInBasket: isInBasket,
     id: id,
   }

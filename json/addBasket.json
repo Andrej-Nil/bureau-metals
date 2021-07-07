@@ -19,7 +19,8 @@
 			"count": 5,
 			"isSale": true, 
 			"percent": "10%",
-			"price_old": "3500", 
+			"price_old": "3500",
+			"total_price": "15000",
 			"isFavorite": false,
 			"isBusket": true
 		}
