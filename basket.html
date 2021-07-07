@@ -88,7 +88,6 @@
         </div>
       </div>
       <!--header__main-->
-
       <nav class="header-nav container">
         <div class="header-nav__desktop">
           <div class="header__catalog h-catalog popup-nav-wrap">
@@ -280,21 +279,19 @@
               <h3 class="basket__title">ваша корзина</h3>
               <div class="basket-total">
                 <p class="basket-total__products">В корзине
-                  <span class="basket-total__products-count">4</span>
+                  <span id="basketProductsCount" class="basket-total__products-count">4</span>
                   покупки
                 </p>
                 <p class="basket-total__price">на сумму
-                  <span class="basket-total__price-count">135 000 ₽</span>
-
-
+                  <span id="basketProductsTotalPrice" class="basket-total__price-count">135 000 ₽</span>
                 </p>
               </div>
             </div>
             <!-- basket__list -->
-            <div class="basket__list">
+            <div id="basketList" class="basket__list">
 
-              <div class="basket-card">
-                <i class="basket-card__remove"></i>
+              <div class="basket-card" data-product-card data-id="3434" data-in-basket="1">
+                <i class="basket-card__remove" data-remove-card></i>
                 <div class="basket-card__top">
                   <h3 class="basket-card__title">
                     <a href="product-page.html" class="basket-card__link link">
@@ -302,7 +299,7 @@
                     </a>
                   </h3>
 
-                  <div class="basket__favorite favorite">
+                  <div class="basket__favorite favorite" data-add-favorite>
                     <i class="product-card__favorite-icon favorite__icon" data-icon-favorite></i>
                     <span class="favorite__add" data-add-favorite-text>добавить в Избранное</span>
                   </div>
@@ -319,15 +316,15 @@
                     </span>
                   </div>
 
-                  <div class="basket-card__counter counter">
-                    <input type="text" class="basket-card__input input counter__input" value="1" />
+                  <div class="basket-card__counter counter" data-counter>
+                    <input type="text" class="basket-card__input input counter__input" value="1" data-counter-input />
                     <div class=" counter__controls">
-                      <span class="basket-card__counter-btn counter__btn">
+                      <span class="basket-card__counter-btn counter__btn" data-counter-btn="inc">
                         <i class="basket-card__counter-icon 
                               counter__icon counter__inc
                             "></i>
                       </span>
-                      <span class="basket-card__counter-btn counter__btn">
+                      <span class="basket-card__counter-btn counter__btn" data-counter-btn="dec">
                         <i class="basket-card__counter-icon 
                               counter__icon counter__dec
                             "></i>
@@ -336,287 +333,59 @@
                   </div>
 
                   <div class="basket-card__price">
-                    <span class="basket-card__price-num">1 111 250</span><span class="basket-card__price-mark">₽</span>
+                    <span class="basket-card__price-num" data-total-price>1 111 250</span><span
+                      class="basket-card__price-mark">₽</span>
                   </div>
                 </div>
+                <div class="basket-rez" data-basket-rez></div>
               </div>
 
-              <div class="basket-card">
-                <i class="basket-card__remove"></i>
-                <div class="basket-card__top">
-                  <h3 class="basket-card__title">
-                    <a href="product-page.html" class="basket-card__link link">
-                      Пруток магниевый 0,6х500х1000 мм МА15 ГОСТ 22635-77 свернутый в рулоне по 100 метров
-                    </a>
-                  </h3>
-
-                  <div class="basket__favorite favorite">
-                    <i class="product-card__favorite-icon favorite__icon" data-icon-favorite></i>
-                    <span class="favorite__add" data-add-favorite-text>добавить в Избранное</span>
-                  </div>
-
-                </div>
-
-                <div class="basket-card__bottom">
-                  <div class="basket-card__price price">
-                    <span class="price__old">1 550</span>
-                    <span class="price__new">
-                      <span class="basket__price-num price__num">1 250</span>
-                      <span class="basket__price-mark price__mark">₽</span><span
-                        class="basket__price-unit price__unit">/кг</span>
-                    </span>
-                  </div>
-
-                  <div class="basket-card__counter counter">
-                    <input type="text" class="basket-card__input input counter__input" value="1" />
-                    <div class=" counter__controls">
-                      <span class="basket-card__counter-btn counter__btn">
-                        <i class="basket-card__counter-icon 
-                              counter__icon counter__inc
-                            "></i>
-                      </span>
-                      <span class="basket-card__counter-btn counter__btn">
-                        <i class="basket-card__counter-icon 
-                              counter__icon counter__dec
-                            "></i>
-                      </span>
-                    </div>
-                  </div>
-
-                  <div class="basket-card__price">
-                    <span class="basket-card__price-num">1 111 250</span><span class="basket-card__price-mark">₽</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="basket-card">
-                <i class="basket-card__remove"></i>
-                <div class="basket-card__top">
-                  <h3 class="basket-card__title">
-                    <a href="product-page.html" class="basket-card__link link">
-                      Пруток магниевый 0,6х500х1000 мм МА15 ГОСТ 22635-77 свернутый в рулоне по 100 метров
-                    </a>
-                  </h3>
-
-                  <div class="basket__favorite favorite">
-                    <i class="product-card__favorite-icon favorite__icon" data-icon-favorite></i>
-                    <span class="favorite__add" data-add-favorite-text>добавить в Избранное</span>
-                  </div>
-
-                </div>
-
-                <div class="basket-card__bottom">
-                  <div class="basket-card__price price">
-                    <span class="price__old">1 550</span>
-                    <span class="price__new">
-                      <span class="basket__price-num price__num">1 250</span>
-                      <span class="basket__price-mark price__mark">₽</span><span
-                        class="basket__price-unit price__unit">/кг</span>
-                    </span>
-                  </div>
-
-                  <div class="basket-card__counter counter">
-                    <input type="text" class="basket-card__input input counter__input" value="1" />
-                    <div class=" counter__controls">
-                      <span class="basket-card__counter-btn counter__btn">
-                        <i class="basket-card__counter-icon 
-                              counter__icon counter__inc
-                            "></i>
-                      </span>
-                      <span class="basket-card__counter-btn counter__btn">
-                        <i class="basket-card__counter-icon 
-                              counter__icon counter__dec
-                            "></i>
-                      </span>
-                    </div>
-                  </div>
-
-                  <div class="basket-card__price">
-                    <span class="basket-card__price-num">1 111 250</span><span class="basket-card__price-mark">₽</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="basket-card">
-                <i class="basket-card__remove"></i>
-                <div class="basket-card__top">
-                  <h3 class="basket-card__title">
-                    <a href="product-page.html" class="basket-card__link link">
-                      Пруток магниевый 0,6х500х1000 мм МА15 ГОСТ 22635-77 свернутый в рулоне по 100 метров
-                    </a>
-                  </h3>
-
-                  <div class="basket__favorite favorite">
-                    <i class="product-card__favorite-icon favorite__icon" data-icon-favorite></i>
-                    <span class="favorite__add" data-add-favorite-text>добавить в Избранное</span>
-                  </div>
-
-                </div>
-
-                <div class="basket-card__bottom">
-                  <div class="basket-card__price price">
-                    <span class="price__old">1 550</span>
-                    <span class="price__new">
-                      <span class="basket__price-num price__num">1 250</span>
-                      <span class="basket__price-mark price__mark">₽</span><span
-                        class="basket__price-unit price__unit">/кг</span>
-                    </span>
-                  </div>
-
-                  <div class="basket-card__counter counter">
-                    <input type="text" class="basket-card__input input counter__input" value="1" />
-                    <div class=" counter__controls">
-                      <span class="basket-card__counter-btn counter__btn">
-                        <i class="basket-card__counter-icon 
-                              counter__icon counter__inc
-                            "></i>
-                      </span>
-                      <span class="basket-card__counter-btn counter__btn">
-                        <i class="basket-card__counter-icon 
-                              counter__icon counter__dec
-                            "></i>
-                      </span>
-                    </div>
-                  </div>
-
-                  <div class="basket-card__price">
-                    <span class="basket-card__price-num">1 111 250</span><span class="basket-card__price-mark">₽</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="basket-card">
-                <i class="basket-card__remove"></i>
-                <div class="basket-card__top">
-                  <h3 class="basket-card__title">
-                    <a href="product-page.html" class="basket-card__link link">
-                      Пруток магниевый 0,6х500х1000 мм МА15 ГОСТ 22635-77 свернутый в рулоне по 100 метров
-                    </a>
-                  </h3>
-
-                  <div class="basket__favorite favorite">
-                    <i class="product-card__favorite-icon favorite__icon" data-icon-favorite></i>
-                    <span class="favorite__add" data-add-favorite-text>добавить в Избранное</span>
-                  </div>
-
-                </div>
-
-                <div class="basket-card__bottom">
-                  <div class="basket-card__price price">
-                    <span class="price__old">1 550</span>
-                    <span class="price__new">
-                      <span class="basket__price-num price__num">1 250</span>
-                      <span class="basket__price-mark price__mark">₽</span><span
-                        class="basket__price-unit price__unit">/кг</span>
-                    </span>
-                  </div>
-
-                  <div class="basket-card__counter counter">
-                    <input type="text" class="basket-card__input input counter__input" value="1" />
-                    <div class=" counter__controls">
-                      <span class="basket-card__counter-btn counter__btn">
-                        <i class="basket-card__counter-icon 
-                              counter__icon counter__inc
-                            "></i>
-                      </span>
-                      <span class="basket-card__counter-btn counter__btn">
-                        <i class="basket-card__counter-icon 
-                              counter__icon counter__dec
-                            "></i>
-                      </span>
-                    </div>
-                  </div>
-
-                  <div class="basket-card__price">
-                    <span class="basket-card__price-num">1 111 250</span><span class="basket-card__price-mark">₽</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="basket-card">
-                <i class="basket-card__remove"></i>
-                <div class="basket-card__top">
-                  <h3 class="basket-card__title">
-                    <a href="product-page.html" class="basket-card__link link">
-                      Пруток магниевый 0,6х500х1000 мм МА15 ГОСТ 22635-77 свернутый в рулоне по 100 метров
-                    </a>
-                  </h3>
-
-                  <div class="basket__favorite favorite">
-                    <i class="product-card__favorite-icon favorite__icon" data-icon-favorite></i>
-                    <span class="favorite__add" data-add-favorite-text>добавить в Избранное</span>
-                  </div>
-
-                </div>
-
-                <div class="basket-card__bottom">
-                  <div class="basket-card__price price">
-                    <span class="price__old">1 550</span>
-                    <span class="price__new">
-                      <span class="basket__price-num price__num">1 250</span>
-                      <span class="basket__price-mark price__mark">₽</span><span
-                        class="basket__price-unit price__unit">/кг</span>
-                    </span>
-                  </div>
-
-                  <div class="basket-card__counter counter">
-                    <input type="text" class="basket-card__input input counter__input" value="1" />
-                    <div class=" counter__controls">
-                      <span class="basket-card__counter-btn counter__btn">
-                        <i class="basket-card__counter-icon 
-                              counter__icon counter__inc
-                            "></i>
-                      </span>
-                      <span class="basket-card__counter-btn counter__btn">
-                        <i class="basket-card__counter-icon 
-                              counter__icon counter__dec
-                            "></i>
-                      </span>
-                    </div>
-                  </div>
-
-                  <div class="basket-card__price">
-                    <span class="basket-card__price-num">1 111 250</span><span class="basket-card__price-mark">₽</span>
-                  </div>
-                </div>
-              </div>
             </div>
             <!-- basket__list -->
 
           </div>
 
-          <div class="basket__form">
+          <div class="basket__form" data-form>
             <div class="basket__top">
               <h3 class="basket__title">Оформление заказа</h3>
             </div>
-            <form action="" class="basket-form">
+            <form id="basketForm" action="../json/send-form.json" class="feetback-form">
+              <p class="form__message" data-form-msg></p>
+              <p class="form__success" data-result>Успешная отправка</p>
               <div class="form__inputs">
-                <div class="basket__form-input input-block input">
-                  <input type="text" name="name" class="input-no-bd" placeholder=" " />
-                  <span class="input__placeholder">Как вас зовут?</span>
+                <div class="input-block input" data-input-block>
+                  <input type="text" name="name" class="input-no-bd" placeholder=" " data-input />
+                  <span class="input__placeholder" data-placeholder="Как вас зовут?" data-input-msg>Как вас
+                    зовут?</span>
                 </div>
-                <div class="basket__form-input input-block input">
-                  <input type="text" name="phone" class="input-no-bd" placeholder=" " />
-                  <span class="input__placeholder">Ваш телефон</span>
+
+                <div class="input-block input" data-input-block>
+                  <input type="text" name="phone" class="input-no-bd" placeholder=" " data-input />
+                  <span class="input__placeholder" data-placeholder="Ваш телефон" data-input-msg>Ваш телефон</span>
                 </div>
-                <div class="basket__form-input input-block input">
-                  <input type="text" name="mail" class="input-no-bd" placeholder=" " />
-                  <span class="input__placeholder">Ваш почта</span>
+
+                <div class="input-block input" data-input-block>
+                  <input type="text" name="email" class="input-no-bd" placeholder=" " data-input />
+                  <span class="input__placeholder" data-placeholder="Ваш почта" data-input-msg>Ваш почта</span>
                 </div>
-                <div class="basket__form-input input-block input">
-                  <input type="text" name="city" class="input-no-bd" placeholder=" " />
-                  <span class="input__placeholder">Город</span>
+
+                <div class="input-block input" data-input-block>
+                  <input type="text" name="city" class="input-no-bd" placeholder=" " data-input />
+                  <span class="input__placeholder" data-placeholder="Город" data-input-msg>Город</span>
                 </div>
-                <div class="input-block input textarea">
-                  <textarea type="text" name="message" class="input-no-bd  textarea__input" placeholder=" "></textarea>
-                  <span class="input__placeholder">Как вас зовут?</span>
+
+                <div class="input-block input textarea" data-input-block>
+                  <textarea name="message" class="input-no-bd feetback-form__textarea textarea__input" placeholder=" "
+                    data-input></textarea>
+                  <span class="input__placeholder" data-placeholder="Сообщение...">Сообщение...</span>
                 </div>
               </div>
-              <div class="basket__form-btn feetback-form__btn">
-                <input type="submit" class="basket__form-sumbit from__sumbit btn red-btn" value="Связаться с нами">
 
-                <label class="basket__form-approval  feetback-form__approval">
-                  <input type="checkbox" class="from-approval__checkbox" checked>
+              <div class="feetback-form__btn">
+                <input type="submit" class="from__sumbit btn red-btn" value="Связаться с нами" data-submit>
+
+                <label class="feetback-form__approval" data-checkbox-block>
+                  <input type="checkbox" name="consent" class="from-approval__checkbox" data-checkbox checked>
                   <span class="from-approval__fake-checkbox fake-checkbox">
 
                   </span>
@@ -626,9 +395,8 @@
                   </span>
                 </label>
               </div>
+
             </form>
-
-
           </div>
 
         </div>
@@ -1800,6 +1568,8 @@
 
     <!-- modals -->
 
+    <!-- modals -->
+
     <!-- added to cart -->
     <div id="addBasketModal" class="add-modal" data-add="close">
       <div class="modal__close" data-close></div>
@@ -1829,7 +1599,7 @@
     <!-- added to Favorite -->
 
     <!-- callBackModal -->
-    <div id="callBackModal" class="modal-bg modal--is-hide" data-close data-modal>
+    <div id="callBackModal" class="modal-bg modal--is-hide" data-close data-modal data-form>
       <div class="modal">
         <div class="modal__close" data-close></div>
         <div class="modal__content">
@@ -1854,7 +1624,7 @@
             <div class="from__bottom">
               <input type="submit" class="from__sumbit btn red-btn" value="Отправить заявку" data-submit>
 
-              <label class="from-approval" checkbox-block>
+              <label class="from-approval" data-checkbox-block>
                 <input type="checkbox" name="consent" class="from-approval__checkbox" data-checkbox checked>
                 <span class="from-approval__fake-checkbox fake-checkbox">
                 </span>
@@ -1878,7 +1648,7 @@
     <!-- callBackModal -->
 
     <!-- fastOrde -->
-    <div id="fastOrdenModal" class="modal-bg modal--is-hide" data-close data-modal>
+    <div id="fastOrdenModal" class="modal-bg modal--is-hide" data-close data-modal data-form>
       <div class="modal">
         <div class="modal__close" data-close></div>
         <div class="modal__content">
@@ -1920,7 +1690,7 @@
             <div class="from__bottom">
               <input type="submit" class="from__sumbit btn red-btn" value="Отправить заявку" data-submit>
 
-              <label class="from-approval" checkbox-block>
+              <label class="from-approval" data-checkbox-block>
                 <input type="checkbox" name="consent" class="from-approval__checkbox" data-checkbox checked>
                 <span class="from-approval__fake-checkbox fake-checkbox">
                 </span>
@@ -1971,7 +1741,7 @@
           <h3 class="modal__title">Поиск</h3>
 
           <div class="search__wrap">
-            <form id="searchForm" action="" method="GET" class="search-form">
+            <form id="searchForm" action="./json/search.json" method="GET" class="search-form">
               <button type="submit" class="search-form__loupe"></button>
               <div id="searchArea" class="search-form__area">
                 <span id="areaName" class="search-form__name">
@@ -2046,7 +1816,6 @@
             </div>
 
           </div>
-
 
           <div class="modal-search__bottom">
             <input type="submit" form="searchForm" class="modal-search__btn btn red-btn" value="Все результаты поиска">
