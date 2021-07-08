@@ -168,13 +168,13 @@ class Render {
     this._render(this.$parent, this.getSpinnerHtml, false);
   }
 
-  renderErrorMsg = (msg) => {
+  renderErrorMsg = (msg, $parent = this.$parent) => {
     const errorHtml = `
     <div class="rez-error">
       <p class="rez-error__msg">${msg}</p>
     </div>
     `;
-    this.$parent.innerHTML = errorHtml;
+    $parent.innerHTML = errorHtml;
   }
 
   renderListCity = (regionList, numCol = 1) => {
@@ -548,7 +548,22 @@ class Modal {
 
 class Basket {
   constructor(basketId) {
-    this.basket = doc.querySelector(basketId);
+    this.$basket = doc.querySelector(basketId);
+    this.init();
+  }
+
+  init = () => {
+    if (!this.$basket) {
+      return;
+    }
+    this.render = new Render(this.$basket);
+    this.server = new Server();
+    this.$basketList = doc.querySelector('#basketList');
+    this.$basketPrice = doc.querySelector('#basketProductsTotalPrice');
+    this.$basketCount = doc.querySelector('#basketProductsCount');
+    this.$basketCard = null;
+    this.$basketCardRez = null;
+    this.listener();
   }
 
   //function setTotalBasketInfo(cardInfo) {
@@ -572,6 +587,70 @@ class Basket {
   //  const id = $productCard.dataset.id;
   //  const response = await server.removeBasketCard(id);
   //}
+
+  //if (target.closest('[data-remove-card]')) {
+  //  removeBasketCard(target).addEventListener;
+  //}
+  removeBasketCard = async () => {
+    const id = this.$basketCard.dataset.id;
+    this.$basketCardRez = this.$basketCard.querySelector('[data-basket-rez]');
+    this.showSpinner();
+    const response = await this.server.removeBasketCard(id);
+    if (!response.rez) {
+      this.showErrorMsg(response.error);
+    }
+
+    if (response.rez) {
+      this.$basketCard.remove();
+      this.setTotalBasket(response.card)
+    }
+  }
+
+  setTotalBasket = (totalBasketObj) => {
+    if (this.$basketPrice) {
+      this.$basketPrice.innerHTML = totalBasketObj.total_price.toLocaleString() + '  ₽';
+    }
+    if (this.$basketCount) {
+      this.$basketCount.innerHTML = totalBasketObj.count
+    }
+  }
+
+  showBasketCardRez = () => {
+    this.$basketCardRez.classList.add('basket-rez--is-show');
+    this.$basketCardRez.classList.add('basket-rez--opacity');
+  }
+
+  hideshowBasketCardRez = () => {
+    this.$basketCardRez.classList.add('basket-rez--transition');
+    setTimeout(() => {
+      this.$basketCardRez.classList.remove('basket-rez--opacity');
+    }, 1500)
+    setTimeout(() => {
+      this.$basketCardRez.classList.remove('basket-rez--is-show');
+      this.$basketCardRez.innerHTML = '';
+    }, 3000)
+
+  }
+
+  showErrorMsg = (errorInfo) => {
+    this.render.renderErrorMsg(errorInfo.desc, this.$basketCardRez);
+    this.hideshowBasketCardRez();
+  }
+
+  showSpinner = () => {
+    this.showBasketCardRez();
+    this.render._render(this.$basketCardRez, this.render.getSpinnerHtml);
+  }
+
+  listener() {
+    this.$basket.addEventListener('click', (e) => {
+      const target = e.target;
+      if (e.target.closest('[data-remove-card]')) {
+        this.$basketCard = target.closest('[data-product-card]');
+        this.removeBasketCard();
+      }
+    });
+  }
 }
 
 class SearchModal extends Modal {
@@ -1747,9 +1826,6 @@ function docClickListener(e) {
   if (target.closest('[data-counter-btn]')) {
     counter(target);
   }
-  if (target.closest('[data-remove-card]')) {
-    removeBasketCard(target);
-  }
 
 }
 
@@ -1790,7 +1866,8 @@ async function inc($btn) {
     if (response.rez) {
       cardObj.$input.value = response.content[0].count;
       setTotalBasketCount(response.card.count);
-      setProductTotalPrice(cardObj.$totalPrice, response.card.total_price);
+      setProductTotalPrice(cardObj.$totalPrice, response.content[0].total_price);
+      basket.setTotalBasket(response.card);
     }
     if (!response.rez) {
       return;
@@ -1814,15 +1891,16 @@ async function dec($btn) {
 
   if (cardObj.isInBasket === '1') {
     const response = await server.addBsasket(cardObj.id, count);
-
-    if (response.rez) {
-      cardObj.$input.value = response.content[0].count;
-      setTotalBasketCount(response.card.count);
-      setProductTotalPrice(cardObj.$totalPrice, response.card.total_price);
-    }
     if (!response.rez) {
       return;
     }
+    if (response.rez) {
+      cardObj.$input.value = response.content[0].count;
+      setTotalBasketCount(response.card.count);
+      setProductTotalPrice(cardObj.$totalPrice, response.content[0].total_price);
+      basket.setTotalBasket(response.card);
+    }
+
   }
 }
 
@@ -1839,10 +1917,9 @@ async function changingValue(target) {
   if (cardObj.isInBasket === '1') {
     const response = await server.addBsasket(cardObj.id, count);
     if (response.rez) {
-
       cardObj.$input.value = response.content[0].count;
       setTotalBasketCount(response.card.count);
-      setProductTotalPrice(cardObj.$totalPrice, response.card.total_price);
+      setProductTotalPrice(cardObj.$totalPrice, response.content[0].total_price);
     }
     if (!response.rez) {
       return;
