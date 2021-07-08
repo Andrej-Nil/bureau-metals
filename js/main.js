@@ -458,7 +458,6 @@ class Render {
   }
 
   getBasketCardHtml = (item) => {
-    console.log(item);
 
     const favoriteCls = item.isFavorite ? 'favorite__icon--is-active' : ''
     const favoriteText = item.isFavorite ? 'удалить из Избранное' : 'добавить в Избранное';
@@ -642,6 +641,7 @@ class Basket {
     }
 
     if (response.rez) {
+      this.$basketCardRez.innerHTML = '';
       this.$basketCard.remove();
       this.setTotalBasket(response.card)
     }
@@ -651,7 +651,6 @@ class Basket {
     if (this.$basketList) {
       const id = infoProduct.content[0].id;
       const rez = this.checkingForProductAvailability(id);
-      console.log(rez);
       if (!rez) {
         this.addCardInBasket(infoProduct)
       }
@@ -1261,9 +1260,7 @@ class AddFavoriteModal extends InfoModal {
     if (!this.$productCard && !this.$modal) {
       return;
     }
-    this.$stiker = this.$productCard.querySelector('[data-sticer-favirite]');
-    this.$icon = this.$productCard.querySelector('[data-icon-favorite]');
-    this.$addText = this.$productCard.querySelector('[data-add-favorite-text]');
+
     this.$favoriteCount = doc.querySelector('#favoriteCount');
   }
 
@@ -1293,14 +1290,23 @@ class AddFavoriteModal extends InfoModal {
 
   add = () => {
     this.render.renderAddInfo('favorite', this.response.favorite);
-    if (this.$stiker) {
-      this.$stiker.classList.add('product-card__stiker-icon--is-active');
+    const $productList = this.getProductList();
+    $productList.forEach((item) => {
+      this.addActiveClass(item);
+    })
+
+  }
+
+  addActiveClass = (item) => {
+    const changeEl = this.getChangeEl(item);
+    if (changeEl.$stiker) {
+      changeEl.$stiker.classList.add('product-card__stiker-icon--is-active');
     }
-    if (this.$icon) {
-      this.$icon.classList.add('favorite__icon--is-active');
+    if (changeEl.$icon) {
+      changeEl.$icon.classList.add('favorite__icon--is-active');
     }
-    if (this.$addText) {
-      this.$addText.innerHTML = 'удалить из Избранное';
+    if (changeEl.$addText) {
+      changeEl.$addText.innerHTML = 'удалить из Избранное';
     }
     if (this.$favoriteCount) {
       this.$favoriteCount.innerHTML = this.response.favorite.count;
@@ -1309,18 +1315,40 @@ class AddFavoriteModal extends InfoModal {
 
   remove = () => {
     this.render.renderDeleteInfo('favorite', this.response.favorite);
-    if (this.$stiker) {
-      this.$stiker.classList.remove('product-card__stiker-icon--is-active');
+    const $productList = this.getProductList();
+    $productList.forEach((item) => {
+      this.addActiveClass(item);
+    })
+  }
+
+  removeActiveClass = (item) => {
+    const changeEl = this.getChangeEl(item);
+    if (changeEl.$stiker) {
+      changeEl.$stiker.classList.remove('product-card__stiker-icon--is-active');
     }
-    if (this.$icon) {
-      this.$icon.classList.remove('favorite__icon--is-active');
+    if (changeEl.$icon) {
+      changeEl.$icon.classList.remove('favorite__icon--is-active');
     }
-    if (this.$addText) {
-      this.$addText.innerHTML = 'удалить из Избранное';
+    if (changeEl.$addText) {
+      changeEl.$addText.innerHTML = 'удалить из Избранное';
     }
     if (this.$favoriteCount) {
       this.$favoriteCount.innerHTML = this.response.favorite.count;
     }
+  }
+
+  getChangeEl = (item) => {
+    return {
+      $stiker: item.querySelector('[data-sticer-favirite]'),
+      $icon: item.querySelector('[data-icon-favorite]'),
+      $addText: item.querySelector('[data-add-favorite-text]'),
+    }
+  }
+
+  getProductList = () => {
+    const id = this.response.content[0].id;
+    return doc.querySelectorAll(`[data-id="${id}"]`);
+
   }
 
 }
@@ -1328,22 +1356,24 @@ class AddFavoriteModal extends InfoModal {
 class AddBasketModal extends InfoModal {
   constructor(modalId) {
     super(modalId);
+    this.init();
   }
 
   init = () => {
     if (!this.$productCard && !this.$modal) {
       return;
     }
-    this.basket = new Basket('#basket')
-    this.$btn = this.$productCard.querySelector('[data-add-basket]');
-    this.$basketCount = doc.querySelector('#basketCount');
-    this.$input = this.$productCard.querySelector('[data-counter-input]');
+    this.$btn = null;
+    this.$basketCount = null;
+    this.$input = null;
 
   }
 
   openModal = ($productCard) => {
     this.open($productCard);
-    this.init();
+    this.$btn = this.$productCard.querySelector('[data-add-basket]');
+    this.$basketCount = doc.querySelector('#basketCount');
+    this.$input = this.$productCard.querySelector('[data-counter-input]');
     this.renderInfo()
   }
 
@@ -1355,7 +1385,7 @@ class AddBasketModal extends InfoModal {
     }
     if (this.response.rez) {
       this.render.delete('[data-spinner]');
-      this.basket.addInBasket(this.response);
+      basket.addInBasket(this.response);
       if (this.response.toggle) {
         this.add();
       }
@@ -1850,7 +1880,11 @@ function addFavorite(target) {
 
 function addBasket(target) {
   const $productCard = target.closest('[data-product-card]');
-  addBasketModal.openModal($productCard);
+  if ($productCard.dataset.inBasket === "1") {
+    return;
+  }
+  if ($productCard)
+    addBasketModal.openModal($productCard);
   if ($addFavoriteModal.dataset.add === 'open') {
     addFavoriteModal.close();
   }
@@ -1968,10 +2002,8 @@ async function dec($btn) {
       setProductTotalPrice(cardObj.$totalPrice, response.content[0].total_price);
       basket.setTotalBasket(response.card);
     }
-
   }
 }
-
 
 async function changingValue(target) {
   const $input = target.closest('[data-counter-input]');
