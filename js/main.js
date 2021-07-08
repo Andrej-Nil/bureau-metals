@@ -20,6 +20,8 @@ const $consultationModal = doc.querySelector('#consultationModal');
 const $callBackForm = doc.querySelector('#callBackForm');
 const $fastOrdenForm = doc.querySelector('#fastOrdenForm');
 const $feedBackForm = doc.querySelector('#feedBackForm');
+
+const $basket = doc.querySelector('#basket');
 const $basketForm = doc.querySelector('#basketForm');
 
 const $basketCount = doc.querySelector('#basketCount');
@@ -272,6 +274,12 @@ class Render {
     this.$parent.insertAdjacentHTML('beforeEnd', productsHtml);
   }
 
+  renderBasketCard = (productCard) => {
+    const $basketList = this.$parent.querySelector('#basketList');
+    this._render($basketList, this.getBasketCardHtml, productCard, 'afterbegin');
+
+  }
+
   createItemListHtml = (arr, getHtmlMarkup) => {
     let itemListHtml = '';
     arr.map((item) => {
@@ -449,8 +457,66 @@ class Render {
     `)
   }
 
+  getBasketCardHtml = (item) => {
+    console.log(item);
+
+    const favoriteCls = item.isFavorite ? 'favorite__icon--is-active' : ''
+    const favoriteText = item.isFavorite ? 'удалить из Избранное' : 'добавить в Избранное';
+    return (/*html*/`
+      <div class="basket-card" data-product-card data-id="566" data-in-basket="1">
+        <i class="basket-card__remove" data-remove-card></i>
+        <div class="basket-card__top">
+          <h3 class="basket-card__title">
+            <a href="product-page.html" class="basket-card__link link">
+            ${item.title}
+            </a>
+          </h3>
+
+          <div class="basket__favorite favorite" data-add-favorite>
+            <i class="product-card__favorite-icon favorite__icon ${favoriteCls}" data-icon-favorite></i>
+            <span class="favorite__add " data-add-favorite-text>${favoriteText}</span>
+          </div>
+
+        </div>
+
+        <div class="basket-card__bottom">
+          <div class="basket-card__price price">
+            <span class="basket-card__price-old price__old">${item.price_old}</span>
+            <span class="price__new">
+              <span class="basket__price-num price__num">${item.price}</span>
+              <span class="basket__price-mark price__mark">₽</span><span
+                class="basket__price-unit price__unit">/кг</span>
+            </span>
+          </div>
+
+          <div class="basket-card__counter counter" data-counter>
+            <input type="text" class="basket-card__input input counter__input" value="${item.count}" data-counter-input />
+            <div class=" counter__controls">
+              <span class="basket-card__counter-btn counter__btn" data-counter-btn="inc">
+                <i class="basket-card__counter-icon 
+                      counter__icon counter__inc
+                    "></i>
+              </span>
+              <span class="basket-card__counter-btn counter__btn" data-counter-btn="dec">
+                <i class="basket-card__counter-icon 
+                      counter__icon counter__dec
+                    "></i>
+              </span>
+            </div>
+          </div>
+
+          <div class="basket-card__price">
+            <span class="basket-card__price-num" data-total-price>${item.total_price}</span><span
+              class="basket-card__price-mark">₽</span>
+          </div>
+        </div>
+        <div class="basket-rez" data-basket-rez></div>
+      </div>
+    `)
+  }
+
   //Общая функция отрисовки
-  _render = ($parent, getHtmlMarkup, array = false) => {
+  _render = ($parent, getHtmlMarkup, array = false, where = 'beforeend') => {
     if (!$parent) {
       return;
     }
@@ -461,10 +527,11 @@ class Render {
       })
     }
     if (!array) {
+
       markupAsStr = getHtmlMarkup();
     }
 
-    $parent.insertAdjacentHTML('beforeEnd', markupAsStr);
+    $parent.insertAdjacentHTML(where, markupAsStr);
   }
 
   //Методы удаление дочерних элементов
@@ -565,32 +632,6 @@ class Basket {
     this.$basketCardRez = null;
     this.listener();
   }
-
-  //function setTotalBasketInfo(cardInfo) {
-  //  if ($basketCount) {
-  //    $basketCount.innerHTML = cardInfo.count;
-  //  }
-
-  //  if ($basketProductsTotalPrice) {
-  //    $basketProductsTotalPrice.innerHTML = cardInfo.total_price + ' ₽';
-  //  }
-
-  //  if ($basketProductsCount) {
-  //    $basketProductsCount.innerHTML = cardInfo.count;
-  //  }
-
-  //}
-
-
-  //async function removeBasketCard(target) {
-  //  const $productCard = target.closest('[data-product-card ]');
-  //  const id = $productCard.dataset.id;
-  //  const response = await server.removeBasketCard(id);
-  //}
-
-  //if (target.closest('[data-remove-card]')) {
-  //  removeBasketCard(target).addEventListener;
-  //}
   removeBasketCard = async () => {
     const id = this.$basketCard.dataset.id;
     this.$basketCardRez = this.$basketCard.querySelector('[data-basket-rez]');
@@ -604,6 +645,33 @@ class Basket {
       this.$basketCard.remove();
       this.setTotalBasket(response.card)
     }
+  }
+
+  addInBasket = (infoProduct) => {
+    if (this.$basketList) {
+      const id = infoProduct.content[0].id;
+      const rez = this.checkingForProductAvailability(id);
+      console.log(rez);
+      if (!rez) {
+        this.addCardInBasket(infoProduct)
+      }
+    }
+  }
+
+  addCardInBasket = (infoProduct) => {
+    this.render.renderBasketCard(infoProduct.content);
+    this.setTotalBasket(infoProduct.card);
+  }
+
+  checkingForProductAvailability = (id) => {
+    const $basketCardList = this.$basketList.querySelectorAll('[data-product-card]');
+    let rez = false;
+    for (let i = 0; i <= $basketCardList.length - 1; i++) {
+      if ($basketCardList[i].dataset.id == id) {
+        rez = true;
+      }
+    }
+    return rez;
   }
 
   setTotalBasket = (totalBasketObj) => {
@@ -1266,6 +1334,7 @@ class AddBasketModal extends InfoModal {
     if (!this.$productCard && !this.$modal) {
       return;
     }
+    this.basket = new Basket('#basket')
     this.$btn = this.$productCard.querySelector('[data-add-basket]');
     this.$basketCount = doc.querySelector('#basketCount');
     this.$input = this.$productCard.querySelector('[data-counter-input]');
@@ -1286,7 +1355,7 @@ class AddBasketModal extends InfoModal {
     }
     if (this.response.rez) {
       this.render.delete('[data-spinner]');
-
+      this.basket.addInBasket(this.response);
       if (this.response.toggle) {
         this.add();
       }
@@ -1874,7 +1943,6 @@ async function inc($btn) {
     }
   }
 }
-
 
 async function dec($btn) {
   const cardObj = getProductCardObj($btn);
