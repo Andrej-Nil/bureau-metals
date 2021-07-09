@@ -643,7 +643,11 @@ class Basket {
     if (response.rez) {
       this.$basketCardRez.innerHTML = '';
       this.$basketCard.remove();
-      this.setTotalBasket(response.card)
+      this.setTotalBasket(response.card);
+      const $basketCardList = this.$basketList.querySelectorAll('[data-product-card]');
+      if (!$basketCardList.length) {
+        this.$basketList.innerHTML = '<p data-empty>Корзина пустая</p>';
+      }
     }
   }
 
@@ -658,6 +662,10 @@ class Basket {
   }
 
   addCardInBasket = (infoProduct) => {
+    const $basketCardList = this.$basketList.querySelectorAll('[data-product-card]');
+    if (!$basketCardList.length) {
+      this.$basketList.innerHTML = '';
+    }
     this.render.renderBasketCard(infoProduct.content);
     this.setTotalBasket(infoProduct.card);
   }
@@ -1733,9 +1741,9 @@ class BasketForm extends Form {
 
     if (this.response.rez) {
       this.clearForm();
-      this.resultBlockShow()
+      this.resultBlockShow();
       if (this.$basketList) {
-        this.$basketList.innerHTML = '<p>Корзина пустая</p>'
+        this.$basketList.innerHTML = '<p data-empty>Корзина пустая</p>';
       }
     }
   }
@@ -1958,19 +1966,22 @@ function counter(target) {
 }
 
 async function inc($btn) {
-  const cardObj = getProductCardObj($btn);
-  const count = parseInt(cardObj.$input.value) + 1;
-  if (cardObj.isInBasket === '0') {
-    cardObj.$input.value = count;
+  const $card = $btn.closest('[data-product-card]');
+  const cardInfo = getCardInfo($card);
+  const $cardList = getCardList(cardInfo.id);
+  const value = checkCount(cardInfo.$input.value);
+  const count = parseInt(value) + 1;
+  if (cardInfo.isInBasket === '0') {
+    cardInfo.$input.value = count;
   }
 
-  if (cardObj.isInBasket === '1') {
-    const response = await server.addBsasket(cardObj.id, count);
+  if (cardInfo.isInBasket === '1') {
+    const response = await server.addBsasket(cardInfo.id, count);
     if (response.rez) {
-      cardObj.$input.value = response.content[0].count;
       setTotalBasketCount(response.card.count);
-      setProductTotalPrice(cardObj.$totalPrice, response.content[0].total_price);
+      setProductTotalPrice($cardList, response.content[0].total_price);
       basket.setTotalBasket(response.card);
+      setInputCardValue($cardList, response.content[0].count);
     }
     if (!response.rez) {
       return;
@@ -1979,47 +1990,53 @@ async function inc($btn) {
 }
 
 async function dec($btn) {
-  const cardObj = getProductCardObj($btn);
-  const count = parseInt(cardObj.$input.value) - 1;
+  const $card = $btn.closest('[data-product-card]');
+  const cardInfo = getCardInfo($card);
+  const $cardList = getCardList(cardInfo.id);
+  const value = checkCount(cardInfo.$input.value);
+  const count = parseInt(value) - 1;
 
-  if (cardObj.isInBasket === '0') {
+  if (cardInfo.isInBasket === '0') {
     if (count < 0) {
-      cardObj.$input.value = 1;
+      cardInfo.$input.value = 1;
     }
     if (count > 0) {
-      cardObj.$input.value = count;
+      cardInfo.$input.value = count;
     }
   }
 
-  if (cardObj.isInBasket === '1') {
-    const response = await server.addBsasket(cardObj.id, count);
+  if (cardInfo.isInBasket === '1') {
+    const response = await server.addBsasket(cardInfo.id, count);
     if (!response.rez) {
       return;
     }
     if (response.rez) {
-      cardObj.$input.value = response.content[0].count;
       setTotalBasketCount(response.card.count);
-      setProductTotalPrice(cardObj.$totalPrice, response.content[0].total_price);
+      setProductTotalPrice($cardList, response.content[0].total_price);
       basket.setTotalBasket(response.card);
+      setInputCardValue($cardList, response.content[0].count);
     }
   }
 }
 
 async function changingValue(target) {
-  const $input = target.closest('[data-counter-input]');
-  const cardObj = getProductCardObj($input);
-  const count = checkCount(cardObj.$input.value);
+  const $card = target.closest('[data-product-card]');
+  const cardInfo = getCardInfo($card);
+  const count = checkCount(cardInfo.$input.value);
 
-  if (cardObj.isInBasket === '0') {
-    cardObj.$input.value = count;
+  const $cardList = getCardList(cardInfo.id);
+  if (cardInfo.isInBasket === '0') {
+    cardInfo.$input.value = count;
   }
 
-  if (cardObj.isInBasket === '1') {
-    const response = await server.addBsasket(cardObj.id, count);
+  if (cardInfo.isInBasket === '1') {
+    const response = await server.addBsasket(cardInfo.id, count);
     if (response.rez) {
-      cardObj.$input.value = response.content[0].count;
       setTotalBasketCount(response.card.count);
-      setProductTotalPrice(cardObj.$totalPrice, response.content[0].total_price);
+      setProductTotalPrice($cardList, response.content[0].total_price);
+      basket.setTotalBasket(response.card);
+      setInputCardValue($cardList, response.content[0].count);
+
     }
     if (!response.rez) {
       return;
@@ -2028,10 +2045,34 @@ async function changingValue(target) {
   }
 }
 
-function setProductTotalPrice($totalPrice, price) {
-  if ($totalPrice) {
-    $totalPrice.innerHTML = price.toLocaleString();
+function getCardInfo($card) {
+  return {
+    $input: $card.querySelector('[data-counter-input]'),
+    isInBasket: $card.dataset.inBasket,
+    id: $card.dataset.id,
   }
+}
+
+
+function getCardList(id) {
+  return doc.querySelectorAll(`[data-id="${id}"]`);
+}
+
+function setInputCardValue($cardList, count) {
+  $cardList.forEach(($item) => {
+    const $input = $item.querySelector('[data-counter-input]');
+    $input.value = count;
+  });
+}
+
+function setProductTotalPrice($cardList, price) {
+  $cardList.forEach(($item) => {
+    const $totalPrice = $item.querySelector('[data-total-price]');
+    if ($totalPrice) {
+      $totalPrice.innerHTML = parseInt(price).toLocaleString();
+    }
+  })
+
 }
 
 function setTotalBasketCount(count) {
@@ -2039,21 +2080,6 @@ function setTotalBasketCount(count) {
     $basketCount.innerHTML = count;
   }
 
-}
-
-function getProductCardObj($el) {
-  const $card = $el.closest('[data-product-card]');
-  const $input = $card.querySelector('[data-counter-input]');
-  const $totalPrice = $card.querySelector('[data-total-price]');
-  const isInBasket = $card.dataset.inBasket;
-  const id = $card.dataset.id;
-  return {
-    $card: $card,
-    $input: $input,
-    $totalPrice: $totalPrice,
-    isInBasket: isInBasket,
-    id: id,
-  }
 }
 
 function checkCount(count) {
