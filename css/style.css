@@ -1112,14 +1112,13 @@ select:-webkit-autofill:focus {
 }
 
 .select:hover .select__header {
-  z-index: 2000;
   border: 1px solid #bc1622;
   border-bottom: none;
   color: #bc1622;
 }
 
 .select:hover .options-body {
-  height: 290px;
+  height: 280px;
   border: 1px solid #bc1622;
   border-top: none;
 }
@@ -1159,6 +1158,7 @@ select:-webkit-autofill:focus {
 
 .options-body {
   position: absolute;
+  z-index: 1000;
   background: #fff;
   border: 1px solid #828282;
   border-top: none;
@@ -1166,12 +1166,12 @@ select:-webkit-autofill:focus {
   left: 0;
   height: 1px;
   overflow: hidden;
-  transition: border 0.2s ease-in-out;
+  transition: 0.2s ease-in-out;
 }
 
 .options {
   background: #fff;
-  padding: 20px 10px;
+  padding: 10px 10px;
 }
 
 .options__search {
@@ -1261,7 +1261,7 @@ select:-webkit-autofill:focus {
 .options__list {
   height: 240px;
   overflow: auto;
-  padding: 10px;
+  padding: 0 5px;
   background: #fff;
   scrollbar-color: #bc1622 #e0e0e0;
   scrollbar-width: thin;
@@ -1277,9 +1277,12 @@ select:-webkit-autofill:focus {
 }
 
 .options__item {
-  margin-bottom: 10px;
-  padding-right: 10px;
+  padding: 5px 0 5px 0;
   cursor: pointer;
+}
+
+.options__item:hover {
+  background: #f2f2f2;
 }
 
 .options__count {
@@ -1349,16 +1352,6 @@ select:-webkit-autofill:focus {
 
 .sorting__item:hover {
   color: #bc1622;
-}
-
-.sorting__item:hover .sorting__arrow::before {
-  font-family: "icomoon";
-  font-weight: normal;
-  font-style: normal;
-  font-display: block;
-  line-height: 1;
-  content: "";
-  font-size: 6px;
 }
 
 .sorting__name {

@@ -242,7 +242,6 @@ class Render {
   }
 
   renderSearchContent = (response) => {
-    console.log(response)
     if (response.categoty !== undefined) {
       this.renderSearchCategory(response.categoty);
     }
@@ -1302,7 +1301,9 @@ class AddFavoriteModal extends InfoModal {
     $productList.forEach((item) => {
       this.addActiveClass(item);
     })
-
+    if (this.$favoriteCount) {
+      this.$favoriteCount.innerHTML = this.response.favorite.count;
+    }
   }
 
   addActiveClass = (item) => {
@@ -1316,9 +1317,7 @@ class AddFavoriteModal extends InfoModal {
     if (changeEl.$addText) {
       changeEl.$addText.innerHTML = 'удалить из Избранное';
     }
-    if (this.$favoriteCount) {
-      this.$favoriteCount.innerHTML = this.response.favorite.count;
-    }
+
   }
 
   remove = () => {
@@ -1327,6 +1326,9 @@ class AddFavoriteModal extends InfoModal {
     $productList.forEach((item) => {
       this.addActiveClass(item);
     })
+    if (this.$favoriteCount) {
+      this.$favoriteCount.innerHTML = this.response.favorite.count;
+    }
   }
 
   removeActiveClass = (item) => {
@@ -1340,9 +1342,7 @@ class AddFavoriteModal extends InfoModal {
     if (changeEl.$addText) {
       changeEl.$addText.innerHTML = 'удалить из Избранное';
     }
-    if (this.$favoriteCount) {
-      this.$favoriteCount.innerHTML = this.response.favorite.count;
-    }
+
   }
 
   getChangeEl = (item) => {
@@ -1778,7 +1778,6 @@ if ($openSearchBtn && $searchModal) {
     searchModal.openSearch();
   });
 }
-
 if ($openSearchMobileBtn && $searchModal) {
   $openSearchMobileBtn.addEventListener('click', () => {
     searchModal.openSearch();

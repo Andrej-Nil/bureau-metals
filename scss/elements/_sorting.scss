@@ -22,11 +22,6 @@
   &:hover {
     color: $base;
   }
-  &:hover .sorting__arrow {
-    &::before {
-      @include font-icon-style("\e905", 6px);
-    }
-  }
 }
 
 .sorting__name {

@@ -2,18 +2,18 @@
   display: inline-block;
   position: relative;
   min-width: 215px;
-
+  //z-index: 500;
   &:hover {
     z-index: 2000;
   }
   &:hover .select__header {
-    z-index: 2000;
+    //z-index: 2000;
     border: 1px solid $base;
     border-bottom: none;
     color: $base;
   }
   &:hover .options-body {
-    height: 290px;
+    height: 280px;
     border: 1px solid $base;
     border-top: none;
     &::before {
@@ -46,6 +46,7 @@
 
 .options-body {
   position: absolute;
+  z-index: 1000;
   background: $white;
   border: 1px solid $grey;
   border-top: none;
@@ -53,12 +54,12 @@
   left: 0;
   height: 1px;
   overflow: hidden;
-  transition: border 0.2s ease-in-out;
+  transition: 0.2s ease-in-out;
 }
 
 .options {
   background: $white;
-  padding: 20px 10px;
+  padding: 10px 10px;
 }
 .options__search {
   position: relative;
@@ -134,7 +135,7 @@
 .options__list {
   height: 240px;
   overflow: auto;
-  padding: 10px;
+  padding: 0 5px;
   background: $white;
   scrollbar-color: $base $l-grey;
   scrollbar-width: thin;
@@ -150,9 +151,13 @@
 }
 
 .options__item {
-  margin-bottom: 10px;
-  padding-right: 10px;
+  padding: 5px 0 5px 0;
+  //margin-bottom: 10px;
+  //padding-right: 10px;
   cursor: pointer;
+  &:hover {
+    background: $pearl;
+  }
 }
 
 .options__count {
