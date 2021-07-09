@@ -277,28 +277,47 @@
         <div class="section__content wrapper">
           <div class="content">
             <div class="product">
-              <div class="product-carousel">
+              <div id="productSlider" class="product-carousel">
 
                 <div class="product__preview">
-                  <div class="product__track">
-                    <img src="./img/image/product-img.jpg" alt="" class="product__img">
+                  <div class="product__track" data-slider-track>
+
+                    <div class="product__slide" data-slide data-idx="1">
+                      <img src="./img/image/product-img.jpg" alt="" class="product__img">
+                    </div>
+
+                    <div class="product__slide" data-slide data-idx="2">
+                      <img src="./img/image/product-img.jpg" alt="" class="product__img">
+                    </div>
+
+                    <div class="product__slide" data-slide data-idx="3">
+                      <img src="./img/image/product-img.jpg" alt="" class="product__img">
+                    </div>
+
+                    <div class="product__slide" data-slide data-idx="4">
+                      <img src="./img/image/product-img.jpg" alt="" class="product__img">
+                    </div>
+
+
                   </div>
 
-                  <div class="product__arrow product__arrow--prev"></div>
-                  <div class="product__arrow product__arrow--next"></div>
+                  <div class="product__arrow product__arrow--prev" data-prev></div>
+                  <div class="product__arrow product__arrow--next" data-next></div>
                 </div>
 
-                <div class="product__dots">
-                  <div class="product__dots-track">
-                    <div class="product__dot">
+                <div class="product__dots" data-dots>
+                  <div class="product__dots-track" data-dot-track>
+                    <div class="product__dot product__dot--is-active" data-dot data-idx="1">
                       <img src="./img/image/dot-img.jpg" alt="" class="product__dot-img">
                     </div>
-                    <div class="product__dot">
+                    <div class="product__dot" data-dot data-idx="2">
                       <img src="./img/image/dot-img.jpg" alt="" class="product__dot-img">
                     </div>
-                    <div class="product__dot">
+                    <div class="product__dot" data-dot data-idx="3">
                       <img src="./img/image/dot-img.jpg" alt="" class="product__dot-img">
-
+                    </div>
+                    <div class="product__dot" data-dot data-idx="4">
+                      <img src="./img/image/dot-img.jpg" alt="" class="product__dot-img">
                     </div>
                   </div>
                 </div>

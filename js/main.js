@@ -727,6 +727,174 @@ class Basket {
   }
 }
 
+class Slider {
+  constructor(sliderId) {
+    this.$slider = document.querySelector(sliderId);
+    this.init()
+
+  }
+
+  init() {
+    if (!this.$slider) {
+      return;
+    }
+    this.index = 1;
+    this.$track = this.$slider.querySelector('[data-slider-track]');
+    this.cloneFirstAndLastSlides();
+    this.$slides = this.$slider.querySelectorAll('[data-slide]');
+    this.quantitySlides = this.$slides.length;
+    this.slideWidth = this.$slides[0].offsetWidth;
+    this.$prevBtn = this.$slider.querySelector('[data-prev]');
+    this.$nextBtn = this.$slider.querySelector('[data-next]');
+    this.$dotTrack = this.$slider.querySelector('[data-dot-track]');
+    this.$dots = this.$slider.querySelector('[data-dots]');
+    this.$dotList = this.$slider.querySelectorAll('[data-dot]');
+    this.activeDot = 1;
+    this.stepDotTreckStep = this.getStepDotTreckStep();
+    this.setPositionTrack();
+    this.navigation();
+    this.listener();
+  }
+
+  navigation = () => {
+    if (this.$nextBtn) {
+      this.$nextBtn.addEventListener('click', this.next);
+    }
+
+    if (this.$prevBtn) {
+      this.$prevBtn.addEventListener('click', this.prev);
+    }
+
+    if (this.$dots) {
+      this.$dots.addEventListener('click', this.dotNavigation);
+    }
+  }
+
+  cloneFirstAndLastSlides = () => {
+    const $firstSlide = this.$track.firstElementChild;
+    const $lastSlide = this.$track.lastElementChild;
+    const $firstSlideClone = this.createSlideClone($firstSlide, 'last');
+    const $lastSlideClone = this.createSlideClone($lastSlide, 'first');
+    this.$track.prepend($lastSlideClone);
+    this.$track.append($firstSlideClone);
+  }
+
+  createSlideClone = (donorSlide, valueDataAttr) => {
+    const $clone = document.createElement('div');
+    $clone.innerHTML = donorSlide.innerHTML;
+    $clone.classList.add('product__slide');
+    $clone.setAttribute('data-clone', valueDataAttr);
+    $clone.setAttribute('data-slide', '');
+    return $clone;
+  }
+
+  next = () => {
+    if (!this.$nextBtn) {
+      return;
+    }
+    this.index >= this.quantitySlides - 1 ? false : this.index++;
+    this.$track.style.transition = "transform .3s ease-in-out";
+    this.setPositionTrack();
+    this.changingTrackPositionByReachingEdge();
+    this.setActiveDot();
+    this.moveDotTrack();
+  }
+
+  prev = () => {
+    if (!this.$prevBtn) {
+      return;
+    }
+    this.index <= 0 ? false : this.index--;
+    this.$track.style.transition = "transform .3s ease-in-out";
+    this.setPositionTrack();
+    this.changingTrackPositionByReachingEdge();
+    this.setActiveDot();
+    this.moveDotTrack();
+  }
+
+  dotNavigation = (e) => {
+    if (!this.$dots) {
+      return;
+    }
+    const $dot = e.target.closest('[data-dot]');
+    if (!$dot) {
+      return;
+    }
+    const dotIdx = $dot.dataset.idx;
+    this.index = dotIdx;
+    this.$track.style.transition = "transform .3s ease-in-out";
+    this.setPositionTrack();
+    this.setActiveDot();
+    this.moveDotTrack();
+  }
+
+  setPositionTrack = () => {
+    const position = this.getShiftTrack()
+    this.$track.style.transform = `translateX(-${position}px)`;
+  }
+
+  getShiftTrack = () => {
+    return this.index * this.slideWidth;
+  }
+
+  changingTrackPositionByReachingEdge = () => {
+    this.$track.addEventListener('transitionend', () => {
+      this.$slides[this.index].dataset.clone === 'last' ? this.index = 1 : this.index;
+
+      this.$slides[this.index].dataset.clone === 'first' ? this.index = this.quantitySlides - 2 : this.index;
+
+      this.$track.style.transition = "none";
+
+      this.setPositionTrack()
+
+    })
+  }
+
+  setActiveDot = () => {
+    this.activeDot = this.activeDot + 1;
+    if (this.activeDot > this.$dotList.length) {
+      this.activeDot = 1;
+    }
+    this.$dotList.forEach(($dot) => {
+      $dot.classList.remove('product__dot--is-active');
+      if ($dot.dataset.idx == this.activeDot) {
+        $dot.classList.add('product__dot--is-active');
+
+        console.log(this.activeDot);
+      }
+    })
+  }
+
+  moveDotTrack = () => {
+    const range = this.activeDot - 2
+    console.log(this.activeDot);
+    if (range < 1) {
+      return;
+    }
+
+
+    const dotStep = this.stepDotTreckStep * range;
+    const dotsLength = this.$dotList.length;
+
+    this.$dotTrack.style.transform = `translateX(-${dotStep}px)`;
+
+  }
+
+  getStepDotTreckStep = () => {
+    const widthDot = this.$dotList[0].offsetWidth;
+    const marginL = parseInt(getComputedStyle(this.$dotList[0]).marginRight);
+    return widthDot + marginL;
+  }
+
+  listener = () => {
+    window.addEventListener(`resize`, () => {
+      this.slideWidth = this.$slides[0].offsetWidth;
+      this.setPositionTrack();
+    }, false);
+  }
+
+}
+
 class SearchModal extends Modal {
   constructor(modalId) {
     super(modalId);
@@ -1768,6 +1936,8 @@ const addFavoriteModal = new AddFavoriteModal('#addFavoriteModal', 'favorite');
 const addBasketModal = new AddBasketModal('#addBasketModal', 'basket');
 
 const basket = new Basket('#basket');
+
+const productSlider = new Slider('#productSlider');
 
 doc.addEventListener('click', docClickListener);
 doc.addEventListener('input', docInputListener);
