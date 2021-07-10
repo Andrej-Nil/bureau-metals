@@ -1164,6 +1164,7 @@ class CityModal extends Modal {
 
     this.showFindedRegeon();
     this.showFindedCity();
+    this.openFindedRegeon();
 
   }
 
@@ -1181,7 +1182,7 @@ class CityModal extends Modal {
       const newRegionList = this.getNewArrRegeon();
       this.setNubColumns();
       this.render.renderListCity(newRegionList, this.numCol);
-      this.openFindedRegeon();
+
     }
 
 
@@ -1236,6 +1237,9 @@ class CityModal extends Modal {
 
   openFindedRegeon() {
     const $allCityList = this.getElement('[data-dropdown]', true);
+    if (this.inputValue.trim() === '') {
+      return;
+    }
     $allCityList.forEach(($cityList) => {
       const $dropdownBody = $cityList.querySelector('[data-dropdown-close]');
       const $arrow = $cityList.querySelector('[data-dropdown-arrow]');
