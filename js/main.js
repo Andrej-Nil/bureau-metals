@@ -1097,27 +1097,36 @@ class CityModal extends Modal {
   setNubColumns = () => {
     let lientWidth = doc.documentElement.clientWidth;
 
+
     if (lientWidth < 500) {
       this.numCol = 1;
-
+      if (this.numCol === this.getColl()) {
+        return;
+      }
       this.render.renderListCity(this.regionList, this.numCol);
       return;
     }
     if (lientWidth < 750) {
       this.numCol = 2;
-
+      if (this.numCol === this.getColl()) {
+        return;
+      }
       this.render.renderListCity(this.regionList, this.numCol);
       return;
     }
     if (lientWidth < 900) {
       this.numCol = 3;
-
+      if (this.numCol === this.getColl()) {
+        return;
+      }
       this.render.renderListCity(this.regionList, this.numCol);
       return;
     }
     if (lientWidth > 900) {
       this.numCol = 4;
-
+      if (this.numCol === this.getColl()) {
+        return;
+      }
       this.render.renderListCity(this.regionList, this.numCol);
       return;
     }
@@ -1152,6 +1161,7 @@ class CityModal extends Modal {
 
   searchCity = () => {
     this.changeInputValue();
+
     this.showFindedRegeon();
     this.showFindedCity();
 
@@ -1200,6 +1210,13 @@ class CityModal extends Modal {
 
     return rez;
   };
+
+  getColl = () => {
+    if (!this.$cityList) {
+      return;
+    }
+    return this.$cityList.querySelectorAll('.city-list__col').length;
+  }
 
   showFindedCity() {
     const $allRegionItems = this.getElement('[data-region-item]', true);
