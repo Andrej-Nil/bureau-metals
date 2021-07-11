@@ -58,7 +58,7 @@
       <!--header__main-->
 
       <nav class="header-nav container">
-        <div class="header-nav__mobile">
+        <div id="mobileMenuBtn" class="header-nav__mobile">
           <div class="header-nav__m-catalog">
             <i class="h-catalog__icon"></i>
             <span class="header-nav__item">Наш каталог </span>
@@ -824,7 +824,7 @@
           <h2 class="section__title">Популярные товары</h2>
         </div>
 
-        <div id="productSlider" class="product-slider">
+        <div id="dsd" class="product-slider">
           <div class="section__content slider-wrap">
             <div class="product-slider__track container">
               <!--product-slider__slide-->
@@ -3483,6 +3483,74 @@
       </a>
     </div>
     <!-- icons-nav -->
+
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="mobile-nav">
+      <div class="mobile-menu__content">
+        <i class="mobile-close" data-close></i>
+        <div class="mobile-menu__header">
+          <div class="mobile__contact-item contact">
+            <i class="contact__icon _contact-mail"></i>
+            <div class="contact__title">Наша почта</div>
+            <a href="mailto:info@byrometalov.ru" class="contact__link">
+              info@byrometalov.ru
+            </a>
+          </div>
+        </div>
+        <ul class="mobile-menu">
+          <li class="mobile-menu__item">
+            <a href="#!" class="mobile-menu__link">
+              Наши услуги
+            </a>
+          </li>
+          <li class="mobile-menu__item">
+            <a href="#!" class="mobile-menu__link">
+              О компании
+            </a>
+          </li>
+          <li class="mobile-menu__item">
+            <a href="#!" class="mobile-menu__link">
+              Новости
+            </a>
+          </li>
+          <li class="mobile-menu__item">
+            <a href="#!" class="mobile-menu__link">
+              Контакты
+            </a>
+          </li>
+
+          <li class="mobile-dropdown" data-dropdown>
+            <div class="mobile-dropdown__header" data-dropdown-header>
+              <i class="mobile-dropdown__arrow" data-dropdown-btn data-dropdown-arrow></i>
+              <a href="#!" class="mobile-menu__link">Производство</a>
+            </div>
+            <div class="mobile-dropdown__list-body" data-dropdown-close="close">
+              <ul class="mobile-dropdown__list" data-dropdown-list>
+                <li class="mobile-dropdown__list-item">
+                  <a href="#!" class="mobile-dropdown__link">Производство</a>
+                </li>
+                <li class="mobile-dropdown__list-item">
+                  <a href="#!" class="mobile-dropdown__link">Производство</a>
+                </li>
+                <li class="mobile-dropdown__list-item">
+                  <a href="#!" class="mobile-dropdown__link">Производство</a>
+                </li>
+                <li class="mobile-dropdown__list-item">
+                  <a href="#!" class="mobile-dropdown__link">Производство</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+
+        </ul>
+        <a href="catalog.html" class="mobile-menu__catalog-nav">
+          Наш каталог
+        </a>
+      </div>
+
+
+    </div>
+    <!-- Mobile menu -->
 
 
     <!-- modals -->

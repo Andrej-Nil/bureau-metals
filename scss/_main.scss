@@ -1,7 +1,7 @@
 //шрифты
-$robotoS: "Roboto Slab", serif;
-$roboto: "Roboto", serif;
-$ebenya: "ebenya", sans-serif;
+$robotoS: 'Roboto Slab', serif;
+$roboto: 'Roboto', serif;
+$ebenya: 'ebenya', sans-serif;
 
 //Основные цвета
 $base: #bc1622;
@@ -65,7 +65,7 @@ body {
 }
 
 @mixin font-icon-style($code, $size) {
-  font-family: "icomoon";
+  font-family: 'icomoon';
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -117,14 +117,14 @@ body {
   justify-content: space-between;
   margin-bottom: 30px;
   &::before {
-    content: "";
+    content: '';
     max-width: 338px;
     width: 100%;
     height: 0;
     order: 1;
   }
   &::after {
-    content: "";
+    content: '';
     max-width: 338px;
     width: 100%;
     height: 0;

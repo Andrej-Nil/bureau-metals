@@ -29,7 +29,41 @@ const $favoriteCount = doc.querySelector('#favoriteCount');
 const $basketProductsTotalPrice = doc.querySelector('#basketProductsTotalPrice');
 const $basketProductsCount = doc.querySelector('#basketProductsCount');
 
+const $mobileMenuBtn = doc.querySelector('#mobileMenuBtn');
+const $mobileMenu = doc.querySelector('#mobileMenu');
+
 const $map = doc.querySelector('#map');
+
+class MobileMenu {
+  constructor(id) {
+    this.$menu = doc.querySelector(id);
+    this.init()
+  }
+
+  init = () => {
+    if (!this.$menu) {
+      return;
+    }
+    this.listner();
+  }
+
+  open = () => {
+    this.$menu.classList.add('mobile-nav--is-open');
+  }
+
+  close = () => {
+    console.log('dfhg')
+    this.$menu.classList.remove('mobile-nav--is-open');
+  }
+
+  listner = () => {
+    this.$menu.addEventListener('click', (e) => {
+      if (e.target.closest('[data-close]')) {
+        this.close();
+      }
+    });
+  }
+}
 
 class Debaunce {
   constructor() { }
@@ -333,7 +367,7 @@ class Render {
     return (/*html*/`
       <li class="modal-search__region region" data-region data-dropdown>
         <div class="region__header" data-dropdown-btn>
-          <i class="region__arrow" data-dropdown-arrow></i>
+          <i class="region__arrow dropdown__arrow" data-dropdown-arrow></i>
           <span class="redion__title" data-region-title>${region.title}</span>
         </div>
         <div class="region__list-body" data-dropdown-close="close">
@@ -1940,6 +1974,8 @@ class BasketForm extends Form {
 
 
 
+
+
 // формы
 const callBackForm = new CallBackForm('#callBackForm');
 const fastOrdenForm = new FastOrdenForm('#fastOrdenForm');
@@ -1955,6 +1991,8 @@ const fastOrderModal = new FastOrderModal('#fastOrdenModal');
 const consultationModal = new ConsultationModal('#consultationModal');
 const addFavoriteModal = new AddFavoriteModal('#addFavoriteModal', 'favorite');
 const addBasketModal = new AddBasketModal('#addBasketModal', 'basket');
+
+const mobiliMenu = new MobileMenu('#mobileMenu');
 
 const basket = new Basket('#basket');
 
@@ -2001,6 +2039,12 @@ if ($openCallBackModalMobileBtn && $callBackModal) {
   })
 }
 
+if ($mobileMenuBtn && $mobileMenu) {
+  $mobileMenuBtn.addEventListener('click', () => {
+    mobiliMenu.open()
+  })
+}
+
 // callBackForm
 if ($callBackForm) {
   $callBackForm.addEventListener('submit', (e) => {
@@ -2040,12 +2084,14 @@ function toggleDropdown(target) {
   const $arrow = getDropdownEl(target, '[data-dropdown-arrow]');
   const isClose = $dropdownBody.dataset.dropdownClose;
 
+  const $dropdownHeader = getDropdownEl(target, '[data-dropdown-header]');
+
   if (isClose == 'close') {
-    openDropdown($dropdownBody, $arrow)
+    openDropdown($dropdownBody, $dropdownHeader, $arrow)
   }
 
   if (isClose == 'open') {
-    closeDropdown($dropdownBody, $arrow)
+    closeDropdown($dropdownBody, $dropdownHeader, $arrow)
   }
 }
 
@@ -2054,18 +2100,27 @@ function getDropdownEl(target, selector) {
   return $dropdown.querySelector(selector);
 }
 
-function openDropdown($dropdownBody, $arrow) {
+function openDropdown($dropdownBody, $dropdownHeader, $arrow) {
   const $dropdownList = $dropdownBody.querySelector('[data-dropdown-list]');
   const dropdownListHeight = $dropdownList.offsetHeight;
   $dropdownBody.style.height = dropdownListHeight + 'px';
-  $arrow.classList.add('region__arrow--is-donw');
+  if ($dropdownHeader) {
+    $dropdownBody.closest('[data-dropdown]').classList.add('bg-pearl');
+    $dropdownHeader.classList.add('dropdown-header--is-active');
+  }
+
+  $arrow.classList.add('dropdown__arrow--is-donw');
   $dropdownBody.dataset.dropdownClose = 'open';
 }
 
-function closeDropdown($dropdownBody, $arrow) {
+function closeDropdown($dropdownBody, $dropdownHeader, $arrow) {
   $dropdownBody.style.height = 0 + 'px';
-  $arrow.classList.remove('region__arrow--is-donw');
+  $arrow.classList.remove('dropdown__arrow--is-donw');
   $dropdownBody.dataset.dropdownClose = 'close';
+  if ($dropdownHeader) {
+    $dropdownBody.closest('[data-dropdown]').classList.remove('bg-pearl');
+    $dropdownHeader.classList.remove('dropdown-header--is-active');
+  }
 }
 
 function addFavorite(target) {
@@ -2112,7 +2167,7 @@ function docClickListener(e) {
   if (target.closest('[data-fast-order]')) {
     fastOrderModal.openFastOrder(target);
   }
-  if (target.closest('[data-dropdown]')) {
+  if (target.closest('[data-dropdown-btn]')) {
     toggleDropdown(target)
   }
   if (target.closest('[data-counter-inc]')) {

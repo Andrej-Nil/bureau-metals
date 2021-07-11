@@ -13,3 +13,17 @@
 .pb0 {
   padding-bottom: 0;
 }
+
+.dropdown__arrow--is-donw {
+  &::before {
+    transform: rotate(90deg);
+  }
+}
+
+.dropdown-header--is-active * {
+  color: $base;
+}
+
+.bg-pearl {
+  background: $pearl;
+}
