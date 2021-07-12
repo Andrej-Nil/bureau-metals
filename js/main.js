@@ -780,8 +780,11 @@ class ProductSlider {
     this.$dotsWrap = this.$slider.querySelector('[data-dots]');
     this.$dotList = this.$slider.querySelectorAll('[data-dot]');
     this.activeDot = 1;
+    this.touchStart = 0;
+    this.touchPosition = 0;
     this.navigation();
     this.listener();
+    this.sensitivity = 30;
   }
 
   navigation = () => {
@@ -867,12 +870,39 @@ class ProductSlider {
   }
 
 
+  startTouchMove = (e) => {
+    this.touchStart = e.changedTouches[0].clientX;
+    this.touchPosition = this.touchStart;
+  }
+
+  touchMove = (e) => {
+    this.touchPosition = e.changedTouches[0].clientX;
+  }
+
+  touchEnd = () => {
+    let distance = this.touchStart - this.touchPosition;
+    if (distance > 0 && distance >= this.sensitivity) {
+      this.next();
+    }
+    if (distance < 0 && distance * -1 >= this.sensitivity) {
+      this.prev();
+    }
+  }
+
+
 
   listener = () => {
     window.addEventListener('resize', this.trackShift, false);
+
+    this.$track.addEventListener('touchstart', (e) => { this.startTouchMove(e) });
+    this.$track.addEventListener('touchmove', (e) => { this.touchMove(e) });
+    this.$track.addEventListener('touchend', () => { this.touchEnd() });
   }
 
+
 }
+
+
 
 class SearchModal extends Modal {
   constructor(modalId) {
