@@ -1,6 +1,6 @@
 'use strict';
 const doc = document;
-//const $body = document.querySelector('body');
+const $body = document.querySelector('body');
 const $openSearchBtn = doc.querySelector('#openSearchBtn');
 const $openSearchMobileBtn = doc.querySelector('#openSearchMobileBtn');
 const $searchModal = doc.querySelector('#searchModal');
@@ -49,11 +49,12 @@ class MobileMenu {
 
   open = () => {
     this.$menu.classList.add('mobile-nav--is-open');
+    $body.classList.add('no-scroll');
   }
 
   close = () => {
-    console.log('dfhg')
     this.$menu.classList.remove('mobile-nav--is-open');
+    $body.classList.remove('no-scroll');
   }
 
   listner = () => {
@@ -152,10 +153,6 @@ class Server {
     for (let key in data) {
       formData.append(`${key}`, data[key])
     }
-
-    //for (let [name, value] of formData) {
-    //  console.log(`${name} = ${value}`);
-    //}
     return formData;
   }
 
@@ -761,7 +758,7 @@ class Basket {
   }
 }
 
-class Slider {
+class ProductSlider {
   constructor(sliderId) {
     this.$slider = document.querySelector(sliderId);
     this.init()
@@ -772,20 +769,17 @@ class Slider {
     if (!this.$slider) {
       return;
     }
-    this.index = 1;
+    this.i = 0;
     this.$track = this.$slider.querySelector('[data-slider-track]');
-    this.cloneFirstAndLastSlides();
     this.$slides = this.$slider.querySelectorAll('[data-slide]');
     this.quantitySlides = this.$slides.length;
     this.slideWidth = this.$slides[0].offsetWidth;
     this.$prevBtn = this.$slider.querySelector('[data-prev]');
     this.$nextBtn = this.$slider.querySelector('[data-next]');
     this.$dotTrack = this.$slider.querySelector('[data-dot-track]');
-    this.$dots = this.$slider.querySelector('[data-dots]');
+    this.$dotsWrap = this.$slider.querySelector('[data-dots]');
     this.$dotList = this.$slider.querySelectorAll('[data-dot]');
     this.activeDot = 1;
-    this.stepDotTreckStep = this.getStepDotTreckStep();
-    this.setPositionTrack();
     this.navigation();
     this.listener();
   }
@@ -799,132 +793,83 @@ class Slider {
       this.$prevBtn.addEventListener('click', this.prev);
     }
 
-    if (this.$dots) {
-      this.$dots.addEventListener('click', this.dotNavigation);
+    if (this.$dotsWrap) {
+      this.$dotsWrap.addEventListener('click', (e) => {
+        const target = e.target;
+        if (target.closest('[data-dot]')) {
+          this.dotNavigation(target.closest('[data-dot]'))
+        }
+      });
     }
-  }
-
-  cloneFirstAndLastSlides = () => {
-    const $firstSlide = this.$track.firstElementChild;
-    const $lastSlide = this.$track.lastElementChild;
-    const $firstSlideClone = this.createSlideClone($firstSlide, 'last');
-    const $lastSlideClone = this.createSlideClone($lastSlide, 'first');
-    this.$track.prepend($lastSlideClone);
-    this.$track.append($firstSlideClone);
-  }
-
-  createSlideClone = (donorSlide, valueDataAttr) => {
-    const $clone = document.createElement('div');
-    $clone.innerHTML = donorSlide.innerHTML;
-    $clone.classList.add('product__slide');
-    $clone.setAttribute('data-clone', valueDataAttr);
-    $clone.setAttribute('data-slide', '');
-    return $clone;
   }
 
   next = () => {
     if (!this.$nextBtn) {
       return;
     }
-    this.index >= this.quantitySlides - 1 ? false : this.index++;
-    this.$track.style.transition = "transform .3s ease-in-out";
-    this.setPositionTrack();
-    this.changingTrackPositionByReachingEdge();
+    if (this.i == this.quantitySlides - 1) {
+      return;
+    }
+    this.i++;
+    this.trackShift();
     this.setActiveDot();
-    this.moveDotTrack();
+    this.trackDotsShift();
   }
 
   prev = () => {
-    if (!this.$prevBtn) {
+    if (this.i == 0) {
       return;
     }
-    this.index <= 0 ? false : this.index--;
-    this.$track.style.transition = "transform .3s ease-in-out";
-    this.setPositionTrack();
-    this.changingTrackPositionByReachingEdge();
+    this.i--;
+    this.trackShift();
     this.setActiveDot();
-    this.moveDotTrack();
+    this.trackDotsShift();
   }
 
-  dotNavigation = (e) => {
-    if (!this.$dots) {
-      return;
-    }
-    const $dot = e.target.closest('[data-dot]');
-    if (!$dot) {
-      return;
-    }
-    const dotIdx = $dot.dataset.idx;
-    this.index = dotIdx;
-    this.$track.style.transition = "transform .3s ease-in-out";
-    this.setPositionTrack();
-    this.setActiveDot();
-    this.moveDotTrack();
-  }
+  trackShift = () => {
+    const step = this.$slides[0].offsetWidth;
 
-  setPositionTrack = () => {
-    const position = this.getShiftTrack()
-    this.$track.style.transform = `translateX(-${position}px)`;
-  }
-
-  getShiftTrack = () => {
-    return this.index * this.slideWidth;
-  }
-
-  changingTrackPositionByReachingEdge = () => {
-    this.$track.addEventListener('transitionend', () => {
-      this.$slides[this.index].dataset.clone === 'last' ? this.index = 1 : this.index;
-
-      this.$slides[this.index].dataset.clone === 'first' ? this.index = this.quantitySlides - 2 : this.index;
-
-      this.$track.style.transition = "none";
-
-      this.setPositionTrack()
-
-    })
+    const trackShift = this.i * step;
+    this.$track.style.transform = `translate(-${trackShift}px, 0)`;
   }
 
   setActiveDot = () => {
-    this.activeDot = this.activeDot + 1;
-    if (this.activeDot > this.$dotList.length) {
-      this.activeDot = 1;
-    }
-    this.$dotList.forEach(($dot) => {
+    this.$dotList.forEach(($dot, idx) => {
       $dot.classList.remove('product__dot--is-active');
-      if ($dot.dataset.idx == this.activeDot) {
+      if (idx == this.i) {
         $dot.classList.add('product__dot--is-active');
-
-        console.log(this.activeDot);
       }
-    })
+    });
   }
 
-  moveDotTrack = () => {
-    const range = this.activeDot - 2
-    console.log(this.activeDot);
-    if (range < 1) {
-      return;
+  trackDotsShift = () => {
+    let countDot = this.i - 1;
+
+    if (countDot < 0) {
+      countDot = 0;
+    }
+    if (this.i >= this.$dotList.length - 1) {
+      countDot = this.$dotList.length - 3
     }
 
-
-    const dotStep = this.stepDotTreckStep * range;
-    const dotsLength = this.$dotList.length;
-
-    this.$dotTrack.style.transform = `translateX(-${dotStep}px)`;
-
+    const dotHeight = this.$dotList[0].offsetHeight;
+    const dotMarginRight = parseInt(getComputedStyle(this.$dotList[0], true).marginRight);
+    const step = dotHeight + dotMarginRight;
+    const dotsTrackShift = countDot * step;
+    this.$dotTrack.style.transform = `translate(-${dotsTrackShift}px, 0)`;
   }
 
-  getStepDotTreckStep = () => {
-    const widthDot = this.$dotList[0].offsetWidth;
-    const marginL = parseInt(getComputedStyle(this.$dotList[0]).marginRight);
-    return widthDot + marginL;
+  dotNavigation = ($dot) => {
+    this.i = $dot.dataset.idx;
+    this.trackShift();
+    this.setActiveDot();
+    this.trackDotsShift();
   }
+
+
 
   listener = () => {
-    window.addEventListener(`resize`, () => {
-      this.slideWidth = this.$slides[0].offsetWidth;
-      this.setPositionTrack();
-    }, false);
+    window.addEventListener('resize', this.trackShift, false);
   }
 
 }
@@ -1277,7 +1222,8 @@ class CityModal extends Modal {
     $allCityList.forEach(($cityList) => {
       const $dropdownBody = $cityList.querySelector('[data-dropdown-close]');
       const $arrow = $cityList.querySelector('[data-dropdown-arrow]');
-      openDropdown($dropdownBody, $arrow);
+      console.log($arrow)
+      openDropdown($dropdownBody, false, $arrow);
     })
   }
 
@@ -1996,7 +1942,7 @@ const mobiliMenu = new MobileMenu('#mobileMenu');
 
 const basket = new Basket('#basket');
 
-const productSlider = new Slider('#productSlider');
+const productSlider = new ProductSlider('#productSlider');
 
 doc.addEventListener('click', docClickListener);
 doc.addEventListener('input', docInputListener);
@@ -2081,6 +2027,7 @@ function toggleDropdown(target) {
     return;
   }
   const $dropdownBody = getDropdownEl(target, '[data-dropdown-close]');
+  console.log()
   const $arrow = getDropdownEl(target, '[data-dropdown-arrow]');
   const isClose = $dropdownBody.dataset.dropdownClose;
 
@@ -2101,6 +2048,7 @@ function getDropdownEl(target, selector) {
 }
 
 function openDropdown($dropdownBody, $dropdownHeader, $arrow) {
+
   const $dropdownList = $dropdownBody.querySelector('[data-dropdown-list]');
   const dropdownListHeight = $dropdownList.offsetHeight;
   $dropdownBody.style.height = dropdownListHeight + 'px';
@@ -2108,14 +2056,13 @@ function openDropdown($dropdownBody, $dropdownHeader, $arrow) {
     $dropdownBody.closest('[data-dropdown]').classList.add('bg-pearl');
     $dropdownHeader.classList.add('dropdown-header--is-active');
   }
-
-  $arrow.classList.add('dropdown__arrow--is-donw');
+  $arrow.classList.add('dropdown__arrow--is-down');
   $dropdownBody.dataset.dropdownClose = 'open';
 }
 
 function closeDropdown($dropdownBody, $dropdownHeader, $arrow) {
   $dropdownBody.style.height = 0 + 'px';
-  $arrow.classList.remove('dropdown__arrow--is-donw');
+  $arrow.classList.remove('dropdown__arrow--is-down');
   $dropdownBody.dataset.dropdownClose = 'close';
   if ($dropdownHeader) {
     $dropdownBody.closest('[data-dropdown]').classList.remove('bg-pearl');

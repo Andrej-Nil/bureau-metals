@@ -18,6 +18,7 @@
 }
 
 .product__track {
+  transition: 0.2s ease-in-out;
   display: flex;
 }
 
@@ -74,6 +75,8 @@
 }
 
 .product__dots {
+  margin: 0 auto;
+  max-width: 338px;
   display: flex;
   overflow: hidden;
 }

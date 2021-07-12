@@ -3,10 +3,10 @@
   overflow: hidden;
   top: 0;
   left: 0;
-  width: 0;
-  padding: 20px 0;
-  max-width: 500px;
-  background: $white;
+  bottom: 0;
+  right: 0;
+  width: 0%;
+  overflow-y: auto;
 
   z-index: 1000;
   @media (min-width: 1130px) {
@@ -16,7 +16,11 @@
 }
 
 .mobile-menu__content {
+  padding: 20px 0;
+  position: relative;
   min-width: 250px;
+  max-width: 500px;
+  background: $white;
 }
 
 .mobile-nav--is-open {
@@ -35,7 +39,7 @@
   width: 25px;
   height: 25px;
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -89,7 +93,7 @@
     display: block;
     width: 6px;
     height: 12px;
-    @include font-icon-style('\e904', 12px);
+    @include font-icon-style("\e904", 12px);
   }
 }
 .mobile-dropdown__list-body {
