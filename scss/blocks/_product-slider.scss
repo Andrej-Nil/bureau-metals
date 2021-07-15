@@ -10,10 +10,10 @@
   }
 }
 .product-slider__track {
-  overflow: hidden;
   display: flex;
   padding-bottom: 125px;
   justify-content: space-between;
+  transition: 0.2s ease-in-out;
 }
 
 .product-slider__slide {

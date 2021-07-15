@@ -758,9 +758,11 @@ class Basket {
   }
 }
 
-class ProductSlider {
-  constructor(sliderId) {
+class Slider {
+  constructor(sliderId, breakingPoints) {
     this.$slider = document.querySelector(sliderId);
+    this.breakingPoints = breakingPoints;
+    this.debaunce = new Debaunce();
     this.init()
 
   }
@@ -769,6 +771,7 @@ class ProductSlider {
     if (!this.$slider) {
       return;
     }
+
     this.i = 0;
     this.$track = this.$slider.querySelector('[data-slider-track]');
     this.$slides = this.$slider.querySelectorAll('[data-slide]');
@@ -776,15 +779,19 @@ class ProductSlider {
     this.slideWidth = this.$slides[0].offsetWidth;
     this.$prevBtn = this.$slider.querySelector('[data-prev]');
     this.$nextBtn = this.$slider.querySelector('[data-next]');
-    this.$dotTrack = this.$slider.querySelector('[data-dot-track]');
-    this.$dotsWrap = this.$slider.querySelector('[data-dots]');
-    this.$dotList = this.$slider.querySelectorAll('[data-dot]');
-    this.activeDot = 1;
+    this.$dotPicTrack = this.$slider.querySelector('[data-pic-dot-track]');
+    this.$dotsPicWrap = this.$slider.querySelector('[data-pic-dots]');
+    this.$dotPicList = this.$slider.querySelectorAll('[data-pic-dot]');
+    this.$dotsWrap = this.$slider.querySelector('[data-dots-wrap]');
+    this.displaySlides;
+    this.activeDotPic = 1;
     this.touchStart = 0;
     this.touchPosition = 0;
+    this.sensitivity = 30;
     this.navigation();
     this.listener();
-    this.sensitivity = 30;
+    this.setDisplaySlides();
+    this.$dotList = this.$slider.querySelectorAll('[data-dot]');
   }
 
   navigation = () => {
@@ -804,19 +811,35 @@ class ProductSlider {
         }
       });
     }
+
+    if (this.$dotsPicWrap) {
+      this.$dotsPicWrap.addEventListener('click', (e) => {
+        const target = e.target;
+        if (target.closest('[data-pic-dot]')) {
+          this.dotPicNavigation(target.closest('[data-pic-dot]'))
+        }
+      });
+    }
   }
 
   next = () => {
     if (!this.$nextBtn) {
       return;
     }
-    if (this.i == this.quantitySlides - 1) {
+    if (this.i == this.quantitySlides - this.displaySlides) {
       return;
     }
     this.i++;
+
     this.trackShift();
-    this.setActiveDot();
-    this.trackDotsShift();
+    if (this.$dotsWrap) {
+      this.setActiveDot();
+    }
+    if (this.$dotsPicWrap) {
+      this.setActivePicDot();
+      this.trackPicDotsShift();
+    }
+
   }
 
   prev = () => {
@@ -825,19 +848,52 @@ class ProductSlider {
     }
     this.i--;
     this.trackShift();
-    this.setActiveDot();
-    this.trackDotsShift();
+    if (this.$dotsWrap) {
+      this.setActiveDot();
+    }
+    if (this.$dotsPicWrap) {
+      this.setActivePicDot();
+      this.trackPicDotsShift();
+    }
   }
 
   trackShift = () => {
-    const step = this.$slides[0].offsetWidth;
-
+    const slideWidth = this.$slides[0].offsetWidth;
+    const slideMarginRight = parseInt(getComputedStyle(this.$slides[0], true).marginRight);
+    const step = slideWidth + slideMarginRight;
     const trackShift = this.i * step;
     this.$track.style.transform = `translate(-${trackShift}px, 0)`;
   }
 
+  dotNavigation = ($dot) => {
+    this.i = $dot.dataset.idx;
+    this.setActiveDot();
+    this.trackShift();
+  }
+
   setActiveDot = () => {
     this.$dotList.forEach(($dot, idx) => {
+      $dot.classList.remove('section-dots__item--is-active');
+      if (idx == this.i) {
+        $dot.classList.add('section-dots__item--is-active');
+      }
+    });
+  }
+
+  setFirstSlide = () => {
+    this.i = 0;
+    this.trackShift();
+    if (this.$dotsWrap) {
+      this.setActiveDot();
+    }
+    if (this.$dotsPicWrap) {
+      this.setActivePicDot();
+      this.trackPicDotsShift();
+    }
+  }
+
+  setActivePicDot = () => {
+    this.$dotPicList.forEach(($dot, idx) => {
       $dot.classList.remove('product__dot--is-active');
       if (idx == this.i) {
         $dot.classList.add('product__dot--is-active');
@@ -845,30 +901,29 @@ class ProductSlider {
     });
   }
 
-  trackDotsShift = () => {
+  trackPicDotsShift = () => {
     let countDot = this.i - 1;
 
     if (countDot < 0) {
       countDot = 0;
     }
-    if (this.i >= this.$dotList.length - 1) {
-      countDot = this.$dotList.length - 3
+    if (this.i >= this.$dotPicList.length - 1) {
+      countDot = this.$dotPicList.length - 3
     }
 
-    const dotHeight = this.$dotList[0].offsetHeight;
-    const dotMarginRight = parseInt(getComputedStyle(this.$dotList[0], true).marginRight);
-    const step = dotHeight + dotMarginRight;
+    const dotWidth = this.$dotPicList[0].offsetHeight;
+    const dotMarginRight = parseInt(getComputedStyle(this.$dotPicList[0], true).marginRight);
+    const step = dotWidth + dotMarginRight;
     const dotsTrackShift = countDot * step;
-    this.$dotTrack.style.transform = `translate(-${dotsTrackShift}px, 0)`;
+    this.$dotPicTrack.style.transform = `translate(-${dotsTrackShift}px, 0)`;
   }
 
-  dotNavigation = ($dot) => {
+  dotPicNavigation = ($dot) => {
     this.i = $dot.dataset.idx;
     this.trackShift();
-    this.setActiveDot();
-    this.trackDotsShift();
+    this.setActivePicDot();
+    this.trackPicDotsShift();
   }
-
 
   startTouchMove = (e) => {
     this.touchStart = e.changedTouches[0].clientX;
@@ -888,19 +943,83 @@ class ProductSlider {
       this.prev();
     }
   }
+  createDotList = () => {
+    const countDot = this.$slides.length - this.displaySlides;
+    let dotsHtml = ''
+    for (let i = 0; countDot >= i; i++) {
+      const cls = this.i == i ? 'section-dots__item--is-active' : '';
+      dotsHtml += /*html*/`<div class="section-dots__item ${cls}" data-dot data-idx="${i}"></div>`
+    }
+    this.$dotsWrap.innerHTML = '';
+    this.$dotsWrap.insertAdjacentHTML('beforeend', dotsHtml);
+    this.$dotList = this.$dotsWrap.querySelectorAll('[data-dot]');
+  }
+  setDisplaySlides = () => {
+    if (!this.breakingPoints) {
+      this.displaySlides = 1;
+      return;
+    }
+    const widthWindow = document.documentElement.scrollWidth;
+    if (this.breakingPoints.four.width <= widthWindow) {
+      if (this.displaySlides == this.breakingPoints.four.count) {
+        return;
+      }
+      this.displaySlides = this.breakingPoints.four.count;
+      this.createDotList();
+      return;
+    }
+    if (this.breakingPoints.three.width <= widthWindow) {
+      if (this.displaySlides == this.breakingPoints.three.count) {
+        return;
+      }
+      this.displaySlides = this.breakingPoints.three.count;
+      this.createDotList();
+      return;
+    }
+    if (this.breakingPoints.two.width <= widthWindow) {
+      if (this.displaySlides == this.breakingPoints.two.count) {
+        return;
+      }
 
+      if (this.displaySlides == this.breakingPoints.one.count) {
+        return;
+      }
+      this.displaySlides = this.breakingPoints.two.count;
+      this.createDotList();
+      return;
+    }
+    this.displaySlides = this.breakingPoints.one.count;
+    this.createDotList();
+  }
 
 
   listener = () => {
-    window.addEventListener('resize', this.trackShift, false);
-
+    const setFirstSlide = this.debaunce.debaunce(this.setFirstSlide, 200)
+    window.addEventListener('resize', setFirstSlide);
     this.$track.addEventListener('touchstart', (e) => { this.startTouchMove(e) });
     this.$track.addEventListener('touchmove', (e) => { this.touchMove(e) });
     this.$track.addEventListener('touchend', () => { this.touchEnd() });
+    if (this.breakingPoints) {
+      const setDisplaySlides = this.debaunce.debaunce(this.setDisplaySlides, 200);
+      window.addEventListener('resize', setDisplaySlides);
+    }
   }
 
 
 }
+
+//class Slider {
+//  constructor(sliderId) {
+//    this.$slider = doc.querySelector(sliderId);
+//    this.init()
+//  }
+//  init = () => {
+//    if (!this.$slider) {
+//      return;
+//    }
+//    console.log(this.$slider);
+//  }
+//}
 
 
 
@@ -1972,7 +2091,28 @@ const mobiliMenu = new MobileMenu('#mobileMenu');
 
 const basket = new Basket('#basket');
 
-const productSlider = new ProductSlider('#productSlider');
+const productSlider = new Slider('#productSlider');
+
+const breakingPoints = {
+  one: {
+    width: 0,
+    count: 1,
+  },
+  two: {
+    width: 700,
+    count: 2,
+  },
+  three: {
+    width: 1000,
+    count: 3,
+  },
+  four: {
+    width: 1472,
+    count: 4,
+  }
+}
+const sliderOne = new Slider('#sliderOne', breakingPoints);
+const sliderTwo = new Slider('#sliderTwo', breakingPoints);
 
 doc.addEventListener('click', docClickListener);
 doc.addEventListener('input', docInputListener);
