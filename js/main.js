@@ -1,6 +1,7 @@
 'use strict';
 const doc = document;
-const $body = document.querySelector('body');
+const $body = doc.querySelector('body');
+const $popupList = doc.querySelectorAll('[data-popup-id]');
 const $openSearchBtn = doc.querySelector('#openSearchBtn');
 const $openSearchMobileBtn = doc.querySelector('#openSearchMobileBtn');
 const $searchModal = doc.querySelector('#searchModal');
@@ -1401,7 +1402,6 @@ class CityModal extends Modal {
 
     }
 
-
   }
 
   getNewArrRegeon = () => {
@@ -1459,9 +1459,18 @@ class CityModal extends Modal {
     $allCityList.forEach(($cityList) => {
       const $dropdownBody = $cityList.querySelector('[data-dropdown-close]');
       const $arrow = $cityList.querySelector('[data-dropdown-arrow]');
-      console.log($arrow)
+      const $cities = $cityList.querySelectorAll('[data-region-item]');
+      this.showAllCity($cities)
       openDropdown($dropdownBody, false, $arrow);
     })
+  }
+
+  showAllCity = ($cities) => {
+    //let rez = true;
+    //$cities.forEach(($city) => {
+    //  res = rez && $city.classList.has('city-hide');
+    //  console.log()
+    //})
   }
 
   showCity($item) {
@@ -2205,6 +2214,12 @@ const sidebar = new Sidebar('#sidebar');
 doc.addEventListener('click', docClickListener);
 doc.addEventListener('input', docInputListener);
 
+
+
+if ($popupList.length) {
+  createPopupNav();
+}
+
 //окно поиска
 if ($openSearchBtn && $searchModal) {
   $openSearchBtn.addEventListener('click', () => {
@@ -2306,11 +2321,11 @@ function getDropdownEl(target, selector) {
 }
 
 async function openDropdown($dropdownBody, $dropdownHeader, $arrow) {
-  const $dropdown = $dropdownHeader.closest('[data-dropdown]');
-  const listId = $dropdown.querySelector('[data-list-id]').dataset.listId;
+  const $dropdown = $dropdownBody.closest('[data-dropdown]');
+  const $listId = $dropdown.querySelector('[data-list-id]');
   const $dropdownList = $dropdownBody.querySelector('[data-dropdown-list]');
-  if (listId) {
-    await createSubmenu(listId, $dropdownList);
+  if ($listId) {
+    await createSubmenu($listId.dataset.listId, $dropdownList);
   }
 
   const dropdownListHeight = $dropdownList.offsetHeight;
@@ -2402,6 +2417,13 @@ function docClickListener(e) {
     counter(target);
   }
 
+}
+
+function createPopupNav() {
+  $popupList.forEach(($item) => {
+    const id = $item.dataset.popupId;
+    console.log(id);
+  })
 }
 
 function docInputListener(e) {

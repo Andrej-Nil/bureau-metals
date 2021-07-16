@@ -860,14 +860,29 @@ select:-webkit-autofill:focus {
 }
 
 .popup-nav-wrap:hover .popup-nav {
-  top: 0;
-  height: auto;
-  overflow: visible;
+  opacity: 1;
+  visibility: visible;
+  transition-delay: 0s;
+  top: 10px;
 }
 
-.popup-nav-wrap:hover .popup-nav__list {
-  opacity: 1;
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+.popup-nav {
+  position: absolute;
+  top: 100px;
+  opacity: 0;
+  visibility: hidden;
+  left: -35px;
+  overflow: hidden;
+  padding: 0 15px;
+  transition: opacity 0.5s, top 0.5s, visibility 0s ease-in-out 0.5s;
+}
+
+.popup-nav__list {
+  margin-top: 60px;
+  height: 100px;
+  width: 338px;
+  background: #fff;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0);
 }
 
 .advantage {
