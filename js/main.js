@@ -45,16 +45,40 @@ class MobileMenu {
       return;
     }
     this.listner();
+    this.catalogList = this.$menu.querySelector('[data-catalog-list]');
+    this.render = new Render(this.catalogList);
+    this.server = new Server();
   }
 
   open = () => {
     this.$menu.classList.add('mobile-nav--is-open');
     $body.classList.add('no-scroll');
+    this.createCatalog()
   }
 
   close = () => {
     this.$menu.classList.remove('mobile-nav--is-open');
     $body.classList.remove('no-scroll');
+  }
+
+  createCatalog = async () => {
+    if (this.catalogList.firstElementChild) {
+      return;
+    }
+
+    const listId = this.catalogList.dataset.listId;
+    this.render.renderSpiner('Идет загрузка...');
+    const response = await this.server.getMenu(listId);
+    if (response.rez == 0) {
+      this.render.renderErrorMsg(response.error.desc);
+      console.log(`Ошибка: ${response.error.id}`);
+    }
+    if (response.rez == 1) {
+      const menuList = response.content;
+      this.render.delete('[data-spinner]');
+      this.render.renderMenu(menuList);
+    }
+
   }
 
   listner = () => {
@@ -1084,8 +1108,6 @@ class Sidebar {
       this.render.delete('[data-spinner]');
       this.render.renderMenu(menuList);
     }
-
-
   }
 
 
