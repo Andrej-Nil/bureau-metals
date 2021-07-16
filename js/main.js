@@ -91,6 +91,7 @@ class Server {
     this.addBasketApi = '../json/addBasket.json';
     this.searchApi = '../json/search.json';
     this.removeBaskethApi = '../json/removeBasket.json';
+    this.menuApi = '../json/sidebar.json';
   }
 
   getCity = async () => {
@@ -105,6 +106,15 @@ class Server {
     data._token = this._token;
     const formData = this.createFormData(data);
     return await this.getResponse(this.POST, formData, this.fastOrderApi);
+  }
+
+  getMenu = async (id) => {
+    const data = {
+      _token: this._token,
+      id: id,
+    };
+    const formData = this.createFormData(data);
+    return await this.getResponse(this.POST, formData, this.menuApi)
   }
 
   addFavorite = async (id) => {
@@ -148,19 +158,6 @@ class Server {
     return await this.getResponse(this.POST, data, api);
   }
 
-  createFormData = (data) => {
-    const formData = new FormData()
-    for (let key in data) {
-      formData.append(`${key}`, data[key])
-    }
-    return formData;
-  }
-
-  getToken = () => {
-    const meta = document.querySelector('meta[name="csrf-token"]');
-    return meta.getAttribute('content');
-  }
-
   getResponse = async (method, data, api) => {
     return await new Promise(function (resolve, reject) {
       const xhr = new XMLHttpRequest();
@@ -186,17 +183,30 @@ class Server {
       };
     })
   }
+
+  createFormData = (data) => {
+    const formData = new FormData()
+    for (let key in data) {
+      formData.append(`${key}`, data[key])
+    }
+    return formData;
+  }
+
+  getToken = () => {
+    const meta = document.querySelector('meta[name="csrf-token"]');
+    return meta.getAttribute('content');
+  }
 }
 
 class Render {
-  constructor($parent) {
+  constructor($parent = null) {
     this.$parent = $parent;
     this.spinnerText = '';
     this.errorMsg = '';
   }
 
   //Методы отресовки элементов
-  renderSpiner = (spinnerText = '') => {
+  renderSpiner = (spinnerText = '', $parent = this.$parent) => {
     this.spinnerText = spinnerText;
     this._render(this.$parent, this.getSpinnerHtml, false);
   }
@@ -248,6 +258,10 @@ class Render {
       end = start + numberSections;
       this._render($columns[i], this.getRegionHtml, arr);
     }
+  }
+
+  renderMenu = (menuList) => {
+    this._render(this.$parent, this.getMemuListHtml, menuList);
   }
 
   renderModalCard = (card) => {
@@ -397,6 +411,39 @@ class Render {
   getColumnsCityListHtml = () => {
     return (/*html*/`
     <ul class="city-list__col"></ul>
+  `)
+  }
+
+  getMemuListHtml = (item) => {
+    if (item.isSubmenu == false) {
+      return (/*html*/`
+        <li class="nav-list__item">
+          <a href="${item.slug}" class="nav-list__link">${item.title}</a>
+        </li>
+      `)
+    }
+    if (item.isSubmenu == true) {
+      return (/*html*/`
+      <li class="nav-list__item" data-dropdown>
+        <div class="dropdown__header" data-dropdown-header>
+          <i class="nav-list__arrow" data-dropdown-btn data-dropdown-arrow data-list-id="${item.id}"></i>
+          <a href="${item.slug}" class="nav-list__link">${item.title}</a>
+        </div>
+        <div class="dropdown__body" data-dropdown-close="close">
+          <ul class="nav-list" data-dropdown-list>
+            
+          </ul>
+        </div>
+      </li>
+    `)
+    }
+  }
+
+  getSubmenuHtml = (item) => {
+    return (/*html*/`
+    <li class="nav-list__item">
+      <a href="${item.slug}" class="nav-list__sublink">${item.title}</a>
+    </li>
   `)
   }
 
@@ -1008,20 +1055,41 @@ class Slider {
 
 }
 
-//class Slider {
-//  constructor(sliderId) {
-//    this.$slider = doc.querySelector(sliderId);
-//    this.init()
-//  }
-//  init = () => {
-//    if (!this.$slider) {
-//      return;
-//    }
-//    console.log(this.$slider);
-//  }
-//}
+class Sidebar {
+  constructor(sidebarId) {
+    this.sidebar = doc.querySelector(sidebarId);
+    this.init()
+  }
+
+  init = () => {
+    if (!this.sidebar) {
+      return;
+    }
+    this.sidebarList = this.sidebar.querySelector('[data-list-id]');
+    this.render = new Render(this.sidebarList);
+    this.server = new Server();
+    this.createNav();
+  }
+
+  createNav = async () => {
+    const listId = this.sidebarList.dataset.listId;
+    this.render.renderSpiner('Идет загрузка...');
+    const response = await this.server.getMenu(listId);
+    if (response.rez == 0) {
+      this.render.renderErrorMsg(response.error.desc);
+      console.log(`Ошибка: ${response.error.id}`);
+    }
+    if (response.rez == 1) {
+      const menuList = response.content;
+      this.render.delete('[data-spinner]');
+      this.render.renderMenu(menuList);
+    }
 
 
+  }
+
+
+}
 
 class SearchModal extends Modal {
   constructor(modalId) {
@@ -1289,11 +1357,9 @@ class CityModal extends Modal {
 
   searchCity = () => {
     this.changeInputValue();
-
     this.showFindedRegeon();
     this.showFindedCity();
     this.openFindedRegeon();
-
   }
 
   changeInputValue = () => {
@@ -2068,15 +2134,13 @@ class BasketForm extends Form {
 }
 
 
-
-
-
 // формы
 const callBackForm = new CallBackForm('#callBackForm');
 const fastOrdenForm = new FastOrdenForm('#fastOrdenForm');
 const feedBackForm = new FeedBackForm('#feedBackForm');
 const basketForm = new BasketForm('#basketForm');
 
+const render = new Render();
 const server = new Server();
 // окна
 const searchModal = new SearchModal('#searchModal');
@@ -2113,6 +2177,8 @@ const breakingPoints = {
 }
 const sliderOne = new Slider('#sliderOne', breakingPoints);
 const sliderTwo = new Slider('#sliderTwo', breakingPoints);
+
+const sidebar = new Sidebar('#sidebar');
 
 doc.addEventListener('click', docClickListener);
 doc.addEventListener('input', docInputListener);
@@ -2193,11 +2259,11 @@ if ($map) {
 
 
 function toggleDropdown(target) {
-  if (target.closest('[data-dropdown-list]')) {
-    return;
-  }
+  //if (target.closest('[data-dropdown-list]')) {
+  //  return;
+  //}
+
   const $dropdownBody = getDropdownEl(target, '[data-dropdown-close]');
-  console.log()
   const $arrow = getDropdownEl(target, '[data-dropdown-arrow]');
   const isClose = $dropdownBody.dataset.dropdownClose;
 
@@ -2217,13 +2283,18 @@ function getDropdownEl(target, selector) {
   return $dropdown.querySelector(selector);
 }
 
-function openDropdown($dropdownBody, $dropdownHeader, $arrow) {
-
+async function openDropdown($dropdownBody, $dropdownHeader, $arrow) {
+  const $dropdown = $dropdownHeader.closest('[data-dropdown]');
+  const listId = $dropdown.querySelector('[data-list-id]').dataset.listId;
   const $dropdownList = $dropdownBody.querySelector('[data-dropdown-list]');
+  if (listId) {
+    await createSubmenu(listId, $dropdownList);
+  }
+
   const dropdownListHeight = $dropdownList.offsetHeight;
   $dropdownBody.style.height = dropdownListHeight + 'px';
   if ($dropdownHeader) {
-    $dropdownBody.closest('[data-dropdown]').classList.add('bg-pearl');
+    $dropdown.classList.add('bg-pearl');
     $dropdownHeader.classList.add('dropdown-header--is-active');
   }
   $arrow.classList.add('dropdown__arrow--is-down');
@@ -2238,6 +2309,15 @@ function closeDropdown($dropdownBody, $dropdownHeader, $arrow) {
     $dropdownBody.closest('[data-dropdown]').classList.remove('bg-pearl');
     $dropdownHeader.classList.remove('dropdown-header--is-active');
   }
+}
+
+async function createSubmenu(id, $ul) {
+  if ($ul.firstElementChild) {
+    return;
+  }
+  const response = await server.getMenu(id);
+  render._render($ul, render.getSubmenuHtml, response.content);
+  console.log(response);
 }
 
 function addFavorite(target) {
@@ -2414,7 +2494,6 @@ function getCardInfo($card) {
     id: $card.dataset.id,
   }
 }
-
 
 function getCardList(id) {
   return doc.querySelectorAll(`[data-id="${id}"]`);

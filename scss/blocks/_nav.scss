@@ -1,56 +1,130 @@
 .nav {
   width: 100%;
+  min-height: 400px;
   background: $milk;
 }
 
-.nav__item {
-  &:hover {
-    background: $pearl;
-  }
-  &:hover .nav__link {
-    color: $base;
-  }
-  &:hover .nav__sublist {
-    height: auto;
+.nav-back {
+  position: relative;
+  display: block;
+  background: $base;
+  padding: 15px 15px 15px 50px;
+}
+
+.nav-back__icon {
+  position: absolute;
+  top: 35%;
+  left: 20px;
+  transform: rotate(180deg);
+  &::before {
+    @include font-icon-style("\e904", 12px);
+    color: $white;
   }
 }
 
-.nav__title {
+.nav-list__item {
+  transition: 0.2s ease-in-out;
+}
+
+.nav-back__text {
+  font-size: 16px;
+  line-height: 20px;
+  color: $white;
+}
+
+.nav-list__link {
+  display: block;
+  padding: 15px 40px 15px 15px;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.dropdown__header {
   position: relative;
 }
 
-.nav__link {
-  display: block;
-  width: 100%;
-  font-size: 16px;
-  line-height: 20px;
-  padding: 15px 25px 15px 10px;
+.dropdown__body {
+  overflow: hidden;
+  height: 0;
+  transition: 0.2s ease-in-out;
 }
 
-.nav__arrow {
+.nav-list__arrow {
   position: absolute;
-  top: 50%;
-  right: 30px;
-  transform: translate(0, -50%);
-  display: block;
-}
-
-.nav__icon {
+  top: 25%;
+  width: 20px;
+  height: 20px;
+  right: 20px;
+  cursor: pointer;
   &::before {
-    @include font-icon-style("\e904", 16px);
-    color: $base;
+    @include font-icon-style("\e904", 12px);
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 }
 
-.nav__sublist {
-  height: 0;
-  overflow: hidden;
-}
-
-.nav__sublink {
+.nav-list__sublink {
   display: block;
-  padding: 7px 10px 7px 10px;
-  font-weight: normal;
   font-size: 14px;
   line-height: 20px;
+  padding: 7px 15px;
+  &:hover {
+    color: $base;
+    text-decoration: underline;
+  }
 }
+
+//.nav__item {
+//  &:hover {
+//    background: $pearl;
+//  }
+//  &:hover .nav__link {
+//    color: $base;
+//  }
+//  &:hover .nav__sublist {
+//    height: auto;
+//  }
+//}
+
+//.nav__title {
+//  position: relative;
+//}
+
+//.nav__link {
+//  display: block;
+//  width: 100%;
+//  font-size: 16px;
+//  line-height: 20px;
+//  padding: 15px 25px 15px 10px;
+//}
+
+//.nav__arrow {
+//  position: absolute;
+//  top: 50%;
+//  right: 30px;
+//  transform: translate(0, -50%);
+//  display: block;
+//}
+
+//.nav__icon {
+//  &::before {
+//    @include font-icon-style("\e904", 16px);
+//    color: $base;
+//  }
+//}
+
+//.nav__sublist {
+//  height: 0;
+//  overflow: hidden;
+//}
+
+//.nav__sublink {
+//  display: block;
+//  padding: 7px 10px 7px 10px;
+//  font-weight: normal;
+//  font-size: 14px;
+//  line-height: 20px;
+//}
