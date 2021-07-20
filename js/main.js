@@ -285,8 +285,8 @@ class Render {
     }
   }
 
-  renderMenu = (menuList) => {
-    this._render(this.$parent, this.getMemuListHtml, menuList);
+  renderMenu = (menuList, $parent = this.$parent) => {
+    this._render($parent, this.getMemuListHtml, menuList);
   }
 
   renderModalCard = (card) => {
@@ -2354,7 +2354,6 @@ async function createSubmenu(id, $ul) {
   }
   const response = await server.getMenu(id);
   render._render($ul, render.getSubmenuHtml, response.content);
-  console.log(response);
 }
 
 function addFavorite(target) {
@@ -2421,9 +2420,20 @@ function docClickListener(e) {
 
 function createPopupNav() {
   $popupList.forEach(($item) => {
-    const id = $item.dataset.popupId;
-    console.log(id);
+    renderPopupNav($item)
   })
+}
+
+async function renderPopupNav($item) {
+  const id = $item.dataset.popupId;
+  const response = await server.getMenu(id);
+  if (response.rez == 0) {
+    render.renderErrorMsg(response.error.desc, $item);
+  }
+  if (response.rez == 1) {
+    render.renderMenu(response.content, $item);
+  }
+
 }
 
 function docInputListener(e) {
