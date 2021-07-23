@@ -167,603 +167,255 @@
         <div class="section__content wrapper">
           <div class="content">
 
-            <div class="filter-btn btn red-btn">Фильтры</div>
+            <div id="filterBtn" class="filter-btn btn red-btn">Фильтры</div>
+            <div id="filters" class="filters__bg">
 
-            <div class="filters">
-              <div class="filters__selected">
-                <div class="filters__active">
-                  <div class="filters__active-list">
-                    <!--<h1 class="filters__title">
+
+              <div class="filters">
+                <i class="filters__close" data-close></i>
+                <div id="selectedFilters" class="filters__selected">
+                  <div class="filters__active">
+                    <h1 class="filters__title">
                       Активные фильтры:
-                    </h1>-->
-                    <div class="filters__active-item">
-                      <span class="filter__active-name">Марка стали: 500Ст</span>
-                      <span class="filter__active-remove"></span>
-                    </div>
-                    <div class="filters__active-item">
-                      <span class="filter__active-name">Сечение аллюминиевой жилы: 2 мм, 5 мм, 10 мм</span>
-                      <span class="filter__active-remove"></span>
-                    </div>
-                    <div class="filters__active-item">
-                      <span class="filter__active-name">Перфорация: Есть</span>
-                      <span class="filter__active-remove"></span>
-                    </div>
-                    <div class="filters__active-item">
-                      <span class="filter__active-name">Класс эксплуатации: Средний</span>
-                      <span class="filter__active-remove"></span>
-                    </div>
-                    <div class="filters__active-item">
-                      <span class="filter__active-name">Марка стали: 500Ст</span>
-                      <span class="filter__active-remove"></span>
-                    </div>
-                    <div class="filters__active-item">
-                      <span class="filter__active-name">Сечение аллюминиевой жилы: 2 мм, 5 мм, 10 мм</span>
-                      <span class="filter__active-remove"></span>
-                    </div>
-                    <div class="filters__active-item">
-                      <span class="filter__active-name">Перфорация: Есть</span>
-                      <span class="filter__active-remove"></span>
-                    </div>
-                    <div class="filters__active-item">
-                      <span class="filter__active-name">Класс эксплуатации: Средний</span>
-                      <span class="filter__active-remove"></span>
-                    </div>
-                  </div>
-                </div>
-                <div class="filters__control">
-                  <span class="filters__btn btn red-btn-bd">Сбросить все</span>
+                    </h1>
+                    <div class="filters__active-list">
 
-                  <span class="filters__btn btn red-btn">Показать</span>
-                </div>
-              </div>
-              <div class="filters__list">
-                <div class="filters__item select">
-                  <div class="select__header">
-                    Фильтр по цене
-                  </div>
-                  <div class="options-body filters__options-body">
-                    <div class="options">
-                      <div class="options__search">
-                        <input type="text" class="options__input" placeholder="Поиск...">
-                        <i class="options__btn"></i>
+                      <div class="filters__active-item">
+                        <span class="filter__active-name">Марка стали: 500Ст</span>
+                        <span class="filter__active-remove"></span>
                       </div>
-                      <ul class="options__list filter-options__list">
-                        <li class="options__item">
-                          <span class="options__link">
-                            <span class="options__checkbox  fake-checkbox fake-checkbox--is-active"></span>
-                            <span class="options__name">
-                              30
-                            </span>
 
-                            <span class="options__count">23</span>
-                          </span>
-                        </li>
-                        <li class="options__item">
-                          <span class="options__link">
-                            <span class="options__checkbox  fake-checkbox"></span>
-                            <span class="options__name">
-                              30
-                            </span>
-
-                            <span class="options__count">23</span>
-                          </span>
-                        </li>
-                        <li class="options__item">
-                          <span class="options__link">
-                            <span class="options__checkbox  fake-checkbox fake-checkbox--is-active"></span>
-                            <span class="options__name">
-                              30
-                            </span>
-
-                            <span class="options__count">23</span>
-                          </span>
-                        </li>
-                        <li class="options__item">
-                          <span class="options__link">
-                            <span class="options__checkbox  fake-checkbox fake-checkbox--is-active"></span>
-                            <span class="options__name">
-                              30
-                            </span>
-
-                            <span class="options__count">23</span>
-                          </span>
-                        </li>
-                        <li class="options__item">
-                          <span class="options__link">
-                            <span class="options__checkbox  fake-checkbox"></span>
-                            <span class="options__name">
-                              30
-                            </span>
-
-                            <span class="options__count">23</span>
-                          </span>
-                        </li>
-                        <li class="options__item">
-                          <span class="options__link">
-                            <span class="options__checkbox  fake-checkbox"></span>
-                            <span class="options__name">
-                              30
-                            </span>
-
-                            <span class="options__count">23</span>
-                          </span>
-                        </li>
-                        <li class="options__item">
-                          <span class="options__link">
-                            <span class="options__checkbox  fake-checkbox"></span>
-                            <span class="options__name">
-                              30
-                            </span>
-
-                            <span class="options__count">23</span>
-                          </span>
-                        </li>
-                        <li class="options__item">
-                          <span class="options__link">
-                            <span class="options__checkbox  fake-checkbox"></span>
-                            <span class="options__name">
-                              30
-                            </span>
-
-                            <span class="options__count">23</span>
-                          </span>
-                        </li>
-                        <li class="options__item">
-                          <span class="options__link">
-                            <span class="options__checkbox  fake-checkbox"></span>
-                            <span class="options__name">
-                              30
-                            </span>
-
-                            <span class="options__count">23</span>
-                          </span>
-                        </li>
-
-                      </ul>
                     </div>
                   </div>
+                  <div class="filters__control">
+                    <span class="filters__btn btn red-btn-bd">Сбросить все</span>
 
-
+                    <span class="filters__btn btn red-btn">Показать</span>
+                  </div>
                 </div>
+                <div class="filters__list">
 
-                <div class="filters__item select">
-                  <div class="select__header">
-                    Толщина листа
-                  </div>
-                  <div class="options-body">
-                    <div class="options">
-                      <div class="options__search">
-                        <input type="text" class="options__input" placeholder="Поиск...">
-                        <i class="options__btn"></i>
-                      </div>
-                      <ul class="options__list filter-options__list">
-                        <li class="options__item">
-                          <span class="options__link">
-                            <span class="options__checkbox  fake-checkbox fake-checkbox--is-active"></span>
-                            <span class="options__name">
-                              30
-                            </span>
-
-                            <span class="options__count">23</span>
-                          </span>
-                        </li>
-                        <li class="options__item">
-                          <span class="options__link">
-                            <span class="options__checkbox  fake-checkbox"></span>
-                            <span class="options__name">
-                              30
-                            </span>
-
-                            <span class="options__count">23</span>
-                          </span>
-                        </li>
-                        <li class="options__item">
-                          <span class="options__link">
-                            <span class="options__checkbox  fake-checkbox fake-checkbox--is-active"></span>
-                            <span class="options__name">
-                              30
-                            </span>
-
-                            <span class="options__count">23</span>
-                          </span>
-                        </li>
-                        <li class="options__item">
-                          <span class="options__link">
-                            <span class="options__checkbox  fake-checkbox fake-checkbox--is-active"></span>
-                            <span class="options__name">
-                              30
-                            </span>
-
-                            <span class="options__count">23</span>
-                          </span>
-                        </li>
-                        <li class="options__item">
-                          <span class="options__link">
-                            <span class="options__checkbox  fake-checkbox"></span>
-                            <span class="options__name">
-                              30
-                            </span>
-
-                            <span class="options__count">23</span>
-                          </span>
-                        </li>
-                        <li class="options__item">
-                          <span class="options__link">
-                            <span class="options__checkbox  fake-checkbox"></span>
-                            <span class="options__name">
-                              30
-                            </span>
-
-                            <span class="options__count">23</span>
-                          </span>
-                        </li>
-                        <li class="options__item">
-                          <span class="options__link">
-                            <span class="options__checkbox  fake-checkbox"></span>
-                            <span class="options__name">
-                              30
-                            </span>
-
-                            <span class="options__count">23</span>
-                          </span>
-                        </li>
-                        <li class="options__item">
-                          <span class="options__link">
-                            <span class="options__checkbox  fake-checkbox"></span>
-                            <span class="options__name">
-                              30
-                            </span>
-
-                            <span class="options__count">23</span>
-                          </span>
-                        </li>
-                        <li class="options__item">
-                          <span class="options__link">
-                            <span class="options__checkbox  fake-checkbox"></span>
-                            <span class="options__name">
-                              30
-                            </span>
-
-                            <span class="options__count">23</span>
-                          </span>
-                        </li>
-
-                      </ul>
+                  <div data-filter="close" class="filter select">
+                    <div class="filter__header select__header">
+                      Сечение алюминиевой жилы, мм
                     </div>
-                  </div>
+                    <div data-body class="options-body">
+                      <div class="options">
+                        <div class="options__search">
+
+                          <input type="text" class="options__input" placeholder="Поиск...">
+                          <i class="options__btn"></i>
+
+                        </div>
+
+                        <ul class="options__list filter-options__list">
+
+                          <li class="options__item">
+
+                            <label class="options__label">
+                              <input type="checkbox" name="consent" class="options__checkbox checkbox" data-checkbox>
+                              <span class="options__checkbox  fake-checkbox"></span>
+                              <span class="options__name">
+                                30
+                              </span>
+                              <span class="options__count">23</span>
+                            </label>
 
 
-                </div>
 
-                <div class="filters__item select">
-                  <div class="select__header">
-                    Сечение алюминиевой жилы, мм
-                  </div>
-                  <div class="options-body">
-                    <div class="options">
-                      <div class="options__search">
-                        <input type="text" class="options__input" placeholder="Поиск...">
-                        <i class="options__btn"></i>
+
+                          </li>
+                          <li class="options__item">
+
+                            <label class="options__label">
+                              <input type="checkbox" name="consent" class="options__checkbox checkbox" data-checkbox>
+                              <span class="options__checkbox  fake-checkbox"></span>
+                              <span class="options__name">
+                                30
+                              </span>
+                              <span class="options__count">23</span>
+                            </label>
+
+                          </li>
+                          <li class="options__item">
+
+                            <label class="options__label">
+                              <input type="checkbox" name="consent" class="options__checkbox checkbox" data-checkbox>
+                              <span class="options__checkbox  fake-checkbox"></span>
+                              <span class="options__name">
+                                30
+                              </span>
+                              <span class="options__count">23</span>
+                            </label>
+
+                          </li>
+                          <li class="options__item">
+
+                            <label class="options__label">
+                              <input type="checkbox" name="consent" class="options__checkbox checkbox" data-checkbox>
+                              <span class="options__checkbox  fake-checkbox"></span>
+                              <span class="options__name">
+                                30
+                              </span>
+                              <span class="options__count">23</span>
+                            </label>
+                          </li>
+                        </ul>
                       </div>
-                      <ul class="options__list filter-options__list">
-                        <li class="options__item">
-                          <span class="options__link">
-                            <span class="options__checkbox  fake-checkbox fake-checkbox--is-active"></span>
-                            <span class="options__name">
-                              30
-                            </span>
-
-                            <span class="options__count">23</span>
-                          </span>
-                        </li>
-                        <li class="options__item">
-                          <span class="options__link">
-                            <span class="options__checkbox  fake-checkbox"></span>
-                            <span class="options__name">
-                              30
-                            </span>
-
-                            <span class="options__count">23</span>
-                          </span>
-                        </li>
-                        <li class="options__item">
-                          <span class="options__link">
-                            <span class="options__checkbox  fake-checkbox fake-checkbox--is-active"></span>
-                            <span class="options__name">
-                              30
-                            </span>
-
-                            <span class="options__count">23</span>
-                          </span>
-                        </li>
-                        <li class="options__item">
-                          <span class="options__link">
-                            <span class="options__checkbox  fake-checkbox fake-checkbox--is-active"></span>
-                            <span class="options__name">
-                              30
-                            </span>
-
-                            <span class="options__count">23</span>
-                          </span>
-                        </li>
-                        <li class="options__item">
-                          <span class="options__link">
-                            <span class="options__checkbox  fake-checkbox"></span>
-                            <span class="options__name">
-                              30
-                            </span>
-
-                            <span class="options__count">23</span>
-                          </span>
-                        </li>
-                        <li class="options__item">
-                          <span class="options__link">
-                            <span class="options__checkbox  fake-checkbox"></span>
-                            <span class="options__name">
-                              30
-                            </span>
-
-                            <span class="options__count">23</span>
-                          </span>
-                        </li>
-                        <li class="options__item">
-                          <span class="options__link">
-                            <span class="options__checkbox  fake-checkbox"></span>
-                            <span class="options__name">
-                              30
-                            </span>
-
-                            <span class="options__count">23</span>
-                          </span>
-                        </li>
-                        <li class="options__item">
-                          <span class="options__link">
-                            <span class="options__checkbox  fake-checkbox"></span>
-                            <span class="options__name">
-                              30
-                            </span>
-
-                            <span class="options__count">23</span>
-                          </span>
-                        </li>
-                        <li class="options__item">
-                          <span class="options__link">
-                            <span class="options__checkbox  fake-checkbox"></span>
-                            <span class="options__name">
-                              30
-                            </span>
-
-                            <span class="options__count">23</span>
-                          </span>
-                        </li>
-
-                      </ul>
                     </div>
+
+
                   </div>
 
+                  <div data-filter="close" class="filter select">
+                    <div class="filter__header select__header">
+                      Сечение алюминиевой жилы, мм
+                    </div>
+                    <div data-body class="options-body">
+                      <div class="options">
+                        <div class="options__search">
 
-                </div>
+                          <input type="text" class="options__input" placeholder="Поиск...">
+                          <i class="options__btn"></i>
 
-                <div class="filters__item select">
-                  <div class="select__header">
-                    Толщина листа, мм
-                  </div>
-                  <div class="options-body">
-                    <div class="options">
-                      <div class="options__search">
-                        <input type="text" class="options__input" placeholder="Поиск...">
-                        <i class="options__btn"></i>
+                        </div>
+
+                        <ul class="options__list filter-options__list">
+
+                          <li class="options__item">
+
+                            <label class="options__label">
+                              <input type="checkbox" name="consent" class="options__checkbox checkbox" data-checkbox>
+                              <span class="options__checkbox  fake-checkbox"></span>
+                              <span class="options__name">
+                                30
+                              </span>
+                              <span class="options__count">23</span>
+                            </label>
+
+
+
+
+                          </li>
+                          <li class="options__item">
+
+                            <label class="options__label">
+                              <input type="checkbox" name="consent" class="options__checkbox checkbox" data-checkbox>
+                              <span class="options__checkbox  fake-checkbox"></span>
+                              <span class="options__name">
+                                30
+                              </span>
+                              <span class="options__count">23</span>
+                            </label>
+
+                          </li>
+                          <li class="options__item">
+
+                            <label class="options__label">
+                              <input type="checkbox" name="consent" class="options__checkbox checkbox" data-checkbox>
+                              <span class="options__checkbox  fake-checkbox"></span>
+                              <span class="options__name">
+                                30
+                              </span>
+                              <span class="options__count">23</span>
+                            </label>
+
+                          </li>
+                          <li class="options__item">
+
+                            <label class="options__label">
+                              <input type="checkbox" name="consent" class="options__checkbox checkbox" data-checkbox>
+                              <span class="options__checkbox  fake-checkbox"></span>
+                              <span class="options__name">
+                                30
+                              </span>
+                              <span class="options__count">23</span>
+                            </label>
+                          </li>
+                        </ul>
                       </div>
-                      <ul class="options__list filter-options__list">
-                        <li class="options__item">
-                          <span class="options__link">
-                            <span class="options__checkbox  fake-checkbox fake-checkbox--is-active"></span>
-                            <span class="options__name">
-                              30
-                            </span>
-
-                            <span class="options__count">23</span>
-                          </span>
-                        </li>
-                        <li class="options__item">
-                          <span class="options__link">
-                            <span class="options__checkbox  fake-checkbox"></span>
-                            <span class="options__name">
-                              30
-                            </span>
-
-                            <span class="options__count">23</span>
-                          </span>
-                        </li>
-                        <li class="options__item">
-                          <span class="options__link">
-                            <span class="options__checkbox  fake-checkbox fake-checkbox--is-active"></span>
-                            <span class="options__name">
-                              30
-                            </span>
-
-                            <span class="options__count">23</span>
-                          </span>
-                        </li>
-                        <li class="options__item">
-                          <span class="options__link">
-                            <span class="options__checkbox  fake-checkbox fake-checkbox--is-active"></span>
-                            <span class="options__name">
-                              30
-                            </span>
-
-                            <span class="options__count">23</span>
-                          </span>
-                        </li>
-                        <li class="options__item">
-                          <span class="options__link">
-                            <span class="options__checkbox  fake-checkbox"></span>
-                            <span class="options__name">
-                              30
-                            </span>
-
-                            <span class="options__count">23</span>
-                          </span>
-                        </li>
-                        <li class="options__item">
-                          <span class="options__link">
-                            <span class="options__checkbox  fake-checkbox"></span>
-                            <span class="options__name">
-                              30
-                            </span>
-
-                            <span class="options__count">23</span>
-                          </span>
-                        </li>
-                        <li class="options__item">
-                          <span class="options__link">
-                            <span class="options__checkbox  fake-checkbox"></span>
-                            <span class="options__name">
-                              30
-                            </span>
-
-                            <span class="options__count">23</span>
-                          </span>
-                        </li>
-                        <li class="options__item">
-                          <span class="options__link">
-                            <span class="options__checkbox  fake-checkbox"></span>
-                            <span class="options__name">
-                              30
-                            </span>
-
-                            <span class="options__count">23</span>
-                          </span>
-                        </li>
-                        <li class="options__item">
-                          <span class="options__link">
-                            <span class="options__checkbox  fake-checkbox"></span>
-                            <span class="options__name">
-                              30
-                            </span>
-
-                            <span class="options__count">23</span>
-                          </span>
-                        </li>
-
-                      </ul>
                     </div>
+
+
                   </div>
 
+                  <div data-filter="close" class="filter select">
+                    <div class="filter__header select__header">
+                      Сечение алюминиевой жилы, мм
+                    </div>
+                    <div data-body class="options-body">
+                      <div class="options">
+                        <div class="options__search">
 
-                </div>
+                          <input type="text" class="options__input" placeholder="Поиск...">
+                          <i class="options__btn"></i>
 
-                <div class="filters__item select">
-                  <div class="select__header">
-                    Фильтр по цене
-                  </div>
-                  <div class="options-body">
-                    <div class="options">
-                      <div class="options__search">
-                        <input type="text" class="options__input" placeholder="Поиск...">
-                        <i class="options__btn"></i>
+                        </div>
+
+                        <ul class="options__list filter-options__list">
+
+                          <li class="options__item">
+
+                            <label class="options__label">
+                              <input type="checkbox" name="consent" class="options__checkbox checkbox" data-checkbox>
+                              <span class="options__checkbox  fake-checkbox"></span>
+                              <span class="options__name">
+                                30
+                              </span>
+                              <span class="options__count">23</span>
+                            </label>
+
+
+
+
+                          </li>
+                          <li class="options__item">
+
+                            <label class="options__label">
+                              <input type="checkbox" name="consent" class="options__checkbox checkbox" data-checkbox>
+                              <span class="options__checkbox  fake-checkbox"></span>
+                              <span class="options__name">
+                                30
+                              </span>
+                              <span class="options__count">23</span>
+                            </label>
+
+                          </li>
+                          <li class="options__item">
+
+                            <label class="options__label">
+                              <input type="checkbox" name="consent" class="options__checkbox checkbox" data-checkbox>
+                              <span class="options__checkbox  fake-checkbox"></span>
+                              <span class="options__name">
+                                30
+                              </span>
+                              <span class="options__count">23</span>
+                            </label>
+
+                          </li>
+                          <li class="options__item">
+
+                            <label class="options__label">
+                              <input type="checkbox" name="consent" class="options__checkbox checkbox" data-checkbox>
+                              <span class="options__checkbox  fake-checkbox"></span>
+                              <span class="options__name">
+                                30
+                              </span>
+                              <span class="options__count">23</span>
+                            </label>
+                          </li>
+                        </ul>
                       </div>
-                      <ul class="options__list filter-options__list">
-                        <li class="options__item">
-                          <span class="options__link">
-                            <span class="options__checkbox  fake-checkbox fake-checkbox--is-active"></span>
-                            <span class="options__name">
-                              30
-                            </span>
-
-                            <span class="options__count">23</span>
-                          </span>
-                        </li>
-                        <li class="options__item">
-                          <span class="options__link">
-                            <span class="options__checkbox  fake-checkbox"></span>
-                            <span class="options__name">
-                              30
-                            </span>
-
-                            <span class="options__count">23</span>
-                          </span>
-                        </li>
-                        <li class="options__item">
-                          <span class="options__link">
-                            <span class="options__checkbox  fake-checkbox fake-checkbox--is-active"></span>
-                            <span class="options__name">
-                              30
-                            </span>
-
-                            <span class="options__count">23</span>
-                          </span>
-                        </li>
-                        <li class="options__item">
-                          <span class="options__link">
-                            <span class="options__checkbox  fake-checkbox fake-checkbox--is-active"></span>
-                            <span class="options__name">
-                              30
-                            </span>
-
-                            <span class="options__count">23</span>
-                          </span>
-                        </li>
-                        <li class="options__item">
-                          <span class="options__link">
-                            <span class="options__checkbox  fake-checkbox"></span>
-                            <span class="options__name">
-                              30
-                            </span>
-
-                            <span class="options__count">23</span>
-                          </span>
-                        </li>
-                        <li class="options__item">
-                          <span class="options__link">
-                            <span class="options__checkbox  fake-checkbox"></span>
-                            <span class="options__name">
-                              30
-                            </span>
-
-                            <span class="options__count">23</span>
-                          </span>
-                        </li>
-                        <li class="options__item">
-                          <span class="options__link">
-                            <span class="options__checkbox  fake-checkbox"></span>
-                            <span class="options__name">
-                              30
-                            </span>
-
-                            <span class="options__count">23</span>
-                          </span>
-                        </li>
-                        <li class="options__item">
-                          <span class="options__link">
-                            <span class="options__checkbox  fake-checkbox"></span>
-                            <span class="options__name">
-                              30
-                            </span>
-
-                            <span class="options__count">23</span>
-                          </span>
-                        </li>
-                        <li class="options__item">
-                          <span class="options__link">
-                            <span class="options__checkbox  fake-checkbox"></span>
-                            <span class="options__name">
-                              30
-                            </span>
-
-                            <span class="options__count">23</span>
-                          </span>
-                        </li>
-
-                      </ul>
                     </div>
+
+
                   </div>
+
 
 
                 </div>
               </div>
             </div>
-
             <div class="display">
               <div class="display__selects">
                 <div class="display__selects-item select">

@@ -8,16 +8,20 @@
 
 .fake-checkbox--is-active {
   &::before {
-    @include font-icon-style("\ea10", 18px);
+    @include font-icon-style('\ea10', 18px);
     position: absolute;
     top: -30%;
     color: $base;
   }
 }
 
+.checkbox {
+  display: none;
+}
+
 .checkbox:checked + .fake-checkbox {
   &::before {
-    @include font-icon-style("\ea10", 18px);
+    @include font-icon-style('\ea10', 18px);
     position: absolute;
     top: -30%;
     color: $base;

@@ -91,6 +91,79 @@ class MobileMenu {
   }
 }
 
+class Filters {
+  constructor(FiltersBlockId) {
+    this.$filtersBlock = doc.querySelector(FiltersBlockId);
+
+    this.init();
+
+  }
+
+  init = () => {
+
+    if (!this.$filtersBlock) {
+      return;
+    }
+
+    this.$selectedFilterList = this.$filtersBlock.querySelector('#selectedFilters');
+    this.$filterList = this.$filtersBlock.querySelectorAll('[data-filter]');
+    this.listener();
+  }
+
+  toggleOptionsList = (target) => {
+    const filter = target.closest('[data-filter]');
+    const status = filter.dataset.filter;
+    if (status === 'close') {
+      this.openFilter(filter);
+    }
+    if (status === 'open') {
+      this.closeFilter(target);
+    }
+  }
+
+  openFilter = (filter) => {
+    this.closeFilter(filter);
+    const filterBody = filter.querySelector('[data-body]');
+    filter.classList.add('select--is-active');
+    filterBody.classList.add('filter-body--is-open');
+    filter.dataset.filter = 'open';
+  }
+
+  closeFilter = (target) => {
+    if (!target) {
+      return
+    }
+    if (target.closest('[data-body]')) {
+      return;
+    }
+    this.$filterList.forEach((item) => {
+      const filterBody = item.querySelector('[data-body]');
+      item.classList.remove('select--is-active');
+      filterBody.classList.remove('filter-body--is-open');
+      item.dataset.filter = 'close';
+    })
+
+  }
+
+  listener = () => {
+    this.$filtersBlock.addEventListener('click', (e) => {
+      const target = e.target;
+      if (target.closest('[data-filter]')) {
+        this.toggleOptionsList(target)
+      }
+    })
+
+    doc.addEventListener('click', (e) => {
+      const target = e.target;
+      if (!target.closest('[data-filter]')) {
+        this.closeFilter(target);
+      }
+    })
+  }
+}
+
+const filters = new Filters('#filters');
+
 class Debaunce {
   constructor() { }
   debaunce = (fn, ms) => {

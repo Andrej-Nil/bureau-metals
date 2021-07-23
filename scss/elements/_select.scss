@@ -2,18 +2,18 @@
   display: inline-block;
   position: relative;
   min-width: 215px;
-  //z-index: 500;
+  z-index: 500;
+  transition: 0.2s ease-in-out;
   &:hover {
     z-index: 2000;
   }
   &:hover .select__header {
-    //z-index: 2000;
+    z-index: 2000;
     border: 1px solid $base;
     border-bottom: none;
     color: $base;
   }
   &:hover .options-body {
-    height: 280px;
     border: 1px solid $base;
     border-top: none;
     &::before {
@@ -21,14 +21,34 @@
     }
   }
 }
+
+.select--is-active {
+  z-index: 2000;
+  & .select__header {
+    z-index: 2000;
+    border: 1px solid $base;
+    border-bottom: none;
+    color: $base;
+  }
+  & .options-body {
+    border: 1px solid $base;
+    border-top: none;
+    &::before {
+      color: $base;
+    }
+  }
+}
+
 .select__header {
   cursor: pointer;
   position: relative;
   display: inline-block;
-  padding: 14px 93px 14px 10px;
+  padding: 14px 25px 14px 10px;
   border: 1px solid $grey;
   border-bottom: none;
   background: $white;
+  font-size: 13px;
+  line-height: 150%;
   color: $grey;
   transition: 0.2s ease-in-out;
   width: 100%;
@@ -40,7 +60,14 @@
     right: 19px;
     width: 12px;
     height: 4px;
-    @include font-icon-style("\e903", 6px);
+    @include font-icon-style('\e903', 6px);
+  }
+  @media (min-width: 500px) {
+    padding: 14px 60px 14px 10px;
+  }
+  @media (min-width: 1130px) {
+    font-size: 16px;
+    padding: 14px 95px 14px 10px;
   }
 }
 
@@ -78,7 +105,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    @include font-icon-style("\e913", 18px);
+    @include font-icon-style('\e913', 18px);
     color: $grey;
   }
 }
@@ -124,6 +151,11 @@
   color: $grey;
 }
 .options__link {
+  display: flex;
+  align-items: center;
+}
+
+.options__label {
   display: flex;
   align-items: center;
 }

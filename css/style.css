@@ -1177,6 +1177,9 @@ select:-webkit-autofill:focus {
   display: inline-block;
   position: relative;
   min-width: 215px;
+  z-index: 500;
+  -webkit-transition: 0.2s ease-in-out;
+  transition: 0.2s ease-in-out;
 }
 
 .select:hover {
@@ -1184,13 +1187,13 @@ select:-webkit-autofill:focus {
 }
 
 .select:hover .select__header {
+  z-index: 2000;
   border: 1px solid #bc1622;
   border-bottom: none;
   color: #bc1622;
 }
 
 .select:hover .options-body {
-  height: 280px;
   border: 1px solid #bc1622;
   border-top: none;
 }
@@ -1199,14 +1202,36 @@ select:-webkit-autofill:focus {
   color: #bc1622;
 }
 
+.select--is-active {
+  z-index: 2000;
+}
+
+.select--is-active .select__header {
+  z-index: 2000;
+  border: 1px solid #bc1622;
+  border-bottom: none;
+  color: #bc1622;
+}
+
+.select--is-active .options-body {
+  border: 1px solid #bc1622;
+  border-top: none;
+}
+
+.select--is-active .options-body::before {
+  color: #bc1622;
+}
+
 .select__header {
   cursor: pointer;
   position: relative;
   display: inline-block;
-  padding: 14px 93px 14px 10px;
+  padding: 14px 25px 14px 10px;
   border: 1px solid #828282;
   border-bottom: none;
   background: #fff;
+  font-size: 13px;
+  line-height: 150%;
   color: #828282;
   -webkit-transition: 0.2s ease-in-out;
   transition: 0.2s ease-in-out;
@@ -1228,6 +1253,19 @@ select:-webkit-autofill:focus {
   line-height: 1;
   content: "";
   font-size: 6px;
+}
+
+@media (min-width: 500px) {
+  .select__header {
+    padding: 14px 60px 14px 10px;
+  }
+}
+
+@media (min-width: 1130px) {
+  .select__header {
+    font-size: 16px;
+    padding: 14px 95px 14px 10px;
+  }
 }
 
 .options-body {
@@ -1334,6 +1372,15 @@ select:-webkit-autofill:focus {
           align-items: center;
 }
 
+.options__label {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
 .options__checkbox {
   margin-right: 15px;
 }
@@ -1388,6 +1435,10 @@ select:-webkit-autofill:focus {
   position: absolute;
   top: -30%;
   color: #bc1622;
+}
+
+.checkbox {
+  display: none;
 }
 
 .checkbox:checked + .fake-checkbox::before {
@@ -3942,32 +3993,62 @@ select:-webkit-autofill:focus {
   }
 }
 
+.filters__bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  overflow: auto;
+  z-index: 1500;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+@media (min-width: 1130px) {
+  .filters__bg {
+    overflow: visible;
+    position: static;
+    margin-bottom: 30px;
+  }
+}
+
 .filters {
-  display: none;
-  background: #f8f8f8;
-  margin-bottom: 30px;
+  position: relative;
+  background: #fff;
 }
 
 @media (min-width: 1130px) {
   .filters {
-    display: block;
+    background: #f8f8f8;
   }
 }
 
-.filters__selected {
-  padding: 30px 20px;
+.filters__close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 20px;
+  height: 20px;
 }
 
-.filters__active-list {
-  margin-bottom: 30px;
+.filters__close::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  background-image: url("../../img/icon/close-icon.svg");
+  background-repeat: no-repeat;
+  background-size: 100%;
 }
 
-.filters__selected {
-  border-bottom: 1px solid #828282;
-}
-
-.filters__item {
-  margin: 0 20px 20px 0;
+@media (min-width: 1130px) {
+  .filters__close {
+    display: none;
+  }
 }
 
 .filters__title {
@@ -3977,6 +4058,24 @@ select:-webkit-autofill:focus {
   font-size: 16px;
   line-height: 150%;
   margin-bottom: 10px;
+}
+
+.filters__selected {
+  padding: 50px 20px 30px;
+}
+
+@media (min-width: 1130px) {
+  .filters__selected {
+    padding: 30px 20px;
+  }
+}
+
+.filters__active-list {
+  margin-bottom: 30px;
+}
+
+.filters__selected {
+  border-bottom: 1px solid #828282;
 }
 
 .filters__active-item {
@@ -3989,25 +4088,31 @@ select:-webkit-autofill:focus {
 
 .filter__active-name {
   font-family: "Roboto", serif;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 150%;
   color: #4f4f4f;
+  margin-bottom: 10px;
+}
+
+@media (min-width: 1130px) {
+  .filter__active-name {
+    font-size: 16px;
+    line-height: 150%;
+  }
 }
 
 .filter__active-remove {
   position: absolute;
   display: block;
-  top: 50%;
+  top: 3px;
   right: 0;
-  -webkit-transform: translate(0, -50%);
-          transform: translate(0, -50%);
   width: 16px;
   height: 16px;
   cursor: pointer;
 }
 
 .filter__active-remove::before {
-  content: "";
+  content: '';
   position: absolute;
   top: 50%;
   left: 50%;
@@ -4018,28 +4123,88 @@ select:-webkit-autofill:focus {
   background-image: url("../../img/icon/remove.svg");
 }
 
-.filters__btn {
-  padding: 10px 30px;
-  font-size: 14px;
-  line-height: 20px;
-  font-weight: normal;
-  margin-right: 25px;
-}
-
-.filters__btn:last-child {
-  margin-right: 0;
+@media (min-width: 1130px) {
+  .filter__active-remove {
+    width: 16px;
+    height: 16px;
+    top: 50%;
+    -webkit-transform: translate(0, -50%);
+            transform: translate(0, -50%);
+  }
 }
 
 .filters__control {
   text-align: right;
 }
 
+.filters__btn {
+  padding: 10px 30px;
+  width: 100%;
+  margin: 0 0 20px 0;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.filters__btn:last-child {
+  margin: 0;
+}
+
+@media (min-width: 400px) {
+  .filters__btn {
+    width: auto;
+    margin: 0 25px 0 0;
+  }
+}
+
 .filters__list {
-  padding: 40px 20px 30px;
+  padding: 20px 20px 30px;
+  height: 370px;
+  overflow: auto;
+  scrollbar-color: #bc1622 #e0e0e0;
+  scrollbar-width: thin;
+}
+
+@media (min-width: 1130px) {
+  .filters__list {
+    overflow: visible;
+    height: auto;
+    padding: 40px 20px 30px;
+  }
+}
+
+.filters__list::-webkit-scrollbar {
+  width: 4px;
+  background-color: #e0e0e0;
+}
+
+.filters__list::-webkit-scrollbar-thumb {
+  background-color: #bc1622;
 }
 
 .filter-options__list {
   height: 190px;
+}
+
+.filter {
+  margin: 0 0 20px 0;
+  width: 100%;
+}
+
+@media (min-width: 500px) {
+  .filter {
+    width: auto;
+  }
+}
+
+@media (min-width: 1130px) {
+  .filter {
+    height: auto;
+    margin: 0 20px 20px 0;
+  }
+}
+
+.filter-body--is-open {
+  height: 270px;
 }
 
 .city-list {
