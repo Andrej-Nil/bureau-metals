@@ -91,79 +91,6 @@ class MobileMenu {
   }
 }
 
-class Filters {
-  constructor(FiltersBlockId) {
-    this.$filtersBlock = doc.querySelector(FiltersBlockId);
-
-    this.init();
-
-  }
-
-  init = () => {
-
-    if (!this.$filtersBlock) {
-      return;
-    }
-
-    this.$selectedFilterList = this.$filtersBlock.querySelector('#selectedFilters');
-    this.$filterList = this.$filtersBlock.querySelectorAll('[data-filter]');
-    this.listener();
-  }
-
-  toggleOptionsList = (target) => {
-    const filter = target.closest('[data-filter]');
-    const status = filter.dataset.filter;
-    if (status === 'close') {
-      this.openFilter(filter);
-    }
-    if (status === 'open') {
-      this.closeFilter(target);
-    }
-  }
-
-  openFilter = (filter) => {
-    this.closeFilter(filter);
-    const filterBody = filter.querySelector('[data-body]');
-    filter.classList.add('select--is-active');
-    filterBody.classList.add('filter-body--is-open');
-    filter.dataset.filter = 'open';
-  }
-
-  closeFilter = (target) => {
-    if (!target) {
-      return
-    }
-    if (target.closest('[data-body]')) {
-      return;
-    }
-    this.$filterList.forEach((item) => {
-      const filterBody = item.querySelector('[data-body]');
-      item.classList.remove('select--is-active');
-      filterBody.classList.remove('filter-body--is-open');
-      item.dataset.filter = 'close';
-    })
-
-  }
-
-  listener = () => {
-    this.$filtersBlock.addEventListener('click', (e) => {
-      const target = e.target;
-      if (target.closest('[data-filter]')) {
-        this.toggleOptionsList(target)
-      }
-    })
-
-    doc.addEventListener('click', (e) => {
-      const target = e.target;
-      if (!target.closest('[data-filter]')) {
-        this.closeFilter(target);
-      }
-    })
-  }
-}
-
-const filters = new Filters('#filters');
-
 class Debaunce {
   constructor() { }
   debaunce = (fn, ms) => {
@@ -190,6 +117,7 @@ class Server {
     this.searchApi = '../json/search.json';
     this.removeBaskethApi = '../json/removeBasket.json';
     this.menuApi = '../json/sidebar.json';
+    this.filterApi = '../json/filter.json';
   }
 
   getCity = async () => {
@@ -213,6 +141,15 @@ class Server {
     };
     const formData = this.createFormData(data);
     return await this.getResponse(this.POST, formData, this.menuApi)
+  }
+
+  getFilterOptoinList = async (fieldSlug) => {
+    const data = {
+      _token: this._token,
+      fieldSlug: fieldSlug,
+    }
+    const formData = this.createFormData(data);
+    return await this.getResponse(this.POST, formData, this.filterApi)
   }
 
   addFavorite = async (id) => {
@@ -296,6 +233,103 @@ class Server {
   }
 }
 
+class Filters {
+  constructor(FiltersBlockId) {
+    this.$filtersBlock = doc.querySelector(FiltersBlockId);
+
+    this.init();
+
+  }
+
+  init = () => {
+
+    if (!this.$filtersBlock) {
+      return;
+    }
+    this.server = new Server();
+    this.render = new Render(this.$selectedFilterList);
+    this.$selectedFilterList = this.$filtersBlock.querySelector('#selectedFilters');
+    this.$filterList = this.$filtersBlock.querySelectorAll('[data-filter]');
+    this.listener();
+  }
+
+  toggleOptionsList = (target) => {
+    const filter = target.closest('[data-filter]');
+    const status = filter.dataset.filter;
+    if (status === 'close') {
+      this.openFilter(filter);
+    }
+    if (status === 'open') {
+      this.closeFilter(target);
+    }
+  }
+
+  openFilter = (filter) => {
+    this.closeFilter(filter);
+    const filterBody = filter.querySelector('[data-body]');
+
+    this.createOptionList(filter);
+    filter.classList.add('select--is-active');
+    filterBody.classList.add('filter-body--is-open');
+    filter.dataset.filter = 'open';
+  }
+
+  closeFilter = (target) => {
+    if (!target) {
+      return
+    }
+    if (target.closest('[data-body]')) {
+      return;
+    }
+    this.$filterList.forEach((item) => {
+      const filterBody = item.querySelector('[data-body]');
+      item.classList.remove('select--is-active');
+      filterBody.classList.remove('filter-body--is-open');
+      item.dataset.filter = 'close';
+    })
+
+  }
+
+  createOptionList = async (filter) => {
+    const $optionList = filter.querySelector('[data-option-list]');
+    const $optionItems = $optionList.querySelectorAll('[data-li]');
+    if ($optionItems.length) {
+      return
+    }
+    const fieldSlug = filter.dataset.fieldSlug;
+    this.render.renderSpiner('Загружаю...', $optionList);
+    const response = await this.server.getFilterOptoinList(fieldSlug);
+    if (response.rez == 0) {
+      this.render.renderErrorMsg(response.error.desc, $optionList);
+      console.log('Ошибка: ' + response.error.id)
+    }
+    if (response.rez == 1) {
+      this.render.clearParent($optionList);
+      this.render.renderOptionList(response.content, $optionList)
+    }
+  }
+
+
+
+  listener = () => {
+    this.$filtersBlock.addEventListener('click', (e) => {
+      const target = e.target;
+      if (target.closest('[data-filter]')) {
+        this.toggleOptionsList(target)
+      }
+    })
+
+    doc.addEventListener('click', (e) => {
+      const target = e.target;
+      if (!target.closest('[data-filter]')) {
+        this.closeFilter(target);
+      }
+    })
+  }
+}
+
+
+
 class Render {
   constructor($parent = null) {
     this.$parent = $parent;
@@ -306,7 +340,7 @@ class Render {
   //Методы отресовки элементов
   renderSpiner = (spinnerText = '', $parent = this.$parent) => {
     this.spinnerText = spinnerText;
-    this._render(this.$parent, this.getSpinnerHtml, false);
+    this._render($parent, this.getSpinnerHtml, false);
   }
 
   renderErrorMsg = (msg, $parent = this.$parent) => {
@@ -318,6 +352,9 @@ class Render {
     $parent.innerHTML = errorHtml;
   }
 
+  renderOptionList = (optionList, $parent) => {
+    this._render($parent, this.getOptionLiHtml, optionList);
+  }
   renderListCity = (regionList, numCol = 1) => {
     this.clearParent();
     this.renderColumnsCityList(numCol);
@@ -686,6 +723,28 @@ class Render {
         </div>
         <div class="basket-rez" data-basket-rez></div>
       </div>
+    `)
+  }
+
+  getOptionLiHtml = (item) => {
+    const isChecked = item.checked ? 'checked' : '';
+    console.log(item);
+    return (/*html*/`
+      <li data-li class="options__item">
+
+        <label class="options__label">
+          <input type="checkbox" name="${item.field_slug}" class="options__checkbox checkbox" data-checkbox
+            value="${item.field_value_slug}" data-name="${item.field_value_name}"
+            ${isChecked}
+            >
+          <span class="options__checkbox  fake-checkbox"></span>
+          <span data-value_slug class="options__name">
+          ${item.field_value_name}
+          </span>
+          <span class="options__count">${item.count}</span>
+        </label>
+
+      </li>
     `)
   }
 
@@ -2254,6 +2313,7 @@ const fastOrderModal = new FastOrderModal('#fastOrdenModal');
 const consultationModal = new ConsultationModal('#consultationModal');
 const addFavoriteModal = new AddFavoriteModal('#addFavoriteModal', 'favorite');
 const addBasketModal = new AddBasketModal('#addBasketModal', 'basket');
+const filters = new Filters('#filters');
 
 const mobiliMenu = new MobileMenu('#mobileMenu');
 
