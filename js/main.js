@@ -248,6 +248,7 @@ class Filters {
     }
     this.server = new Server();
     this.render = new Render(this.$selectedFilterList);
+    this.debaunce = new Debaunce();
     this.$selectedFilterList = this.$filtersBlock.querySelector('#selectedFilters');
     this.$filterList = this.$filtersBlock.querySelectorAll('[data-filter]');
     this.listener();
@@ -309,6 +310,32 @@ class Filters {
     }
   }
 
+  searchOption = (e) => {
+    const filter = e.target.closest('[data-filter]');
+    const options = filter.querySelectorAll('[data-li]');
+    const inputValue = e.target.value.trim().toLowerCase();
+
+    options.forEach((li) => {
+      this.hideOption(li)
+      const slug = li.dataset.li.trim().toLowerCase();
+      if (slug.includes(inputValue)) {
+        this.showOption(li);
+      }
+      if (inputValue == '') {
+        this.showOption(li);
+      }
+    })
+
+  }
+
+  hideOption = (option) => {
+    option.classList.add('option-hide');
+  }
+
+  showOption = (option) => {
+    option.classList.remove('option-hide');
+  }
+
 
 
   listener = () => {
@@ -317,6 +344,11 @@ class Filters {
       if (target.closest('[data-filter]')) {
         this.toggleOptionsList(target)
       }
+    })
+
+    this.$filtersBlock.addEventListener('input', (e) => {
+      if (e.target.closest('[data-input]'))
+        this.searchOption(e);
     })
 
     doc.addEventListener('click', (e) => {
@@ -728,13 +760,12 @@ class Render {
 
   getOptionLiHtml = (item) => {
     const isChecked = item.checked ? 'checked' : '';
-    console.log(item);
     return (/*html*/`
-      <li data-li class="options__item">
+      <li data-li="${item.field_value_name}" class="options__item">
 
         <label class="options__label">
           <input type="checkbox" name="${item.field_slug}" class="options__checkbox checkbox" data-checkbox
-            value="${item.field_value_slug}" data-name="${item.field_value_name}"
+            value="${item.field_value_slug}" 
             ${isChecked}
             >
           <span class="options__checkbox  fake-checkbox"></span>

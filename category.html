@@ -168,10 +168,9 @@
           <div class="content">
 
             <div id="filterBtn" class="filter-btn btn red-btn">Фильтры</div>
+
             <div id="filters" class="filters__bg">
-
-
-              <div class="filters">
+              <form action="" method="GET" class="filters">
                 <i class="filters__close" data-close></i>
                 <div id="selectedFilters" class="filters__selected">
                   <div class="filters__active">
@@ -190,7 +189,7 @@
                   <div class="filters__control">
                     <span class="filters__btn btn red-btn-bd">Сбросить все</span>
 
-                    <span class="filters__btn btn red-btn">Показать</span>
+                    <input type="submit" class="filters__btn btn red-btn" value="Показать">
                   </div>
                 </div>
                 <div class="filters__list">
@@ -203,26 +202,13 @@
                       <div class="options">
                         <div class="options__search">
 
-                          <input type="text" class="options__input" placeholder="Поиск...">
+                          <input data-input type="text" class="options__input" placeholder="Поиск...">
                           <i class="options__btn"></i>
 
                         </div>
 
                         <ul data-option-list class="options__list filter-options__list">
 
-                          <li class="options__item">
-
-                            <label class="options__label">
-                              <input type="checkbox" name="aluminii" class="options__checkbox checkbox" data-checkbox
-                                value="armatura" data-name="арматура Алю" data-id="aluminiiarmatura">
-                              <span class="options__checkbox  fake-checkbox"></span>
-                              <span class="options__name">
-                                30
-                              </span>
-                              <span class="options__count">23</span>
-                            </label>
-
-                          </li>
                         </ul>
                       </div>
                     </div>
@@ -230,7 +216,7 @@
                   </div>
 
                 </div>
-              </div>
+              </form>
             </div>
             <div class="display">
               <div class="display__selects">

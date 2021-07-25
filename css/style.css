@@ -398,6 +398,8 @@ select:-webkit-autofill:focus {
   display: inline-block;
   padding: 20px 40px;
   cursor: pointer;
+  outline: none;
+  border: none;
   font-weight: 500;
   font-size: 16px;
   line-height: 20px;
@@ -1410,6 +1412,10 @@ select:-webkit-autofill:focus {
 
 .options__item:hover {
   background: #f2f2f2;
+}
+
+.option-hide {
+  display: none;
 }
 
 .options__count {
