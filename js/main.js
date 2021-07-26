@@ -247,9 +247,11 @@ class Filters {
       return;
     }
     this.server = new Server();
-    this.render = new Render(this.$selectedFilterList);
+
     this.debaunce = new Debaunce();
-    this.$selectedFilterList = this.$filtersBlock.querySelector('#selectedFilters');
+    this.$selectedFilterList = this.$filtersBlock.querySelector('#selectedFilterList');
+    this.render = new Render(this.$selectedFilterList);
+    this.$filterListWrap = this.$filtersBlock.querySelector('#filterListWrap');
     this.$filterList = this.$filtersBlock.querySelectorAll('[data-filter]');
     this.listener();
   }
@@ -336,7 +338,47 @@ class Filters {
     option.classList.remove('option-hide');
   }
 
+  toggleSelectedOption = (checkbox) => {
+    if (checkbox.checked) {
+      this.createSelectedOption(checkbox);
+    }
+    if (!checkbox.checked) {
+      this.removeSelectedFilter(checkbox.dataset.id);
+    }
 
+  }
+
+  createSelectedOption = ($checkbox) => {
+    const infoOption = this.getInfoOption($checkbox)
+    this.render.renderSelectedOption(infoOption);
+  }
+
+  deleteSelectedFilter = ($btn) => {
+    const $selectedOption = $btn.closest('[data-option]');
+    this.checkboxOff($selectedOption)
+  }
+
+  removeSelectedFilter = (id) => {
+    const $selectedOptoin = this.$selectedFilterList.querySelector(`[data-id="${id}"]`)
+    $selectedOptoin.remove();
+  }
+
+  checkboxOff = ($option) => {
+    const $filter = this.$filterListWrap.querySelector(`[data-field-slug="${$option.dataset.filter}"]`);
+    const $checkbox = $filter.querySelector(`[data-id="${$option.dataset.id}"]`);
+    $checkbox.checked = false;
+    this.removeSelectedFilter($checkbox.dataset.id);
+  }
+
+
+  getInfoOption = (checkbox) => {
+    return {
+      name: checkbox.name,
+      value: checkbox.value,
+      title: checkbox.dataset.title,
+      id: checkbox.dataset.id,
+    }
+  }
 
   listener = () => {
     this.$filtersBlock.addEventListener('click', (e) => {
@@ -344,11 +386,21 @@ class Filters {
       if (target.closest('[data-filter]')) {
         this.toggleOptionsList(target)
       }
+
+      if (target.closest('[data-remove]')) {
+        this.deleteSelectedFilter(target);
+      }
     })
 
     this.$filtersBlock.addEventListener('input', (e) => {
-      if (e.target.closest('[data-input]'))
+      if (e.target.closest('[data-input]')) {
         this.searchOption(e);
+      }
+
+      if (e.target.closest('[data-checkbox]')) {
+        this.toggleSelectedOption(e.target);
+      }
+
     })
 
     doc.addEventListener('click', (e) => {
@@ -429,6 +481,19 @@ class Render {
 
   renderMenu = (menuList, $parent = this.$parent) => {
     this._render($parent, this.getMemuListHtml, menuList);
+  }
+
+  renderSelectedOption = (infoOption) => {
+    const selectedOptionHtml = (/*html*/`
+    <div data-filter="${infoOption.name}" 
+    data-option="${infoOption.value}" 
+    data-id="${infoOption.id}"
+    class="filters__active-item">
+    <span class="filter__active-name">${infoOption.title}</span>
+    <span data-remove class="filter__active-remove"></span>
+  </div>
+    `)
+    this.$parent.insertAdjacentHTML('beforeEnd', selectedOptionHtml);
   }
 
   renderModalCard = (card) => {
@@ -761,12 +826,15 @@ class Render {
   getOptionLiHtml = (item) => {
     const isChecked = item.checked ? 'checked' : '';
     return (/*html*/`
-      <li data-li="${item.field_value_name}" class="options__item">
+      <li data-li="${item.field_value_name}"
+     class="options__item">
 
         <label class="options__label">
           <input type="checkbox" name="${item.field_slug}" class="options__checkbox checkbox" data-checkbox
             value="${item.field_value_slug}" 
             ${isChecked}
+            data-title="${item.field_value_name}"
+            data-id="${item.field_slug + item.field_value_slug}"
             >
           <span class="options__checkbox  fake-checkbox"></span>
           <span data-value_slug class="options__name">

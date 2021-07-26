@@ -172,17 +172,12 @@
             <div id="filters" class="filters__bg">
               <form action="" method="GET" class="filters">
                 <i class="filters__close" data-close></i>
-                <div id="selectedFilters" class="filters__selected">
+                <div class="filters__selected">
                   <div class="filters__active">
                     <h1 class="filters__title">
                       Активные фильтры:
                     </h1>
-                    <div class="filters__active-list">
-
-                      <div class="filters__active-item">
-                        <span class="filter__active-name">Марка стали: 500Ст</span>
-                        <span class="filter__active-remove"></span>
-                      </div>
+                    <div id="selectedFilterList" class="filters__active-list">
 
                     </div>
                   </div>
@@ -192,7 +187,7 @@
                     <input type="submit" class="filters__btn btn red-btn" value="Показать">
                   </div>
                 </div>
-                <div class="filters__list">
+                <div id="filterListWrap" class="filters__list">
 
                   <div data-field-slug="aluminii" data-filter="close" class="filter select">
                     <div class="filter__header select__header">
