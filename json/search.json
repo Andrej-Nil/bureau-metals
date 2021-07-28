@@ -103,14 +103,14 @@
     "isBusket": false
   }
   ], 
-  "news+": [
+  "news": [
       {
     "id": "515461",
     "date": "12.12.2021",
     "slug":"#", 
-    "title": "Лист латунный загнулся", 
-    "photo_webp": "",
-    "photo": "",
+    "title": "Название найденой новости", 
+    "photo_webp": "./img/image/small-card.jpg",
+    "photo": "./img/image/small-card.jpg",
     "desc": ""
   }
   ],

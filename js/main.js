@@ -533,6 +533,7 @@ class Render {
       this.renderSearchProducts(response.products);
     }
     if (response.news !== undefined) {
+      this.renderSearchNews(response.news);
     }
 
   }
@@ -545,6 +546,16 @@ class Render {
     </div>
     `)
     this.$parent.insertAdjacentHTML('beforeEnd', caregoryHtml);
+  }
+
+  renderSearchNews = (category) => {
+    const listNewsHtml = this.createItemListHtml(category, this.getSearchNewsHtml);
+    const newsHtml = (/*html*/`
+    <div class="modal-search__cards">
+      ${listNewsHtml}
+    </div>
+    `)
+    this.$parent.insertAdjacentHTML('beforeEnd', newsHtml);
   }
 
   renderSearchProducts = (products) => {
@@ -749,6 +760,23 @@ class Render {
       <div class="small-card__info">
         <div class="small-card__title">${item.title}</div>
         <div class="small-card__desc">${item.desc}</div>
+      </div>
+    </a>
+    `);
+  }
+
+  getSearchNewsHtml = (item) => {
+    return (/*html*/`
+    <a href="${item.slug}" class="small-card">
+      <div class="small-card__preview">
+        <picture class="small-card__picture">
+          <source srcset="${item.photo_webp}" type="image/webp">
+          <img src="${item.photo}" alt="" class="small-card__img">
+        </picture>
+      </div>
+      <div class="small-card__info">
+        <div class="small-card__title">${item.title}</div>
+        <div class="small-card__desc">${item.date}</div>
       </div>
     </a>
     `);
