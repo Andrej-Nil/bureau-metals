@@ -31,8 +31,10 @@ const $basketProductsTotalPrice = doc.querySelector('#basketProductsTotalPrice')
 const $basketProductsCount = doc.querySelector('#basketProductsCount');
 
 const $morePropWrap = doc.querySelector('#morePropWrap');
-const $propMore = $morePropWrap.querySelector('[data-prop-more]');
-const $showPropBtn = doc.querySelector('#showPropBtn')
+const $propMore = doc.querySelector('[data-prop-more]');
+const $showPropBtn = doc.querySelector('#showPropBtn');
+
+const $selects = doc.querySelectorAll('[data-select]');
 
 
 const $mobileMenuBtn = doc.querySelector('#mobileMenuBtn');
@@ -2532,6 +2534,11 @@ if ($morePropWrap) {
   $showPropBtn.addEventListener('click', togglePropMoreList)
 }
 
+
+if ($map) {
+  yandexMap();
+}
+
 function togglePropMoreList() {
   const status = $morePropWrap.dataset.status
   if (status === "close") {
@@ -2560,16 +2567,6 @@ function closePropMoreList() {
   $showPropBtn.innerText = btnText;
   $morePropWrap.classList.remove('properties__more--is-show');
   $morePropWrap.dataset.status = 'close';
-}
-
-
-
-
-//const  = doc.querySelector('#moreProp');
-//const $showPropBtn = doc.querySelector('#showPropBtn')
-
-if ($map) {
-  yandexMap();
 }
 
 
@@ -2673,6 +2670,26 @@ function yandexMap() {
   ymaps.ready(initMap);
 }
 
+
+
+function createPopupNav() {
+  $popupList.forEach(($item) => {
+    renderPopupNav($item)
+  })
+}
+
+async function renderPopupNav($item) {
+  const id = $item.dataset.popupId;
+  const response = await server.getMenu(id);
+  if (response.rez == 0) {
+    render.renderErrorMsg(response.error.desc, $item);
+  }
+  if (response.rez == 1) {
+    render.renderMenu(response.content, $item);
+  }
+
+}
+
 function docClickListener(e) {
   const target = e.target;
   if (target.closest('[data-fast-order]')) {
@@ -2694,24 +2711,55 @@ function docClickListener(e) {
     counter(target);
   }
 
+  if ($selects.length) {
+    if (target.closest('[data-select-btn]')) {
+      toggleSelect(target)
+    }
+    if (!target.closest('[data-select-btn]')) {
+      closeAllSelect();
+    }
+  }
+
+
 }
 
-function createPopupNav() {
-  $popupList.forEach(($item) => {
-    renderPopupNav($item)
+function closeAllSelect() {
+  $selects.forEach(($select) => {
+    const selectEls = getSelectEls($select);
+    closeSelect(selectEls)
   })
 }
 
-async function renderPopupNav($item) {
-  const id = $item.dataset.popupId;
-  const response = await server.getMenu(id);
-  if (response.rez == 0) {
-    render.renderErrorMsg(response.error.desc, $item);
+function toggleSelect(target) {
+  const $select = target.closest('[data-select]');
+  const selectEls = getSelectEls($select);
+  const status = $select.dataset.select;
+  if (status === 'close') {
+    closeAllSelect();
+    openSelect(selectEls);
   }
-  if (response.rez == 1) {
-    render.renderMenu(response.content, $item);
-  }
+  if (status === 'open') {
+    closeSelect(selectEls);
 
+  }
+}
+
+function openSelect(selectEls) {
+  selectEls.$body.style.height = '270px';
+  selectEls.$select.dataset.select = 'open';
+  selectEls.$select.classList.add('select--is-active');
+}
+function closeSelect(selectEls) {
+  selectEls.$body.style.height = '0px';
+  selectEls.$select.dataset.select = 'close';
+  selectEls.$select.classList.remove('select--is-active');
+}
+
+function getSelectEls($select) {
+  return {
+    $select: $select,
+    $body: $select.querySelector('[data-body]'),
+  }
 }
 
 function docInputListener(e) {
