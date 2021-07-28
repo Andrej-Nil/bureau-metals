@@ -30,6 +30,11 @@ const $favoriteCount = doc.querySelector('#favoriteCount');
 const $basketProductsTotalPrice = doc.querySelector('#basketProductsTotalPrice');
 const $basketProductsCount = doc.querySelector('#basketProductsCount');
 
+const $morePropWrap = doc.querySelector('#morePropWrap');
+const $propMore = $morePropWrap.querySelector('[data-prop-more]');
+const $showPropBtn = doc.querySelector('#showPropBtn')
+
+
 const $mobileMenuBtn = doc.querySelector('#mobileMenuBtn');
 const $mobileMenu = doc.querySelector('#mobileMenu');
 
@@ -2452,6 +2457,7 @@ if ($popupList.length) {
   createPopupNav();
 }
 
+//modals
 //окно поиска
 if ($openSearchBtn && $searchModal) {
   $openSearchBtn.addEventListener('click', () => {
@@ -2490,20 +2496,20 @@ if ($openCallBackModalMobileBtn && $callBackModal) {
   })
 }
 
+
 if ($mobileMenuBtn && $mobileMenu) {
   $mobileMenuBtn.addEventListener('click', () => {
     mobiliMenu.open()
   })
 }
 
-// callBackForm
+// Forms
 if ($callBackForm) {
   $callBackForm.addEventListener('submit', (e) => {
     e.preventDefault();
   })
 }
 
-// fastOrdenForm
 if ($fastOrdenForm) {
   $fastOrdenForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -2521,6 +2527,46 @@ if ($basketForm) {
     e.preventDefault();
   })
 }
+
+if ($morePropWrap) {
+  $showPropBtn.addEventListener('click', togglePropMoreList)
+}
+
+function togglePropMoreList() {
+  const status = $morePropWrap.dataset.status
+  if (status === "close") {
+    openPropMoreList();
+  }
+  if (status === "open") {
+    closePropMoreList();
+  }
+}
+
+function openPropMoreList() {
+  const heightPropMore = $propMore.offsetHeight;
+  const btnText = 'Свернуть характеристики';
+  $morePropWrap.style.height = heightPropMore + 30 + 'px';
+  setTimeout(() => {
+    $morePropWrap.classList.add('properties__more--is-show');
+  }, 300)
+
+  $showPropBtn.innerText = btnText;
+  $morePropWrap.dataset.status = 'open';
+}
+
+function closePropMoreList() {
+  const btnText = 'Все характеристики'
+  $morePropWrap.style.height = '0px';
+  $showPropBtn.innerText = btnText;
+  $morePropWrap.classList.remove('properties__more--is-show');
+  $morePropWrap.dataset.status = 'close';
+}
+
+
+
+
+//const  = doc.querySelector('#moreProp');
+//const $showPropBtn = doc.querySelector('#showPropBtn')
 
 if ($map) {
   yandexMap();

@@ -30,12 +30,19 @@
 }
 
 .properties {
-  max-width: 338px;
+  max-width: 507px;
   margin-bottom: 40px;
 }
 
-.properties__list {
-  margin-bottom: 30px;
+.properties__more {
+  height: 0;
+  opacity: 0;
+  transition: 0.3s ease-in-out;
+  overflow: hidden;
+}
+
+.properties__more--is-show {
+  opacity: 1;
 }
 
 .properties__item {
@@ -52,7 +59,7 @@
   font-weight: 500;
 }
 
-.properties__more {
+.properties__show-all {
   display: inline-block;
   cursor: pointer;
   font-family: $roboto;
