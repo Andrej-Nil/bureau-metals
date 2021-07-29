@@ -11,6 +11,7 @@
 }
 
 .filters__bg {
+  //display: none;
   position: fixed;
   top: 0;
   left: 0;
@@ -147,6 +148,74 @@
     width: auto;
     margin: 0 25px 0 0;
   }
+}
+
+.filters__show-rez {
+  position: relative;
+  display: inline-block;
+}
+
+.filters-sticker {
+  position: absolute;
+  text-align: center;
+  width: 160px;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, -55px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s, top 0.5s, visibility 0s ease-in-out 0.5s;
+}
+
+.filters-sticker--is-show {
+  opacity: 1;
+  visibility: visible;
+  transition-delay: 0s;
+}
+
+.filter-sticker__close {
+  position: absolute;
+  display: block;
+  top: 5px;
+  right: 5px;
+  width: 10px;
+  height: 10px;
+  z-index: 1001;
+  cursor: pointer;
+  &::before {
+    position: absolute;
+    left: 0;
+    @include font-icon-style('\e911', 8px);
+  }
+}
+
+.filters__count {
+  position: relative;
+  display: block;
+  padding: 10px;
+  font-family: $roboto;
+  font-size: 14px;
+  line-height: 150%;
+  background: #f7efd6;
+  border: 1px solid F2F2F2;
+  z-index: 1000;
+}
+
+.filters-sticker__arrow {
+  position: absolute;
+  bottom: -10%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  display: block;
+}
+
+.filters-sticker__icon {
+  display: block;
+  width: 20px;
+  height: 20px;
+  transform: rotate(45deg);
+  background: #f7efd6;
+  border: 1px solid F2F2F2;
 }
 
 .filters__list {

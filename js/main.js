@@ -125,6 +125,7 @@ class Server {
     this.removeBaskethApi = '../json/removeBasket.json';
     this.menuApi = '../json/sidebar.json';
     this.filterApi = '../json/filter.json';
+    this.filterCheckboxApi = '../json/checkbox.json';
   }
 
   getCity = async () => {
@@ -159,6 +160,11 @@ class Server {
     return await this.getResponse(this.POST, formData, this.filterApi)
   }
 
+  getRezToggleFilterCheckbox = async (data) => {
+    data._token = this._token
+    const formData = this.createFormData(data);
+    return await this.getResponse(this.POST, formData, this.filterCheckboxApi);
+  }
   addFavorite = async (id) => {
     const data = {
       _token: this._token,
@@ -260,7 +266,9 @@ class Filters {
     this.render = new Render(this.$selectedFilterList);
     this.$filterListWrap = this.$filtersBlock.querySelector('#filterListWrap');
     this.$filterList = this.$filtersBlock.querySelectorAll('[data-filter]');
+    this.$filterSticker = this.$filtersBlock.querySelector('#filterSticker');
     this.listener();
+    this.creatingFilterOptions();
   }
 
   toggleOptionsList = (target) => {
@@ -277,8 +285,6 @@ class Filters {
   openFilter = (filter) => {
     this.closeFilter(filter);
     const filterBody = filter.querySelector('[data-body]');
-
-    this.createOptionList(filter);
     filter.classList.add('select--is-active');
     filterBody.classList.add('filter-body--is-open');
     filter.dataset.filter = 'open';
@@ -300,13 +306,21 @@ class Filters {
 
   }
 
-  createOptionList = async (filter) => {
-    const $optionList = filter.querySelector('[data-option-list]');
+
+
+  creatingFilterOptions = () => {
+    this.$filterList.forEach(($filter) => {
+      this.createOptionList($filter);
+    })
+  }
+
+  createOptionList = async ($filter) => {
+    const $optionList = $filter.querySelector('[data-option-list]');
     const $optionItems = $optionList.querySelectorAll('[data-li]');
     if ($optionItems.length) {
       return
     }
-    const fieldSlug = filter.dataset.fieldSlug;
+    const fieldSlug = $filter.dataset.fieldSlug;
     this.render.renderSpiner('Загружаю...', $optionList);
     const response = await this.server.getFilterOptoinList(fieldSlug);
     if (response.rez == 0) {
@@ -345,14 +359,51 @@ class Filters {
     option.classList.remove('option-hide');
   }
 
-  toggleSelectedOption = (checkbox) => {
-    if (checkbox.checked) {
-      this.createSelectedOption(checkbox);
+  toggleSelectedOption = async (target) => {
+    const $liOption = target.closest('[data-li]');
+    const $checkbox = $liOption.querySelector('[data-checkbox]')
+    const data = {
+      field_slug: $checkbox.name,
+      field_value_slug: $checkbox.value,
     }
-    if (!checkbox.checked) {
-      this.removeSelectedFilter(checkbox.dataset.id);
+    const response = await this.server.getRezToggleFilterCheckbox(data);
+    if (response.rez == 0) {
+      this.toggleCheckboxWithRez0($checkbox);
+      console.log('Ошибка: ' + response.error.id)
     }
 
+    if (response.rez == 1) {
+      this.toggleCheckboxWithRez1($checkbox, response)
+      this.setFilterCount(response.count);
+      this.showFilterSticker();
+    }
+
+  }
+
+  toggleCheckboxWithRez0 = ($checkbox) => {
+    if (!$checkbox.checked) {
+      this.createSelectedOption($checkbox);
+      $checkbox.checked = true;
+      return;
+    }
+    if ($checkbox.checked) {
+      this.removeSelectedFilter($checkbox.dataset.id);
+      $checkbox.checked = false;
+      return;
+    }
+  }
+
+  toggleCheckboxWithRez1 = ($checkbox, response) => {
+    if (response.toggle) {
+      this.createSelectedOption($checkbox);
+      $checkbox.checked = response.toggle;
+      return;
+    }
+    if (!response.toggle) {
+      this.removeSelectedFilter($checkbox.dataset.id);
+      $checkbox.checked = response.toggle;
+      return;
+    }
   }
 
   createSelectedOption = ($checkbox) => {
@@ -360,23 +411,68 @@ class Filters {
     this.render.renderSelectedOption(infoOption);
   }
 
-  deleteSelectedFilter = ($btn) => {
+  deleteSelectedFilter = async ($btn) => {
     const $selectedOption = $btn.closest('[data-option]');
-    this.checkboxOff($selectedOption)
+    const data = {
+      field_slug: $selectedOption.dataset.activeFilter,
+      field_value_slug: $selectedOption.dataset.option,
+    }
+    const response = await this.server.getRezToggleFilterCheckbox(data)
+    if (response.rez == 0) {
+      this.checkboxOff($selectedOption);
+      console.log('Ошибка: ' + response.error.id)
+    }
+    if (response.rez == 1) {
+      this.checkboxOff($selectedOption);
+    }
+
   }
 
   removeSelectedFilter = (id) => {
     const $selectedOptoin = this.$selectedFilterList.querySelector(`[data-id="${id}"]`)
-    $selectedOptoin.remove();
+    if ($selectedOptoin) {
+      $selectedOptoin.remove();
+    }
+
   }
 
   checkboxOff = ($option) => {
-    const $filter = this.$filterListWrap.querySelector(`[data-field-slug="${$option.dataset.filter}"]`);
+    const $filter = this.$filterListWrap.querySelector(`[data-field-slug="${$option.dataset.activeFilter}"]`);
     const $checkbox = $filter.querySelector(`[data-id="${$option.dataset.id}"]`);
+
     $checkbox.checked = false;
     this.removeSelectedFilter($checkbox.dataset.id);
   }
 
+  setFilterCount = (count) => {
+    const $tolal = this.$filterSticker.querySelector('#filtersTotal');
+    $tolal.innerText = `Найдено ${count} товаров`
+  }
+
+  showFilterSticker = () => {
+    this.$filterSticker.classList.add('filters-sticker--is-show');
+  }
+
+  hideFilterSticker = () => {
+    this.$filterSticker.classList.remove('filters-sticker--is-show');
+  }
+
+  resetAllFilters = async () => {
+    const $checkboxList = this.$filterListWrap.querySelectorAll('[data-checkbox]')
+    const data = { reset: true };
+    const response = await this.server.getRezToggleFilterCheckbox(data);
+    if (response.rez == 0) {
+      console.log('Ошибка: ' + response.error.id);
+    }
+
+    this.$selectedFilterList.innerText = '';
+    this.hideFilterSticker();
+
+    $checkboxList.forEach(($checkbox) => {
+      $checkbox.checked = false;
+    })
+
+  }
 
   getInfoOption = (checkbox) => {
     return {
@@ -397,6 +493,17 @@ class Filters {
       if (target.closest('[data-remove]')) {
         this.deleteSelectedFilter(target);
       }
+
+      if (target.closest('[data-li]')) {
+        this.toggleSelectedOption(e.target);
+      }
+
+      if (target.closest('#filterStickerClose')) {
+        this.hideFilterSticker()
+      }
+      if (target.closest('[data-reset]')) {
+        this.resetAllFilters()
+      }
     })
 
     this.$filtersBlock.addEventListener('input', (e) => {
@@ -404,9 +511,9 @@ class Filters {
         this.searchOption(e);
       }
 
-      if (e.target.closest('[data-checkbox]')) {
-        this.toggleSelectedOption(e.target);
-      }
+      //if (e.target.closest('[data-checkbox]')) {
+      //  this.toggleSelectedOption(e.target);
+      //}
 
     })
 
@@ -492,7 +599,7 @@ class Render {
 
   renderSelectedOption = (infoOption) => {
     const selectedOptionHtml = (/*html*/`
-    <div data-filter="${infoOption.name}" 
+    <div data-active-filter="${infoOption.name}" 
     data-option="${infoOption.value}" 
     data-id="${infoOption.id}"
     class="filters__active-item">
@@ -864,7 +971,7 @@ class Render {
       <li data-li="${item.field_value_name}"
      class="options__item">
 
-        <label class="options__label">
+        <div class="options__label">
           <input type="checkbox" name="${item.field_slug}" class="options__checkbox checkbox" data-checkbox
             value="${item.field_value_slug}" 
             ${isChecked}
@@ -876,7 +983,7 @@ class Render {
           ${item.field_value_name}
           </span>
           <span class="options__count">${item.count}</span>
-        </label>
+        </div>
 
       </li>
     `)

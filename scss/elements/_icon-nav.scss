@@ -9,9 +9,9 @@
   background: rgba(255, 255, 255, 0.5);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   z-index: 1000;
-  @media (min-width: 1130px) {
+  @media (min-width: 1665px) {
     padding: 36px 0;
-    top: 30%;
+    top: 40%;
     width: 100px;
     height: 200px;
   }
@@ -27,7 +27,7 @@
     margin: 0 auto;
   }
 
-  @media (min-width: 1130px) {
+  @media (min-width: 1665px) {
     margin: 0 auto 50px;
     width: 42px;
     height: 42px;
@@ -40,7 +40,7 @@
   height: 100%;
   cursor: pointer;
   &::before {
-    content: "";
+    content: '';
     display: block;
     width: 23px;
     height: 23px;
@@ -49,7 +49,7 @@
     background-size: contain;
   }
 
-  @media (min-width: 1130px) {
+  @media (min-width: 1665px) {
     &::before {
       width: 42px;
       height: 42px;
@@ -59,13 +59,13 @@
 
 .icons-nav__item--basket {
   &::before {
-    background-image: url("../img/icon/basket-icon.svg");
+    background-image: url('../img/icon/basket-icon.svg');
   }
 }
 
 .icons-nav__item--favorite {
   &::before {
-    background-image: url("../img/icon/favorite-icon.svg");
+    background-image: url('../img/icon/favorite-icon.svg');
   }
 }
 
@@ -74,8 +74,8 @@
   right: -10px;
   top: -50%;
   display: block;
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
   background: $base;
 
@@ -83,9 +83,9 @@
   text-align: center;
   font-family: $roboto;
   font-size: 10px;
-  line-height: 20px;
+  line-height: 23px;
 
-  @media (min-width: 1130px) {
+  @media (min-width: 1665px) {
     right: -16px;
     top: -50%;
     width: 32px;

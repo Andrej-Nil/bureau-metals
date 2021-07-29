@@ -182,9 +182,20 @@
                     </div>
                   </div>
                   <div class="filters__control">
-                    <span class="filters__btn btn red-btn-bd">Сбросить все</span>
+                    <span data-reset class="filters__btn btn red-btn-bd">Сбросить все</span>
 
-                    <input type="submit" class="filters__btn btn red-btn" value="Показать">
+                    <div class="filters__show-rez">
+                      <div id="filterSticker" class="filters-sticker">
+                        <i id="filterStickerClose" class="filter-sticker__close"></i>
+                        <span id="filtersTotal" class="filters__count">
+                        </span>
+
+                        <span class="filters-sticker__arrow">
+                          <span class="filters-sticker__icon"></span>
+                        </span>
+                      </div>
+                      <input type="submit" class="filters__btn btn red-btn" value="Показать">
+                    </div>
                   </div>
                 </div>
                 <div id="filterListWrap" class="filters__list">
@@ -1685,7 +1696,7 @@
             <!--product-tile-->
 
             <div class="content__bottom">
-              <div data-select='close' class="display__selects-item select">
+              <div data-select='close' class="content__selects-item select">
                 <div data-select-btn class="select__header">
                   Сначала дешевые
                 </div>
@@ -1834,7 +1845,7 @@
               </div>
               <!-- pagination -->
 
-              <div data-select='close' class="display__selects-item select">
+              <div data-select='close' class="content__selects-item select">
                 <div data-select-btn class="select__header">
                   18 на странице
                 </div>
