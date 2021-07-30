@@ -1,6 +1,8 @@
 .filter-btn {
   width: 100%;
   margin-bottom: 30px;
+  padding: 15px;
+  font-size: 14px;
   @media (min-width: 400px) {
     width: 250px;
     display: block;
@@ -11,7 +13,6 @@
 }
 
 .filters__bg {
-  //display: none;
   position: fixed;
   top: 0;
   left: 0;
@@ -20,7 +21,12 @@
   overflow: auto;
   z-index: 1500;
   background: rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s, top 0.5s, visibility 0s ease-in-out 0.5s;
   @media (min-width: 1130px) {
+    opacity: 1;
+    visibility: visible;
     overflow: visible;
     position: static;
     margin-bottom: 30px;
@@ -29,11 +35,21 @@
 
 .filters {
   position: relative;
-
-  //display: none;
+  transform: translate(0, -100%);
   background: $white;
+  transition: 0.5s ease-in-out;
   @media (min-width: 1130px) {
     background: $milk;
+    transform: translate(0, 0);
+  }
+}
+
+.filters-is-show {
+  opacity: 1;
+  visibility: visible;
+  transition-delay: 0s;
+  & .filters {
+    transform: translate(0, 0);
   }
 }
 

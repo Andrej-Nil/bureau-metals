@@ -3992,6 +3992,8 @@ select:-webkit-autofill:focus {
 .filter-btn {
   width: 100%;
   margin-bottom: 30px;
+  padding: 15px;
+  font-size: 14px;
 }
 
 @media (min-width: 400px) {
@@ -4016,10 +4018,16 @@ select:-webkit-autofill:focus {
   overflow: auto;
   z-index: 1500;
   background: rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition: opacity 0.5s, top 0.5s, visibility 0s ease-in-out 0.5s;
+  transition: opacity 0.5s, top 0.5s, visibility 0s ease-in-out 0.5s;
 }
 
 @media (min-width: 1130px) {
   .filters__bg {
+    opacity: 1;
+    visibility: visible;
     overflow: visible;
     position: static;
     margin-bottom: 30px;
@@ -4028,13 +4036,31 @@ select:-webkit-autofill:focus {
 
 .filters {
   position: relative;
+  -webkit-transform: translate(0, -100%);
+          transform: translate(0, -100%);
   background: #fff;
+  -webkit-transition: 0.5s ease-in-out;
+  transition: 0.5s ease-in-out;
 }
 
 @media (min-width: 1130px) {
   .filters {
     background: #f8f8f8;
+    -webkit-transform: translate(0, 0);
+            transform: translate(0, 0);
   }
+}
+
+.filters-is-show {
+  opacity: 1;
+  visibility: visible;
+  -webkit-transition-delay: 0s;
+          transition-delay: 0s;
+}
+
+.filters-is-show .filters {
+  -webkit-transform: translate(0, 0);
+          transform: translate(0, 0);
 }
 
 .filters__close {

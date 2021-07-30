@@ -25,6 +25,10 @@ const $feedBackForm = doc.querySelector('#feedBackForm');
 const $basket = doc.querySelector('#basket');
 const $basketForm = doc.querySelector('#basketForm');
 
+const $filters = doc.querySelector('#filters');
+const $filterBtn = doc.querySelector('#filterBtn');
+
+
 const $basketCount = doc.querySelector('#basketCount');
 const $favoriteCount = doc.querySelector('#favoriteCount');
 const $basketProductsTotalPrice = doc.querySelector('#basketProductsTotalPrice');
@@ -2669,6 +2673,22 @@ if ($morePropWrap) {
   $showPropBtn.addEventListener('click', togglePropMoreList)
 }
 
+if ($filters) {
+  $filterBtn.addEventListener('click', openFilter);
+  $filters.addEventListener('click', (e) => {
+    if (e.target.hasAttribute('data-close')) {
+      closeFilter();
+    }
+  });
+}
+
+function openFilter() {
+  $filters.classList.add('filters-is-show');
+}
+
+function closeFilter() {
+  $filters.classList.remove('filters-is-show');
+}
 
 if ($map) {
   yandexMap();
