@@ -1,14 +1,18 @@
 .map {
   position: relative;
   overflow: hidden;
-  margin-bottom: 100px;
+  margin: 0 auto 100px;
+  max-width: 1472px;
+
   height: 320px;
+
   @media (min-width: 1130px) {
     height: 580px;
   }
 }
 
 .map__img {
+  padding: 0 15px;
   position: absolute;
   left: 50%;
   top: 50%;
