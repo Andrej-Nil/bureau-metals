@@ -1735,6 +1735,9 @@ class SearchModal extends Modal {
     });
 
     _defineProperty(this, "showSpinner", () => {
+      if (this.$spinnerWrap.classList.contains('modal-search__spinner--is-show')) {
+        return;
+      }
       this.$spinnerWrap.classList.add('modal-search__spinner--is-show');
       this.renderSpinner.renderSpiner('Идет загрузка...');
     });

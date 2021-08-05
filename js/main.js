@@ -1612,13 +1612,15 @@ class SearchModal extends Modal {
 
   sendingSearchQuery = () => {
     this.value = this.$input.value;
-    this.hideSpinner();
     this.showSpinner();
     this.createContent();
   }
 
   //показать скрыть спинер
   showSpinner = () => {
+    if (this.$spinnerWrap.classList.contains('modal-search__spinner--is-show')) {
+      return;
+    }
     this.$spinnerWrap.classList.add('modal-search__spinner--is-show');
     this.renderSpinner.renderSpiner('Идет загрузка...');
   }
