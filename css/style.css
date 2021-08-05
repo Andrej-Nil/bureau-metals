@@ -872,8 +872,7 @@ select:-webkit-autofill:focus {
   position: absolute;
   top: 100px;
   padding: 0 15px;
-  left: -35px;
-  overflow: hidden;
+  left: -20spx;
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.5s, top 0.5s, visibility 0s ease-in-out 0.5s;
@@ -884,7 +883,7 @@ select:-webkit-autofill:focus {
   min-height: 100px;
   width: 338px;
   background: #fff;
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0);
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
 }
 
 .advantage {
