@@ -1042,12 +1042,7 @@ select:-webkit-autofill:focus {
   transition: 0.2s ease-in-out;
 }
 
-.select:hover {
-  z-index: 2000;
-}
-
 .select:hover .select__header {
-  z-index: 2000;
   border: 1px solid #bc1622;
   border-bottom: none;
   color: #bc1622;
@@ -1594,7 +1589,6 @@ select:-webkit-autofill:focus {
   }
   .product-card:hover .product-card__bg {
     height: 640px;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
   }
   .product-card:hover .product-card__back {
     opacity: 1;
@@ -1721,9 +1715,9 @@ select:-webkit-autofill:focus {
   opacity: 0;
   padding: 20px 15px;
   z-index: -1;
-  max-width: 338px;
   width: 100%;
   transition: 0.5s ease-in-out;
+  background: #fff;
 }
 
 .product-card__list {
@@ -1746,9 +1740,8 @@ select:-webkit-autofill:focus {
   position: absolute;
   top: 0;
   left: 0;
-  max-width: 338px;
-  height: 500px;
   width: 100%;
+  height: 500px;
   background: #fff;
   z-index: -1;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0);
@@ -3628,7 +3621,7 @@ select:-webkit-autofill:focus {
     opacity: 1;
     visibility: visible;
     overflow: visible;
-    position: static;
+    position: relative;
     margin-bottom: 30px;
   }
 }
@@ -3666,7 +3659,7 @@ select:-webkit-autofill:focus {
 }
 
 .filters__close::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 50%;
   left: 50%;
@@ -3745,7 +3738,7 @@ select:-webkit-autofill:focus {
 }
 
 .filter__active-remove::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 50%;
   left: 50%;

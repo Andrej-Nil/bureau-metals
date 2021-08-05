@@ -33,13 +33,12 @@
     }
     &:hover .product-card__bg {
       height: 640px;
-
-      box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
     }
     &:hover .product-card__back {
       opacity: 1;
       bottom: -140px;
       z-index: 1000;
+      //box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
     }
   }
 
@@ -147,9 +146,10 @@
   opacity: 0;
   padding: 20px 15px;
   z-index: -1;
-  max-width: 338px;
+  //max-width: 338px;
   width: 100%;
   transition: 0.5s ease-in-out;
+  background: $white;
 }
 
 .product-card__list {
@@ -173,10 +173,10 @@
   position: absolute;
   top: 0;
   left: 0;
-
-  max-width: 338px;
-  height: 500px;
   width: 100%;
+  //max-width: 338px;
+  height: 500px;
+
   background: $white;
   z-index: -1;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0);
