@@ -1612,6 +1612,7 @@ class SearchModal extends Modal {
 
   sendingSearchQuery = () => {
     this.value = this.$input.value;
+    this.hideSpinner();
     this.showSpinner();
     this.createContent();
   }

@@ -1729,6 +1729,7 @@ class SearchModal extends Modal {
 
     _defineProperty(this, "sendingSearchQuery", () => {
       this.value = this.$input.value;
+      this.hideSpinner();
       this.showSpinner();
       this.createContent();
     });
