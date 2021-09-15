@@ -169,6 +169,7 @@ class Server {
     const formData = this.createFormData(data);
     return await this.getResponse(this.POST, formData, this.filterCheckboxApi);
   }
+
   addFavorite = async (id) => {
     const data = {
       _token: this._token,
@@ -177,6 +178,7 @@ class Server {
     const formData = this.createFormData(data);
     return await this.getResponse(this.POST, formData, this.addFavoriteApi)
   }
+
 
   addBsasket = async (id, count) => {
     const data = {
@@ -2110,7 +2112,7 @@ class AddFavoriteModal extends InfoModal {
       changeEl.$icon.classList.add('favorite__icon--is-active');
     }
     if (changeEl.$addText) {
-      changeEl.$addText.innerHTML = 'удалить из Избранное';
+      changeEl.$addText.innerHTML = 'удалить из Избранного';
     }
 
   }
@@ -2119,7 +2121,7 @@ class AddFavoriteModal extends InfoModal {
     this.render.renderDeleteInfo('favorite', this.response.favorite);
     const $productList = this.getProductList();
     $productList.forEach((item) => {
-      this.addActiveClass(item);
+      this.removeActiveClass(item);
     })
     if (this.$favoriteCount) {
       this.$favoriteCount.innerHTML = this.response.favorite.count;
@@ -2135,7 +2137,7 @@ class AddFavoriteModal extends InfoModal {
       changeEl.$icon.classList.remove('favorite__icon--is-active');
     }
     if (changeEl.$addText) {
-      changeEl.$addText.innerHTML = 'удалить из Избранное';
+      changeEl.$addText.innerHTML = 'Добавить из Избранное';
     }
 
   }

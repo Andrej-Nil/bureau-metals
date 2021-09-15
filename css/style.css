@@ -259,7 +259,7 @@ body {
 }
 
 .tile::before {
-  content: '';
+  content: "";
   max-width: 338px;
   width: 100%;
   height: 0;
@@ -267,7 +267,7 @@ body {
 }
 
 .tile::after {
-  content: '';
+  content: "";
   max-width: 338px;
   width: 100%;
   height: 0;
@@ -724,7 +724,7 @@ select:-webkit-autofill:focus {
 }
 
 .counter__inc::before {
-  font-family: 'icomoon';
+  font-family: "icomoon";
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -735,7 +735,7 @@ select:-webkit-autofill:focus {
 }
 
 .counter__dec::before {
-  font-family: 'icomoon';
+  font-family: "icomoon";
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -776,7 +776,7 @@ select:-webkit-autofill:focus {
 }
 
 .search__icon:before {
-  font-family: 'icomoon';
+  font-family: "icomoon";
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -802,7 +802,7 @@ select:-webkit-autofill:focus {
 }
 
 ._contact-phone::before {
-  font-family: 'icomoon';
+  font-family: "icomoon";
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -812,7 +812,7 @@ select:-webkit-autofill:focus {
 }
 
 ._contact-mail::before {
-  font-family: 'icomoon';
+  font-family: "icomoon";
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -822,7 +822,7 @@ select:-webkit-autofill:focus {
 }
 
 ._contact-city::before {
-  font-family: 'icomoon';
+  font-family: "icomoon";
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -1003,7 +1003,7 @@ select:-webkit-autofill:focus {
 }
 
 .favorite__icon::before {
-  font-family: 'icomoon';
+  font-family: "icomoon";
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -1014,7 +1014,7 @@ select:-webkit-autofill:focus {
 }
 
 .favorite__icon--is-active::before {
-  font-family: 'icomoon';
+  font-family: "icomoon";
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -1099,7 +1099,7 @@ select:-webkit-autofill:focus {
   right: 19px;
   width: 12px;
   height: 4px;
-  font-family: 'icomoon';
+  font-family: "icomoon";
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -1158,7 +1158,7 @@ select:-webkit-autofill:focus {
   position: absolute;
   top: 0;
   left: 0;
-  font-family: 'icomoon';
+  font-family: "icomoon";
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -1272,7 +1272,7 @@ select:-webkit-autofill:focus {
 }
 
 .fake-checkbox--is-active::before {
-  font-family: 'icomoon';
+  font-family: "icomoon";
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -1289,7 +1289,7 @@ select:-webkit-autofill:focus {
 }
 
 .checkbox:checked + .fake-checkbox::before {
-  font-family: 'icomoon';
+  font-family: "icomoon";
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -1351,7 +1351,7 @@ select:-webkit-autofill:focus {
   position: absolute;
   top: 0;
   left: 0;
-  font-family: 'icomoon';
+  font-family: "icomoon";
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -1452,8 +1452,8 @@ select:-webkit-autofill:focus {
 .catalog-card__img {
   position: absolute;
   right: 0;
-  top: 0;
-  height: 100%;
+  bottom: 0;
+  height: 75%;
   max-width: 100%;
 }
 
@@ -1516,7 +1516,7 @@ select:-webkit-autofill:focus {
 }
 
 .catalog-card__icon::before {
-  font-family: 'icomoon';
+  font-family: "icomoon";
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -1550,6 +1550,205 @@ select:-webkit-autofill:focus {
   background: linear-gradient(90.69deg, #e8e8e8 0.57%, #f1f1f1 99.4%);
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0);
   transition: 0.5s ease-in-out;
+}
+
+.our-catalog::before {
+  width: 100%;
+  max-width: none;
+}
+
+.our-catalog::after {
+  width: 100%;
+  max-width: none;
+}
+
+@media (min-width: 630px) {
+  .our-catalog::before {
+    width: 49%;
+  }
+  .our-catalog::after {
+    width: 49%;
+  }
+}
+
+@media (min-width: 900px) {
+  .our-catalog::before {
+    width: 32%;
+  }
+  .our-catalog::after {
+    width: 32%;
+  }
+}
+
+@media (min-width: 1400px) {
+  .our-catalog::before {
+    width: 338px;
+  }
+  .our-catalog::after {
+    width: 338px;
+  }
+}
+
+.our-catalog-card {
+  margin-bottom: 30px;
+  position: relative;
+  padding: 20px;
+  width: 338px;
+  width: 100%;
+  height: 230px;
+}
+
+@media (min-width: 630px) {
+  .our-catalog-card {
+    width: 49%;
+  }
+}
+
+@media (min-width: 900px) {
+  .our-catalog-card {
+    width: 32%;
+  }
+}
+
+@media (min-width: 1280px) {
+  .our-catalog-card:hover .our-catalog-card__bg {
+    height: 110%;
+  }
+  .our-catalog-card:hover .our-catalog-card__img {
+    width: 110%;
+  }
+  .our-catalog-card:hover .our-catalog-card__list {
+    transform: translate(0, 0);
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0s;
+  }
+  .our-catalog-card:hover .our-catalog-card__more {
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0s;
+  }
+  .our-catalog-card:hover .our-catalog-card__arrow {
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0s;
+    bottom: -10px;
+    right: 20px;
+    transform: rotate(-90deg);
+  }
+}
+
+@media (min-width: 1400px) {
+  .our-catalog-card {
+    width: 338px;
+  }
+}
+
+.our-catalog-card__bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  transition: 0.4s ease-in-out;
+}
+
+.our-catalog-card__img {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
+  width: 120%;
+  height: auto;
+  transition: 0.5s ease-in-out;
+}
+
+@media (min-width: 1400px) {
+  .our-catalog-card__img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+.our-catalog-card__title {
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.our-catalog-card__link {
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 120%;
+  color: #fff;
+}
+
+@media (min-width: 1280px) {
+  .our-catalog-card__link {
+    font-size: 24px;
+    height: auto;
+  }
+}
+
+.our-catalog-card__list {
+  position: relative;
+  visibility: hidden;
+  opacity: 0;
+}
+
+@media (min-width: 1280px) {
+  .our-catalog-card__list {
+    transform: translate(0, -30px);
+    transition: opacity 0.4s, visibility 0s ease-in-out 0.5s, transform 0.4s ease-in-out;
+  }
+}
+
+.our-catalog-card__item {
+  margin-bottom: 10px;
+}
+
+.our-catalog-card__item-link {
+  color: #fff;
+  font-size: 12px;
+  line-height: 120%;
+  text-decoration: underline;
+}
+
+.our-catalog-card__more {
+  position: absolute;
+  top: 200px;
+  color: #fff;
+}
+
+@media (min-width: 1280px) {
+  .our-catalog-card__more {
+    top: 210px;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.4s, visibility 0s ease-in-out 0.5s;
+  }
+}
+
+.our-catalog-card__arrow {
+  position: absolute;
+  display: block;
+  bottom: 10px;
+  transform: rotate(-90deg);
+  right: 15px;
+  width: 30px;
+  height: 30px;
+  background: linear-gradient(90deg, #be1622 -0.04%, #1d1d1b 99.96%);
+}
+
+@media (min-width: 1280px) {
+  .our-catalog-card__arrow {
+    bottom: 30px;
+    right: 200px;
+    transition: 0.5s ease-in;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.4s, bottom 0.4s, right 0.4s, visibility 0s ease-in-out 0.5s, transform 0.4s ease-in-out;
+  }
 }
 
 .product-card {
@@ -1639,7 +1838,7 @@ select:-webkit-autofill:focus {
 }
 
 .product-card__stiker-icon::before {
-  font-family: 'icomoon';
+  font-family: "icomoon";
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -1650,7 +1849,7 @@ select:-webkit-autofill:focus {
 }
 
 .product-card__stiker-icon--is-active::before {
-  font-family: 'icomoon';
+  font-family: "icomoon";
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -1793,7 +1992,7 @@ select:-webkit-autofill:focus {
 }
 
 .basket-card__remove::before {
-  font-family: 'icomoon';
+  font-family: "icomoon";
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -2044,7 +2243,7 @@ select:-webkit-autofill:focus {
 }
 
 .news-card__arrow::before {
-  font-family: 'icomoon';
+  font-family: "icomoon";
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -2262,7 +2461,7 @@ select:-webkit-autofill:focus {
 }
 
 .search-card__arrow::before {
-  font-family: 'icomoon';
+  font-family: "icomoon";
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -2463,7 +2662,7 @@ select:-webkit-autofill:focus {
 }
 
 .product__arrow--prev::before {
-  font-family: 'icomoon';
+  font-family: "icomoon";
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -2477,7 +2676,7 @@ select:-webkit-autofill:focus {
 }
 
 .product__arrow--next::before {
-  font-family: 'icomoon';
+  font-family: "icomoon";
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -2913,7 +3112,7 @@ select:-webkit-autofill:focus {
 
 .pagination__arrow--prev::before {
   display: block;
-  font-family: 'icomoon';
+  font-family: "icomoon";
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -2924,7 +3123,7 @@ select:-webkit-autofill:focus {
 
 .pagination__arrow--next::before {
   display: block;
-  font-family: 'icomoon';
+  font-family: "icomoon";
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -2997,7 +3196,7 @@ select:-webkit-autofill:focus {
 }
 
 .from-approval__checkbox:checked ~ .from-approval__fake-checkbox::before {
-  font-family: 'icomoon';
+  font-family: "icomoon";
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -3274,7 +3473,7 @@ select:-webkit-autofill:focus {
 }
 
 .sections-arrow__icon--is-prev::before {
-  font-family: 'icomoon';
+  font-family: "icomoon";
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -3285,7 +3484,7 @@ select:-webkit-autofill:focus {
 
 @media (min-width: 1280px) {
   .sections-arrow__icon--is-prev::before {
-    font-family: 'icomoon';
+    font-family: "icomoon";
     font-weight: normal;
     font-style: normal;
     font-display: block;
@@ -3300,7 +3499,7 @@ select:-webkit-autofill:focus {
 }
 
 .sections-arrow__icon--is-next::before {
-  font-family: 'icomoon';
+  font-family: "icomoon";
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -3311,7 +3510,7 @@ select:-webkit-autofill:focus {
 
 @media (min-width: 1280px) {
   .sections-arrow__icon--is-next::before {
-    font-family: 'icomoon';
+    font-family: "icomoon";
     font-weight: normal;
     font-style: normal;
     font-display: block;
@@ -3454,7 +3653,7 @@ select:-webkit-autofill:focus {
 }
 
 .view-tile::before {
-  font-family: 'icomoon';
+  font-family: "icomoon";
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -3464,7 +3663,7 @@ select:-webkit-autofill:focus {
 }
 
 .view-list::before {
-  font-family: 'icomoon';
+  font-family: "icomoon";
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -3498,7 +3697,7 @@ select:-webkit-autofill:focus {
 }
 
 .nav-back__icon::before {
-  font-family: 'icomoon';
+  font-family: "icomoon";
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -3546,7 +3745,7 @@ select:-webkit-autofill:focus {
 }
 
 .nav-list__arrow::before {
-  font-family: 'icomoon';
+  font-family: "icomoon";
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -3836,7 +4035,7 @@ select:-webkit-autofill:focus {
 .filter-sticker__close::before {
   position: absolute;
   left: 0;
-  font-family: 'icomoon';
+  font-family: "icomoon";
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -3985,7 +4184,7 @@ select:-webkit-autofill:focus {
 .region__arrow::before {
   position: absolute;
   top: 0;
-  font-family: 'icomoon';
+  font-family: "icomoon";
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -4087,7 +4286,7 @@ select:-webkit-autofill:focus {
   display: block;
   width: 23px;
   height: 23px;
-  font-family: 'icomoon';
+  font-family: "icomoon";
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -4476,7 +4675,7 @@ select:-webkit-autofill:focus {
 }
 
 .h-catalog__icon::before {
-  font-family: 'icomoon';
+  font-family: "icomoon";
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -4502,7 +4701,7 @@ select:-webkit-autofill:focus {
 }
 
 .h-more__icon::before {
-  font-family: 'icomoon';
+  font-family: "icomoon";
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -4562,7 +4761,7 @@ select:-webkit-autofill:focus {
   display: block;
   width: 100%;
   height: 100%;
-  font-family: 'icomoon';
+  font-family: "icomoon";
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -5511,7 +5710,7 @@ select:-webkit-autofill:focus {
 }
 
 .modal-search__loupe::before {
-  font-family: 'icomoon';
+  font-family: "icomoon";
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -5555,7 +5754,7 @@ select:-webkit-autofill:focus {
 }
 
 .modal-search__arrow::before {
-  font-family: 'icomoon';
+  font-family: "icomoon";
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -5715,7 +5914,7 @@ select:-webkit-autofill:focus {
 }
 
 .search-form__loupe::before {
-  font-family: 'icomoon';
+  font-family: "icomoon";
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -5921,7 +6120,7 @@ select:-webkit-autofill:focus {
   display: block;
   width: 6px;
   height: 12px;
-  font-family: 'icomoon';
+  font-family: "icomoon";
   font-weight: normal;
   font-style: normal;
   font-display: block;

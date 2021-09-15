@@ -1,85 +1,87 @@
 // шрифты
-@import './_fonts';
-@import './_icon-font';
+@import "./_fonts";
+@import "./_icon-font";
 
 //базовый
-@import './_main';
+@import "./_main";
 
-@import './blocks/_animations';
+@import "./blocks/_animations";
 
 //Элементы
-@import './elements/_logo';
-@import './elements/_btns';
-@import './elements/_spinner';
-@import './elements/_rez-error';
+@import "./elements/_logo";
+@import "./elements/_btns";
+@import "./elements/_spinner";
+@import "./elements/_rez-error";
 
-@import './elements/_inputs';
-@import './elements/_path';
-@import './elements/_counter';
-@import './elements/_search';
-@import './elements/_contact';
-@import './elements/_popup-nav';
-@import './elements/_advantage';
-@import './elements/_price';
-@import './elements/_favorite';
-@import './elements/_select';
-@import './elements/_fake-checkbox';
-@import './elements/_sorting';
+@import "./elements/_inputs";
+@import "./elements/_path";
+@import "./elements/_counter";
+@import "./elements/_search";
+@import "./elements/_contact";
+@import "./elements/_popup-nav";
+@import "./elements/_advantage";
+@import "./elements/_price";
+@import "./elements/_favorite";
+@import "./elements/_select";
+@import "./elements/_fake-checkbox";
+@import "./elements/_sorting";
 
-@import './elements/_catalog-card';
-@import './elements/_product-card';
-@import './elements/_basket-card';
-@import './elements/_news-card';
-@import './elements/_modal-card';
-@import './elements/_small-card';
-@import './elements/_search-card';
-@import './elements/_product-line';
-@import './elements/_product-slider';
-@import './elements/_product';
+@import "./elements/_catalog-card";
+@import "./elements/_our-catalog-card";
 
-@import './elements/_icon-nav';
-@import './elements/_pagination';
+@import "./elements/_product-card";
+@import "./elements/_basket-card";
+@import "./elements/_news-card";
+@import "./elements/_modal-card";
+@import "./elements/_small-card";
+@import "./elements/_search-card";
+@import "./elements/_product-line";
+@import "./elements/_product-slider";
+@import "./elements/_product";
+
+@import "./elements/_icon-nav";
+@import "./elements/_pagination";
 
 //блоки
-@import './blocks/_form';
-@import './blocks/_section';
-@import './blocks/_advantages';
+@import "./blocks/_form";
+@import "./blocks/_section";
+@import "./blocks/_advantages";
 
-@import './blocks/_display';
-@import './blocks/_nav';
-@import './blocks/_search-info';
-@import './blocks/_filters';
-@import './blocks/_region';
+@import "./blocks/_display";
+@import "./blocks/_nav";
+@import "./blocks/_search-info";
+@import "./blocks/_filters";
+@import "./blocks/_region";
 
 //header
-@import './blocks/_header';
-@import './blocks/_header-top';
-@import './blocks/_main-header';
-@import './blocks/_header-main';
-@import './blocks/_header-nav';
+@import "./blocks/_header";
+@import "./blocks/_header-top";
+@import "./blocks/_main-header";
+@import "./blocks/_header-main";
+@import "./blocks/_header-nav";
 
-@import './blocks/_product-slider';
+@import "./blocks/_product-slider";
 
-@import './blocks/_error404';
+@import "./blocks/_error404";
 
-@import './blocks/_about';
-@import './blocks/_bank-account';
-@import './blocks/_our-contacts';
-@import './blocks/_basket';
-@import './blocks/_map';
+@import "./blocks/_about";
+@import "./blocks/_bank-account";
+@import "./blocks/_our-contacts";
+@import "./blocks/_basket";
+@import "./blocks/_map";
 
 // footer
-@import './blocks/_footer';
-@import './blocks/_footer-nav';
-@import './blocks/_footer-bottom';
+@import "./blocks/_footer";
+@import "./blocks/_footer-nav";
+@import "./blocks/_footer-bottom";
 
 // modal
-@import './blocks/_modal';
-@import './elements/_search-form';
+@import "./blocks/_modal";
+@import "./elements/_search-form";
 
-@import './blocks/_mobile-menu';
+@import "./blocks/_mobile-menu";
 
 // для переназначеный стилей
-@import './blocks/_important';
+@import "./blocks/_important";
 
-@import './blocks/_content-bottom';
+@import "./blocks/_content-bottom";
