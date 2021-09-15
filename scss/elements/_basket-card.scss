@@ -54,7 +54,7 @@
     max-width: 170px;
   }
   @media (min-width: 1050px) {
-    margin: 0;
+    //margin: 0 0 0 auto;
     width: 49%;
   }
 }
@@ -64,6 +64,23 @@
   align-items: flex-end;
   justify-content: space-between;
   max-width: 500px;
+}
+
+.basket-card__left {
+  display: flex;
+  flex-grow: 1;
+  text-align: right;
+
+  @media (min-width: 768px) {
+    font-size: 18px;
+    line-height: 24px;
+  }
+}
+.basket-card__col--left {
+  justify-content: flex-end;
+  @media (min-width: 400px) {
+    width: 33%;
+  }
 }
 
 .basket-card__price-old {
@@ -88,10 +105,22 @@
   }
 }
 
+.basket-card__right {
+  text-align: right;
+  @media (min-width: 400px) {
+    width: 33%;
+  }
+}
+
 .basket-card__input {
+  width: 40px;
   margin-bottom: 0;
-  padding: 9px 15px;
+  padding: 9px 10px;
   background: rgba(0, 0, 0, 0);
+  @media (min-width: 768px) {
+    padding: 9px 15px;
+    width: 66px;
+  }
 }
 
 .basket-card__counter-btn {

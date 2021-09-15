@@ -181,6 +181,7 @@ class Server {
 
 
   addBsasket = async (id, count) => {
+    console.log(count)
     const data = {
       _token: this._token,
       id: id,
@@ -915,11 +916,11 @@ class Render {
   }
 
   getBasketCardHtml = (item) => {
-
+    console.log(item);
     const favoriteCls = item.isFavorite ? 'favorite__icon--is-active' : ''
     const favoriteText = item.isFavorite ? 'удалить из Избранное' : 'добавить в Избранное';
     return (/*html*/`
-      <div class="basket-card" data-product-card data-id="566" data-in-basket="1">
+      <div class="basket-card" data-product-card data-id="${item.id}" data-in-basket="1">
         <i class="basket-card__remove" data-remove-card></i>
         <div class="basket-card__top">
           <h3 class="basket-card__title">
@@ -1940,7 +1941,9 @@ class FastOrderModal extends Modal {
       this.$input.value = 1;
       return;
     }
+    console.log(count);
     const response = await this.getProduct(count);
+
     this.sentCountAndTotalPrice(response.content[0]);
   }
 
@@ -2184,7 +2187,7 @@ class AddBasketModal extends InfoModal {
 
   renderInfo = async () => {
     this.showSpinner();
-    this.response = await this.server.addBsasket(this.productId);
+    this.response = await this.server.addBsasket(this.productId, this.$input.value);
     if (!this.response.rez) {
       this.showError(this.response.error);
     }
@@ -2953,6 +2956,8 @@ async function inc($btn) {
   const $cardList = getCardList(cardInfo.id);
   const value = checkCount(cardInfo.$input.value);
   const count = parseInt(value) + 1;
+
+
   if (cardInfo.isInBasket === '0') {
     cardInfo.$input.value = count;
   }
