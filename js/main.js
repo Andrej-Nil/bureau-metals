@@ -130,6 +130,15 @@ class Server {
     this.menuApi = '../json/sidebar.json';
     this.filterApi = '../json/filter.json';
     this.filterCheckboxApi = '../json/checkbox.json';
+    //this.cityApi = '../json/city.json';
+    //this.fastOrderApi = '/api/prod/show';
+    //this.addFavoriteApi = '/api/favorite/toggle';
+    //this.addBasketApi = '/api/cart/toggle';
+    //this.searchApi = '../json/search.json';
+    //this.removeBaskethApi = '/api/cart/toggle/remove';
+    //this.menuApi = '/api/category/get';
+    //this.filterApi = '../json/filter.json';
+    //this.filterCheckboxApi = '../json/checkbox.json';
   }
 
   getCity = async () => {
@@ -1108,6 +1117,7 @@ class Basket {
     this.server = new Server();
     this.$basketList = doc.querySelector('#basketList');
     this.$basketPrice = doc.querySelector('#basketProductsTotalPrice');
+    this.$basketTotalCount = doc.querySelector('#basketCount');
     this.$basketCount = doc.querySelector('#basketProductsCount');
     this.$basketCard = null;
     this.$basketCardRez = null;
@@ -1115,9 +1125,12 @@ class Basket {
   }
   removeBasketCard = async () => {
     const id = this.$basketCard.dataset.id;
+
+
     this.$basketCardRez = this.$basketCard.querySelector('[data-basket-rez]');
     this.showSpinner();
     const response = await this.server.removeBasketCard(id);
+
     if (!response.rez) {
       this.showErrorMsg(response.error);
     }
@@ -1125,7 +1138,9 @@ class Basket {
     if (response.rez) {
       this.$basketCardRez.innerHTML = '';
       this.$basketCard.remove();
+
       this.setTotalBasket(response.card);
+
       const $basketCardList = this.$basketList.querySelectorAll('[data-product-card]');
       if (!$basketCardList.length) {
         this.$basketList.innerHTML = '<p data-empty>Корзина пустая</p>';
@@ -1164,11 +1179,17 @@ class Basket {
   }
 
   setTotalBasket = (totalBasketObj) => {
+
     if (this.$basketPrice) {
       this.$basketPrice.innerHTML = totalBasketObj.total_price.toLocaleString() + '  ₽';
     }
     if (this.$basketCount) {
-      this.$basketCount.innerHTML = totalBasketObj.count
+      console.log(this.$basketCount.innerHTML)
+      this.$basketCount.innerHTML = totalBasketObj.count;
+    }
+    console.log(totalBasketObj.count)
+    if (this.$basketTotalCount) {
+      this.$basketTotalCount.innerHTML = totalBasketObj.count;
     }
   }
 
@@ -1200,8 +1221,10 @@ class Basket {
   }
 
   listener() {
+
     this.$basket.addEventListener('click', (e) => {
       const target = e.target;
+
       if (e.target.closest('[data-remove-card]')) {
         this.$basketCard = target.closest('[data-product-card]');
         this.removeBasketCard();
