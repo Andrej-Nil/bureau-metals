@@ -836,7 +836,7 @@ class Render {
         </div>
 
         <div class="modal-card__counter counter" data-modal-counter>
-          <input type="text" class="modal-card__input input counter__input" value="3" data-modal-input/>
+          <input type="text" class="modal-card__input input counter__input" value="3" data-modal-input data-counter-input/>
           <div class="modal-card__controls counter__controls">
             <span class="modal-card__inc counter__btn" data-modal-btn="inc">
               <i class="modal-card__inc-icon
@@ -2980,9 +2980,9 @@ async function inc($btn) {
   const value = checkCount(cardInfo.$input.value);
   const count = parseInt(value) + 1;
 
-
   if (cardInfo.isInBasket === '0') {
     cardInfo.$input.value = count;
+    setTolalPriceInCard($card, count)
   }
 
   if (cardInfo.isInBasket === '1') {
@@ -2999,6 +2999,17 @@ async function inc($btn) {
   }
 }
 
+function setTolalPriceInCard($card, count) {
+  const $cardTotlePrice = $card.querySelector('[data-total-price]');
+  if (!$cardTotlePrice) {
+    return;
+  }
+  const $cardPrice = $card.querySelector('[data-price]');
+  const price = $cardPrice.dataset.price;
+
+  $cardTotlePrice.innerHTML = (count * price).toLocaleString();
+}
+
 async function dec($btn) {
   const $card = $btn.closest('[data-product-card]');
   const cardInfo = getCardInfo($card);
@@ -3012,6 +3023,7 @@ async function dec($btn) {
     }
     if (count > 0) {
       cardInfo.$input.value = count;
+      setTolalPriceInCard($card, count)
     }
   }
 
