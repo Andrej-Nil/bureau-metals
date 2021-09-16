@@ -2982,7 +2982,7 @@ async function inc($btn) {
 
   if (cardInfo.isInBasket === '0') {
     cardInfo.$input.value = count;
-    setTolalPriceInCard($card, count)
+    setTotalPriceInCard($card, count)
   }
 
   if (cardInfo.isInBasket === '1') {
@@ -2999,16 +2999,7 @@ async function inc($btn) {
   }
 }
 
-function setTolalPriceInCard($card, count) {
-  const $cardTotlePrice = $card.querySelector('[data-total-price]');
-  if (!$cardTotlePrice) {
-    return;
-  }
-  const $cardPrice = $card.querySelector('[data-price]');
-  const price = $cardPrice.dataset.price;
 
-  $cardTotlePrice.innerHTML = (count * price).toLocaleString();
-}
 
 async function dec($btn) {
   const $card = $btn.closest('[data-product-card]');
@@ -3023,7 +3014,7 @@ async function dec($btn) {
     }
     if (count > 0) {
       cardInfo.$input.value = count;
-      setTolalPriceInCard($card, count)
+      setTotalPriceInCard($card, count)
     }
   }
 
@@ -3039,6 +3030,17 @@ async function dec($btn) {
       setInputCardValue($cardList, response.content[0].count);
     }
   }
+}
+
+function setTotalPriceInCard($card, count) {
+  const $cardTotalPrice = $card.querySelector('[data-total-price]');
+  if (!$cardTotalPrice) {
+    return;
+  }
+  const $cardPrice = $card.querySelector('[data-price]');
+  const price = $cardPrice.dataset.price;
+
+  $cardTotalPrice.innerHTML = (count * price).toLocaleString();
 }
 
 async function changingValue(target) {
