@@ -179,6 +179,19 @@
                     </h1>
                     <div id="selectedFilterList" class="filters__active-list">
 
+                      <div data-active-filter="aluminii" data-option="truba" data-id="aluminiitruba"
+                        class="filters__active-item">
+                        <span class="filter__active-name">труба Алю</span>
+                        <span data-remove="" class="filter__active-remove"></span>
+                      </div>
+
+
+                      <div data-active-filter="aluminii" data-option="ugolok" data-id="aluminiiugolok"
+                        class="filters__active-item">
+                        <span class="filter__active-name">уголок Алю</span>
+                        <span data-remove="" class="filter__active-remove"></span>
+                      </div>
+
                     </div>
                   </div>
                   <div class="filters__control">
@@ -200,7 +213,7 @@
                 </div>
                 <div id="filterListWrap" class="filters__list">
 
-                  <div data-field-slug="aluminii" data-filter="close" class="filter select">
+                  <div data-field-slug="aluminii" data-id="4543" data-filter="close" class="filter select">
                     <div class="filter__header select__header">
                       Сечение алюминиевой жилы, мм
                     </div>
@@ -220,6 +233,29 @@
                     </div>
 
                   </div>
+
+                  <div data-field-slug="aluminii2" data-id="4543" data-filter="close" class="filter select">
+                    <div class="filter__header select__header">
+                      Сечение алюминиевой жилы, мм
+                    </div>
+                    <div data-body class="options-body">
+                      <div class="options">
+                        <div class="options__search">
+
+                          <input data-input type="text" class="options__input" placeholder="Поиск...">
+                          <i class="options__btn"></i>
+
+                        </div>
+
+                        <ul data-option-list class="options__list filter-options__list">
+
+                        </ul>
+                      </div>
+                    </div>
+
+                  </div>
+
+
 
                 </div>
               </form>
@@ -1905,33 +1941,9 @@
           </div>
 
           <div id="sidebar" class="sidebar">
-            <nav class="nav">
-              <ul class="nav-list" data-list-id="3212">
-                <li class="nav-list__item" data-dropdown>
-                  <div class="dropdown__header" data-dropdown-header>
-                    <i class="nav-list__arrow" data-dropdown-btn data-dropdown-arrow></i>
-                    <a href="#!" class="nav-list__link">Производство</a>
-                  </div>
-                  <div class="dropdown__body" data-dropdown-close="close">
-                    <ul class="nav-list" data-dropdown-list>
-                      <li class="nav-list__item">
-                        <a href="#!" class="nav-list__sublink">Производство</a>
-                      </li>
-                      <li class="nav-list__item">
-                        <a href="#!" class="nav-list__sublink">Производство</a>
-                      </li>
-                      <li class="nav-list__item">
-                        <a href="#!" class="nav-list__sublink">Производство</a>
-                      </li>
-                      <li class="nav-list__item">
-                        <a href="#!" class="nav-list__sublink">Производство</a>
-                      </li>
-                    </ul>
-                  </div>
-                </li>
-              </ul>
+            <div id="navWrap" class="nav-wrap" data-list-id="54756">
 
-            </nav>
+            </div>
           </div>
 
         </div>
@@ -2493,7 +2505,7 @@
 
 
   <!--app-->
-  <script src="./js/mainbabel.js"></script>
+  <script src="./js/main.js"></script>
 </body>
 
 </html>

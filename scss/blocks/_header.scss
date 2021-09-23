@@ -1,3 +1,5 @@
 .header {
+  position: relative;
   background: $base-lg;
+  z-index: 1000;
 }

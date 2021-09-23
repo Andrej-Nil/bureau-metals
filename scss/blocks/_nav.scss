@@ -1,7 +1,70 @@
+.nav-wrap {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+}
+
 .nav {
+  display: flex;
+  min-width: 338px;
   width: 100%;
-  min-height: 400px;
+  //min-height: 400px;
+  right: 0%;
+  opacity: 1;
+  transition: 0.5s ease-in-out;
   background: $milk;
+  z-index: 10;
+}
+.nav--move {
+  position: absolute;
+}
+.nav--hide {
+  opacity: 0;
+}
+.nav--left {
+  right: 102%;
+  max-width: 338px;
+  background: $milk;
+  z-index: 100;
+  box-shadow: 3px -3px 3px rgba(0, 0, 0, 0.5);
+}
+
+.nav--right {
+  right: -102%;
+  max-width: 338px;
+  background: $milk;
+  z-index: 100;
+  box-shadow: 3px -3px 3px rgba(0, 0, 0, 0.5);
+}
+
+.nav-back__icon {
+  position: absolute;
+  top: 33%;
+  left: 10px;
+  width: 20px;
+  height: 20px;
+  transform: rotate(180deg);
+  cursor: pointer;
+  &::before {
+    @include font-icon-style("\e904", 12px);
+    position: relative;
+    left: 50%;
+    width: 10px;
+    height: 10px;
+    transform: translate(-50%, 0);
+    color: $white;
+  }
+}
+
+.nav-list {
+  display: block;
+  width: 100%;
+  background: $milk;
+}
+
+.nav-list__item {
+  position: relative;
+  transition: 0.2s ease-in-out;
 }
 
 .nav-back {
@@ -9,21 +72,20 @@
   display: block;
   background: $base;
   padding: 15px 15px 15px 50px;
-}
-
-.nav-back__icon {
-  position: absolute;
-  top: 35%;
-  left: 20px;
-  transform: rotate(180deg);
-  &::before {
-    @include font-icon-style("\e904", 12px);
-    color: $white;
+  cursor: pointer;
+  &:hover {
+    background: $base;
   }
 }
 
-.nav-list__item {
-  transition: 0.2s ease-in-out;
+.nav-list__link--current {
+  font-weight: 600;
+  color: $base;
+  border-bottom: 1px solid $base;
+  background: #f8f8f8;
+  &:hover {
+    background: #f8f8f8;
+  }
 }
 
 .nav-back__text {
@@ -34,6 +96,7 @@
 
 .nav-list__link {
   display: block;
+  width: 100%;
   padding: 15px 40px 15px 15px;
   font-size: 16px;
   line-height: 20px;
@@ -51,16 +114,14 @@
 
 .nav-list__arrow {
   position: absolute;
-  top: 25%;
-  width: 20px;
-  height: 20px;
-  right: 20px;
+  width: 40px;
+  height: 100%;
+  right: 0;
   cursor: pointer;
   transition: 0.2s ease-in-out;
   &::before {
     @include font-icon-style("\e904", 12px);
     position: absolute;
-
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);

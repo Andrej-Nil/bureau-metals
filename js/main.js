@@ -128,17 +128,20 @@ class Server {
     this.searchApi = '../json/search.json';
     this.removeBaskethApi = '../json/removeBasket.json';
     this.menuApi = '../json/sidebar.json';
+    this.sidebarApi = '/json/sidebar.json';
     this.filterApi = '../json/filter.json';
     this.filterCheckboxApi = '../json/checkbox.json';
-    //this.cityApi = '../json/city.json';
+
+    //this.cityApi = '/api/city/get';
     //this.fastOrderApi = '/api/prod/show';
     //this.addFavoriteApi = '/api/favorite/toggle';
     //this.addBasketApi = '/api/cart/toggle';
     //this.searchApi = '../json/search.json';
     //this.removeBaskethApi = '/api/cart/toggle/remove';
     //this.menuApi = '/api/category/get';
-    //this.filterApi = '../json/filter.json';
-    //this.filterCheckboxApi = '../json/checkbox.json';
+    //this.sidebarApi = '/api/sidebar/get';
+    //this.filterApi = '/api/filter/get';
+    //this.filterCheckboxApi = '/api/check/filter/get';
   }
 
   getCity = async () => {
@@ -164,13 +167,26 @@ class Server {
     return await this.getResponse(this.POST, formData, this.menuApi)
   }
 
-  getFilterOptoinList = async (fieldSlug) => {
+  getSidebar = async (id) => {
     const data = {
       _token: this._token,
-      fieldSlug: fieldSlug,
-    }
+      id: id,
+    };
     const formData = this.createFormData(data);
-    return await this.getResponse(this.POST, formData, this.filterApi)
+    return await this.getResponse(this.POST, formData, this.sidebarApi)
+  }
+
+  getFilterOptoinList = async (fieldSlug, id, list) => {
+    const slug = fieldSlug.slice(0, -2)
+    const data = {
+      _token: this._token,
+      id: id,
+      fieldSlug: fieldSlug
+    }
+    const json = JSON.stringify(list)
+    const formData = this.createFormData(data);
+    formData.append('json', json);
+    return await this.getResponse(this.POST, formData, this.filterApi);
   }
 
   getRezToggleFilterCheckbox = async (data) => {
@@ -284,14 +300,15 @@ class Filters {
     this.$filterList = this.$filtersBlock.querySelectorAll('[data-filter]');
     this.$filterSticker = this.$filtersBlock.querySelector('#filterSticker');
     this.listener();
-    this.creatingFilterOptions();
   }
 
-  toggleOptionsList = (target) => {
-    const filter = target.closest('[data-filter]');
-    const status = filter.dataset.filter;
+  toggleOptionsList = async (target) => {
+    const $filter = target.closest('[data-filter]');
+    const status = $filter.dataset.filter;
     if (status === 'close') {
-      this.openFilter(filter);
+      this.openFilter($filter);
+      await this.createOptionList($filter);
+      this.searchOption($filter);
     }
     if (status === 'open') {
       this.closeFilter(target);
@@ -324,21 +341,21 @@ class Filters {
 
 
 
-  creatingFilterOptions = () => {
-    this.$filterList.forEach(($filter) => {
-      this.createOptionList($filter);
-    })
-  }
+  //creatingFilterOptions = () => {
+  //  this.$filterList.forEach(($filter) => {
+  //    this.createOptionList($filter);
+  //  })
+  //}
 
   createOptionList = async ($filter) => {
     const $optionList = $filter.querySelector('[data-option-list]');
-    const $optionItems = $optionList.querySelectorAll('[data-li]');
-    if ($optionItems.length) {
-      return
-    }
+    //const $optionItems = $optionList.querySelectorAll('[data-li]');
+    $optionList.innerHTML = '';
+    const selectedOptions = this.getSelectedOptions()
     const fieldSlug = $filter.dataset.fieldSlug;
+    const id = $filter.dataset.id;
     this.render.renderSpiner('Загружаю...', $optionList);
-    const response = await this.server.getFilterOptoinList(fieldSlug);
+    const response = await this.server.getFilterOptoinList(fieldSlug, id, selectedOptions);
     if (response.rez == 0) {
       this.render.renderErrorMsg(response.error.desc, $optionList);
       console.log('Ошибка: ' + response.error.id)
@@ -349,10 +366,20 @@ class Filters {
     }
   }
 
-  searchOption = (e) => {
-    const filter = e.target.closest('[data-filter]');
-    const options = filter.querySelectorAll('[data-li]');
-    const inputValue = e.target.value.trim().toLowerCase();
+  getSelectedOptions = () => {
+    const listOptions = [];
+    const selectedOptions = this.$selectedFilterList.querySelectorAll('[data-active-filter]');
+    selectedOptions.forEach(($item) => {
+      listOptions.push({ [$item.dataset.activeFilter]: $item.dataset.option })
+    })
+    return listOptions;
+  }
+
+  searchOption = ($filter) => {
+    console.log('test');
+    const options = $filter.querySelectorAll('[data-li]');
+    const input = $filter.querySelector('[data-input]');
+    const inputValue = input.value.trim().toLowerCase();
 
     options.forEach((li) => {
       this.hideOption(li)
@@ -376,12 +403,17 @@ class Filters {
   }
 
   toggleSelectedOption = async (target) => {
+    const $filter = target.closest('[data-filter]');
     const $liOption = target.closest('[data-li]');
-    const $checkbox = $liOption.querySelector('[data-checkbox]')
+    const $checkbox = $liOption.querySelector('[data-checkbox]');
+    const $checkboxCheck = $checkbox.checked;
     const data = {
       field_slug: $checkbox.name,
       field_value_slug: $checkbox.value,
+      checkbox: $checkboxCheck,
+      id: $filter.dataset.fieldSlug,
     }
+
     const response = await this.server.getRezToggleFilterCheckbox(data);
     if (response.rez == 0) {
       this.toggleCheckboxWithRez0($checkbox);
@@ -432,6 +464,7 @@ class Filters {
     const data = {
       field_slug: $selectedOption.dataset.activeFilter,
       field_value_slug: $selectedOption.dataset.option,
+      checkbox: true,
     }
     const response = await this.server.getRezToggleFilterCheckbox(data)
     if (response.rez == 0) {
@@ -524,7 +557,8 @@ class Filters {
 
     this.$filtersBlock.addEventListener('input', (e) => {
       if (e.target.closest('[data-input]')) {
-        this.searchOption(e);
+        const $filter = e.target.closest('[data-filter]');
+        this.searchOption($filter);
       }
 
       //if (e.target.closest('[data-checkbox]')) {
@@ -564,6 +598,85 @@ class Render {
     </div>
     `;
     $parent.innerHTML = errorHtml;
+  }
+
+  renderSidebar = (menuList, side = "now") => {
+    const sidebarHtml = this.getSidebarHtml(menuList, side);
+    this.$parent.insertAdjacentHTML('beforeEnd', sidebarHtml);
+  }
+
+  getSidebarHtml = (menuList, side) => {
+    const back = this.getSidebarBackHtml(menuList);
+    const current = this.getSidebarCurrentHtml(menuList);
+    const sidebarListHtml = this.getSidebarListHtml(menuList);
+
+    return (/*html*/`
+    <nav class="nav nav--${side}" data-side="${side}">
+      <ul class="nav-list">
+        ${back}
+        ${current}
+        ${sidebarListHtml}
+      </ul>
+    </nav>
+    `)
+  }
+
+  getSidebarBackHtml = (menuList) => {
+    let mark = '';
+    for (let i = 0; i <= menuList.length - 1; i++) {
+      if (menuList[i].directing == "back") {
+
+        mark = (/*html*/`
+          <li class="nav-list__item nav-back" data-back data-id="${menuList[i].id}" >
+            <i class="nav-back__icon"></i>
+            <span class="nav-back__text">${menuList[i].title}</span>
+          </li>`)
+
+        break;
+      }
+    }
+    return mark;
+  }
+  //${ link }
+  //getBackArrowHtml = (menuList) => {
+
+  //}
+
+  getSidebarCurrentHtml = (menuList) => {
+    let mark = '';
+    for (let i = 0; i <= menuList.length - 1; i++) {
+      if (menuList[i].directing == "now") {
+        mark = (/*html */`<li class="nav-list__item" data-current>
+          <a href="${menuList[i].slug}" class="nav-list__link nav-list__link--current">${menuList[i].title}</a>
+      </li>`
+        )
+        break;
+      }
+    }
+    return mark;
+  }
+
+  getSidebarListHtml = (menuList) => {
+    let mark = '';
+    menuList.forEach((item) => {
+      if (item.directing == "back" || item.directing == "now") {
+        return
+      }
+      mark = mark + this.getSidebarItem(item);
+    })
+    return mark;
+  }
+
+  getSidebarItem = (item) => {
+    const arrow = item.isSubmenu ? `<i class="nav-list__arrow" data-id="${item.id}" data-next></i>` : '';
+    return (/*html*/`
+      <li class="nav-list__item">
+        <div class="dropdown__header">
+          ${arrow}
+          <a href="${item.slug}" class="nav-list__link">${item.title}</a>
+        </div>
+      </li>
+    `)
   }
 
   renderOptionList = (optionList, $parent) => {
@@ -614,8 +727,9 @@ class Render {
   }
 
   renderSelectedOption = (infoOption) => {
+    const name = infoOption.name.slice(0, -2);
     const selectedOptionHtml = (/*html*/`
-    <div data-active-filter="${infoOption.name}" 
+    <div data-active-filter="${name}" 
     data-option="${infoOption.value}" 
     data-id="${infoOption.id}"
     class="filters__active-item">
@@ -821,6 +935,7 @@ class Render {
   }
 
   getModalCardHtml = (card) => {
+    const unit = card.units ? `(${card.units})` : '';
     return (/*html*/`
     <div class="modal-card" data-modal-card data-id=${card.id}>
       <h3 class="modal-card__title" >
@@ -828,7 +943,7 @@ class Render {
       </h3>
       <div class="modal-card__info">
         <div class="modal-card__price">
-          <p class="modal-card__price-name">Цена за единицу (м/пог):</p>
+          <p class="modal-card__price-name">Цена за единицу ${unit}:</p>
           <p class="modal-card__price-grup">
           <span class="modal-card__price-num">${card.price}</span>
           <span class="modal-card__price-mark"> ₽</span>
@@ -836,7 +951,7 @@ class Render {
         </div>
 
         <div class="modal-card__counter counter" data-modal-counter>
-          <input type="text" class="modal-card__input input counter__input" value="3" data-modal-input data-counter-input/>
+          <input type="text" class="modal-card__input input counter__input" value="${card.count}" data-modal-input data-counter-input/>
           <div class="modal-card__controls counter__controls">
             <span class="modal-card__inc counter__btn" data-modal-btn="inc">
               <i class="modal-card__inc-icon
@@ -988,7 +1103,7 @@ class Render {
      class="options__item">
 
         <div class="options__label">
-          <input type="checkbox" name="${item.field_slug}" class="options__checkbox checkbox" data-checkbox
+          <input type="checkbox" name="${item.field_slug}[]" class="options__checkbox checkbox" data-checkbox
             value="${item.field_value_slug}" 
             ${isChecked}
             data-title="${item.field_value_name}"
@@ -1301,7 +1416,7 @@ class Slider {
     if (!this.$nextBtn) {
       return;
     }
-    if (this.i == this.quantitySlides - this.displaySlides) {
+    if (this.i >= this.quantitySlides - this.displaySlides) {
       return;
     }
     this.i++;
@@ -1493,16 +1608,19 @@ class Sidebar {
     if (!this.sidebar) {
       return;
     }
-    this.sidebarList = this.sidebar.querySelector('[data-list-id]');
+    this.sidebarList = this.sidebar.querySelector('#navWrap');
     this.render = new Render(this.sidebarList);
     this.server = new Server();
     this.createNav();
+    this.listner();
+    this.sideBack = 'left';
+    this.sideNext = 'right';
   }
 
   createNav = async () => {
-    const listId = this.sidebarList.dataset.listId;
+    const listId = this.sidebarList.dataset.id;
     this.render.renderSpiner('Идет загрузка...');
-    const response = await this.server.getMenu(listId);
+    const response = await this.server.getSidebar(listId);
     if (response.rez == 0) {
       this.render.renderErrorMsg(response.error.desc);
       console.log(`Ошибка: ${response.error.id}`);
@@ -1510,11 +1628,68 @@ class Sidebar {
     if (response.rez == 1) {
       const menuList = response.content;
       this.render.delete('[data-spinner]');
-      this.render.renderMenu(menuList);
+      this.render.renderSidebar(menuList);
+    }
+  }
+  createBackMenu = async (arrow) => {
+    await this.createNewMenu(arrow, this.sideBack);
+
+    this.shiftMenu(this.sideBack);
+  };
+
+  createNextMenu = async (arrow) => {
+    await this.createNewMenu(arrow, this.sideNext);
+
+    this.shiftMenu(this.sideNext);
+  }
+
+  createNewMenu = async (arrow, side) => {
+    const id = arrow.dataset.id;
+    const response = await this.server.getSidebar(id);
+
+    if (response.rez == 0) {
+      console.log(`Ошибка: ${response.error.id}`);
+    }
+    if (response.rez == 1) {
+      const menuList = response.content;
+      console.log(side)
+      this.render.renderSidebar(menuList, side);
     }
   }
 
+  shiftMenu = (side) => {
+    const newMenu = this.sidebar.querySelector(`[data-side="${side}"]`);
+    console.log(newMenu);
+    newMenu.classList.add('nav--move');
 
+    const nowMenu = this.sidebar.querySelector('[data-side="now"]');
+    nowMenu.classList.add(`nav--hide`);
+    setTimeout(() => {
+      newMenu.classList.remove(`nav--${side}`);
+    }, 100)
+    setTimeout(() => {
+      nowMenu.remove();
+      newMenu.classList.remove('nav--move');
+      newMenu.dataset.side = 'now';
+    }, 600);
+
+  }
+
+  listner = () => {
+    this.sidebar.addEventListener('click', (e) => {
+      const target = e.target;
+      if (target.closest('[data-back]')) {
+        this.createBackMenu(target);
+      }
+    })
+
+    this.sidebar.addEventListener('click', (e) => {
+      const target = e.target;
+      if (target.closest('[data-next]')) {
+        this.createNextMenu(target);
+      }
+    })
+  }
 }
 
 class SearchModal extends Modal {

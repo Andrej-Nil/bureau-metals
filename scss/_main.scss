@@ -95,10 +95,12 @@ body {
 }
 
 .sidebar {
+  overflow: hidden;
   display: none;
   max-width: 338px;
   width: 100%;
   margin-right: 30px;
+  background: $milk;
   @media (min-width: 1280px) {
     display: block;
   }

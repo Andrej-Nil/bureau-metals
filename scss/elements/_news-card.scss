@@ -1,6 +1,7 @@
 .news-card {
-  display: inline-block;
+  display: inline-flex;
   width: 100%;
+  flex-direction: column;
   margin: 0 0 30px 0;
   transition: 0.2s ease-in-out;
   &:hover {
@@ -40,6 +41,9 @@
 }
 
 .news-card__info {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
   padding: 0 20px 20px;
 }
 
@@ -54,7 +58,6 @@
   font-size: 16px;
   line-height: 150%;
   color: $grey;
-  margin-bottom: 9px;
 }
 
 .news-card__desc {
@@ -62,7 +65,7 @@
   font-size: 14px;
   line-height: 150%;
   color: $d-grey;
-  margin-bottom: 10px;
+  flex-grow: 1;
 }
 
 .news-card__link {
