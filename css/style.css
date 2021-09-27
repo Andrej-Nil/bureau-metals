@@ -1955,6 +1955,10 @@ select:-webkit-autofill:focus {
   font-weight: 500;
 }
 
+.product-card__property--link {
+  color: #bc1622;
+}
+
 .product-card__bg {
   position: absolute;
   top: 0;
