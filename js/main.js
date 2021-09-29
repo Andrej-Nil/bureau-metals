@@ -233,11 +233,32 @@ class Server {
     return await this.getResponse(this.POST, formData, this.searchApi);
   }
 
+
   postForm = async ($form) => {
     const api = $form.action;
-    const data = new FormData(this.$form);
-    data.append('_token', this._token);
+    const data = this.getFormData($form)
     return await this.getResponse(this.POST, data, api);
+  }
+
+
+  getFormData = ($form) => {
+    let data = new FormData($form);
+    data.append('_token', this._token);
+    if ($form.id == 'fastOrdenForm') {
+      const productInfo = this.getProductInfo($form);
+      data.append('id', productInfo.id);
+      data.append('count', productInfo.count);
+    }
+
+    return data;
+  }
+
+  getProductInfo = ($form) => {
+    const $modal = $form.closest('[data-modal]');
+    return {
+      id: $modal.querySelector('[data-modal-card]').dataset.id,
+      count: $modal.querySelector('[data-modal-input]').value,
+    }
   }
 
   getResponse = async (method, data, api) => {
