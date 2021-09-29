@@ -946,7 +946,7 @@ class Render {
   }
 
   getModalCardHtml = (card) => {
-    const unit = card.units ? `(${card.units})` : '';
+    const units = card.units ? `(${card.units})` : '';
     return (/*html*/`
     <div class="modal-card" data-modal-card data-id=${card.id}>
       <h3 class="modal-card__title" >
@@ -954,7 +954,7 @@ class Render {
       </h3>
       <div class="modal-card__info">
         <div class="modal-card__price">
-          <p class="modal-card__price-name">Цена за единицу ${unit}:</p>
+          <p class="modal-card__price-name">Цена за единицу ${units}:</p>
           <p class="modal-card__price-grup">
           <span class="modal-card__price-num">${card.price}</span>
           <span class="modal-card__price-mark"> ₽</span>
@@ -1054,57 +1054,63 @@ class Render {
     console.log(item);
     const favoriteCls = item.isFavorite ? 'favorite__icon--is-active' : ''
     const favoriteText = item.isFavorite ? 'удалить из Избранное' : 'добавить в Избранное';
-    return (/*html*/`
-      <div class="basket-card" data-product-card data-id="${item.id}" data-in-basket="1">
-        <i class="basket-card__remove" data-remove-card></i>
-        <div class="basket-card__top">
-          <h3 class="basket-card__title">
-            <a href="product-page.html" class="basket-card__link link">
-            ${item.title}
-            </a>
-          </h3>
 
-          <div class="basket__favorite favorite" data-add-favorite>
-            <i class="product-card__favorite-icon favorite__icon ${favoriteCls}" data-icon-favorite></i>
-            <span class="favorite__add " data-add-favorite-text>${favoriteText}</span>
-          </div>
+    return (/*html */`
+    <div class="basket-card" data-product-card="1" data-id="${item.id}" data-in-basket="1">
+    <i class="basket-card__remove" data-remove-card=""></i>
+    <div class="basket-card__top">
+      <h3 class="basket-card__title">
+        <a href="product-page.html" class="basket-card__link link">
+        ${item.title}
+        </a>
+      </h3>
 
-        </div>
-
-        <div class="basket-card__bottom">
-          <div class="basket-card__price price">
-            <span class="basket-card__price-old price__old">${item.price_old}</span>
-            <span class="price__new">
-              <span class="basket__price-num price__num">${item.price}</span>
-              <span class="basket__price-mark price__mark">₽</span><span
-                class="basket__price-unit price__unit">/кг</span>
-            </span>
-          </div>
-
-          <div class="basket-card__counter counter" data-counter>
-            <input type="text" class="basket-card__input input counter__input" value="${item.count}" data-counter-input />
-            <div class=" counter__controls">
-              <span class="basket-card__counter-btn counter__btn" data-counter-btn="inc">
-                <i class="basket-card__counter-icon 
-                      counter__icon counter__inc
-                    "></i>
-              </span>
-              <span class="basket-card__counter-btn counter__btn" data-counter-btn="dec">
-                <i class="basket-card__counter-icon 
-                      counter__icon counter__dec
-                    "></i>
-              </span>
-            </div>
-          </div>
-
-          <div class="basket-card__price">
-            <span class="basket-card__price-num" data-total-price>${item.total_price}</span><span
-              class="basket-card__price-mark">₽</span>
-          </div>
-        </div>
-        <div class="basket-rez" data-basket-rez></div>
+      <div class="basket__favorite favorite" data-add-favorite>
+        <i class="product-card__favorite-icon favorite__icon ${favoriteCls}" data-icon-favorite></i>
+        <span class="favorite__add" data-add-favorite-text>${favoriteText}</span>
       </div>
+
+    </div>
+
+    <div class="basket-card__bottom">
+      <div class="basket-card__left">
+        <div class="basket-card__price price">
+          <span class="basket-card__price-old price__old">${item.price_old}</span>
+          <span class="price__new">
+            <span class="basket__price-num price__num">${item.price}</span>
+            <span class="basket__price-mark price__mark">₽</span><span class="basket__price-unit price__unit">/${item.units}</span>
+          </span>
+        </div>
+      </div>
+
+
+      <div class="basket-card__counter basket-card__center counter " data-counter="">
+        <input type="text" class="basket-card__input input counter__input" value="${item.count}" data-counter-input="">
+        <div class=" counter__controls">
+          <span class="basket-card__counter-btn counter__btn" data-counter-btn="inc">
+            <i class="basket-card__counter-icon 
+                  counter__icon counter__inc
+                "></i>
+          </span>
+          <span class="basket-card__counter-btn counter__btn" data-counter-btn="dec">
+            <i class="basket-card__counter-icon 
+                  counter__icon counter__dec
+                "></i>
+          </span>
+        </div>
+      </div>
+
+      <div class="basket-card__right">
+        <div class="basket-card__price ">
+          <span class="basket-card__price-num" data-total-price="">${item.total_price}</span><span class="basket-card__price-mark">₽</span>
+        </div>
+      </div>
+    </div>
+    <div class="basket-rez" data-basket-rez=""></div>
+  </div>
     `)
+
+
   }
 
   getOptionLiHtml = (item) => {
@@ -2099,6 +2105,8 @@ class FastOrderModal extends Modal {
   }
   openFastOrder = async ($btn) => {
     this.$btn = $btn
+    this.$product = $btn.closest('[data-product-card]');
+    this.count = this.$product.querySelector('[data-counter-input]').value;
     this.open();
     this.render.clearParent();
     this.render.renderSpiner('Идет загрузка...');
@@ -2117,7 +2125,7 @@ class FastOrderModal extends Modal {
   }
 
   createModalCard = async () => {
-    const response = await this.getProduct();
+    const response = await this.getProduct(this.count);
     if (!response.rez) {
       this.render.renderErrorMsg(response.error.desc);
       console.log(`Ошибка: ${response.error.id}`);

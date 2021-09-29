@@ -1,6 +1,7 @@
 .pagination {
   display: flex;
-  //justify-content: space-between;
+
+  justify-content: center;
   //width: 400px;
   width: 100%;
   margin: 0 auto;
@@ -32,17 +33,12 @@
     border: 1px solid $base;
     color: $base;
   }
+}
 
-  &:last-child,
-  &:first-child {
-    display: none;
-  }
-
+.pagination__item--arrow {
+  display: none;
   @media (min-width: 400px) {
-    &:last-child,
-    &:first-child {
-      display: block;
-    }
+    display: block;
   }
 }
 

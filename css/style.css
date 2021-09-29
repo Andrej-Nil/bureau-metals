@@ -281,6 +281,35 @@ body {
   }
 }
 
+.catalog-tile::before {
+  content: "";
+  width: 100%;
+  height: 0;
+  order: 1;
+}
+
+.catalog-tile::after {
+  content: "";
+  width: 100%;
+  height: 0;
+}
+
+@media (min-width: 900px) {
+  .catalog-tile::before {
+    content: "";
+    max-width: 100%;
+    width: 32%;
+    height: 0;
+    order: 1;
+  }
+  .catalog-tile::after {
+    content: "";
+    max-width: 100%;
+    width: 32%;
+    height: 0;
+  }
+}
+
 .link:hover {
   color: #bc1622;
   text-decoration: underline;
@@ -2546,12 +2575,12 @@ select:-webkit-autofill:focus {
   }
 }
 
-.product-line__right {
+.product-line__left {
   margin: 0 0 20px 0;
 }
 
 @media (min-width: 768px) {
-  .product-line__right {
+  .product-line__left {
     margin: 0;
     width: 305px;
   }
@@ -2575,10 +2604,23 @@ select:-webkit-autofill:focus {
   }
 }
 
+.product-line__right {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
 @media (min-width: 400px) {
-  .product-line__left {
+  .product-line__right {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
+  }
+}
+
+@media (min-width: 768px) {
+  .product-line__right {
+    margin: 0 20px 0 auto;
   }
 }
 
@@ -2606,26 +2648,21 @@ select:-webkit-autofill:focus {
 }
 
 .product-line__price {
-  margin: 0 0 20px auto;
-  flex-direction: row;
+  width: auto;
 }
 
 @media (min-width: 400px) {
   .product-line__price {
     min-width: 108px;
     flex-direction: column;
-    margin: 0 auto 0;
   }
 }
 
 @media (min-width: 768px) {
   .product-line__price {
+    order: 0;
     margin: 0 20px 0 auto;
   }
-}
-
-.product-line__counter {
-  margin-right: 20px;
 }
 
 .product-line__btn {
@@ -3084,6 +3121,7 @@ select:-webkit-autofill:focus {
 
 .pagination {
   display: flex;
+  justify-content: center;
   width: 100%;
   margin: 0 auto;
   margin-bottom: 100px;
@@ -3121,12 +3159,12 @@ select:-webkit-autofill:focus {
   color: #bc1622;
 }
 
-.pagination__item:last-child, .pagination__item:first-child {
+.pagination__item--arrow {
   display: none;
 }
 
 @media (min-width: 400px) {
-  .pagination__item:last-child, .pagination__item:first-child {
+  .pagination__item--arrow {
     display: block;
   }
 }
@@ -4439,16 +4477,9 @@ select:-webkit-autofill:focus {
   overflow: hidden;
 }
 
-@media (min-width: 1130px) {
-  .main-header {
-    overflow: visible;
-  }
-}
-
 @media (min-width: 1280px) {
   .main-header {
     padding: 40px 0 0 0;
-    overflow: visible;
     padding: 0 0 30px 0;
   }
 }
@@ -4859,6 +4890,7 @@ select:-webkit-autofill:focus {
 }
 
 .header-nav__m-catalog {
+  display: inline-block;
   cursor: pointer;
 }
 
