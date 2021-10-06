@@ -1,6 +1,17 @@
 .nav-wrap {
+  position: relative;
+  overflow: hidden;
   display: flex;
   min-height: 100px;
+}
+
+.sticky {
+  position: fixed;
+  z-index: 101;
+}
+.stop {
+  position: relative;
+  z-index: 101;
 }
 
 .nav {
@@ -9,6 +20,7 @@
   width: 100%;
   right: 0%;
   opacity: 1;
+  overflow: hidden;
   transition: 0.5s ease-in-out;
   background: $milk;
   z-index: 10;
@@ -30,6 +42,7 @@
 .nav--right {
   right: -102%;
   max-width: 338px;
+  opacity: 0;
   background: $milk;
   z-index: 100;
   box-shadow: 3px -3px 3px rgba(0, 0, 0, 0.5);

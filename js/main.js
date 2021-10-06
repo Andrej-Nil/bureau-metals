@@ -3200,7 +3200,7 @@ if (doc.querySelector('#sidebar')) {
 function sidebarMovement() {
   window.addEventListener('scroll', Ascroll, false);
   document.body.addEventListener('scroll', Ascroll, false);
-  var a = document.querySelector('#navWrap'),
+  var a = document.querySelector('#sidebarInner'),
     b = null,
     K = null,
     Z = 0,
@@ -3209,7 +3209,7 @@ function sidebarMovement() {
 
   function Ascroll() {
     var Ra = a.getBoundingClientRect(),
-      R1bottom = document.querySelector('#sidebar').getBoundingClientRect().bottom;
+      R1bottom = document.querySelector('.content').getBoundingClientRect().bottom;
     if (Ra.bottom < R1bottom) {
       if (b == null) {
         var Sa = getComputedStyle(a, ''), s = '';
@@ -3220,7 +3220,6 @@ function sidebarMovement() {
         }
         b = document.createElement('div');
         b.className = "stop";
-        b.style.cssText = s + ' box-sizing: border-box; width: ' + a.offsetWidth + 'px;';
         a.insertBefore(b, a.firstChild);
         var l = a.childNodes.length;
         for (var i = 1; i < l; i++) {
