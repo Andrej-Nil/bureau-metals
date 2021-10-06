@@ -2,7 +2,7 @@
   position: fixed;
   padding: 23px 0;
   right: 0;
-  top: 20%;
+  top: 40%;
   width: 50px;
   height: 120px;
   background: $milk;
@@ -40,7 +40,7 @@
   height: 100%;
   cursor: pointer;
   &::before {
-    content: '';
+    content: "";
     display: block;
     width: 23px;
     height: 23px;
@@ -59,13 +59,13 @@
 
 .icons-nav__item--basket {
   &::before {
-    background-image: url('../img/icon/basket-icon.svg');
+    background-image: url("../img/icon/basket-icon.svg");
   }
 }
 
 .icons-nav__item--favorite {
   &::before {
-    background-image: url('../img/icon/favorite-icon.svg');
+    background-image: url("../img/icon/favorite-icon.svg");
   }
 }
 

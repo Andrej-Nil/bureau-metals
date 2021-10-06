@@ -80,10 +80,10 @@
   position: absolute;
   width: 100%;
   left: 0;
-  bottom: 0;
+  top: 49px;
   height: 0;
   overflow: hidden;
-  transform: translate(0, 100%);
+  //transform: translate(0, 100%);
   border: 1px solid $base;
   background: $white;
   transition: 0.2s ease-in-out;

@@ -3051,7 +3051,7 @@ select:-webkit-autofill:focus {
   position: fixed;
   padding: 23px 0;
   right: 0;
-  top: 20%;
+  top: 40%;
   width: 50px;
   height: 120px;
   background: #f8f8f8;
@@ -3097,7 +3097,7 @@ select:-webkit-autofill:focus {
 }
 
 .icons-nav__item::before {
-  content: '';
+  content: "";
   display: block;
   width: 23px;
   height: 23px;
@@ -3792,16 +3792,6 @@ select:-webkit-autofill:focus {
 .nav-wrap {
   display: flex;
   min-height: 100px;
-}
-
-.sticky {
-  position: fixed;
-  z-index: 101;
-}
-
-.stop {
-  position: relative;
-  z-index: 101;
 }
 
 .nav {
@@ -6146,10 +6136,9 @@ select:-webkit-autofill:focus {
   position: absolute;
   width: 100%;
   left: 0;
-  bottom: 0;
+  top: 49px;
   height: 0;
   overflow: hidden;
-  transform: translate(0, 100%);
   border: 1px solid #bc1622;
   background: #fff;
   transition: 0.2s ease-in-out;

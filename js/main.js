@@ -3193,7 +3193,10 @@ function docClickListener(e) {
 }
 
 //doc.addEventListener('scroll', sidebarMovement)
-sidebarMovement();
+if (doc.querySelector('#sidebar')) {
+  sidebarMovement();
+}
+
 function sidebarMovement() {
   window.addEventListener('scroll', Ascroll, false);
   document.body.addEventListener('scroll', Ascroll, false);

@@ -1,16 +1,6 @@
 .nav-wrap {
   display: flex;
-  //overflow: hidden;
   min-height: 100px;
-}
-
-.sticky {
-  position: fixed;
-  z-index: 101;
-}
-.stop {
-  position: relative;
-  z-index: 101;
 }
 
 .nav {
