@@ -645,8 +645,8 @@ class Render {
     });
 
     _defineProperty(this, "renderSearchContent", response => {
-      if (response.categoty !== undefined) {
-        this.renderSearchCategory(response.categoty);
+      if (response.category !== undefined) {
+        this.renderSearchCategory(response.category);
       }
 
       if (response.products !== undefined) {
@@ -1712,7 +1712,7 @@ class SearchModal extends Modal {
         return this.server.getSearchContent(data);
       }
 
-      if (this.area === 'categoty') {
+      if (this.area === 'category') {
         data.products = 0;
         data.category = 8;
         data.news = 0;

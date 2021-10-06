@@ -1,14 +1,22 @@
 .nav-wrap {
-  position: relative;
   display: flex;
-  align-items: flex-start;
+  //overflow: hidden;
+  min-height: 100px;
+}
+
+.sticky {
+  position: fixed;
+  z-index: 101;
+}
+.stop {
+  position: relative;
+  z-index: 101;
 }
 
 .nav {
   display: flex;
   min-width: 338px;
   width: 100%;
-  //min-height: 400px;
   right: 0%;
   opacity: 1;
   transition: 0.5s ease-in-out;

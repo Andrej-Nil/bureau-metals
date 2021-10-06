@@ -136,7 +136,7 @@ class Server {
     //this.fastOrderApi = '/api/prod/show';
     //this.addFavoriteApi = '/api/favorite/toggle';
     //this.addBasketApi = '/api/cart/toggle';
-    //this.searchApi = '../json/search.json';
+    //this.searchApi = '/api/search/get';
     //this.removeBaskethApi = '/api/cart/toggle/remove';
     //this.menuApi = '/api/category/get';
     //this.sidebarApi = '/api/sidebar/get';
@@ -208,7 +208,6 @@ class Server {
 
 
   addBsasket = async (id, count) => {
-    console.log(count)
     const data = {
       _token: this._token,
       id: id,
@@ -235,6 +234,7 @@ class Server {
 
 
   postForm = async ($form) => {
+    console.log($form)
     const api = $form.action;
     const data = this.getFormData($form)
     return await this.getResponse(this.POST, data, api);
@@ -249,7 +249,10 @@ class Server {
       data.append('id', productInfo.id);
       data.append('count', productInfo.count);
     }
-
+    console.log(data)
+    for (let [name, value] of data) {
+      console.log(`${name} = ${value}`);
+    }
     return data;
   }
 
@@ -607,8 +610,6 @@ class Filters {
     })
   }
 }
-
-
 
 class Render {
   constructor($parent = null) {
@@ -969,7 +970,7 @@ class Render {
   getModalCardHtml = (card) => {
     const units = card.units ? `(${card.units})` : '';
     return (/*html*/`
-    <div class="modal-card" data-modal-card data-id=${card.id}>
+    <div class="modal-card" data-modal-card data-product-card data-id=${card.id}>
       <h3 class="modal-card__title" >
       ${card.title}
       </h3>
@@ -1072,7 +1073,6 @@ class Render {
   }
 
   getBasketCardHtml = (item) => {
-    console.log(item);
     const favoriteCls = item.isFavorite ? 'favorite__icon--is-active' : ''
     const favoriteText = item.isFavorite ? 'удалить из Избранное' : 'добавить в Избранное';
 
@@ -1252,7 +1252,7 @@ class Modal {
     if (!this.$resultBlock) {
       return;
     }
-    this.$resultBlock.classList.remove('modal__result--is-show');
+    this.$resultBlock.classList.remove('result--is-show');
   }
 }
 
@@ -1278,12 +1278,9 @@ class Basket {
   }
   removeBasketCard = async () => {
     const id = this.$basketCard.dataset.id;
-
-
     this.$basketCardRez = this.$basketCard.querySelector('[data-basket-rez]');
     this.showSpinner();
     const response = await this.server.removeBasketCard(id);
-
     if (!response.rez) {
       this.showErrorMsg(response.error);
     }
@@ -1293,14 +1290,39 @@ class Basket {
       this.$basketCard.remove();
 
       this.setTotalBasket(response.card);
-
-      const $basketCardList = this.$basketList.querySelectorAll('[data-product-card]');
-      if (!$basketCardList.length) {
-        this.$basketList.innerHTML = '<p data-empty>Корзина пустая</p>';
-      }
+      this.showMessageForEmptyBasket();
+      this.removeProductOnPageFromBasket(response);
     }
   }
 
+  showMessageForEmptyBasket = () => {
+    const $basketCardList = this.$basketList.querySelectorAll('[data-product-card]');
+    if (!$basketCardList.length) {
+      this.$basketList.innerHTML = '<p data-empty>Корзина пустая</p>';
+    }
+  }
+
+  removeProductOnPageFromBasket = (response) => {
+    const $productList = doc.querySelectorAll(`[data-id="${response.content[0].id}"]`);
+    $productList.forEach(($card) => {
+      if ($card.dataset.id = response.content[0].id) {
+        this.toggleProduct($card);
+      }
+    })
+  }
+
+  toggleProduct = ($card) => {
+    const $input = $card.querySelector('[data-counter-input]');
+    //const $price = $price.
+    const $btn = $card.querySelector('[data-add-basket]');
+
+    $btn.classList.remove('red-btn-bd');
+    $btn.classList.add('red-btn');
+    $btn.innerHTML = 'Заказать';
+    $input.value = 1;
+    $card.dataset.inBasket = '0';
+
+  }
   addInBasket = (infoProduct) => {
     if (this.$basketList) {
       const id = infoProduct.content[0].id;
@@ -1310,6 +1332,8 @@ class Basket {
       }
     }
   }
+
+
 
   addCardInBasket = (infoProduct) => {
     const $basketCardList = this.$basketList.querySelectorAll('[data-product-card]');
@@ -1332,15 +1356,12 @@ class Basket {
   }
 
   setTotalBasket = (totalBasketObj) => {
-
     if (this.$basketPrice) {
       this.$basketPrice.innerHTML = totalBasketObj.total_price.toLocaleString() + '  ₽';
     }
     if (this.$basketCount) {
-      console.log(this.$basketCount.innerHTML)
       this.$basketCount.innerHTML = totalBasketObj.count;
     }
-    console.log(totalBasketObj.count)
     if (this.$basketTotalCount) {
       this.$basketTotalCount.innerHTML = totalBasketObj.count;
     }
@@ -1646,11 +1667,12 @@ class Sidebar {
     if (!this.sidebar) {
       return;
     }
-    this.sidebarList = this.sidebar.querySelector('#navWrap');
+    this.sidebarList = this.sidebar.querySelector('[data-nav-wrap]');
     this.render = new Render(this.sidebarList);
     this.server = new Server();
     this.createNav();
     this.listner();
+
     this.sideBack = 'left';
     this.sideNext = 'right';
   }
@@ -2179,7 +2201,6 @@ class FastOrderModal extends Modal {
       this.$input.value = 1;
       return;
     }
-    console.log(count);
     const response = await this.getProduct(count);
 
     this.sentCountAndTotalPrice(response.content[0]);
@@ -2213,10 +2234,11 @@ class FastOrderModal extends Modal {
         this.counter(e.target);
       }
     })
+
     this.$modal.addEventListener('input', (e) => {
       if (e.target.closest('[data-modal-input]')) {
 
-        this.changingValue();
+        this.changingValue(e.target);
       }
     })
   }
@@ -2409,6 +2431,7 @@ class AddBasketModal extends InfoModal {
     if (!this.$productCard && !this.$modal) {
       return;
     }
+    this.$basketList = doc.querySelector('#basketList');
     this.$btn = null;
     this.$basketCount = null;
     this.$input = null;
@@ -2420,35 +2443,66 @@ class AddBasketModal extends InfoModal {
     this.$btn = this.$productCard.querySelector('[data-add-basket]');
     this.$basketCount = doc.querySelector('#basketCount');
     this.$input = this.$productCard.querySelector('[data-counter-input]');
-    this.renderInfo()
+    this.toggleBasket()
   }
 
-  renderInfo = async () => {
+  toggleBasket = async () => {
     this.showSpinner();
-    this.response = await this.server.addBsasket(this.productId, this.$input.value);
-    if (!this.response.rez) {
-      this.showError(this.response.error);
-    }
-    if (this.response.rez) {
-      this.render.delete('[data-spinner]');
-      basket.addInBasket(this.response);
+    if (this.$productCard.dataset.inBasket == '0') {
+      this.response = await this.server.addBsasket(this.productId, this.$input.value);
+      if (!this.response.rez) {
+        this.showError(this.response.error);
+      }
       if (this.response.toggle) {
+        this.render.delete('[data-spinner]');
+        basket.addInBasket(this.response);
         this.add();
+        return;
       }
-      if (!this.response.toggle) {
+    }
+    if (this.$productCard.dataset.inBasket == '1') {
+      this.response = await this.server.addBsasket(this.productId, 0);
+      if (!this.response.rez) {
+        this.showError(this.response.error);
+      }
+      if (this.response.toggle) {
+
+        this.render.delete('[data-spinner]');
+        basket.addInBasket(this.response);
         this.remove();
+        return;
       }
+
     }
   }
+
+  //renderInfo = async () => {
+  //  this.showSpinner();
+  //  this.response = await this.server.addBsasket(this.productId, this.$input.value);
+  //  if (!this.response.rez) {
+  //    this.showError(this.response.error);
+  //  }
+  //  if (this.response.rez) {
+  //    this.render.delete('[data-spinner]');
+  //    basket.addInBasket(this.response);
+  //    if (this.response.toggle) {
+  //      this.add();
+  //    }
+  //    if (!this.response.toggle) {
+  //      this.remove();
+  //    }
+  //  }
+  //}
 
   add = () => {
     this.render.renderAddInfo('basket', this.response.card);
     if (this.$basketCount) {
       this.$basketCount.innerHTML = this.response.card.count;
     }
+
     this.$btn.classList.remove('red-btn');
     this.$btn.classList.add('red-btn-bd');
-    this.$btn.innerHTML = 'В карзине';
+    this.$btn.innerHTML = 'Удалить';
     this.$input.value = this.response.content[0].count;
     this.$productCard.dataset.inBasket = '1';
   }
@@ -2456,12 +2510,25 @@ class AddBasketModal extends InfoModal {
   remove = () => {
     this.render.renderDeleteInfo('basket', this.response.card);
     if (this.$basketCount) {
-      this.$basketCount = this.response.card.count;
+      this.$basketCount.innerHTML = this.response.card.count;
     }
     this.$btn.classList.add('red-btn');
     this.$btn.classList.remove('red-btn-bd');
-    this.$btn.innerHTML = 'Заказать';
+    this.$btn.innerHTML = 'В корзину';
+    this.$input.value = this.response.content[0].count;
     this.$productCard.dataset.inBasket = '0';
+    this.removeProductFromBasket()
+  }
+
+  removeProductFromBasket = () => {
+    const id = this.response.content[0].id;
+    if (!this.$basketList) {
+      return;
+    }
+    const $basketCard = this.$basketList.querySelector(`[data-id="${id}"]`);
+    if ($basketCard) {
+      $basketCard.remove();
+    }
   }
 
 }
@@ -2699,9 +2766,11 @@ class FeedBackForm extends Form {
   }
 
   initFeedBackForm = () => {
+
     if (!this.$form) {
       return false;
     }
+
     this.$checkbox = this.$form.querySelector('[data-checkbox]');
     this.$submitBtn = this.$form.querySelector('[data-submit]');
     this.$inputPhone = this.$form.querySelector('[name="phone"]');
@@ -2711,10 +2780,14 @@ class FeedBackForm extends Form {
   }
 
   send = () => {
+
     this.$submitBtn.addEventListener('click', () => {
+
       const result = this.formCheck(this.$inputPhone, this.$inputMail, this.$checkbox);
+      console.log(result);
       this.resultBlockHide();
       if (result) {
+
         this.sendForm();
       }
     });
@@ -3042,11 +3115,7 @@ function addFavorite(target) {
 
 function addBasket(target) {
   const $productCard = target.closest('[data-product-card]');
-  if ($productCard.dataset.inBasket === "1") {
-    return;
-  }
-  if ($productCard)
-    addBasketModal.openModal($productCard);
+  addBasketModal.openModal($productCard);
   if ($addFavoriteModal.dataset.add === 'open') {
     addFavoriteModal.close();
   }
@@ -3121,7 +3190,100 @@ function docClickListener(e) {
     }
   }
 
+}
 
+//doc.addEventListener('scroll', sidebarMovement)
+sidebarMovement();
+function sidebarMovement() {
+  window.addEventListener('scroll', Ascroll, false);
+  document.body.addEventListener('scroll', Ascroll, false);
+  var a = document.querySelector('#navWrap'),
+    b = null,
+    K = null,
+    Z = 0,
+    P = 0,
+    N = 5;
+
+  function Ascroll() {
+    var Ra = a.getBoundingClientRect(),
+      R1bottom = document.querySelector('#sidebar').getBoundingClientRect().bottom;
+    if (Ra.bottom < R1bottom) {
+      if (b == null) {
+        var Sa = getComputedStyle(a, ''), s = '';
+        for (var i = 0; i < Sa.length; i++) {
+          if (Sa[i].indexOf('overflow') == 0 || Sa[i].indexOf('padding') == 0 || Sa[i].indexOf('border') == 0 || Sa[i].indexOf('outline') == 0 || Sa[i].indexOf('box-shadow') == 0 || Sa[i].indexOf('background') == 0) {
+            s += Sa[i] + ': ' + Sa.getPropertyValue(Sa[i]) + '; '
+          }
+        }
+        b = document.createElement('div');
+        b.className = "stop";
+        b.style.cssText = s + ' box-sizing: border-box; width: ' + a.offsetWidth + 'px;';
+        a.insertBefore(b, a.firstChild);
+        var l = a.childNodes.length;
+        for (var i = 1; i < l; i++) {
+          b.appendChild(a.childNodes[1]);
+        }
+        a.style.height = b.getBoundingClientRect().height + 'px';
+        a.style.padding = '0';
+        a.style.border = '0';
+      }
+      var Rb = b.getBoundingClientRect(),
+        Rh = Ra.top + Rb.height,
+        W = document.documentElement.clientHeight,
+        R1 = Math.round(Rh - R1bottom),
+        R2 = Math.round(Rh - W);
+      if (Rb.height > W) {
+        if (Ra.top < K) {  // скролл вниз
+          if (R2 + N > R1) {  // не дойти до низа
+            if (Rb.bottom - W + N <= 0) {  // подцепиться
+              b.className = 'sticky';
+              b.style.top = W - Rb.height - N + 'px';
+              Z = N + Ra.top + Rb.height - W;
+            } else {
+              b.className = 'stop';
+              b.style.top = - Z + 'px';
+            }
+          } else {
+            b.className = 'stop';
+            b.style.top = - R1 + 'px';
+            Z = R1;
+          }
+        } else {  // скролл вверх
+          if (Ra.top - P < 0) {  // не дойти до верха
+            if (Rb.top - P >= 0) {  // подцепиться
+              b.className = 'sticky';
+              b.style.top = P + 'px';
+              Z = Ra.top - P;
+            } else {
+              b.className = 'stop';
+              b.style.top = - Z + 'px';
+            }
+          } else {
+            b.className = '';
+            b.style.top = '';
+            Z = 0;
+          }
+        }
+        K = Ra.top;
+      } else {
+        if ((Ra.top - P) <= 0) {
+          if ((Ra.top - P) <= R1) {
+            b.className = 'stop';
+            b.style.top = - R1 + 'px';
+          } else {
+            b.className = 'sticky';
+            b.style.top = P + 'px';
+          }
+        } else {
+          b.className = '';
+          b.style.top = '';
+        }
+      }
+      window.addEventListener('resize', function () {
+        a.children[0].style.width = getComputedStyle(a, '').width
+      }, false);
+    }
+  }
 }
 
 function closeAllSelect() {
@@ -3173,7 +3335,7 @@ function docInputListener(e) {
 function docChangListener(e) {
   const target = e.target;
   if (target.closest('[data-counter-input]')) {
-    changingValue(target)
+    changingValue(target);
   }
 }
 
@@ -3197,7 +3359,7 @@ async function inc($btn) {
 
   if (cardInfo.isInBasket === '0') {
     cardInfo.$input.value = count;
-    setTotalPriceInCard($card, count)
+    setTotalPriceInCard($card, count);
   }
 
   if (cardInfo.isInBasket === '1') {
@@ -3213,8 +3375,6 @@ async function inc($btn) {
     }
   }
 }
-
-
 
 async function dec($btn) {
   const $card = $btn.closest('[data-product-card]');
@@ -3247,6 +3407,9 @@ async function dec($btn) {
   }
 }
 
+
+
+
 function setTotalPriceInCard($card, count) {
   const $cardTotalPrice = $card.querySelector('[data-total-price]');
   if (!$cardTotalPrice) {
@@ -3260,17 +3423,20 @@ function setTotalPriceInCard($card, count) {
 
 async function changingValue(target) {
   const $card = target.closest('[data-product-card]');
+  const $price = $card.querySelector('[data-price]');
   const cardInfo = getCardInfo($card);
   const count = checkCount(cardInfo.$input.value);
 
   const $cardList = getCardList(cardInfo.id);
   if (cardInfo.isInBasket === '0') {
     cardInfo.$input.value = count;
+    $price.innerHTML = ($price.dataset.price * count).toLocaleString();
   }
 
   if (cardInfo.isInBasket === '1') {
     const response = await server.addBsasket(cardInfo.id, count);
     if (response.rez) {
+      $price.innerHTML = response.content[0].total_price;
       setTotalBasketCount(response.card.count);
       setProductTotalPrice($cardList, response.content[0].total_price);
       basket.setTotalBasket(response.card);
@@ -3330,4 +3496,3 @@ function checkCount(count) {
   }
   return value;
 }
-
