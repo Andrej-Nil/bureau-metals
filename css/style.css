@@ -916,7 +916,7 @@ select:-webkit-autofill:focus {
   left: -20px;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.5s, top 0.5s, visibility 0s ease-in-out 0.5s;
+  transition: opacity 0.25s, top 0.25s, visibility 0s ease 0.25s;
 }
 
 .popup-nav__list {
@@ -3802,6 +3802,7 @@ select:-webkit-autofill:focus {
 
 .nav-wrap {
   position: relative;
+  max-width: 338px;
   overflow: hidden;
   display: flex;
   min-height: 100px;
@@ -6256,6 +6257,44 @@ select:-webkit-autofill:focus {
   margin-bottom: 30px;
 }
 
+.mobile-submenu {
+  position: absolute;
+  top: 0;
+  right: 0%;
+  background: #fff;
+  min-height: 100%;
+  width: 0;
+  overflow: hidden;
+  transition: 0.3s ease-in-out;
+}
+
+.mobile-submenu--open {
+  right: 0%;
+  width: 100%;
+}
+
+.mobile-submenu__back {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 0 0 0 60px;
+  color: #bc1622;
+  height: 50px;
+  z-index: 1000;
+}
+
+.mobile-submenu__back::before {
+  font-family: "icomoon";
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+  line-height: 1;
+  content: "";
+  font-size: 20px;
+  position: absolute;
+  left: 20px;
+}
+
 .mobile__contact-item {
   margin-bottom: 20px;
 }
@@ -6270,6 +6309,7 @@ select:-webkit-autofill:focus {
   right: 10px;
   width: 40px;
   height: 40px;
+  z-index: 1000px;
 }
 
 .mobile-close::before {
@@ -6288,6 +6328,10 @@ select:-webkit-autofill:focus {
 
 .mobile-menu {
   margin-bottom: 30px;
+}
+
+.mobile-menu__item {
+  position: relative;
 }
 
 .mobile-menu__item:last-child {
@@ -6340,19 +6384,6 @@ select:-webkit-autofill:focus {
   height: 0;
   overflow: hidden;
   transition: 0.2s ease-in-out;
-}
-
-.mobile-dropdown__list-item {
-  margin-bottom: 4px;
-}
-
-.mobile-dropdown__list {
-  padding: 10px 2px;
-}
-
-.mobile-dropdown__link {
-  display: block;
-  padding: 8px 10px;
 }
 
 .mobile-menu__catalog-nav {

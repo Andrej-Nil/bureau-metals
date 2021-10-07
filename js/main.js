@@ -57,15 +57,15 @@ class MobileMenu {
       return;
     }
     this.listner();
-    this.catalogList = this.$menu.querySelector('[data-catalog-list]');
-    this.render = new Render(this.catalogList);
+    this.submenu = this.$menu.querySelector('#mobileSubmenu');
+    this.submenuList = this.$menu.querySelector('#mobileSubmenuList');
+    this.render = new Render(this.submenuList);
     this.server = new Server();
   }
 
   open = () => {
     this.$menu.classList.add('mobile-nav--is-open');
     $body.classList.add('no-scroll');
-    this.createCatalog()
   }
 
   close = () => {
@@ -73,14 +73,28 @@ class MobileMenu {
     $body.classList.remove('no-scroll');
   }
 
-  createCatalog = async () => {
-    if (this.catalogList.firstElementChild) {
+
+
+  openSubMenu = ($btn) => {
+    this.submenu.classList.add('mobile-submenu--open');
+    this.createSubmenu($btn);
+
+  }
+  closeSubMenu = () => {
+    this.submenu.classList.remove('mobile-submenu--open');
+    setTimeout(() => {
+      this.render.clearParent();
+    }, 200)
+  }
+
+  createSubmenu = async ($btn) => {
+    if (!this.submenuList) {
       return;
     }
+    const submenuId = $btn.dataset.listId;
 
-    const listId = this.catalogList.dataset.listId;
     this.render.renderSpiner('Идет загрузка...');
-    const response = await this.server.getMenu(listId);
+    const response = await this.server.getMenu(submenuId);
     if (response.rez == 0) {
       this.render.renderErrorMsg(response.error.desc);
       console.log(`Ошибка: ${response.error.id}`);
@@ -92,11 +106,17 @@ class MobileMenu {
     }
 
   }
-
   listner = () => {
     this.$menu.addEventListener('click', (e) => {
       if (e.target.closest('[data-close]')) {
         this.close();
+        this.closeSubMenu()
+      }
+      if (e.target.closest('[data-submenu-arrow]')) {
+        this.openSubMenu(e.target);
+      }
+      if (e.target.closest('[data-back]')) {
+        this.closeSubMenu(e.target);
       }
     });
   }
@@ -234,7 +254,6 @@ class Server {
 
 
   postForm = async ($form) => {
-    console.log($form)
     const api = $form.action;
     const data = this.getFormData($form)
     return await this.getResponse(this.POST, data, api);
@@ -248,10 +267,6 @@ class Server {
       const productInfo = this.getProductInfo($form);
       data.append('id', productInfo.id);
       data.append('count', productInfo.count);
-    }
-    console.log(data)
-    for (let [name, value] of data) {
-      console.log(`${name} = ${value}`);
     }
     return data;
   }
@@ -488,7 +503,6 @@ class Filters {
 
   deleteSelectedFilter = async ($btn) => {
     const $selectedOption = $btn.closest('[data-option]');
-    console.log($selectedOption)
     const list = this.getSelectedOptions();
     const data = {
       field_slug: $selectedOption.dataset.activeFilter,
@@ -557,7 +571,6 @@ class Filters {
 
   getInfoOption = ($checkbox) => {
     const category = $checkbox.closest('[data-filter]').dataset.id;
-    console.log()
     return {
       name: $checkbox.name,
       value: $checkbox.value,
@@ -1706,7 +1719,6 @@ class Sidebar {
   createNewMenu = async ($arrow, side) => {
     const $parent = $arrow.closest('[data-id]')
     const id = $parent.dataset.id;
-    console.log($parent)
     const response = await this.server.getSidebar(id);
 
     if (response.rez == 0) {
@@ -2106,13 +2118,13 @@ class CityModal extends Modal {
     })
   }
 
-  showAllCity = ($cities) => {
-    //let rez = true;
-    //$cities.forEach(($city) => {
-    //  res = rez && $city.classList.has('city-hide');
-    //  console.log()
-    //})
-  }
+  //showAllCity = ($cities) => {
+  //let rez = true;
+  //$cities.forEach(($city) => {
+  //  res = rez && $city.classList.has('city-hide');
+  //  console.log()
+  //})
+  //}
 
   showCity($item) {
     $item.classList.remove('city-hide');
@@ -2784,7 +2796,6 @@ class FeedBackForm extends Form {
     this.$submitBtn.addEventListener('click', () => {
 
       const result = this.formCheck(this.$inputPhone, this.$inputMail, this.$checkbox);
-      console.log(result);
       this.resultBlockHide();
       if (result) {
 
