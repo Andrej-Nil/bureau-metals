@@ -794,7 +794,7 @@ class Render {
     const infoObj = {
       title: '',
       type: '',
-      totalPrice: info.total_price.toLocaleString(),
+      totalPrice: Math.round(info.total_price).toLocaleString(),
       count: info.count
     }
     if (type === 'favorite') {
@@ -805,7 +805,7 @@ class Render {
       infoObj.title = 'Товар добавлен в Крозину';
       infoObj.where = 'Корзине';
     }
-    this.$parent.innerHTML = this.getAddModalHtml(infoObj);
+    this.$parent.innerHTML = this.getAddModalHtml(infoObj, type);
   }
 
   renderSearchContent = (response) => {
@@ -869,7 +869,7 @@ class Render {
     const infoObj = {
       title: '',
       type: '',
-      totalPrice: info.total_price.toLocaleString(),
+      totalPrice: Math.round(info.total_price).toLocaleString(),
       count: info.count.toLocaleString()
     }
     if (type === 'favorite') {
@@ -880,7 +880,7 @@ class Render {
       infoObj.title = 'Товар удален из Крозины';
       infoObj.where = 'Корзине';
     }
-    this.$parent.innerHTML = this.getAddModalHtml(infoObj);
+    this.$parent.innerHTML = this.getAddModalHtml(infoObj, type);
   }
 
   //Методы возвращающие разметку
@@ -1021,13 +1021,18 @@ class Render {
     `)
   }
 
-  getAddModalHtml = (infoObj) => {
+  getAddModalHtml = (infoObj, type) => {
+    let price = ''
+    if (type === 'basket') {
+      price = /*html*/`на
+      сумму
+      <span class="modal__total-price" data-total-price>${infoObj.totalPrice} руб</span>`
+    }
     return (/*html*/`
     <h3 class="add-modal__title">${infoObj.title} </h3>
     <p class="add-modal__desc" data-desc>В ${infoObj.where} <span class="modal__total-product" data-total-item>${infoObj.count}
-        товаров</span> на
-      сумму
-      <span class="modal__total-price" data-total-price>${infoObj.totalPrice} руб</span>
+        товаров</span>
+      ${price}
     </p>
     `)
   }
@@ -1088,7 +1093,8 @@ class Render {
   getBasketCardHtml = (item) => {
     const favoriteCls = item.isFavorite ? 'favorite__icon--is-active' : ''
     const favoriteText = item.isFavorite ? 'удалить из Избранное' : 'добавить в Избранное';
-
+    const oldPrice = item.price_old ? `<span class="basket-card__price-old price__old">${item.price_old}</span>` : ''
+    const totalPrice = Math.round(item.total_price).toLocaleString();
     return (/*html */`
     <div class="basket-card" data-product-card="1" data-id="${item.id}" data-in-basket="1">
     <i class="basket-card__remove" data-remove-card=""></i>
@@ -1098,7 +1104,7 @@ class Render {
         ${item.title}
         </a>
       </h3>
-
+      ${oldPrice}
       <div class="basket__favorite favorite" data-add-favorite>
         <i class="product-card__favorite-icon favorite__icon ${favoriteCls}" data-icon-favorite></i>
         <span class="favorite__add" data-add-favorite-text>${favoriteText}</span>
@@ -1109,7 +1115,7 @@ class Render {
     <div class="basket-card__bottom">
       <div class="basket-card__left">
         <div class="basket-card__price price">
-          <span class="basket-card__price-old price__old">${item.price_old}</span>
+          
           <span class="price__new">
             <span class="basket__price-num price__num">${item.price}</span>
             <span class="basket__price-mark price__mark">₽</span><span class="basket__price-unit price__unit">/${item.units}</span>
@@ -1136,7 +1142,7 @@ class Render {
 
       <div class="basket-card__right">
         <div class="basket-card__price ">
-          <span class="basket-card__price-num" data-total-price="">${item.total_price}</span><span class="basket-card__price-mark">₽</span>
+          <span class="basket-card__price-num" data-total-price="">${totalPrice}</span><span class="basket-card__price-mark">₽</span>
         </div>
       </div>
     </div>
@@ -1331,7 +1337,7 @@ class Basket {
 
     $btn.classList.remove('red-btn-bd');
     $btn.classList.add('red-btn');
-    $btn.innerHTML = 'Заказать';
+    $btn.innerHTML = 'В карзину';
     $input.value = 1;
     $card.dataset.inBasket = '0';
 
@@ -1370,7 +1376,7 @@ class Basket {
 
   setTotalBasket = (totalBasketObj) => {
     if (this.$basketPrice) {
-      this.$basketPrice.innerHTML = totalBasketObj.total_price.toLocaleString() + '  ₽';
+      this.$basketPrice.innerHTML = Math.round(totalBasketObj.total_price).toLocaleString() + '  ₽';
     }
     if (this.$basketCount) {
       this.$basketCount.innerHTML = totalBasketObj.count;
@@ -1743,6 +1749,7 @@ class Sidebar {
       nowMenu.remove();
       newMenu.classList.remove('nav--move');
       newMenu.dataset.side = 'now';
+      sidebarMovement();
     }, 600);
 
   }
@@ -2259,6 +2266,64 @@ class FastOrderModal extends Modal {
 class ConsultationModal extends Modal {
   constructor(modalId) {
     super(modalId);
+  }
+}
+
+class GaleriaModal extends Modal {
+  constructor(modalId) {
+    super(modalId);
+    this.init()
+  }
+
+  init = () => {
+    if (!this.$modal) {
+      return;
+    }
+    this.$modalImg = this.$modal.querySelector('#modalImg');
+    this.bigImgSrc = ''
+    this.$galeria = doc.querySelector('#galeria');
+    this.galeriaListener();
+  }
+
+  openGaleriaModal(target) {
+    const $galeriaCard = target.closest('[data-galeria-card]');
+    const $img = $galeriaCard.querySelector('[src]');
+
+    this.bigImgSrc = this.getImgSrc($img)
+
+    this.setGaleriaModalImg()
+    this.open()
+  }
+
+  setGaleriaModalImg = () => {
+    console.log(this.$modalImg, this.bigImgSrc);
+    this.$modalImg.src = this.bigImgSrc;
+
+  }
+
+  getImgSrc = ($img) => {
+
+    if (!$img) {
+      return;
+    }
+    if ($img.dataset.bigImg) {
+      return this.bigImgSrc = $img.dataset.bigImg;
+    }
+
+    if (!$img.dataset.bigImg) {
+      return this.bigImgSrc = $img.src;
+    }
+
+  }
+  galeriaListener = () => {
+    if (!this.$galeria) {
+      return;
+    }
+    this.$galeria.addEventListener('click', (e) => {
+      if (e.target.closest('[data-galeria-card]')) {
+        this.openGaleriaModal(e.target)
+      }
+    })
   }
 }
 
@@ -2830,6 +2895,9 @@ class BasketForm extends Form {
     this.$inputPhone = this.$form.querySelector('[name="phone"]');
     this.$inputMail = this.$form.querySelector('[name="email"]');
     this.$basketList = doc.querySelector('#basketList');
+    this.$basketProductsCount = doc.querySelector('#basketProductsCount');
+    this.$basketProductsTotalPrice = doc.querySelector('#basketProductsTotalPrice');
+    this.$basketCount = doc.querySelector('#basketCount');
     this.listeners();
     this.send();
   }
@@ -2840,18 +2908,9 @@ class BasketForm extends Form {
       this.resultBlockHide();
       if (result) {
         this.sendForm();
+        this.setZero();
       }
     });
-  }
-
-
-  listeners = () => {
-    this.$inputPhone.addEventListener('blur', () => {
-      this.checkInput(this.$inputPhone);
-    })
-    this.$inputMail.addEventListener('blur', () => {
-      this.checkInput(this.$inputMail);
-    })
   }
 
   sendForm = async () => {
@@ -2864,11 +2923,41 @@ class BasketForm extends Form {
     if (this.response.rez) {
       this.clearForm();
       this.resultBlockShow();
-      if (this.$basketList) {
-        this.$basketList.innerHTML = '<p data-empty>Корзина пустая</p>';
-      }
+
     }
   }
+
+  setZero = () => {
+    if (!this.$basketList) {
+      return
+    }
+    if (this.$basketCount) {
+      this.$basketCount.innerHTML = 0;
+    }
+
+    if (this.$basketList) {
+      this.$basketList.innerHTML = '<p data-empty>Корзина пустая</p>';
+    }
+
+    if (this.$basketProductsCount) {
+      this.$basketProductsCount.innerHTML = 0;
+    }
+
+    if (this.$basketProductsTotalPrice) {
+      this.$basketProductsTotalPrice.innerHTML = 0 + ' ₽';
+    }
+  }
+
+  listeners = () => {
+    this.$inputPhone.addEventListener('blur', () => {
+      this.checkInput(this.$inputPhone);
+    })
+    this.$inputMail.addEventListener('blur', () => {
+      this.checkInput(this.$inputMail);
+    })
+  }
+
+
 }
 
 
@@ -2886,6 +2975,7 @@ const cityModal = new CityModal('#cityModal');
 const callBackModal = new CityModal('#callBackModal');
 const fastOrderModal = new FastOrderModal('#fastOrdenModal');
 const consultationModal = new ConsultationModal('#consultationModal');
+const galeriaModal = new GaleriaModal('#galeriaModal');
 const addFavoriteModal = new AddFavoriteModal('#addFavoriteModal', 'favorite');
 const addBasketModal = new AddBasketModal('#addBasketModal', 'basket');
 const filters = new Filters('#filters');
@@ -3220,7 +3310,7 @@ function sidebarMovement() {
 
   function Ascroll() {
     var Ra = a.getBoundingClientRect(),
-      R1bottom = document.querySelector('.content').getBoundingClientRect().bottom;
+      R1bottom = document.querySelector('#sidebar').getBoundingClientRect().bottom;
     if (Ra.bottom < R1bottom) {
       if (b == null) {
         var Sa = getComputedStyle(a, ''), s = '';
@@ -3372,7 +3462,7 @@ async function inc($btn) {
 
   if (cardInfo.isInBasket === '0') {
     cardInfo.$input.value = count;
-    setTotalPriceInCard($card, count);
+    setTotalPriceInCard($card, cardInfo.$input.value);
   }
 
   if (cardInfo.isInBasket === '1') {
@@ -3394,10 +3484,10 @@ async function dec($btn) {
   const cardInfo = getCardInfo($card);
   const $cardList = getCardList(cardInfo.id);
   const value = checkCount(cardInfo.$input.value);
-  const count = parseInt(value) - 1;
+  let count = parseInt(value) - 1;
 
   if (cardInfo.isInBasket === '0') {
-    if (count < 0) {
+    if (count <= 0) {
       cardInfo.$input.value = 1;
     }
     if (count > 0) {
@@ -3407,6 +3497,9 @@ async function dec($btn) {
   }
 
   if (cardInfo.isInBasket === '1') {
+    if (count <= 0) {
+      count = 1
+    }
     const response = await server.addBsasket(cardInfo.id, count);
     if (!response.rez) {
       return;
@@ -3431,7 +3524,7 @@ function setTotalPriceInCard($card, count) {
   const $cardPrice = $card.querySelector('[data-price]');
   const price = $cardPrice.dataset.price;
 
-  $cardTotalPrice.innerHTML = (count * price).toLocaleString();
+  $cardTotalPrice.innerHTML = Math.round((count * price)).toLocaleString();
 }
 
 async function changingValue(target) {
@@ -3443,7 +3536,7 @@ async function changingValue(target) {
   const $cardList = getCardList(cardInfo.id);
   if (cardInfo.isInBasket === '0') {
     cardInfo.$input.value = count;
-    $price.innerHTML = ($price.dataset.price * count).toLocaleString();
+    $price.innerHTML = Math.round(($price.dataset.price * count)).toLocaleString();
   }
 
   if (cardInfo.isInBasket === '1') {

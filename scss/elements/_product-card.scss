@@ -8,17 +8,8 @@
   z-index: 0;
   transition: 0.5s ease-in-out;
 
-  @media (min-width: 630px) {
-    width: 49%;
-  }
-
-  @media (min-width: 900px) {
-    width: 32%;
-  }
-
   @media (min-width: 1280px) {
     height: 500px;
-    width: 32%;
 
     &:hover {
       z-index: 800;
@@ -32,10 +23,6 @@
       opacity: 1;
       z-index: 900;
     }
-    //&:hover .product-card__bg {
-    //height: 640px;
-    //box-shadow: 0px 10px 10px -10px rgba(0, 0, 0, 0.2);
-    //}
 
     &:hover .product-card__back {
       opacity: 1;
@@ -50,7 +37,7 @@
     flex-direction: column;
   }
 
-  @media (min-width: 1472px) {
+  @media (min-width: 1400px) {
     max-width: 338px;
   }
 }

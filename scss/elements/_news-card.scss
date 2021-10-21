@@ -1,26 +1,17 @@
+.our-news {
+  margin-bottom: 30px;
+}
+
 .news-card {
   display: inline-flex;
   width: 100%;
   flex-direction: column;
-  margin: 0 0 30px 0;
   transition: 0.2s ease-in-out;
   &:hover {
     box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.15);
   }
-
-  @media (min-width: 630px) {
-    width: 49%;
-  }
-
-  @media (min-width: 900px) {
-    width: 32%;
-  }
-
-  @media (min-width: 1280px) {
-    width: 32%;
-  }
-  @media (min-width: 1472px) {
-    width: 338px;
+  @media (min-width: 1400px) {
+    max-width: 338px;
     height: 540px;
   }
 }
