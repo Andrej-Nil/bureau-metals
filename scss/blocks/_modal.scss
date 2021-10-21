@@ -24,6 +24,8 @@
 }
 
 .galeria-modal {
+  display: flex;
+  align-items: center;
   max-width: 80%;
 }
 
@@ -54,19 +56,25 @@
 }
 
 .modal__content--galery {
-  max-height: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
 }
 
 .modal__preview {
-  display: flex;
+  position: relative;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   //width: 100%;
 }
 
 .modal__img {
-  //display: block;
+  display: block;
+  padding: 40px;
   max-width: 100%;
+  background: $white;
 }
 
 .modal__title {

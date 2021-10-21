@@ -5689,6 +5689,8 @@ select:-webkit-autofill:focus {
 }
 
 .galeria-modal {
+  display: flex;
+  align-items: center;
   max-width: 80%;
 }
 
@@ -5723,17 +5725,24 @@ select:-webkit-autofill:focus {
 }
 
 .modal__content--galery {
-  max-height: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
 }
 
 .modal__preview {
-  display: flex;
+  position: relative;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
 }
 
 .modal__img {
+  display: block;
+  padding: 40px;
   max-width: 100%;
+  background: #fff;
 }
 
 .modal__title {
