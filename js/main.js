@@ -2125,13 +2125,12 @@ class CityModal extends Modal {
     })
   }
 
-  //showAllCity = ($cities) => {
-  //let rez = true;
-  //$cities.forEach(($city) => {
-  //  res = rez && $city.classList.has('city-hide');
-  //  console.log()
-  //})
-  //}
+  showAllCity = ($cities) => {
+    let rez = true;
+    $cities.forEach(($city) => {
+      rez = rez && $city.classList.contains('city-hide');
+    })
+  }
 
   showCity($item) {
     $item.classList.remove('city-hide');

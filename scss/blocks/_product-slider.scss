@@ -1,4 +1,6 @@
 .product-slider {
+  display: flex;
+  flex-direction: column;
   position: relative;
   width: 100%;
   margin: 0 auto;
@@ -11,9 +13,12 @@
 }
 .product-slider__track {
   display: flex;
-  padding-bottom: 125px;
-  //justify-content: space-between;
+  padding-bottom: 30px;
   transition: 0.2s ease-in-out;
+
+  @media (min-width: 1280px) {
+    padding-bottom: 125px;
+  }
 }
 
 .product-slider__slide {
@@ -34,6 +39,6 @@
   }
 }
 
-.product-slider__card {
+.product-slider__slide .product-slider__card {
   width: 100%;
 }

@@ -25,3 +25,32 @@
 .bg-pearl {
   background: $pearl;
 }
+
+.about-category,
+.product__desc {
+  p {
+    margin-bottom: 15px;
+  }
+
+  ul {
+    margin-bottom: 15px;
+  }
+
+  li {
+    list-style-type: disc;
+    padding-left: 15px;
+    margin-left: 20px;
+    margin-bottom: 8px;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: 500;
+    margin-bottom: 20px;
+    font-size: 18px;
+  }
+}
