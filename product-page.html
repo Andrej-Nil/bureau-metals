@@ -168,20 +168,27 @@
                 <div class="product__preview">
                   <div class="product__track" data-slider-track>
 
-                    <div class="product__slide" data-slide data-idx="1">
-                      <img src="./img/image/product-img.jpg" alt="" class="product__img">
+                    <div data-big-src="./img/image/main-header-bg.jpg" class="product__slide" data-slide data-idx="1">
+                      <img data-content-card src="./img/image/product-img.jpg" alt="" class="product__img">
                     </div>
 
-                    <div class="product__slide" data-slide data-idx="2">
-                      <img src="./img/image/product-img.jpg" alt="" class="product__img">
+                    <div
+                      data-big-src="https://media.istockphoto.com/videos/young-woman-sitting-in-an-open-car-trunk-at-sunset-and-making-selfie-video-id1147019685"
+                      class="product__slide" data-slide data-idx="2">
+                      <i class="stiker-play"></i>
+                      <video data-content-card class="product__img">
+                        <source
+                          src="https://media.istockphoto.com/videos/young-woman-sitting-in-an-open-car-trunk-at-sunset-and-making-selfie-video-id1147019685"
+                          type="video/mp4" />
+                      </video>
                     </div>
 
-                    <div class="product__slide" data-slide data-idx="3">
-                      <img src="./img/image/product-img.jpg" alt="" class="product__img">
+                    <div data-big-src="./img/image/main-header-bg.jpg" class="product__slide" data-slide data-idx="3">
+                      <img data-content-card src="./img/image/product-img.jpg" alt="" class="product__img">
                     </div>
 
-                    <div class="product__slide" data-slide data-idx="4">
-                      <img src="./img/image/product-img.jpg" alt="" class="product__img">
+                    <div data-big-src="./img/image/main-header-bg.jpg" class="product__slide" data-slide data-idx="4">
+                      <img data-content-card src="./img/image/product-img.jpg" alt="" class="product__img">
                     </div>
 
 
@@ -197,7 +204,12 @@
                       <img src="./img/image/dot-img.jpg" alt="" class="product__dot-img">
                     </div>
                     <div class="product__dot" data-pic-dot data-idx="1">
-                      <img src="./img/image/dot-img.jpg" alt="" class="product__dot-img">
+                      <i class="stiker-play"></i>
+                      <video class="product__dot-img">
+                        <source
+                          src="https://media.istockphoto.com/videos/young-woman-sitting-in-an-open-car-trunk-at-sunset-and-making-selfie-video-id1147019685"
+                          type="video/mp4" />
+                      </video>
                     </div>
                     <div class="product__dot" data-pic-dot data-idx="2">
                       <img src="./img/image/dot-img.jpg" alt="" class="product__dot-img">
@@ -1999,6 +2011,20 @@
 
     </div>
     <!-- searchModal -->
+
+
+    <!-- galeriaModal -->
+    <div id="galeriaModal" class="modal-bg  modal--is-hide" data-close data-modal>
+      <div class="modal galeria-modal">
+        <div class="modal__content modal__content--galery">
+          <div class="modal__close" data-close></div>
+          <div data-content class="modal__preview ">
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <!-- galeriaModal -->
 
     <!-- modals -->
   </div>

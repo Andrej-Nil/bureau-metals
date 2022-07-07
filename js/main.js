@@ -651,79 +651,6 @@ class Render {
     this.$parent.insertAdjacentHTML('beforeEnd', sidebarHtml);
   }
 
-  getSidebarHtml = (menuList, side) => {
-    const back = this.getSidebarBackHtml(menuList);
-    const current = this.getSidebarCurrentHtml(menuList);
-    const sidebarListHtml = this.getSidebarListHtml(menuList);
-
-    return (/*html*/`
-    <nav class="nav nav--${side}" data-side="${side}">
-      <ul class="nav-list">
-        ${back}
-        ${current}
-        ${sidebarListHtml}
-      </ul>
-    </nav>
-    `)
-  }
-
-  getSidebarBackHtml = (menuList) => {
-    let mark = '';
-    for (let i = 0; i <= menuList.length - 1; i++) {
-      if (menuList[i].directing == "back") {
-        mark = (/*html*/`
-          <li class="nav-list__item nav-back" data-back data-id="${menuList[i].id}" >
-            <i class="nav-back__icon"></i>
-            <span class="nav-back__text">${menuList[i].title}</span>
-          </li>`)
-
-        break;
-      }
-    }
-    return mark;
-  }
-  //${ link }
-  //getBackArrowHtml = (menuList) => {
-
-  //}
-
-  getSidebarCurrentHtml = (menuList) => {
-    let mark = '';
-    for (let i = 0; i <= menuList.length - 1; i++) {
-      if (menuList[i].directing == "now") {
-        mark = (/*html */`<li class="nav-list__item" data-current>
-          <a href="${menuList[i].slug}" class="nav-list__link nav-list__link--current">${menuList[i].title}</a>
-      </li>`
-        )
-        break;
-      }
-    }
-    return mark;
-  }
-
-  getSidebarListHtml = (menuList) => {
-    let mark = '';
-    menuList.forEach((item) => {
-      if (item.directing == "back" || item.directing == "now") {
-        return
-      }
-      mark = mark + this.getSidebarItem(item);
-    })
-    return mark;
-  }
-
-  getSidebarItem = (item) => {
-    const arrow = item.isSubmenu ? `<i class="nav-list__arrow" data-id="${item.id}" data-next></i>` : '';
-    return (/*html*/`
-      <li class="nav-list__item">
-        <div class="dropdown__header">
-          ${arrow}
-          <a href="${item.slug}" class="nav-list__link">${item.title}</a>
-        </div>
-      </li>
-    `)
-  }
-
   renderOptionList = (optionList, $parent) => {
     this._render($parent, this.getOptionLiHtml, optionList);
   }
@@ -929,6 +856,76 @@ class Render {
       cityListHtml = cityListHtml + this.getCityHtml(city);
     })
     return cityListHtml;
+  }
+
+
+  getSidebarHtml = (menuList, side) => {
+    const back = this.getSidebarBackHtml(menuList);
+    const current = this.getSidebarCurrentHtml(menuList);
+    const sidebarListHtml = this.getSidebarListHtml(menuList);
+
+    return (/*html*/`
+    <nav class="nav nav--${side}" data-side="${side}">
+      <ul class="nav-list">
+        ${back}
+        ${current}
+        ${sidebarListHtml}
+      </ul>
+    </nav>
+    `)
+  }
+
+  getSidebarBackHtml = (menuList) => {
+    let mark = '';
+    for (let i = 0; i <= menuList.length - 1; i++) {
+      if (menuList[i].directing == "back") {
+        mark = (/*html*/`
+          <li class="nav-list__item nav-back" data-back data-id="${menuList[i].id}" >
+            <i class="nav-back__icon"></i>
+            <span class="nav-back__text">${menuList[i].title}</span>
+          </li>`)
+
+        break;
+      }
+    }
+    return mark;
+  }
+
+  getSidebarCurrentHtml = (menuList) => {
+    let mark = '';
+    for (let i = 0; i <= menuList.length - 1; i++) {
+      if (menuList[i].directing == "now") {
+        mark = (/*html */`<li class="nav-list__item" data-current>
+          <a href="${menuList[i].slug}" class="nav-list__link nav-list__link--current">${menuList[i].title}</a>
+      </li>`
+        )
+        break;
+      }
+    }
+    return mark;
+  }
+
+  getSidebarListHtml = (menuList) => {
+    let mark = '';
+    menuList.forEach((item) => {
+      if (item.directing == "back" || item.directing == "now") {
+        return
+      }
+      mark = mark + this.getSidebarItem(item);
+    })
+    return mark;
+  }
+
+  getSidebarItem = (item) => {
+    const arrow = item.isSubmenu ? `<i class="nav-list__arrow" data-id="${item.id}" data-next></i>` : '';
+    return (/*html*/`
+      <li class="nav-list__item">
+        <div class="dropdown__header">
+          ${arrow}
+          <a href="${item.slug}" class="nav-list__link">${item.title}</a>
+        </div>
+      </li>
+    `)
   }
 
   getCityHtml = (city) => {
@@ -1174,6 +1171,21 @@ class Render {
         </div>
 
       </li>
+    `)
+  }
+
+  getGaliriaImgHtml = (src) => {
+    return (/*html*/`
+    <img src="${src}" class="modal__img" alt=""/>
+    `)
+  }
+  getGaliriaVideoHtml = (src) => {
+    return (/*html*/`
+    <video data-content-card class="modal__img" controls="controls">
+      <source
+        src="${src}"
+        type='video/MP4' />
+    </video>
     `)
   }
 
@@ -2278,51 +2290,61 @@ class GaleriaModal extends Modal {
     if (!this.$modal) {
       return;
     }
-    this.$modalImg = this.$modal.querySelector('#modalImg');
-    this.bigImgSrc = ''
-    this.$galeria = doc.querySelector('#galeria');
+
+    this.$modalContent = this.$modal.querySelector('[data-content]');
+    this.bigContentSrc = ''
     this.galeriaListener();
   }
 
   openGaleriaModal(target) {
-    const $galeriaCard = target.closest('[data-galeria-card]');
-    const $img = $galeriaCard.querySelector('[src]');
-
-    this.bigImgSrc = this.getImgSrc($img)
-
-    this.setGaleriaModalImg()
-    this.open()
+    const $galeriaCard = target.closest('[data-big-src]');
+    this.bigContentSrc = this.getBigContentSrc($galeriaCard);
+    this.changeModalGaleriaContent($galeriaCard);
+    this.open();
   }
 
-  setGaleriaModalImg = () => {
-    console.log(this.$modalImg, this.bigImgSrc);
-    this.$modalImg.src = this.bigImgSrc;
-
+  stopVideo() {
+    const $video = this.$modal.querySelector('video');
+    if (!$video) return;
+    $video.pause();
+    $video.currentTime = 0;
+  }
+  changeModalGaleriaContent = ($galeriaCard) => {
+    const $contentCard = $galeriaCard.querySelector('[data-content-card]')
+    if ($contentCard.tagName === 'IMG') {
+      this.$modalContent.innerHTML = render.getGaliriaImgHtml(this.bigContentSrc);
+    }
+    if ($contentCard.tagName === 'VIDEO') {
+      this.$modalContent.innerHTML = render.getGaliriaVideoHtml(this.bigContentSrc);
+    }
   }
 
-  getImgSrc = ($img) => {
 
-    if (!$img) {
+  getBigContentSrc = ($content) => {
+    if (!$content) {
       return;
     }
-    if ($img.dataset.bigImg) {
-      return this.bigImgSrc = $img.dataset.bigImg;
+    if ($content.dataset.bigSrc) {
+      return this.bigImgSrc = $content.dataset.bigSrc;
     }
-
-    if (!$img.dataset.bigImg) {
-      return this.bigImgSrc = $img.src;
+    if (!$content.dataset.bigSrc) {
+      return this.bigImgSrc = $content.src;
     }
-
   }
   galeriaListener = () => {
-    if (!this.$galeria) {
-      return;
-    }
-    this.$galeria.addEventListener('click', (e) => {
-      if (e.target.closest('[data-galeria-card]')) {
-        this.openGaleriaModal(e.target)
+    document.addEventListener('click', (e) => {
+      if (e.target.closest('[data-big-src]')) {
+        this.openGaleriaModal(e.target);
       }
     })
+
+    this.$modal.addEventListener('click', (e) => {
+      if (e.target.closest('[data-close]')) {
+        this.stopVideo();
+      }
+    })
+
+
   }
 }
 

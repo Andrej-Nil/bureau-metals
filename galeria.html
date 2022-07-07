@@ -162,10 +162,28 @@
 
       <div id="galeria" class="section__content our-news tile-four container">
         <!-- galeria-card -->
-        <div class="news-card galeria-card" data-galeria-card>
-          <div class="news-card__preview">
-            <img src="./img/image/news-card-img.jpg" alt="" class="news-card__img"
-              data-big-img="./img/image/news-card-img.jpg" />
+        <div class="news-card galeria-card">
+          <div class="news-card__preview"
+            data-big-src="https://media.istockphoto.com/videos/young-woman-sitting-in-an-open-car-trunk-at-sunset-and-making-selfie-video-id1147019685">
+            <i class="stiker-play"></i>
+            <video data-content-card class="news-card__video">
+              <source
+                src="https://media.istockphoto.com/videos/young-woman-sitting-in-an-open-car-trunk-at-sunset-and-making-selfie-video-id1147019685"
+                type="video/mp4" />
+            </video>
+          </div>
+          <p class="news-card__desc galeria-card__desc">
+            С учётом сложившейся международной обстановки, высокое качество
+            позиционных исследований предопределяет высокую востребованность
+            распределения внутренних резервов и ресурсов. Господа.
+          </p>
+        </div>
+        <!-- galeria-card -->
+
+        <!-- galeria-card -->
+        <div class="news-card galeria-card">
+          <div data-big-src="./img/image/main-header-bg.jpg" class="news-card__preview">
+            <img data-content-card src="./img/image/news-card-img.jpg" alt="" class="news-card__img" />
           </div>
 
           <p class="news-card__desc galeria-card__desc">
@@ -177,10 +195,9 @@
         <!-- galeria-card -->
 
         <!-- galeria-card -->
-        <div class="news-card galeria-card" data-galeria-card>
-          <div class="news-card__preview">
-            <img src="./img/image/news-card-img.jpg" alt="" class="news-card__img"
-              data-big-img="./img/image/main-header-bg.jpg" />
+        <div class="news-card galeria-card">
+          <div data-big-src="./img/image/main-header-bg.jpg" class="news-card__preview">
+            <img data-content-card src="./img/image/news-card-img.jpg" alt="" class="news-card__img" />
           </div>
 
           <p class="news-card__desc galeria-card__desc">
@@ -192,10 +209,9 @@
         <!-- galeria-card -->
 
         <!-- galeria-card -->
-        <div class="news-card galeria-card" data-galeria-card>
-          <div class="news-card__preview">
-            <img src="./img/image/news-card-img.jpg" alt="" class="news-card__img"
-              data-big-img="./img/image/main-header-bg.jpg" />
+        <div class="news-card galeria-card">
+          <div data-big-src="./img/image/main-header-bg.jpg" class="news-card__preview">
+            <img data-content-card src="./img/image/news-card-img.jpg" alt="" class="news-card__img" />
           </div>
 
           <p class="news-card__desc galeria-card__desc">
@@ -207,25 +223,9 @@
         <!-- galeria-card -->
 
         <!-- galeria-card -->
-        <div class="news-card galeria-card" data-galeria-card>
-          <div class="news-card__preview">
-            <img src="./img/image/news-card-img.jpg" alt="" class="news-card__img"
-              data-big-img="./img/image/main-header-bg.jpg" />
-          </div>
-
-          <p class="news-card__desc galeria-card__desc">
-            С учётом сложившейся международной обстановки, высокое качество
-            позиционных исследований предопределяет высокую востребованность
-            распределения внутренних резервов и ресурсов. Господа.
-          </p>
-        </div>
-        <!-- galeria-card -->
-
-        <!-- galeria-card -->
-        <div class="news-card galeria-card" data-galeria-card>
-          <div class="news-card__preview">
-            <img src="./img/image/news-card-img.jpg" alt="" class="news-card__img"
-              data-big-img="./img/image/main-header-bg.jpg" />
+        <div class="news-card galeria-card">
+          <div data-big-src="./img/image/main-header-bg.jpg" class="news-card__preview">
+            <img data-content-card src="./img/image/news-card-img.jpg" alt="" class="news-card__img" />
           </div>
 
           <p class="news-card__desc galeria-card__desc">
@@ -796,9 +796,8 @@
     <div id="galeriaModal" class="modal-bg  modal--is-hide" data-close data-modal>
       <div class="modal galeria-modal">
         <div class="modal__content modal__content--galery">
-          <div class="modal__preview">
-            <div class="modal__close" data-close></div>
-            <img id="modalImg" src="./img/image/news-card-img.jpg" alt="" class="modal__img">
+          <div class="modal__close" data-close></div>
+          <div data-content class="modal__preview ">
           </div>
 
         </div>
