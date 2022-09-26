@@ -1181,7 +1181,7 @@ class Render {
   }
   getGaliriaVideoHtml = (src) => {
     return (/*html*/`
-    <video data-content-card class="modal__img" controls="controls">
+    <video data-content-card autoplay class="modal__img" controls="controls">
       <source
         src="${src}"
         type='video/MP4' />
